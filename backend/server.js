@@ -13,17 +13,25 @@ console.log('🔥 Starting EduPortal Secure Backend Server...');
 dotenv.config();
 
 // Initialize Firebase Admin
+let serviceAccount;
 try {
-    const serviceAccount = require(path.join(__dirname, './serviceAccountKey.json'));
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount)
-    });
-    const db = admin.firestore();
-    console.log('✅ Firebase Firestore Connected Successfully');
-} catch (error) {
-    console.error('❌ Firebase initialization error:', error.message);
-    console.log('⚠️ Make sure serviceAccountKey.json exists in backend folder');
+    // Render ke Environment Variable se JSON read karein
+    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+    console.log("✅ Firebase credentials loaded from Environment Variable");
+} catch (e) {
+    // Agar variable nahi hai to local file se try karein (localhost ke liye)
+    try {
+        serviceAccount = require('./serviceAccountKey.json');
+        console.log("✅ Firebase credentials loaded from local file");
+    } catch (err) {
+        console.error("❌ Firebase credentials missing! Set FIREBASE_SERVICE_ACCOUNT env var.");
+        process.exit(1);
+    }
 }
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+});
 
 // Initialize Express
 const app = express();
