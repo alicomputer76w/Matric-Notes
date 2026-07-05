@@ -12,21 +12,36 @@ console.log('🔥 Starting EduPortal Secure Backend Server...');
 // Load environment variables
 dotenv.config();
 
-// Firebase initialization with better error handling
+// Firebase initialization with individual environment variables (PERMANENT SOLUTION)
 let serviceAccount;
 
-if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+// Check karein ke individual variables set hain ya nahi
+if (process.env.FIREBASE_PROJECT_ID) {
+    // Individual environment variables se credentials banayein
+    serviceAccount = {
+        type: process.env.FIREBASE_TYPE || 'service_account',
+        project_id: process.env.FIREBASE_PROJECT_ID,
+        private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
+        private_key: (process.env.FIREBASE_PRIVATE_KEY || '').replace(/\\n/g, '\n'),
+        client_email: process.env.FIREBASE_CLIENT_EMAIL,
+        client_id: process.env.FIREBASE_CLIENT_ID,
+        auth_uri: process.env.FIREBASE_AUTH_URI || 'https://accounts.google.com/o/oauth2/auth',
+        token_uri: process.env.FIREBASE_TOKEN_URI || 'https://oauth2.googleapis.com/token',
+        auth_provider_x509_cert_url: process.env.FIREBASE_AUTH_PROVIDER_X509_CERT_URL || 'https://www.googleapis.com/oauth2/v1/certs',
+        client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL
+    };
+    
+    console.log("✅ Firebase credentials loaded from individual Environment Variables");
+    console.log(`📧 Project ID: ${serviceAccount.project_id}`);
+    console.log(`📧 Client Email: ${serviceAccount.client_email}`);
+} else if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+    // Fallback: Purana JSON variable
     try {
-        // Parse JSON from environment variable
         serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-        
-        // Fix private_key if it has literal \n instead of newlines
         if (serviceAccount.private_key && serviceAccount.private_key.includes('\\n')) {
             serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
         }
-        
-        console.log("✅ Firebase credentials loaded from Environment Variable");
-        console.log(`📧 Project ID: ${serviceAccount.project_id}`);
+        console.log("✅ Firebase credentials loaded from JSON Environment Variable");
     } catch (error) {
         console.error("❌ Failed to parse FIREBASE_SERVICE_ACCOUNT:", error.message);
         process.exit(1);
@@ -36,11 +51,22 @@ if (process.env.FIREBASE_SERVICE_ACCOUNT) {
         serviceAccount = require('./serviceAccountKey.json');
         console.log("✅ Firebase credentials loaded from local file");
     } catch (err) {
-        console.error("❌ Firebase credentials missing! Set FIREBASE_SERVICE_ACCOUNT env var.");
+        console.error("❌ Firebase credentials missing! Set environment variables.");
         process.exit(1);
     }
 }
 
+// Initialize Firebase Admin
+try {
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount)
+    });
+    console.log("✅ Firebase Admin initialized successfully");
+} catch (error) {
+    console.error("❌ Firebase Admin initialization failed:", error.message);
+    console.error("❌ Error details:", error.code, error.message);
+    process.exit(1);
+}
 // Initialize Firebase Admin
 try {
     admin.initializeApp({
