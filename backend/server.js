@@ -55,19 +55,14 @@ if (process.env.FIREBASE_PROJECT_ID) {
         process.exit(1);
     }
 }
-
-// Initialize Firebase Admin
-try {
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount)
-    });
-    console.log("✅ Firebase Admin initialized successfully");
-} catch (error) {
-    console.error("❌ Firebase Admin initialization failed:", error.message);
-    console.error("❌ Error details:", error.code, error.message);
-    process.exit(1);
-}
-// Initialize Firebase Admin
+console.log("PROJECT:", process.env.FIREBASE_PROJECT_ID);
+console.log("EMAIL:", process.env.FIREBASE_CLIENT_EMAIL);
+console.log("PRIVATE KEY EXISTS:", !!process.env.FIREBASE_PRIVATE_KEY);
+console.log(
+  "PRIVATE KEY START:",
+  process.env.FIREBASE_PRIVATE_KEY?.substring(0, 30)
+);
+ // Initialize Firebase Admin
 try {
     admin.initializeApp({
         credential: admin.credential.cert(serviceAccount)
