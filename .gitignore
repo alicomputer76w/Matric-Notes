@@ -6,9 +6,6 @@ backend/node_modules/
 .env
 backend/.env
 
-# Firebase service account key (security!)
-backend/serviceAccountKey.json
-
 # OS files
 .DS_Store
 Thumbs.db
