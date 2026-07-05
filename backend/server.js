@@ -12,14 +12,26 @@ console.log('🔥 Starting EduPortal Secure Backend Server...');
 // Load environment variables
 dotenv.config();
 
-// Initialize Firebase Admin
+// Firebase initialization with better error handling
 let serviceAccount;
-try {
-    // Render ke Environment Variable se JSON read karein
-    serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-    console.log("✅ Firebase credentials loaded from Environment Variable");
-} catch (e) {
-    // Agar variable nahi hai to local file se try karein (localhost ke liye)
+
+if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+    try {
+        // Parse JSON from environment variable
+        serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+        
+        // Fix private_key if it has literal \n instead of newlines
+        if (serviceAccount.private_key && serviceAccount.private_key.includes('\\n')) {
+            serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+        }
+        
+        console.log("✅ Firebase credentials loaded from Environment Variable");
+        console.log(`📧 Project ID: ${serviceAccount.project_id}`);
+    } catch (error) {
+        console.error("❌ Failed to parse FIREBASE_SERVICE_ACCOUNT:", error.message);
+        process.exit(1);
+    }
+} else {
     try {
         serviceAccount = require('./serviceAccountKey.json');
         console.log("✅ Firebase credentials loaded from local file");
@@ -29,9 +41,16 @@ try {
     }
 }
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
+// Initialize Firebase Admin
+try {
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount)
+    });
+    console.log("✅ Firebase Admin initialized successfully");
+} catch (error) {
+    console.error("❌ Firebase Admin initialization failed:", error.message);
+    process.exit(1);
+}
 
 // Initialize Express
 const app = express();
