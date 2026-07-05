@@ -97,8 +97,6 @@ admin.auth().listUsers(1)
     console.error(err);
   });
 
-// Initialize Express
-const app = express();
   
 // Initialize Express
 const app = express();
