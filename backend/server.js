@@ -9,7 +9,6 @@ const nodemailer = require('nodemailer');
 
 console.log('🔥 Starting EduPortal Secure Backend Server...');
 
-// Load environment variables
 dotenv.config();
 
 // Firebase initialization with individual environment variables (PERMANENT SOLUTION)
