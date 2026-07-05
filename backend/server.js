@@ -287,41 +287,44 @@ app.post('/api/auth/send-otp', async (req, res) => {
         // Store OTP in Firestore instead of in-memory
         await storeOTP(email, otp, 'verification');
         
-        // Email bhejne ki koshish
-        try {
-            console.log('� Attempting to send email...');
-            console.log('🔵 EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'NOT SET');
-            const mailOptions = {
-                from: process.env.EMAIL_USER,
-                to: email,
-                subject: 'EduPortal - Email Verification OTP',
-                html: `
-                    <div style="font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5;">
-                        <div style="max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                            <h2 style="color: #4361ee; text-align: center;">EduPortal Verification</h2>
-                            <p style="color: #555; font-size: 16px;">Your One-Time Password (OTP) for email verification:</p>
-                            <div style="background: #4361ee; color: white; font-size: 32px; font-weight: bold; text-align: center; padding: 20px; margin: 20px 0; border-radius: 5px; letter-spacing: 5px;">
-                                ${otp}
-                            </div>
-                            <p style="color: #777; font-size: 14px;">This OTP will expire in 5 minutes.</p>
-                            <p style="color: #777; font-size: 14px;">If you didn't request this, please ignore this email.</p>
-                        </div>
-                    </div>
-                `
-            };
-            
-            await transporter.sendMail(mailOptions);
-            console.log('✅ Email sent successfully');
-        } catch (emailError) {
-            console.error('❌ Email send error:', emailError.message);
-            console.error('❌ Email send stack:', emailError.stack);
-        }
-        
-        console.log('🔵 Sending success response');
+        // Send response IMMEDIATELY (no waiting for email)
+        console.log('🔵 Sending success response immediately');
         res.json({ 
             success: true, 
-            message: 'OTP sent successfully! Check console (CMD) for OTP.' 
+            message: 'OTP sent successfully! Check your email (or Render logs for testing).' 
         });
+        
+        // Send email in background (async)
+        (async () => {
+            try {
+                console.log('🔵 Attempting to send email...');
+                console.log('🔵 EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'NOT SET');
+                const mailOptions = {
+                    from: process.env.EMAIL_USER,
+                    to: email,
+                    subject: 'EduPortal - Email Verification OTP',
+                    html: `
+                        <div style="font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5;">
+                            <div style="max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                                <h2 style="color: #4361ee; text-align: center;">EduPortal Verification</h2>
+                                <p style="color: #555; font-size: 16px;">Your One-Time Password (OTP) for email verification:</p>
+                                <div style="background: #4361ee; color: white; font-size: 32px; font-weight: bold; text-align: center; padding: 20px; margin: 20px 0; border-radius: 5px; letter-spacing: 5px;">
+                                    ${otp}
+                                </div>
+                                <p style="color: #777; font-size: 14px;">This OTP will expire in 5 minutes.</p>
+                                <p style="color: #777; font-size: 14px;">If you didn't request this, please ignore this email.</p>
+                            </div>
+                        </div>
+                    `
+                };
+                
+                await transporter.sendMail(mailOptions);
+                console.log('✅ Email sent successfully to', email);
+            } catch (emailError) {
+                console.error('❌ Email send error:', emailError.message);
+                console.error('❌ Email send stack:', emailError.stack);
+            }
+        })();
         
     } catch (error) {
         console.error('❌ OTP Error:', error.message);
@@ -486,39 +489,47 @@ app.post('/api/auth/forgot-password-send-otp', async (req, res) => {
         // OTP store karein with purpose in Firestore
         await storeOTP(email, otp, 'password_reset');
         
-        // Email bhejein
-        try {
-            const mailOptions = {
-                from: process.env.EMAIL_USER,
-                to: email,
-                subject: 'EduPortal - Password Reset OTP',
-                html: `
-                    <div style="font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5;">
-                        <div style="max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                            <h2 style="color: #f72585; text-align: center;">Password Reset Request</h2>
-                            <p style="color: #555; font-size: 16px;">Your OTP for password reset:</p>
-                            <div style="background: #f72585; color: white; font-size: 32px; font-weight: bold; text-align: center; padding: 20px; margin: 20px 0; border-radius: 5px; letter-spacing: 5px;">
-                                ${otp}
-                            </div>
-                            <p style="color: #777; font-size: 14px;">This OTP will expire in 5 minutes.</p>
-                            <p style="color: #777; font-size: 14px;">If you didn't request this, please ignore this email.</p>
-                        </div>
-                    </div>
-                `
-            };
-            
-            await transporter.sendMail(mailOptions);
-        } catch (emailError) {
-            console.log('⚠️ Email send nahi ho saka');
-        }
-        
+        // Send response IMMEDIATELY (no waiting for email)
+        console.log('🔵 Sending success response immediately');
         res.json({ 
             success: true, 
             message: 'OTP sent to your email for password reset!' 
         });
         
+        // Send email in background (async)
+        (async () => {
+            try {
+                console.log('🔵 Attempting to send password reset email...');
+                const mailOptions = {
+                    from: process.env.EMAIL_USER,
+                    to: email,
+                    subject: 'EduPortal - Password Reset OTP',
+                    html: `
+                        <div style="font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5;">
+                            <div style="max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                                <h2 style="color: #f72585; text-align: center;">Password Reset Request</h2>
+                                <p style="color: #555; font-size: 16px;">Your OTP for password reset:</p>
+                                <div style="background: #f72585; color: white; font-size: 32px; font-weight: bold; text-align: center; padding: 20px; margin: 20px 0; border-radius: 5px; letter-spacing: 5px;">
+                                    ${otp}
+                                </div>
+                                <p style="color: #777; font-size: 14px;">This OTP will expire in 5 minutes.</p>
+                                <p style="color: #777; font-size: 14px;">If you didn't request this, please ignore this email.</p>
+                            </div>
+                        </div>
+                    `
+                };
+                
+                await transporter.sendMail(mailOptions);
+                console.log('✅ Password reset email sent successfully to', email);
+            } catch (emailError) {
+                console.error('❌ Password reset email send error:', emailError.message);
+                console.error('❌ Email send stack:', emailError.stack);
+            }
+        })();
+        
     } catch (error) {
-        console.error('Forgot Password OTP Error:', error);
+        console.error('Forgot Password OTP Error:', error.message);
+        console.error('Forgot Password OTP Stack:', error.stack);
         res.status(500).json({ 
             success: false, 
             message: 'Failed to send OTP.' 
