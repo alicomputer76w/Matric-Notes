@@ -15,14 +15,26 @@ dotenv.config();
 // Firebase initialization with individual environment variables (PERMANENT SOLUTION)
 let serviceAccount;
 
+console.log("🔵 Checking Firebase environment variables...");
+console.log("🔵 FIREBASE_PROJECT_ID:", process.env.FIREBASE_PROJECT_ID ? "Set" : "NOT SET");
+console.log("🔵 FIREBASE_CLIENT_EMAIL:", process.env.FIREBASE_CLIENT_EMAIL ? "Set" : "NOT SET");
+console.log("🔵 FIREBASE_PRIVATE_KEY length:", process.env.FIREBASE_PRIVATE_KEY ? process.env.FIREBASE_PRIVATE_KEY.length : 0);
+
 // Check karein ke individual variables set hain ya nahi
 if (process.env.FIREBASE_PROJECT_ID) {
     // Individual environment variables se credentials banayein
+    let privateKey = process.env.FIREBASE_PRIVATE_KEY || '';
+    
+    // Try multiple ways to fix newlines in private key
+    privateKey = privateKey.replace(/\\n/g, '\n'); // Replace literal \n with actual newlines
+    privateKey = privateKey.replace(/\\r/g, '\r'); // Replace literal \r with actual carriage returns
+    privateKey = privateKey.trim(); // Trim whitespace
+    
     serviceAccount = {
         type: process.env.FIREBASE_TYPE || 'service_account',
         project_id: process.env.FIREBASE_PROJECT_ID,
         private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
-        private_key: (process.env.FIREBASE_PRIVATE_KEY || '').replace(/\\n/g, '\n'),
+        private_key: privateKey,
         client_email: process.env.FIREBASE_CLIENT_EMAIL,
         client_id: process.env.FIREBASE_CLIENT_ID,
         auth_uri: process.env.FIREBASE_AUTH_URI || 'https://accounts.google.com/o/oauth2/auth',
@@ -34,12 +46,14 @@ if (process.env.FIREBASE_PROJECT_ID) {
     console.log("✅ Firebase credentials loaded from individual Environment Variables");
     console.log(`📧 Project ID: ${serviceAccount.project_id}`);
     console.log(`📧 Client Email: ${serviceAccount.client_email}`);
+    console.log("🔵 Private key starts with:", serviceAccount.private_key.substring(0, 50));
 } else if (process.env.FIREBASE_SERVICE_ACCOUNT) {
     // Fallback: Purana JSON variable
     try {
         serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-        if (serviceAccount.private_key && serviceAccount.private_key.includes('\\n')) {
+        if (serviceAccount.private_key) {
             serviceAccount.private_key = serviceAccount.private_key.replace(/\\n/g, '\n');
+            serviceAccount.private_key = serviceAccount.private_key.trim();
         }
         console.log("✅ Firebase credentials loaded from JSON Environment Variable");
     } catch (error) {
@@ -58,10 +72,8 @@ if (process.env.FIREBASE_PROJECT_ID) {
 console.log("PROJECT:", serviceAccount.project_id);
 console.log("EMAIL:", serviceAccount.client_email);
 console.log("PRIVATE KEY EXISTS:", !!serviceAccount.private_key);
-console.log(
-  "PRIVATE KEY START:",
-  serviceAccount.private_key?.substring(0, 30)
-);
+console.log("PRIVATE KEY starts with:", serviceAccount.private_key?.substring(0, 50));
+console.log("PRIVATE KEY ends with:", serviceAccount.private_key?.substring(serviceAccount.private_key.length - 20));
 // Initialize Firebase Admin
 try {
     admin.initializeApp({
@@ -97,12 +109,98 @@ admin.auth().listUsers(1)
     console.error(err);
   });
 
-  
+// ------------------------------
+// Firestore OTP Helper Functions
+// ------------------------------
+const otpCollection = db.collection('otps');
+
+/**
+ * Store OTP in Firestore
+ * @param {string} email - User's email
+ * @param {string} otp - OTP code
+ * @param {string} [purpose='verification'] - Purpose of OTP (verification or password_reset)
+ */
+async function storeOTP(email, otp, purpose = 'verification') {
+  const expiresAt = Date.now() + 5 * 60 * 1000; // 5 minutes from now
+  await otpCollection.doc(email).set({
+    email,
+    otp,
+    purpose,
+    expiresAt,
+    verified: false,
+    createdAt: admin.firestore.FieldValue.serverTimestamp()
+  });
+  console.log(`🔵 OTP stored for ${email} (purpose: ${purpose})`);
+}
+
+/**
+ * Retrieve OTP from Firestore
+ * @param {string} email - User's email
+ * @returns {Promise<FirebaseFirestore.DocumentData|null>} OTP document or null
+ */
+async function getOTP(email) {
+  const doc = await otpCollection.doc(email).get();
+  if (!doc.exists) {
+    console.log(`❌ No OTP found for ${email}`);
+    return null;
+  }
+  const data = doc.data();
+  console.log(`🔵 Retrieved OTP for ${email}:`, data);
+  return data;
+}
+
+/**
+ * Verify OTP
+ * @param {string} email - User's email
+ * @param {string} otp - OTP code to verify
+ * @param {string} [purpose] - Expected purpose (optional)
+ * @returns {Promise<boolean>} True if valid
+ */
+async function verifyOTPInDB(email, otp, purpose) {
+  const otpData = await getOTP(email);
+  if (!otpData) {
+    return { valid: false, message: 'OTP not found. Please request a new OTP.' };
+  }
+
+  // Check if OTP is expired
+  if (Date.now() > otpData.expiresAt) {
+    await deleteOTP(email);
+    return { valid: false, message: 'OTP expired. Please request a new OTP.' };
+  }
+
+  // Check purpose only if provided
+  if (purpose && otpData.purpose !== purpose) {
+    return { valid: false, message: 'Invalid OTP purpose.' };
+  }
+
+  // Check OTP
+  if (otpData.otp !== otp) {
+    return { valid: false, message: 'Invalid OTP. Please try again.' };
+  }
+
+  // Mark as verified
+  await otpCollection.doc(email).update({ verified: true });
+  console.log(`✅ OTP verified for ${email}`);
+  return { valid: true, message: 'OTP verified successfully!' };
+}
+
+/**
+ * Delete OTP from Firestore
+ * @param {string} email - User's email
+ */
+async function deleteOTP(email) {
+  await otpCollection.doc(email).delete();
+  console.log(`🔵 OTP deleted for ${email}`);
+}
+
 // Initialize Express
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: ['https://alicomputer76w.github.io', 'http://localhost:5500', 'http://127.0.0.1:5500'],
+    credentials: true
+}));
 app.use(express.json());
 
 // ============================================
@@ -115,9 +213,6 @@ const transporter = nodemailer.createTransport({
         pass: process.env.EMAIL_PASS
     }
 });
-
-// OTP Store (Temporary - production mein database mein store karein)
-const otpStore = {};
 
 // Generate OTP Function
 function generateOTP() {
@@ -161,14 +256,25 @@ app.get('/', (req, res) => {
 
 // 1. SEND OTP (Registration se pehle)
 app.post('/api/auth/send-otp', async (req, res) => {
+    console.log('🔵 Received send-otp request for email:', req.body.email);
     try {
         const { email } = req.body;
         
-        const db = admin.firestore();
+        if (!email) {
+            console.log('❌ No email provided');
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Email is required' 
+            });
+        }
+        
         const usersRef = db.collection('users');
+        console.log('🔵 Checking if email exists in Firestore...');
         const snapshot = await usersRef.where('email', '==', email).get();
+        console.log('🔵 Firestore query result:', snapshot.size, 'documents found');
         
         if (!snapshot.empty) {
+            console.log('❌ Email already registered');
             return res.status(400).json({ 
                 success: false, 
                 message: 'This email is already registered. Please login.' 
@@ -176,19 +282,15 @@ app.post('/api/auth/send-otp', async (req, res) => {
         }
         
         const otp = generateOTP();
+        console.log('🔵 Generated OTP:', otp);
         
-        otpStore[email] = {
-            otp: otp,
-            expires: Date.now() + 5 * 60 * 1000 // 5 minutes
-        };
-        
-        // Console mein OTP print karein (Email na chale to)
-        console.log('===========================================');
-        console.log(`📧 OTP for ${email}: ${otp}`);
-        console.log('===========================================');
+        // Store OTP in Firestore instead of in-memory
+        await storeOTP(email, otp, 'verification');
         
         // Email bhejne ki koshish
         try {
+            console.log('� Attempting to send email...');
+            console.log('🔵 EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'NOT SET');
             const mailOptions = {
                 from: process.env.EMAIL_USER,
                 to: email,
@@ -211,82 +313,97 @@ app.post('/api/auth/send-otp', async (req, res) => {
             await transporter.sendMail(mailOptions);
             console.log('✅ Email sent successfully');
         } catch (emailError) {
-            console.log('⚠️ Email send nahi ho saka, lekin OTP console mein available hai');
+            console.error('❌ Email send error:', emailError.message);
+            console.error('❌ Email send stack:', emailError.stack);
         }
         
+        console.log('🔵 Sending success response');
         res.json({ 
             success: true, 
             message: 'OTP sent successfully! Check console (CMD) for OTP.' 
         });
         
     } catch (error) {
-        console.error('OTP Error:', error);
+        console.error('❌ OTP Error:', error.message);
+        console.error('❌ OTP Error stack:', error.stack);
         res.status(500).json({ 
             success: false, 
-            message: 'Failed to send OTP. Please try again.' 
+            message: 'Failed to send OTP. Please try again. Error: ' + error.message 
         });
     }
 });
 
-// 2. VERIFY OTP
+
+// Test endpoint to check server
+app.get('/api/test', (req, res) => {
+    console.log('🔵 Test endpoint called');
+    res.json({ 
+        success: true, 
+        message: 'Server is working!',
+        firebaseConnected: !!admin.apps.length,
+        emailUser: process.env.EMAIL_USER ? 'Set' : 'NOT SET'
+    });
+});
+
 // 2. VERIFY OTP
 app.post('/api/auth/verify-otp', async (req, res) => {
+    console.log('🔵 Received verify-otp request for email:', req.body.email);
     try {
         const { email, otp } = req.body;
         
-        const storedOTP = otpStore[email];
-        
-        if (!storedOTP) {
+        if (!email || !otp) {
+            console.log('❌ Missing email or otp');
             return res.status(400).json({ 
                 success: false, 
-                message: 'OTP not found. Please request a new OTP.' 
+                message: 'Email and OTP are required' 
             });
         }
         
-        if (Date.now() > storedOTP.expires) {
-            delete otpStore[email];
+        // Use our Firestore verify function (don't specify purpose to support both registration and password reset)
+        const verificationResult = await verifyOTPInDB(email, otp);
+        
+        if (!verificationResult.valid) {
             return res.status(400).json({ 
                 success: false, 
-                message: 'OTP expired. Please request a new OTP.' 
+                message: verificationResult.message 
             });
         }
-        
-        if (storedOTP.otp !== otp) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'Invalid OTP. Please try again.' 
-            });
-        }
-        
-        // ✅ OTP ko delete NAHI karein - Reset password ke liye chahiye hoga
-        // Sirf verified flag add karein
-        otpStore[email].verified = true;
         
         res.json({ 
             success: true, 
-            message: 'Email verified successfully!' 
+            message: verificationResult.message 
         });
         
     } catch (error) {
-        console.error('Verify OTP Error:', error);
+        console.error('❌ Verify OTP Error:', error.message);
+        console.error('❌ Verify OTP Stack:', error.stack);
         res.status(500).json({ 
             success: false, 
-            message: 'Failed to verify OTP.' 
+            message: 'Failed to verify OTP. Error: ' + error.message 
         });
     }
 });
 // 3. REGISTER USER (OTP verify hone ke baad)
 app.post('/api/auth/register', async (req, res) => {
+    console.log('🔵 Received register request for email:', req.body.email);
     try {
         const { name, email, password, role } = req.body;
         
-        const db = admin.firestore();
+        if (!name || !email || !password) {
+            console.log('❌ Missing required fields');
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Name, email, and password are required' 
+            });
+        }
+        
         const usersRef = db.collection('users');
         
         // Check if user already exists
         const snapshot = await usersRef.where('email', '==', email).get();
         
         if (!snapshot.empty) {
+            console.log('❌ User already exists');
             return res.status(400).json({ 
                 success: false, 
                 message: 'User already exists with this email' 
@@ -294,10 +411,12 @@ app.post('/api/auth/register', async (req, res) => {
         }
         
         // Hash password
+        console.log('🔵 Hashing password...');
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         
         // Create user in Firestore
+        console.log('🔵 Creating user in Firestore...');
         const userDoc = await usersRef.add({
             name: name,
             email: email,
@@ -308,6 +427,10 @@ app.post('/api/auth/register', async (req, res) => {
             premiumFiles: [],
             accessedFiles: []
         });
+        console.log('✅ User created with ID:', userDoc.id);
+        
+        // Delete OTP after successful registration
+        await deleteOTP(email);
         
         res.status(201).json({ 
             success: true, 
@@ -316,10 +439,11 @@ app.post('/api/auth/register', async (req, res) => {
         });
         
     } catch (error) {
-        console.error('Registration error:', error);
+        console.error('❌ Registration error:', error.message);
+        console.error('❌ Registration stack:', error.stack);
         res.status(500).json({ 
             success: false, 
-            error: error.message 
+            message: 'Registration failed. Error: ' + error.message 
         });
     }
 });
@@ -329,15 +453,26 @@ app.post('/api/auth/register', async (req, res) => {
 
 // 5. FORGOT PASSWORD - Send OTP
 app.post('/api/auth/forgot-password-send-otp', async (req, res) => {
+    console.log('🔵 Received forgot password OTP request for email:', req.body.email);
     try {
         const { email } = req.body;
         
-        const db = admin.firestore();
+        if (!email) {
+            console.log('❌ No email provided');
+            return res.status(400).json({ 
+                success: false, 
+                message: 'Email is required' 
+            });
+        }
+        
         const usersRef = db.collection('users');
+        console.log('🔵 Checking if email exists in Firestore...');
         const snapshot = await usersRef.where('email', '==', email).get();
+        console.log('🔵 Firestore query result:', snapshot.size, 'documents found');
         
         // Check karein ke user exist karta hai
         if (snapshot.empty) {
+            console.log('❌ No account found with this email');
             return res.status(404).json({ 
                 success: false, 
                 message: 'No account found with this email.' 
@@ -346,13 +481,10 @@ app.post('/api/auth/forgot-password-send-otp', async (req, res) => {
         
         // OTP generate karein
         const otp = generateOTP();
+        console.log('🔵 Generated OTP:', otp);
         
-        // OTP store karein with purpose
-        otpStore[email] = {
-            otp: otp,
-            expires: Date.now() + 5 * 60 * 1000, // 5 minutes
-            purpose: 'password_reset'
-        };
+        // OTP store karein with purpose in Firestore
+        await storeOTP(email, otp, 'password_reset');
         
         // Email bhejein
         try {
@@ -395,52 +527,45 @@ app.post('/api/auth/forgot-password-send-otp', async (req, res) => {
 });
 
 // 6. RESET PASSWORD
-// 6. RESET PASSWORD
 app.post('/api/auth/reset-password', async (req, res) => {
+    console.log('🔵 Received reset password request for email:', req.body.email);
     try {
         const { email, otp, newPassword } = req.body;
+        
+        if (!email || !otp || !newPassword) {
+            console.log('❌ Missing required fields');
+            return res.status(400).json({
+                success: false,
+                message: 'Email, OTP, and new password are required.'
+            });
+        }
         
         // Password validation
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
         
         if (!passwordRegex.test(newPassword)) {
+            console.log('❌ Password does not meet requirements');
             return res.status(400).json({
                 success: false,
                 message: 'Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, and 1 special character.'
             });
         }
         
-        // OTP verify karein
-        const storedOTP = otpStore[email];
-        
-        if (!storedOTP || storedOTP.purpose !== 'password_reset') {
+        // OTP verify karein using Firestore
+        const verificationResult = await verifyOTPInDB(email, otp, 'password_reset');
+        if (!verificationResult.valid) {
             return res.status(400).json({ 
                 success: false, 
-                message: 'Invalid or expired OTP.' 
-            });
-        }
-        
-        if (Date.now() > storedOTP.expires) {
-            delete otpStore[email];
-            return res.status(400).json({ 
-                success: false, 
-                message: 'OTP expired. Please request a new one.' 
-            });
-        }
-        
-        if (storedOTP.otp !== otp) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'Invalid OTP.' 
+                message: verificationResult.message 
             });
         }
         
         // Password hash karein
+        console.log('🔵 Hashing new password...');
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(newPassword, salt);
         
         // Database mein update karein
-        const db = admin.firestore();
         const usersRef = db.collection('users');
         const snapshot = await usersRef.where('email', '==', email).get();
         
@@ -450,18 +575,21 @@ app.post('/api/auth/reset-password', async (req, res) => {
         });
         
         if (userId) {
+            console.log('🔵 Updating password in Firestore for user ID:', userId);
             await usersRef.doc(userId).update({
                 password: hashedPassword
             });
             
-            // ✅ Ab OTP delete karein
-            delete otpStore[email];
+            // ✅ Ab OTP delete karein from Firestore
+            await deleteOTP(email);
+            console.log('✅ OTP deleted from Firestore');
             
             res.json({ 
                 success: true, 
                 message: 'Password updated successfully! Please login with new password.' 
             });
         } else {
+            console.log('❌ User not found in Firestore');
             res.status(404).json({ 
                 success: false, 
                 message: 'User not found.' 
@@ -469,10 +597,11 @@ app.post('/api/auth/reset-password', async (req, res) => {
         }
         
     } catch (error) {
-        console.error('Reset Password Error:', error);
+        console.error('❌ Reset Password Error:', error.message);
+        console.error('❌ Reset Password Stack:', error.stack);
         res.status(500).json({ 
             success: false, 
-            message: 'Failed to reset password.' 
+            message: 'Failed to reset password. Error: ' + error.message 
         });
     }
 });
@@ -538,8 +667,8 @@ app.post('/api/auth/login', async (req, res) => {
 
 // 5. GET CURRENT USER PROFILE (Protected Route)
 app.get('/api/auth/me', verifyToken, async (req, res) => {
+    console.log('🔵 Received get current user request for user ID:', req.userId);
     try {
-        const db = admin.firestore();
         const userDoc = await db.collection('users').doc(req.userId).get();
         
         if (!userDoc.exists) {
