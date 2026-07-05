@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduPortal - 9th & 10th Class Study Hub</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-graduation-cap"></i> EduPortal
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#classes">Classes</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#papers">Past Papers</a></li>
+                <li><a href="#premium" class="btn-premium">Go Premium</a></li>
+                <!-- Guest Buttons (Bina Login) -->
+<div class="auth-buttons" id="guestNav" style="display: flex; gap: 10px; align-items: center;">
+    <button class="btn" style="border: 2px solid var(--primary-color); color: var(--primary-color); background: transparent;" onclick="openModal('login')">Sign In</button>
+    <button class="btn btn-premium" onclick="openModal('register')">Sign Up</button>
+</div>
+
+<!-- User Menu (Login Ke Baad Show Hoga) -->
+<div class="user-menu" id="userNav">
+    <div class="user-avatar" id="userAvatar">U</div>
+    <span class="user-name" id="userName">User</span>
+    <button class="btn-dashboard" onclick="openDashboard()">Dashboard</button>
+    <button class="btn-logout" onclick="logout()">Logout</button>
+</div>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="badge">📚 Board Exam Preparation</span>
+                <h1>Master Your <span class="highlight">9th & 10th Class</span> Exams</h1>
+                <p>Complete study material including Books, Chapter-wise Notes, MCQs, and Solved Past Papers. English & Urdu Medium available.</p>
+                
+                <div class="hero-buttons">
+                    <a href="#classes" class="btn btn-primary">Start Learning Free</a>
+                    <a href="#premium" class="btn btn-outline">View Premium Tests</a>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <i class="fas fa-book-open"></i>
+                        <span>All Books</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Solved Papers</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Premium Tests</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80" alt="Student Studying">
+            </div>
+        </div>
+    </section>
+
+    <!-- Class Selection Section -->
+    <section id="classes" class="classes-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Select Your Class</h2>
+                <p>Choose your class to access books, notes, and tests</p>
+            </div>
+            
+            <div class="class-cards">
+                <!-- 9th Class Card -->
+                <div class="class-card">
+                    <div class="card-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3>9th Class</h3>
+                    <p>English & Urdu Medium</p>
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> All Textbooks PDF</li>
+                        <li><i class="fas fa-check"></i> Chapter-wise Notes</li>
+                        <li><i class="fas fa-check"></i> MCQs & Short Questions</li>
+                        <li><i class="fas fa-lock"></i> Chapter Tests (Premium)</li>
+                    </ul>
+                    <a href="pages/9th-class.html" class="btn btn-card">Explore 9th Class</a>
+                </div>
+
+                <!-- 10th Class Card -->
+                <div class="class-card featured">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="card-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>10th Class</h3>
+                    <p>English & Urdu Medium</p>
+                    <ul class="card-features">
+                        <li><i class="fas fa-check"></i> All Textbooks PDF</li>
+                        <li><i class="fas fa-check"></i> Chapter-wise Notes</li>
+                        <li><i class="fas fa-check"></i> 5 Years Solved Papers</li>
+                        <li><i class="fas fa-lock"></i> Full Book Tests (Premium)</li>
+                    </ul>
+                    <a href="/pages/10th-class.html" class="btn btn-card">Explore 10th Class</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Overview -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>What We Offer</h2>
+                <p>Free resources vs Premium test series</p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Free Features -->
+                <div class="feature-box free">
+                    <div class="feature-tag">FREE</div>
+                    <i class="fas fa-gift"></i>
+                    <h3>Free Resources</h3>
+                    <ul>
+                        <li>All Books (Eng/Urdu)</li>
+                        <li>Chapter-wise Notes</li>
+                        <li>MCQs & Short Q/A</li>
+                        <li>Long Questions</li>
+                        <li>Previous 5 Years Papers</li>
+                    </ul>
+                </div>
+
+                <!-- Premium Features -->
+                <div class="feature-box premium">
+                    <div class="feature-tag">PREMIUM</div>
+                    <i class="fas fa-crown"></i>
+                    <h3>Premium Test Series</h3>
+                    <ul>
+                        <li>Chapter-wise Tests</li>
+                        <li>Quarterly Book Tests</li>
+                        <li>Half Book Tests</li>
+                        <li>Full Book Mock Exams</li>
+                        <li>Detailed Performance Analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Papers Section -->
+    <section id="papers" class="papers-section">
+        <div class="container">
+            <div class="papers-banner">
+                <div class="papers-content">
+                    <h2><i class="fas fa-file-signature"></i> Previous 5 Years Board Papers</h2>
+                    <p>Download solved past papers for all subjects. Completely FREE!</p>
+                    <a href="#" class="btn btn-white">Browse Past Papers</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><i class="fas fa-graduation-cap"></i> EduPortal</h3>
+                    <p>Your ultimate study companion for 9th and 10th class board exams.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">9th Class Books</a></li>
+                        <li><a href="#">10th Class Notes</a></li>
+                        <li><a href="#">Past Papers</a></li>
+                        <li><a href="#">Premium Tests</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@eduportal.pk</li>
+                        <li><i class="fas fa-phone"></i> +92 300 1234567</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPortal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+    <!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal('login')">&times;</button>
+        <div class="modal-header">
+            <h2>Welcome Back!</h2>
+            <p>Login to access your account</p>
+        </div>
+        <div id="loginMessage" class="message-box"></div>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="loginEmail" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn-submit" id="loginBtn">Login Now</button>
+        </form>
+        <div style="text-align: right; margin-bottom: 1rem;">
+    <a onclick="switchModal('login', 'forgotPassword')" style="color: var(--primary-color); font-size: 0.9rem; cursor: pointer; font-weight: 600;">
+        Forgot Password?
+    </a>
+</div>
+        <div class="modal-footer">
+            Don't have an account? <a onclick="switchModal('login', 'register')">Sign Up here</a>
+        </div>
+    </div>
+</div>
+
+<!-- REGISTER MODAL -->
+<div class="modal-overlay" id="registerModal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal('register')">&times;</button>
+        <div class="modal-header">
+            <h2>Create Account</h2>
+            <p>Join EduPortal to access Matric Notes</p>
+        </div>
+        <div class="step-indicator">
+            <div class="step active" id="step1">Step 1: Details</div>
+            <div class="step" id="step2">Step 2: Verify</div>
+        </div>
+        <div id="registerMessage" class="message-box"></div>
+
+        <form id="registerForm" onsubmit="handleRegister(event)">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="regName" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="regEmail" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+    <label>Password</label>
+    <input type="password" id="regPassword" placeholder="Create a strong password" required oninput="checkPasswordStrength()">
+    <div id="passwordRequirements" style="margin-top: 0.8rem; font-size: 0.85rem;">
+        <div id="req-length" style="color: #999; margin: 3px 0;">
+            <i class="fas fa-circle" style="font-size: 8px;"></i> Minimum 8 characters
+        </div>
+        <div id="req-uppercase" style="color: #999; margin: 3px 0;">
+            <i class="fas fa-circle" style="font-size: 8px;"></i> At least 1 uppercase letter (A-Z)
+        </div>
+        <div id="req-lowercase" style="color: #999; margin: 3px 0;">
+            <i class="fas fa-circle" style="font-size: 8px;"></i> At least 1 lowercase letter (a-z)
+        </div>
+        <div id="req-number" style="color: #999; margin: 3px 0;">
+            <i class="fas fa-circle" style="font-size: 8px;"></i> At least 1 number (0-9)
+        </div>
+        <div id="req-special" style="color: #999; margin: 3px 0;">
+            <i class="fas fa-circle" style="font-size: 8px;"></i> At least 1 special character (@$!%*?&#)
+        </div>
+    </div>
+</div>
+            <div class="form-group">
+                <label>Select Role</label>
+                <select id="regRole" required>
+                    <option value="student">Student</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit" id="registerBtn">Send OTP & Register</button>
+        </form>
+
+        <div class="otp-section" id="otpSection">
+    <h3 style="margin-bottom: 1rem; color: var(--primary-color);">
+        <i class="fas fa-shield-alt"></i> Verify Your Email
+    </h3>
+    <p style="color: var(--text-light); margin-bottom: 1rem;">
+        Enter 6-digit code sent to<br>
+        <strong id="otpEmail" style="color: var(--primary-color);"></strong>
+    </p>
+    <input type="text" id="otpInput" class="otp-input" placeholder="000000" maxlength="6" value="">
+    <button class="btn-submit" onclick="verifyOTP()">
+        <i class="fas fa-check"></i> Verify OTP
+    </button>
+    <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-light);">
+        Didn't receive OTP? 
+        <a onclick="resendOTP()" style="color: var(--primary-color); cursor: pointer; font-weight: 600;">Resend OTP</a>
+    </p>
+    <div class="modal-footer">
+        <a onclick="backToRegisterForm()">Back to form</a>
+    </div>
+</div>
+
+        <div class="modal-footer" id="registerFooter">
+            Already have an account? <a onclick="switchModal('register', 'login')">Login here</a>
+        </div>
+    </div>
+</div>
+<!-- FORGOT PASSWORD MODAL -->
+<div class="modal-overlay" id="forgotPasswordModal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal('forgotPassword')">&times;</button>
+        <div class="modal-header">
+            <h2><i class="fas fa-key"></i> Reset Password</h2>
+            <p>Enter your email to receive OTP</p>
+        </div>
+        
+        <div class="step-indicator">
+            <div class="step active" id="fpStep1">Step 1: Email</div>
+            <div class="step" id="fpStep2">Step 2: OTP</div>
+            <div class="step" id="fpStep3">Step 3: New Password</div>
+        </div>
+        
+        <div id="forgotPasswordMessage" class="message-box"></div>
+
+        <!-- Step 1: Email Input -->
+        <form id="forgotEmailForm" onsubmit="handleForgotEmail(event)">
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="fpEmail" placeholder="Enter your registered email" required>
+            </div>
+            <button type="submit" class="btn-submit" id="fpEmailBtn">Send OTP</button>
+        </form>
+
+        <!-- Step 2: OTP Input -->
+        <form id="forgotOTPForm" onsubmit="handleForgotOTP(event)" style="display: none;">
+            <div class="form-group">
+                <label>Enter OTP</label>
+                <input type="text" id="fpOTP" class="otp-input" placeholder="000000" maxlength="6" required>
+            </div>
+            <button type="submit" class="btn-submit" id="fpOTPBtn">Verify OTP</button>
+            <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-light); text-align: center;">
+                Didn't receive OTP? 
+                <a onclick="resendForgotOTP()" style="color: var(--primary-color); cursor: pointer; font-weight: 600;">Resend OTP</a>
+            </p>
+        </form>
+
+       <!-- Step 3: New Password -->
+<form id="forgotNewPasswordForm" onsubmit="handleNewPassword(event)" style="display: none;">
+    <div class="form-group">
+        <label>New Password</label>
+        <input type="password" id="fpNewPassword" placeholder="Enter new password" required oninput="checkForgotPasswordStrength()">
+        <div id="fpPasswordRequirements" style="margin-top: 0.8rem; font-size: 0.85rem;">
+            <div id="fp-req-length" style="color: #999; margin: 3px 0;">
+                <i class="fas fa-circle" style="font-size: 8px;"></i> Minimum 8 characters
+            </div>
+            <div id="fp-req-uppercase" style="color: #999; margin: 3px 0;">
+                <i class="fas fa-circle" style="font-size: 8px;"></i> At least 1 uppercase letter (A-Z)
+            </div>
+            <div id="fp-req-lowercase" style="color: #999; margin: 3px 0;">
+                <i class="fas fa-circle" style="font-size: 8px;"></i> At least 1 lowercase letter (a-z)
+            </div>
+            <div id="fp-req-number" style="color: #999; margin: 3px 0;">
+                <i class="fas fa-circle" style="font-size: 8px;"></i> At least 1 number (0-9)
+            </div>
+            <div id="fp-req-special" style="color: #999; margin: 3px 0;">
+                <i class="fas fa-circle" style="font-size: 8px;"></i> At least 1 special character (@$!%*?&#)
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Confirm New Password</label>
+        <input type="password" id="fpConfirmPassword" placeholder="Confirm new password" required>
+    </div>
+    <button type="submit" class="btn-submit" id="fpPasswordBtn" disabled>Reset Password</button>
+</form>
+
+        <div class="modal-footer">
+            Remember your password? <a onclick="switchModal('forgotPassword', 'login')">Login here</a>
+        </div>
+    </div>
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+    let currentUser = null;
+    let tempUserData = null;
+    const API_URL = 'http://localhost:5000';
+
+    function checkAuth() {
+        const token = localStorage.getItem('token');
+        const userData = localStorage.getItem('user');
+
+        if (token && userData) {
+            currentUser = JSON.parse(userData);
+            document.getElementById('guestNav').style.display = 'none';
+            document.getElementById('userNav').style.display = 'flex';
+            
+            const initials = currentUser.name.split(' ').map(n => n[0]).join('').toUpperCase();
+            document.getElementById('userAvatar').innerText = initials;
+            document.getElementById('userName').innerText = currentUser.name.split(' ')[0];
+        } else {
+            currentUser = null;
+            document.getElementById('guestNav').style.display = 'flex';
+            document.getElementById('userNav').style.display = 'none';
+        }
+    }
+
+    checkAuth();
+
+    function openModal(type) {
+        document.getElementById(type + 'Modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(type) {
+    document.getElementById(type + 'Modal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+    
+    if (type === 'login') {
+        document.getElementById('loginForm').reset();
+        document.getElementById('loginMessage').style.display = 'none';
+    } else if (type === 'register') {
+        document.getElementById('registerForm').reset();
+        document.getElementById('registerMessage').style.display = 'none';
+        document.getElementById('otpSection').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+        document.getElementById('registerFooter').style.display = 'block';
+        document.getElementById('step1').classList.add('active');
+        document.getElementById('step2').classList.remove('active');
+        document.getElementById('otpInput').value = '';
+    } else if (type === 'forgotPassword') {
+        resetForgotPasswordForm();
+    }
+}
+
+    function switchModal(from, to) {
+        closeModal(from);
+        setTimeout(() => openModal(to), 200);
+    }
+
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    });
+
+    async function handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const btn = document.getElementById('loginBtn');
+        const msg = document.getElementById('loginMessage');
+
+        btn.disabled = true;
+        btn.innerText = 'Logging in...';
+
+        try {
+            const response = await fetch(`${API_URL}/api/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                msg.className = 'message-box success';
+                msg.innerText = 'Login successful!';
+                setTimeout(() => { closeModal('login'); checkAuth(); }, 1000);
+            } else {
+                msg.className = 'message-box error';
+                msg.innerText = data.message || 'Login failed';
+            }
+        } catch (error) {
+            msg.className = 'message-box error';
+            msg.innerText = 'Server error! Make sure backend is running.';
+        } finally {
+            btn.disabled = false;
+            btn.innerText = 'Login Now';
+        }
+    }
+
+      async function handleRegister(e) {
+        e.preventDefault();
+        
+        // Password validation
+        const password = document.getElementById('regPassword').value;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+        
+        if (!passwordRegex.test(password)) {
+            const msg = document.getElementById('registerMessage');
+            msg.className = 'message-box error';
+            msg.innerText = '❌ Password must meet all requirements (8+ chars, uppercase, lowercase, number, special char)';
+            msg.style.display = 'block';
+            return;
+        }
+        
+        tempUserData = {
+            name: document.getElementById('regName').value,
+            email: document.getElementById('regEmail').value,
+            password: password,
+            role: document.getElementById('regRole').value
+        };
+
+        const btn = document.getElementById('registerBtn');
+        const msg = document.getElementById('registerMessage');
+        btn.disabled = true;
+        btn.innerText = 'Sending OTP...';
+
+        try {
+            const response = await fetch(`${API_URL}/api/auth/send-otp`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: tempUserData.email })
+            });
+            const data = await response.json();
+
+            if (response.ok) {
+                document.getElementById('otpInput').value = '';
+                document.getElementById('registerForm').style.display = 'none';
+                document.getElementById('registerFooter').style.display = 'none';
+                document.getElementById('otpSection').style.display = 'block';
+                document.getElementById('otpEmail').innerText = tempUserData.email;
+                document.getElementById('step1').classList.remove('active');
+                document.getElementById('step2').classList.add('active');
+                
+                msg.className = 'message-box success';
+                msg.innerText = '✅ OTP sent to your email!';
+                msg.style.display = 'block';
+            } else {
+                msg.className = 'message-box error';
+                msg.innerText = data.message || 'Failed to send OTP';
+                msg.style.display = 'block';
+            }
+        } catch (error) {
+            msg.className = 'message-box error';
+            msg.innerText = '❌ Server error!';
+            msg.style.display = 'block';
+        } finally {
+            btn.disabled = false;
+            btn.innerText = 'Send OTP & Register';
+        }
+    }
+
+    // Forgot Password Strength Checker
+function checkForgotPasswordStrength() {
+    const password = document.getElementById('fpNewPassword').value;
+    
+    // Requirements check karein
+    const requirements = {
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /[0-9]/.test(password),
+        special: /[@$!%*?&#]/.test(password)
+    };
+    
+    // UI update karein
+    updateForgotRequirement('fp-req-length', requirements.length);
+    updateForgotRequirement('fp-req-uppercase', requirements.uppercase);
+    updateForgotRequirement('fp-req-lowercase', requirements.lowercase);
+    updateForgotRequirement('fp-req-number', requirements.number);
+    updateForgotRequirement('fp-req-special', requirements.special);
+    
+    // Agar sab conditions puri hain to button enable karein
+    const allValid = Object.values(requirements).every(req => req === true);
+    const resetBtn = document.getElementById('fpPasswordBtn');
+    
+    if (password.length > 0) {
+        resetBtn.disabled = !allValid;
+    } else {
+        resetBtn.disabled = true;
+    }
+}
+
+function updateForgotRequirement(id, isValid) {
+    const element = document.getElementById(id);
+    if (isValid) {
+        element.style.color = '#4cc9f0';
+        element.innerHTML = '<i class="fas fa-check-circle" style="font-size: 12px;"></i> ' + element.textContent.trim().substring(2);
+    } else {
+        element.style.color = '#999';
+        element.innerHTML = '<i class="fas fa-circle" style="font-size: 8px;"></i> ' + element.textContent.trim().substring(2);
+    }
+}
+    async function verifyOTP() {
+        const otp = document.getElementById('otpInput').value;
+        const msg = document.getElementById('registerMessage');
+
+        if (otp.length !== 6) {
+            msg.className = 'message-box error';
+            msg.innerText = 'Please enter 6-digit OTP';
+            return;
+        }
+
+        try {
+            const verifyResponse = await fetch(`${API_URL}/api/auth/verify-otp`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: tempUserData.email, otp: otp })
+            });
+            const verifyData = await verifyResponse.json();
+
+            if (!verifyResponse.ok) {
+                msg.className = 'message-box error';
+                msg.innerText = verifyData.message || 'Invalid OTP';
+                return;
+            }
+
+            const registerResponse = await fetch(`${API_URL}/api/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(tempUserData)
+            });
+            const registerData = await registerResponse.json();
+
+            if (registerResponse.ok) {
+                msg.className = 'message-box success';
+                msg.innerText = 'Registration successful! Please login.';
+                setTimeout(() => { closeModal('register'); setTimeout(() => openModal('login'), 300); }, 1500);
+            } else {
+                msg.className = 'message-box error';
+                msg.innerText = registerData.message || 'Registration failed';
+            }
+        } catch (error) {
+            msg.className = 'message-box error';
+            msg.innerText = 'Verification failed';
+        }
+    }
+
+   function backToRegisterForm() {
+    document.getElementById('registerForm').style.display = 'block';
+    document.getElementById('registerFooter').style.display = 'block';
+    document.getElementById('otpSection').style.display = 'none';
+    document.getElementById('step1').classList.add('active');
+    document.getElementById('step2').classList.remove('active');
+    document.getElementById('otpInput').value = '';  // Clear OTP input
+    document.getElementById('registerMessage').style.display = 'none';
+}
+
+// Resend OTP Function
+async function resendOTP() {
+    const msg = document.getElementById('registerMessage');
+    
+    try {
+        const response = await fetch(`${API_URL}/api/auth/send-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: tempUserData.email })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            document.getElementById('otpInput').value = '';
+            msg.className = 'message-box success';
+            msg.innerText = '✅ New OTP sent to your email!';
+            msg.style.display = 'block';
+        } else {
+            msg.className = 'message-box error';
+            msg.innerText = data.message || 'Failed to resend OTP';
+            msg.style.display = 'block';
+        }
+    } catch (error) {
+        msg.className = 'message-box error';
+        msg.innerText = '❌ Failed to resend OTP';
+        msg.style.display = 'block';
+    }
+}
+// ============================================
+// PASSWORD STRENGTH CHECKER
+// ============================================
+function checkPasswordStrength() {
+    const password = document.getElementById('regPassword').value;
+    
+    // Requirements check karein
+    const requirements = {
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /[0-9]/.test(password),
+        special: /[@$!%*?&#]/.test(password)
+    };
+    
+    // UI update karein
+    updateRequirement('req-length', requirements.length);
+    updateRequirement('req-uppercase', requirements.uppercase);
+    updateRequirement('req-lowercase', requirements.lowercase);
+    updateRequirement('req-number', requirements.number);
+    updateRequirement('req-special', requirements.special);
+    
+    // Agar sab conditions puri hain to register button enable karein
+    const allValid = Object.values(requirements).every(req => req === true);
+    const registerBtn = document.getElementById('registerBtn');
+    
+    if (password.length > 0) {
+        registerBtn.disabled = !allValid;
+    }
+}
+
+function updateRequirement(id, isValid) {
+    const element = document.getElementById(id);
+    if (isValid) {
+        element.style.color = '#4cc9f0';
+        element.innerHTML = '<i class="fas fa-check-circle" style="font-size: 12px;"></i> ' + element.textContent.trim().substring(2);
+    } else {
+        element.style.color = '#999';
+        element.innerHTML = '<i class="fas fa-circle" style="font-size: 8px;"></i> ' + element.textContent.trim().substring(2);
+    }
+}
+
+// ============================================
+// FORGOT PASSWORD FUNCTIONS
+// ============================================
+let forgotPasswordEmail = null;
+let forgotPasswordOTP = null;
+
+// Step 1: Email send karein
+async function handleForgotEmail(e) {
+    e.preventDefault();
+    
+    forgotPasswordEmail = document.getElementById('fpEmail').value;
+    const btn = document.getElementById('fpEmailBtn');
+    const msg = document.getElementById('forgotPasswordMessage');
+    
+    btn.disabled = true;
+    btn.innerText = 'Sending OTP...';
+    
+    try {
+        const response = await fetch(`${API_URL}/api/auth/forgot-password-send-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: forgotPasswordEmail })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            // ⭐ YE NAYA CODE ADD KAREIN - OTP INPUT CLEAR KAREIN
+            document.getElementById('fpOTP').value = '';
+            // ⭐ YE NAYA CODE ADD KAREIN
+            
+            document.getElementById('forgotEmailForm').style.display = 'none';
+            document.getElementById('forgotOTPForm').style.display = 'block';
+            document.getElementById('fpStep1').classList.remove('active');
+            document.getElementById('fpStep2').classList.add('active');
+            
+            msg.className = 'message-box success';
+            msg.innerText = '✅ OTP sent to your email!';
+            msg.style.display = 'block';
+        } else {
+            msg.className = 'message-box error';
+            msg.innerText = data.message || 'Failed to send OTP';
+            msg.style.display = 'block';
+        }
+    } catch (error) {
+        msg.className = 'message-box error';
+        msg.innerText = '❌ Server error!';
+        msg.style.display = 'block';
+    } finally {
+        btn.disabled = false;
+        btn.innerText = 'Send OTP';
+    }
+}
+// Step 2: OTP verify karein
+async function handleForgotOTP(e) {
+    e.preventDefault();
+    
+    forgotPasswordOTP = document.getElementById('fpOTP').value;
+    const btn = document.getElementById('fpOTPBtn');
+    const msg = document.getElementById('forgotPasswordMessage');
+    
+    if (forgotPasswordOTP.length !== 6) {
+        msg.className = 'message-box error';
+        msg.innerText = 'Please enter 6-digit OTP';
+        msg.style.display = 'block';
+        return;
+    }
+    
+    btn.disabled = true;
+    btn.innerText = 'Verifying...';
+    
+    // OTP verify karein backend se
+    try {
+        const response = await fetch(`${API_URL}/api/auth/verify-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: forgotPasswordEmail, otp: forgotPasswordOTP })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            document.getElementById('forgotOTPForm').style.display = 'none';
+            document.getElementById('forgotNewPasswordForm').style.display = 'block';
+            document.getElementById('fpStep2').classList.remove('active');
+            document.getElementById('fpStep3').classList.add('active');
+            
+            msg.className = 'message-box success';
+            msg.innerText = '✅ OTP verified! Enter new password.';
+            msg.style.display = 'block';
+        } else {
+            msg.className = 'message-box error';
+            msg.innerText = data.message || 'Invalid OTP';
+            msg.style.display = 'block';
+        }
+    } catch (error) {
+        msg.className = 'message-box error';
+        msg.innerText = '❌ Verification failed';
+        msg.style.display = 'block';
+    } finally {
+        btn.disabled = false;
+        btn.innerText = 'Verify OTP';
+    }
+}
+
+async function handleNewPassword(e) {
+    e.preventDefault();
+    
+    const newPassword = document.getElementById('fpNewPassword').value;
+    const confirmPassword = document.getElementById('fpConfirmPassword').value;
+    const btn = document.getElementById('fpPasswordBtn');
+    const msg = document.getElementById('forgotPasswordMessage');
+    
+    // Password validation
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+    
+    if (!passwordRegex.test(newPassword)) {
+        msg.className = 'message-box error';
+        msg.innerText = '❌ Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number, and 1 special character.';
+        msg.style.display = 'block';
+        return;
+    }
+    
+    if (newPassword !== confirmPassword) {
+        msg.className = 'message-box error';
+        msg.innerText = '❌ Passwords do not match!';
+        msg.style.display = 'block';
+        return;
+    }
+    
+    btn.disabled = true;
+    btn.innerText = 'Resetting...';
+    
+    try {
+        const response = await fetch(`${API_URL}/api/auth/reset-password`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                email: forgotPasswordEmail, 
+                otp: forgotPasswordOTP,
+                newPassword: newPassword 
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            msg.className = 'message-box success';
+            msg.innerText = '✅ Password reset successful! Please login with new password.';
+            msg.style.display = 'block';
+            
+            setTimeout(() => {
+                closeModal('forgotPassword');
+                resetForgotPasswordForm();
+                setTimeout(() => openModal('login'), 300);
+            }, 2000);
+        } else {
+            msg.className = 'message-box error';
+            msg.innerText = data.message || 'Failed to reset password';
+            msg.style.display = 'block';
+        }
+    } catch (error) {
+        msg.className = 'message-box error';
+        msg.innerText = '❌ Reset failed';
+        msg.style.display = 'block';
+    } finally {
+        btn.disabled = false;
+        btn.innerText = 'Reset Password';
+    }
+}
+
+// Resend OTP for forgot password
+async function resendForgotOTP() {
+    const msg = document.getElementById('forgotPasswordMessage');
+    
+    try {
+        const response = await fetch(`${API_URL}/api/auth/forgot-password-send-otp`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: forgotPasswordEmail })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            msg.className = 'message-box success';
+            msg.innerText = '✅ New OTP sent to your email!';
+            msg.style.display = 'block';
+        } else {
+            msg.className = 'message-box error';
+            msg.innerText = data.message || 'Failed to resend OTP';
+            msg.style.display = 'block';
+        }
+    } catch (error) {
+        msg.className = 'message-box error';
+        msg.innerText = '❌ Failed to resend OTP';
+        msg.style.display = 'block';
+    }
+}
+
+// Forgot password form reset
+function resetForgotPasswordForm() {
+    document.getElementById('forgotEmailForm').style.display = 'block';
+    document.getElementById('forgotOTPForm').style.display = 'none';
+    document.getElementById('forgotNewPasswordForm').style.display = 'none';
+    document.getElementById('fpStep1').classList.add('active');
+    document.getElementById('fpStep2').classList.remove('active');
+    document.getElementById('fpStep3').classList.remove('active');
+    document.getElementById('forgotPasswordMessage').style.display = 'none';
+    forgotPasswordEmail = null;
+    forgotPasswordOTP = null;
+}
+    function logout() {
+        if (confirm('Kya aap waqai logout karna chahte hain?')) {
+            localStorage.clear();
+            currentUser = null;
+            checkAuth();
+        }
+    }
+
+    function openDashboard() {
+        if (!currentUser) { openModal('login'); return; }
+        alert(`Welcome ${currentUser.name}! Dashboard feature coming soon.`);
+    }
+</script>
+</body>
+</html>

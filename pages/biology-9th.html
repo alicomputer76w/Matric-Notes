@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9th Biology - EduPortal</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    
+    <!-- Page Specific CSS -->
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, #06a77d, #2d6a4f); /* Biology Green Theme */
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .breadcrumb {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .breadcrumb a {
+            color: #d8f3dc;
+        }
+
+        .chapters-container {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 0 20px;
+        }
+
+        .chapter-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .chapter-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chapter-header:hover {
+            background: #f8f9fa;
+        }
+
+        .chapter-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .chapter-number {
+            background: #06a77d; /* Biology Green */
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .chapter-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .btn-notes {
+            background: #d8f3dc;
+            color: #2d6a4f;
+        }
+
+        .btn-notes:hover {
+            background: #2d6a4f;
+            color: white;
+        }
+
+        .btn-test {
+            background: #fff0f3;
+            color: var(--accent-color);
+        }
+
+        .btn-test:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .premium-badge-sm {
+            font-size: 0.65rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> EduPortal
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="9th-class.html" class="active">9th Class</a></li>
+                <li><a href="10th-class.html">10th Class</a></li>
+                <li><a href="#premium" class="btn-premium">Go Premium</a></li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Biology - 9th Class</h1>
+            <p>Chapter-wise Notes, MCQs, and Premium Tests</p>
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> / 
+                <a href="9th-class.html">9th Class</a> / 
+                <span>Biology</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Chapters List -->
+    <section class="chapters-container">
+        
+        <!-- Chapter 1 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-title">
+                    <span class="chapter-number">1</span>
+                    The Science of Biology
+                </div>
+                <div class="chapter-actions">
+                    <a href="#" class="action-btn btn-notes"><i class="fas fa-file-alt"></i> Notes</a>
+                    <a href="#" class="action-btn btn-test"><i class="fas fa-lock"></i> Test <span class="premium-badge-sm">PREMIUM</span></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 2 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-title">
+                    <span class="chapter-number">2</span>
+                    Biodiversity
+                </div>
+                <div class="chapter-actions">
+                    <a href="#" class="action-btn btn-notes"><i class="fas fa-file-alt"></i> Notes</a>
+                    <a href="#" class="action-btn btn-test"><i class="fas fa-lock"></i> Test <span class="premium-badge-sm">PREMIUM</span></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 3 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-title">
+                    <span class="chapter-number">3</span>
+                    The Cell
+                </div>
+                <div class="chapter-actions">
+                    <a href="#" class="action-btn btn-notes"><i class="fas fa-file-alt"></i> Notes</a>
+                    <a href="#" class="action-btn btn-test"><i class="fas fa-lock"></i> Test <span class="premium-badge-sm">PREMIUM</span></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 4 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-title">
+                    <span class="chapter-number">4</span>
+                    Cell Cycle
+                </div>
+                <div class="chapter-actions">
+                    <a href="#" class="action-btn btn-notes"><i class="fas fa-file-alt"></i> Notes</a>
+                    <a href="#" class="action-btn btn-test"><i class="fas fa-lock"></i> Test <span class="premium-badge-sm">PREMIUM</span></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 5 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-title">
+                    <span class="chapter-number">5</span>
+                    Tissues, Organs and Organ System
+                </div>
+                <div class="chapter-actions">
+                    <a href="#" class="action-btn btn-notes"><i class="fas fa-file-alt"></i> Notes</a>
+                    <a href="#" class="action-btn btn-test"><i class="fas fa-lock"></i> Test <span class="premium-badge-sm">PREMIUM</span></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 6 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-title">
+                    <span class="chapter-number">6</span>
+                    Biomolecules
+                </div>
+                <div class="chapter-actions">
+                    <a href="#" class="action-btn btn-notes"><i class="fas fa-file-alt"></i> Notes</a>
+                    <a href="#" class="action-btn btn-test"><i class="fas fa-lock"></i> Test <span class="premium-badge-sm">PREMIUM</span></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 7 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-title">
+                    <span class="chapter-number">7</span>
+                    Enzymes
+                </div>
+                <div class="chapter-actions">
+                    <a href="#" class="action-btn btn-notes"><i class="fas fa-file-alt"></i> Notes</a>
+                    <a href="#" class="action-btn btn-test"><i class="fas fa-lock"></i> Test <span class="premium-badge-sm">PREMIUM</span></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 8 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-title">
+                    <span class="chapter-number">8</span>
+                    Bioenergetics
+                </div>
+                <div class="chapter-actions">
+                    <a href="#" class="action-btn btn-notes"><i class="fas fa-file-alt"></i> Notes</a>
+                    <a href="#" class="action-btn btn-test"><i class="fas fa-lock"></i> Test <span class="premium-badge-sm">PREMIUM</span></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 9 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-title">
+                    <span class="chapter-number">9</span>
+                    Plant Physiology
+                </div>
+                <div class="chapter-actions">
+                    <a href="#" class="action-btn btn-notes"><i class="fas fa-file-alt"></i> Notes</a>
+                    <a href="#" class="action-btn btn-test"><i class="fas fa-lock"></i> Test <span class="premium-badge-sm">PREMIUM</span></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 10 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-title">
+                    <span class="chapter-number">10</span>
+                    Reproduction in Plants
+                </div>
+                <div class="chapter-actions">
+                    <a href="#" class="action-btn btn-notes"><i class="fas fa-file-alt"></i> Notes</a>
+                    <a href="#" class="action-btn btn-test"><i class="fas fa-lock"></i> Test <span class="premium-badge-sm">PREMIUM</span></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 11 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-title">
+                    <span class="chapter-number">11</span>
+                    Biostatistics
+                </div>
+                <div class="chapter-actions">
+                    <a href="#" class="action-btn btn-notes"><i class="fas fa-file-alt"></i> Notes</a>
+                    <a href="#" class="action-btn btn-test"><i class="fas fa-lock"></i> Test <span class="premium-badge-sm">PREMIUM</span></a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPortal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+</body>
+</html>

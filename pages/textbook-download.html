@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Textbook - EduPortal</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Links (Fixed for pages folder) -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    
+    <!-- Page Specific Styles -->
+    <style>
+        .download-hero {
+            background: linear-gradient(135deg, #f8f9fa 0%, #eef2ff 100%);
+            padding: 6rem 0;
+            text-align: center;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .download-card {
+            background: white;
+            max-width: 700px;
+            width: 90%;
+            margin: 0 auto;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--primary-color);
+        }
+
+        .book-icon-wrapper {
+            width: 100px;
+            height: 100px;
+            background: #eef2ff;
+            color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 2rem;
+        }
+
+        .subject-title {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .class-badge {
+            display: inline-block;
+            background: #fff0f3;
+            color: var(--accent-color);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-dl {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+        }
+
+        .btn-dl:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(67, 97, 238, 0.3);
+            background: var(--secondary-color);
+        }
+
+        .btn-view {
+            background: white;
+            color: var(--text-dark);
+            border: 2px solid #eee;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background: #f8faff;
+        }
+
+        .file-details {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .detail-item i {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> EduPortal
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="9th-class.html">9th Class</a></li>
+                <li><a href="10th-class.html">10th Class</a></li>
+                <li><a href="#premium" class="btn-premium">Go Premium</a></li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Download Section -->
+    <section class="download-hero">
+        <div class="download-card">
+            <div class="book-icon-wrapper">
+                <i class="fas fa-book-open"></i>
+            </div>
+            
+            <h1 class="subject-title" id="dynamicSubject">Physics Textbook</h1>
+            <span class="class-badge">9th Class | English & Urdu Medium</span>
+            
+            <div class="action-buttons">
+                <!-- Download Button -->
+                <a href="#" target="_blank" class="btn-dl">
+                    <i class="fas fa-cloud-download-alt"></i> Download PDF
+                </a>
+                
+                <!-- View Online Button -->
+                <a href="#" target="_blank" class="btn-view">
+                    <i class="fas fa-eye"></i> View Online
+                </a>
+            </div>
+
+            <div class="file-details">
+                <div class="detail-item"><i class="fas fa-file-pdf"></i> Format: PDF</div>
+                <div class="detail-item"><i class="fas fa-hdd"></i> Size: ~15 MB</div>
+                <div class="detail-item"><i class="fas fa-calendar-check"></i> Edition: 2026</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPortal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+       <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. URL se parameter get karein
+            const params = new URLSearchParams(window.location.search);
+            let subject = params.get('sub');
+            
+            console.log("URL Subject Param:", subject); // Debugging ke liye
+            
+            // 2. Agar param mil jaye to format karein
+            if (subject) {
+                // Special handling for Computer Science (%20 decode ho jayega)
+                subject = decodeURIComponent(subject);
+                
+                // Har word ka pehla letter capital karein
+                const formattedSubject = subject.replace(/\b\w/g, l => l.toUpperCase());
+                
+                // Title aur Heading update karein
+                const titleElement = document.getElementById('dynamicSubject');
+                if(titleElement) {
+                    titleElement.innerText = formattedSubject + " Textbook";
+                }
+                document.title = "Download " + formattedSubject + " - EduPortal";
+            } else {
+                console.warn("No 'sub' parameter found in URL!");
+            }
+        });
+    </script>
+</body>
+</html>

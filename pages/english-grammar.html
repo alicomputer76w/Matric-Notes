@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Grammar - 9th Class</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    
+    <style>
+        .page-header { background: linear-gradient(135deg, #fb5607, #ffbe0b); color: white; padding: 3rem 0; text-align: center; }
+        .breadcrumb { margin-top: 1rem; font-size: 0.9rem; opacity: 0.9; }
+        .breadcrumb a { color: #fff3e0; }
+
+        .grammar-container { max-width: 1100px; margin: 4rem auto; padding: 0 20px; }
+        
+        /* Section Dividers */
+        .section-divider { 
+            text-align: center; margin: 4rem 0 2rem; position: relative; 
+        }
+        .section-divider h2 { 
+            display: inline-block; background: white; padding: 0 20px; 
+            font-size: 1.8rem; color: #fb5607; position: relative; z-index: 1; 
+        }
+        .section-divider::before {
+            content: ''; position: absolute; top: 50%; left: 0; right: 0;
+            height: 2px; background: #eee; z-index: 0;
+        }
+
+        /* Grammar Topic Cards */
+        .grammar-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;
+        }
+
+        .grammar-card {
+            background: white; border-radius: 12px; padding: 2rem;
+            box-shadow: var(--shadow); border: 1px solid #eee;
+            transition: var(--transition); cursor: pointer;
+        }
+        .grammar-card:hover { transform: translateY(-5px); border-color: #fb5607; }
+
+        .grammar-icon {
+            width: 50px; height: 50px; background: #fff3e0; color: #fb5607;
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; margin-bottom: 1rem;
+        }
+
+        .grammar-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text-dark); }
+        .grammar-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
+
+        /* Detail View (Hidden by default) */
+        .detail-view {
+            display: none; background: white; border-radius: 12px; 
+            padding: 2.5rem; margin-top: 2rem; box-shadow: var(--shadow);
+            border-left: 5px solid #fb5607; animation: fadeIn 0.4s ease;
+        }
+        .detail-view.active { display: block; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .detail-title { font-size: 1.8rem; color: #fb5607; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        .rule-box { background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem; }
+        .rule-box h4 { color: var(--text-dark); margin-bottom: 0.8rem; }
+        .example-list { list-style: none; padding: 0; }
+        .example-list li { padding: 0.5rem 0; border-bottom: 1px solid #eee; color: var(--text-light); }
+        .example-list li:last-child { border-bottom: none; }
+        .highlight { color: #fb5607; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo"><i class="fas fa-graduation-cap"></i> EduPortal</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="9th-class.html" class="active">9th Class</a></li>
+                <li><a href="10th-class.html">10th Class</a></li>
+                <li><a href="#premium" class="btn-premium">Go Premium</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>English Grammar & Question Types</h1>
+            <p>Complete guide for Board Exams</p>
+            <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="9th-class.html">9th Class</a> / <span>English Grammar</span></div>
+        </div>
+    </header>
+
+    <section class="grammar-container">
+        
+        <!-- SECTION 1: GRAMMAR MCQs -->
+        <div id="mcqs" class="section-divider"><h2><i class="fas fa-check-circle"></i> Grammar MCQs</h2></div>
+        
+        <div class="grammar-grid">
+            <div class="grammar-card" onclick="showDetail('pos')">
+                <div class="grammar-icon"><i class="fas fa-spell-check"></i></div>
+                <h3>Parts of Speech</h3>
+                <p>Noun, Pronoun, Verb, Adjective, Adverb, Preposition, Conjunction, Interjection identification.</p>
+            </div>
+            <div class="grammar-card" onclick="showDetail('voice')">
+                <div class="grammar-icon"><i class="fas fa-exchange-alt"></i></div>
+                <h3>Active & Passive Voice</h3>
+                <p>Rules for changing sentences from Active to Passive and vice versa.</p>
+            </div>
+            <div class="grammar-card" onclick="showDetail('preposition')">
+                <div class="grammar-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <h3>Prepositions</h3>
+                <p>Correct use of at, in, on, by, with, for, since, during etc.</p>
+            </div>
+            <div class="grammar-card" onclick="showDetail('pair')">
+                <div class="grammar-icon"><i class="fas fa-link"></i></div>
+                <h3>Pair of Words</h3>
+                <p>Difference between commonly confused words (e.g., Affect/Effect).</p>
+            </div>
+            <div class="grammar-card" onclick="showDetail('comprehension')">
+                <div class="grammar-icon"><i class="fas fa-paragraph"></i></div>
+                <h3>Comprehension Paragraph</h3>
+                <p>How to read and answer questions based on unseen passages.</p>
+            </div>
+            <div class="grammar-card" onclick="showDetail('translation')">
+                <div class="grammar-icon"><i class="fas fa-language"></i></div>
+                <h3>Urdu to English Translation</h3>
+                <p>Common board translation sentences and their correct English versions.</p>
+            </div>
+        </div>
+
+        <!-- Detail Views for MCQs -->
+        <div id="detail-pos" class="detail-view">
+            <h2 class="detail-title"><i class="fas fa-spell-check"></i> Parts of Speech MCQs</h2>
+            <div class="rule-box">
+                <h4>Key Rules:</h4>
+                <ul class="example-list">
+                    <li><span class="highlight">Noun:</span> Naming word (Person, Place, Thing). Example: <i>Lahore is a big city.</i></li>
+                    <li><span class="highlight">Verb:</span> Action word. Example: <i>She runs fast.</i></li>
+                    <li><span class="highlight">Adjective:</span> Describes a noun. Example: <i>Beautiful flower.</i></li>
+                </ul>
+            </div>
+            <p><em>(Yahan aap baad mein actual MCQs add karenge...)</em></p>
+        </div>
+
+        <div id="detail-voice" class="detail-view">
+            <h2 class="detail-title"><i class="fas fa-exchange-alt"></i> Active & Passive Voice</h2>
+            <div class="rule-box">
+                <h4>Basic Formula:</h4>
+                <ul class="example-list">
+                    <li>Active: Subject + Verb + Object</li>
+                    <li>Passive: Object + Helping Verb + V3 + by + Subject</li>
+                    <li>Example: <i>He writes a letter.</i> → <i>A letter is written by him.</i></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Add similar detail divs for preposition, pair, comprehension, translation -->
+        <div id="detail-preposition" class="detail-view"><h2 class="detail-title"><i class="fas fa-map-marker-alt"></i> Prepositions</h2><div class="rule-box"><h4>Important Rules:</h4><ul class="example-list"><li><span class="highlight">At:</span> Specific time/place (at 5 PM, at home)</li><li><span class="highlight">In:</span> Months/Years/Large places (in July, in Pakistan)</li><li><span class="highlight">On:</span> Days/Surfaces (on Monday, on the table)</li></ul></div></div>
+        <div id="detail-pair" class="detail-view"><h2 class="detail-title"><i class="fas fa-link"></i> Pair of Words</h2><div class="rule-box"><h4>Common Pairs:</h4><ul class="example-list"><li><span class="highlight">Affect (v) vs Effect (n):</span> The news affected him. The effect was bad.</li><li><span class="highlight">Accept (v) vs Except (prep):</span> I accept your offer. Everyone came except Ali.</li></ul></div></div>
+        <div id="detail-comprehension" class="detail-view"><h2 class="detail-title"><i class="fas fa-paragraph"></i> Comprehension Paragraph</h2><div class="rule-box"><h4>Tips:</h4><ul class="example-list"><li>Read the passage twice before answering.</li><li>Answers should be in your own words.</li><li>Keep answers short and to the point.</li></ul></div></div>
+        <div id="detail-translation" class="detail-view"><h2 class="detail-title"><i class="fas fa-language"></i> Urdu to English Translation</h2><div class="rule-box"><h4>Common Sentences:</h4><ul class="example-list"><li>میں سکول جاتا ہوں۔ → <span class="highlight">I go to school.</span></li><li>وہ کتاب پڑھ رہا ہے۔ → <span class="highlight">He is reading a book.</span></li></ul></div></div>
+
+
+        <!-- SECTION 2: QUESTION TYPES -->
+        <div id="questions" class="section-divider"><h2><i class="fas fa-pen-fancy"></i> Question Types (Grammar Notes)</h2></div>
+        
+        <div class="grammar-grid">
+            <div class="grammar-card" onclick="showDetail('use-it-there')">
+                <div class="grammar-icon"><i class="fas fa-question-circle"></i></div>
+                <h3>Use of It & There</h3>
+                <p>Difference between 'It is' and 'There is/are' with examples.</p>
+            </div>
+            <div class="grammar-card" onclick="showDetail('am-is-are')">
+                <div class="grammar-icon"><i class="fas fa-user-check"></i></div>
+                <h3>Am, Is, Are, Was, Were</h3>
+                <p>Correct usage of helping verbs in present and past tense.</p>
+            </div>
+            <div class="grammar-card" onclick="showDetail('has-have-had')">
+                <div class="grammar-icon"><i class="fas fa-clock"></i></div>
+                <h3>Has, Have, Had</h3>
+                <p>Perfect tenses and possession rules.</p>
+            </div>
+        </div>
+
+        <!-- Detail Views for Question Types -->
+        <div id="detail-use-it-there" class="detail-view">
+            <h2 class="detail-title"><i class="fas fa-question-circle"></i> Use of It & There</h2>
+            <div class="rule-box">
+                <h4>Rules:</h4>
+                <ul class="example-list">
+                    <li><span class="highlight">It is:</span> Used for specific things/time/weather. <i>It is raining. It is a book.</i></li>
+                    <li><span class="highlight">There is/are:</span> Used for existence. <i>There is a book on the table. There are many students.</i></li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="detail-am-is-are" class="detail-view">
+            <h2 class="detail-title"><i class="fas fa-user-check"></i> Am, Is, Are, Was, Were</h2>
+            <div class="rule-box">
+                <h4>Usage:</h4>
+                <ul class="example-list">
+                    <li><span class="highlight">Am:</span> Only with 'I'. <i>I am happy.</i></li>
+                    <li><span class="highlight">Is:</span> Singular (He/She/It). <i>He is tall.</i></li>
+                    <li><span class="highlight">Are:</span> Plural (We/You/They). <i>They are playing.</i></li>
+                    <li><span class="highlight">Was/Were:</span> Past tense forms of Is/Are.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="detail-has-have-had" class="detail-view">
+            <h2 class="detail-title"><i class="fas fa-clock"></i> Has, Have, Had</h2>
+            <div class="rule-box">
+                <h4>Rules:</h4>
+                <ul class="example-list">
+                    <li><span class="highlight">Has:</span> Singular subjects (He/She/It). <i>He has a car.</i></li>
+                    <li><span class="highlight">Have:</span> Plural subjects & I/You. <i>I have a pen. They have books.</i></li>
+                    <li><span class="highlight">Had:</span> Past tense for all subjects. <i>She had gone yesterday.</i></li>
+                </ul>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 EduPortal. All rights reserved.</p></div></div></footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        function showDetail(id) {
+            // Hide all detail views first
+            document.querySelectorAll('.detail-view').forEach(el => el.classList.remove('active'));
+            
+            // Show selected detail view
+            const target = document.getElementById('detail-' + id);
+            if(target) {
+                target.classList.add('active');
+                // Smooth scroll to the detail view
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Check URL hash on load to open specific section
+        window.addEventListener('load', () => {
+            if(window.location.hash === '#mcqs') {
+                document.getElementById('mcqs').scrollIntoView({behavior: 'smooth'});
+            } else if(window.location.hash === '#questions') {
+                document.getElementById('questions').scrollIntoView({behavior: 'smooth'});
+            }
+        });
+    </script>
+</body>
+</html>

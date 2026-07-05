@@ -1,0 +1,28 @@
+# Node modules (bohat important!)
+node_modules/
+backend/node_modules/
+
+# Environment variables (security!)
+.env
+backend/.env
+
+# Firebase service account key (security!)
+backend/serviceAccountKey.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Log files
+*.log
+npm-debug.log*
+
+# Temporary files
+tmp/
+temp/

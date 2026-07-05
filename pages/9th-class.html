@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9th Class - EduPortal</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    
+    <!-- Page Specific CSS -->
+    <style>
+        .page-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .breadcrumb {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .breadcrumb a {
+            color: #e0e7ff;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .subject-header {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .subject-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .subject-body {
+            padding: 1.5rem;
+        }
+
+        .resource-list {
+            list-style: none;
+        }
+
+        .resource-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .resource-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .resource-btn:hover {
+            background: #eef2ff;
+            color: var(--primary-color);
+        }
+
+        .premium-tag {
+            font-size: 0.7rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> EduPortal
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="9th-class.html" class="active">9th Class</a></li>
+                <li><a href="10th-class.html">10th Class</a></li>
+                <li><a href="#premium" class="btn-premium">Go Premium</a></li>
+            </ul>
+
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>9th Class Study Material</h1>
+            <p>Select your subject to access Books, Notes, and Tests</p>
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> / <span>9th Class</span>
+            </div>
+        </div>
+    </header>
+
+       <!-- Subjects Section -->
+    <section class="container">
+        <div class="subjects-grid">
+            
+            <!-- Mathematics -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon" style="background: #f72585;"><i class="fas fa-calculator"></i></div>
+                    <h3>Mathematics</h3>
+                </div>
+                <div class="subject-body">
+                    <ul class="resource-list">
+                        <li><a href="textbook-download.html?sub=Mathematics" target="_blank" class="resource-btn">Textbook (PDF) <i class="fas fa-download"></i></a></li>
+                        <li><a href="math-9th.html" class="resource-btn">Chapter Notes <i class="fas fa-file-alt"></i></a></li>
+                        <li><a href="#" class="resource-btn">Important Questions <i class="fas fa-star"></i></a></li>
+                        <li><a href="#" class="resource-btn">Past Papers <i class="fas fa-history"></i></a></li>
+                        <li><a href="#" class="resource-btn">Mock Tests <span class="premium-tag">PREMIUM</span> <i class="fas fa-lock"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Physics -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon"><i class="fas fa-atom"></i></div>
+                    <h3>Physics</h3>
+                </div>
+                <div class="subject-body">
+                    <ul class="resource-list">
+                        <li><a href="textbook-download.html?sub=Physics" target="_blank" class="resource-btn">Textbook (PDF) <i class="fas fa-download"></i></a></li>
+                        <li><a href="physics-9th.html" class="resource-btn">Chapter Notes <i class="fas fa-file-alt"></i></a></li>
+                        <li><a href="#" class="resource-btn">MCQs & Short Q/A <i class="fas fa-question-circle"></i></a></li>
+                        <li><a href="#" class="resource-btn">Past Papers <i class="fas fa-history"></i></a></li>
+                        <li><a href="#" class="resource-btn">Chapter Tests <span class="premium-tag">PREMIUM</span> <i class="fas fa-lock"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Chemistry -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon" style="background: #4cc9f0;"><i class="fas fa-flask"></i></div>
+                    <h3>Chemistry</h3>
+                </div>
+                <div class="subject-body">
+                    <ul class="resource-list">
+                        <li><a href="textbook-download.html?sub=Chemistry" target="_blank" class="resource-btn">Textbook (PDF) <i class="fas fa-download"></i></a></li>
+                        <li><a href="chemistry-9th.html" class="resource-btn">Chapter Notes <i class="fas fa-file-alt"></i></a></li>
+                        <li><a href="#" class="resource-btn">MCQs & Short Q/A <i class="fas fa-question-circle"></i></a></li>
+                        <li><a href="#" class="resource-btn">Past Papers <i class="fas fa-history"></i></a></li>
+                        <li><a href="#" class="resource-btn">Chapter Tests <span class="premium-tag">PREMIUM</span> <i class="fas fa-lock"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Biology -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon" style="background: #4361ee;"><i class="fas fa-dna"></i></div>
+                    <h3>Biology</h3>
+                </div>
+                <div class="subject-body">
+                    <ul class="resource-list">
+                        <li><a href="textbook-download.html?sub=Biology" target="_blank" class="resource-btn">Textbook (PDF) <i class="fas fa-download"></i></a></li>
+                        <li><a href="biology-9th.html" class="resource-btn">Chapter Notes <i class="fas fa-file-alt"></i></a></li>
+                        <li><a href="#" class="resource-btn">Diagrams & MCQs <i class="fas fa-image"></i></a></li>
+                        <li><a href="#" class="resource-btn">Past Papers <i class="fas fa-history"></i></a></li>
+                        <li><a href="#" class="resource-btn">Full Book Test <span class="premium-tag">PREMIUM</span> <i class="fas fa-lock"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Computer Science Card -->
+<div class="subject-card">
+    <div class="subject-header">
+        <div class="subject-icon" style="background: #7209b7;"><i class="fas fa-laptop-code"></i></div>
+        <h3>Computer Science</h3>
+    </div>
+    <div class="subject-body">
+        <ul class="resource-list">
+            <li><a href="textbook-download.html?sub=Computer%20Science" target="_blank" class="resource-btn">Textbook (PDF) <i class="fas fa-download"></i></a></li>
+            <!-- Link ko yahan change karein -->
+            <li><a href="computer-exercises.html" class="resource-btn">Solved Exercises <i class="fas fa-check-double"></i></a></li>
+            <li><a href="#" class="resource-btn">Past Papers <i class="fas fa-history"></i></a></li>
+            <li><a href="#" class="resource-btn">Online Quiz <span class="premium-tag">PREMIUM</span> <i class="fas fa-lock"></i></a></li>
+        </ul>
+    </div>
+</div>
+
+           <!-- English -->
+<div class="subject-card">
+    <div class="subject-header">
+        <div class="subject-icon" style="background: #fb5607;"><i class="fas fa-language"></i></div>
+        <h3>English</h3>
+    </div>
+    <div class="subject-body">
+        <ul class="resource-list">
+            <li><a href="textbook-download.html?sub=English" target="_blank" class="resource-btn">Textbook (PDF) <i class="fas fa-download"></i></a></li>
+            
+            <!-- Link to Main English Page -->
+            <li><a href="english-9th.html" class="resource-btn">Book Chapters <i class="fas fa-book-open"></i></a></li>
+            
+            <!-- Grammar MCQs -->
+            <li><a href="english-grammar.html#mcqs" class="resource-btn">Grammar MCQs <i class="fas fa-check-circle"></i></a></li>
+            
+            <!-- Grammar Question Types -->
+            <li><a href="english-grammar.html#questions" class="resource-btn">Question Types <i class="fas fa-pen-fancy"></i></a></li>
+            
+            <li><a href="#" class="resource-btn">Past Papers <i class="fas fa-history"></i></a></li>
+            <li><a href="#" class="resource-btn">Vocabulary Test <span class="premium-tag">PREMIUM</span> <i class="fas fa-lock"></i></a></li>
+        </ul>
+    </div>
+</div>
+            <!-- Urdu -->
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-icon" style="background: #2ec4b6;"><i class="fas fa-feather-alt"></i></div>
+                    <h3>Urdu</h3>
+                </div>
+                <div class="subject-body">
+                    <ul class="resource-list">
+                        <li><a href="textbook-download.html?sub=Urdu" target="_blank" class="resource-btn">Textbook (PDF) <i class="fas fa-download"></i></a></li>
+                        <li><a href="#" class="resource-btn">Chapter Summaries <i class="fas fa-file-alt"></i></a></li>
+                        <li><a href="#" class="resource-btn">Poetry Explanation <i class="fas fa-scroll"></i></a></li>
+                        <li><a href="#" class="resource-btn">Past Papers <i class="fas fa-history"></i></a></li>
+                        <li><a href="#" class="resource-btn">Composition Test <span class="premium-tag">PREMIUM</span> <i class="fas fa-lock"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+
+           <!-- Islamiat -->
+<div class="subject-card">
+    <div class="subject-header">
+        <div class="subject-icon" style="background: #cb997e;"><i class="fas fa-mosque"></i></div>
+        <h3>Islamiat</h3>
+    </div>
+    <div class="subject-body">
+        <ul class="resource-list">
+            <li><a href="textbook-download.html?sub=Islamiat" target="_blank" class="resource-btn">Textbook (PDF) <i class="fas fa-download"></i></a></li>
+            <!-- Chapter Notes Link Added -->
+            <li><a href="islamiat-9th.html" class="resource-btn">Chapter Notes <i class="fas fa-file-alt"></i></a></li>
+            <li><a href="#" class="resource-btn">Ayat & Ahadith <i class="fas fa-quote-right"></i></a></li>
+            <li><a href="#" class="resource-btn">Past Papers <i class="fas fa-history"></i></a></li>
+            <li><a href="#" class="resource-btn">Sectional Tests <span class="premium-tag">PREMIUM</span> <i class="fas fa-lock"></i></a></li>
+        </ul>
+    </div>
+</div>
+           <!-- Al-Quran -->
+<div class="subject-card">
+    <div class="subject-header">
+        <div class="subject-icon" style="background: #d4af37;"><i class="fas fa-quran"></i></div>
+        <h3>Al-Quran</h3>
+    </div>
+    <div class="subject-body">
+        <ul class="resource-list">
+            <li><a href="textbook-download.html?sub=Al-Quran" target="_blank" class="resource-btn">Textbook (PDF) <i class="fas fa-download"></i></a></li>
+            <!-- Chapter Notes Link -->
+            <li><a href="quran-9th.html" class="resource-btn">Surah Details <i class="fas fa-book-quran"></i></a></li>
+            <li><a href="#" class="resource-btn">Tajweed Rules <i class="fas fa-book-open"></i></a></li>
+            <li><a href="#" class="resource-btn">Past Papers <i class="fas fa-history"></i></a></li>
+            <li><a href="#" class="resource-btn">Recitation Test <span class="premium-tag">PREMIUM</span> <i class="fas fa-lock"></i></a></li>
+        </ul>
+    </div>
+</div>
+
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPortal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+</body>
+</html>
