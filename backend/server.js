@@ -55,14 +55,14 @@ if (process.env.FIREBASE_PROJECT_ID) {
         process.exit(1);
     }
 }
-console.log("PROJECT:", process.env.FIREBASE_PROJECT_ID);
-console.log("EMAIL:", process.env.FIREBASE_CLIENT_EMAIL);
-console.log("PRIVATE KEY EXISTS:", !!process.env.FIREBASE_PRIVATE_KEY);
+console.log("PROJECT:", serviceAccount.project_id);
+console.log("EMAIL:", serviceAccount.client_email);
+console.log("PRIVATE KEY EXISTS:", !!serviceAccount.private_key);
 console.log(
   "PRIVATE KEY START:",
-  process.env.FIREBASE_PRIVATE_KEY?.substring(0, 30)
+  serviceAccount.private_key?.substring(0, 30)
 );
- // Initialize Firebase Admin
+// Initialize Firebase Admin
 try {
     admin.initializeApp({
         credential: admin.credential.cert(serviceAccount)
@@ -73,6 +73,33 @@ try {
     process.exit(1);
 }
 
+const db = admin.firestore();
+
+// Firestore Test
+db.collection("test")
+  .limit(1)
+  .get()
+  .then(() => {
+    console.log("✅ Firestore Connected Successfully");
+  })
+  .catch((err) => {
+    console.error("❌ Firestore Connection Failed:", err);
+  });
+
+// Firebase Auth Test
+admin.auth().listUsers(1)
+  .then((result) => {
+    console.log("✅ Firebase Auth Connected");
+    console.log("Users:", result.users.length);
+  })
+  .catch((err) => {
+    console.error("❌ Firebase Auth Failed");
+    console.error(err);
+  });
+
+// Initialize Express
+const app = express();
+  
 // Initialize Express
 const app = express();
 
