@@ -11,7 +11,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- CSS Links (Fixed for pages folder) -->
+    <!-- CSS Links -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/responsive.css">
     
@@ -181,8 +181,8 @@
                 <i class="fas fa-book-open"></i>
             </div>
             
-            <h1 class="subject-title" id="dynamicSubject">Physics Textbook</h1>
-            <span class="class-badge">9th Class | English & Urdu Medium</span>
+            <h1 class="subject-title" id="dynamicSubject">Loading...</h1>
+            <span class="class-badge" id="classBadge">Loading...</span>
             
             <div class="action-buttons">
                 <!-- Download Button -->
@@ -213,31 +213,46 @@
         </div>
     </footer>
 
-       <script src="../js/main.js"></script>
+    <script src="../js/main.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. URL se parameter get karein
-            const params = new URLSearchParams(window.location.search);
-            let subject = params.get('sub');
+        // Run immediately when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🔄 Page loaded, updating content...');
             
-            console.log("URL Subject Param:", subject); // Debugging ke liye
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const classParam = urlParams.get('class');
+            const subjectParam = urlParams.get('subject');
             
-            // 2. Agar param mil jaye to format karein
-            if (subject) {
-                // Special handling for Computer Science (%20 decode ho jayega)
-                subject = decodeURIComponent(subject);
-                
-                // Har word ka pehla letter capital karein
-                const formattedSubject = subject.replace(/\b\w/g, l => l.toUpperCase());
-                
-                // Title aur Heading update karein
-                const titleElement = document.getElementById('dynamicSubject');
-                if(titleElement) {
-                    titleElement.innerText = formattedSubject + " Textbook";
+            console.log('📍 URL Parameters:', { class: classParam, subject: subjectParam });
+            
+            // Update Class Badge
+            const classBadge = document.getElementById('classBadge');
+            if (classBadge) {
+                if (classParam === '10th') {
+                    classBadge.textContent = '10th Class | English & Urdu Medium';
+                    console.log('✅ Updated to 10th Class');
+                } else if (classParam === '9th') {
+                    classBadge.textContent = '9th Class | English & Urdu Medium';
+                    console.log('✅ Updated to 9th Class');
+                } else {
+                    classBadge.textContent = classParam ? `${classParam} Class | English & Urdu Medium` : '9th Class | English & Urdu Medium';
                 }
-                document.title = "Download " + formattedSubject + " - EduPortal";
-            } else {
-                console.warn("No 'sub' parameter found in URL!");
+            }
+            
+            // Update Subject Title
+            const subjectTitle = document.getElementById('dynamicSubject');
+            if (subjectTitle && subjectParam) {
+                // Format subject name (capitalize each word)
+                const formattedSubject = subjectParam
+                    .replace(/-/g, ' ')
+                    .replace(/\b\w/g, l => l.toUpperCase());
+                
+                subjectTitle.textContent = formattedSubject + ' Textbook';
+                document.title = `Download ${formattedSubject} - EduPortal`;
+                console.log('✅ Updated subject to:', formattedSubject);
+            } else if (subjectTitle) {
+                subjectTitle.textContent = 'Select Subject';
             }
         });
     </script>
