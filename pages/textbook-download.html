@@ -199,10 +199,16 @@
             </div>
 
             <div class="file-details">
-                <div class="detail-item"><i class="fas fa-file-pdf"></i> Format: PDF</div>
-                <div class="detail-item"><i class="fas fa-hdd"></i> Size: ~15 MB</div>
-                <div class="detail-item"><i class="fas fa-calendar-check"></i> Edition: 2026</div>
-            </div>
+                    <div class="detail-item"><i class="fas fa-file-pdf"></i> Format: PDF</div>
+                    <div class="detail-item"><i class="fas fa-hdd"></i> Size: ~15 MB</div>
+                    <div class="detail-item"><i class="fas fa-calendar-check"></i> Edition: 2026</div>
+                </div>
+
+                <!-- Debug Log -->
+                <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef; text-align: left; max-height: 300px; overflow-y: auto;">
+                    <h4 style="margin: 0 0 10px 0; color: #333;">🔍 Debug Log:</h4>
+                    <div id="debugLog" style="font-family: monospace; font-size: 12px; line-height: 1.5;"></div>
+                </div>
         </div>
     </section>
 
@@ -242,6 +248,18 @@
             '10th-Al-Quran': 'https://drive.google.com/uc?id=1gQDn7H8iq4G0DN_XRhGC8Sg95HE-_Xvc&export=download'
         };
 
+        // Debug log function
+        function debugLog(message, type = 'info') {
+            const debugLogEl = document.getElementById('debugLog');
+            if (!debugLogEl) return;
+            const time = new Date().toLocaleTimeString();
+            const colorClass = type === 'error' ? 'color: #dc3545;' : 
+                             type === 'success' ? 'color: #28a745;' : 
+                             'color: #007bff;';
+            debugLogEl.innerHTML += `<div style="${colorClass}">[${time}] ${message}</div>`;
+            console.log(message);
+        }
+
         // Extract File ID from Google Drive URL
         function getFileId(url) {
             const match = url.match(/id=([^&]+)/);
@@ -249,14 +267,14 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🔄 Page loaded, updating content...');
+            debugLog('🔄 Page loaded, updating content...');
             
             // Get URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const classParam = urlParams.get('class');
             const subjectParam = urlParams.get('subject');
             
-            console.log('📍 URL Parameters:', { class: classParam, subject: subjectParam });
+            debugLog(`📍 URL Parameters: class = ${classParam}, subject = ${subjectParam}`);
             
             // Update Class Badge
             const classBadge = document.getElementById('classBadge');
@@ -266,7 +284,7 @@
                 } else if (classParam === '9th') {
                     classBadge.textContent = '9th Class | English & Urdu Medium';
                 } else {
-                    classBadge.textContent = `${classParam} Class | English & Urdu Medium`;
+                    classBadge.textContent = `${classParam} Class | English & Urdu Medium';
                 }
             }
             
@@ -287,17 +305,21 @@
                 // Normalize subject: replace spaces with hyphens and make sure it's clean
                 const normalizedSubject = subjectParam.replace(/\s+/g, '-');
                 const key = `${classParam}-${normalizedSubject}`;
+                debugLog(`🔑 Looking for key: ${key}`);
+                
                 const downloadLink = booksLinks[key];
                 
                 if (downloadLink) {
+                    debugLog(`✅ Found download link!`, 'success');
                     const fileId = getFileId(downloadLink);
+                    debugLog(`📦 File ID: ${fileId}`);
                     
                     // Update download button - Direct download attempt
                     const downloadBtn = document.getElementById('downloadBtn');
                     if (downloadBtn) {
                         downloadBtn.href = downloadLink;
                         downloadBtn.target = '_blank';
-                        downloadBtn.setAttribute('download', '');
+                        debugLog(`🔗 Download button href: ${downloadLink}`);
                     }
                     
                     // Update view button - Google Drive viewer
@@ -305,12 +327,10 @@
                     if (viewBtn && fileId) {
                         viewBtn.href = `https://drive.google.com/file/d/${fileId}/view`;
                         viewBtn.target = '_blank';
+                        debugLog(`👁️ View button href: ${viewBtn.href}`);
                     }
-                    
-                    console.log('✅ Download link set:', downloadLink);
-                    console.log('✅ View link set:', `https://drive.google.com/file/d/${fileId}/view`);
                 } else {
-                    console.warn('⚠️ No download link found for:', key);
+                    debugLog(`⚠️ No download link found for key: ${key}`, 'error');
                     
                     // Disable buttons if no link found
                     const downloadBtn = document.getElementById('downloadBtn');
@@ -332,6 +352,8 @@
                         };
                     }
                 }
+            } else {
+                debugLog('⚠️ Missing class or subject parameters in URL', 'error');
             }
         });
     </script>
