@@ -217,14 +217,14 @@
 
     <script src="../js/main.js"></script>
     <script>
-        // All Books Download Links - Google Drive
+        // All Books Download Links - Google Drive (keys use hyphens for consistency)
         const booksLinks = {
             // 9th Class Books
             '9th-Mathematics': 'https://drive.google.com/uc?id=1TyNExEOd38RD1SJEymhw-dvzka763G8W&export=download',
             '9th-Physics': 'https://drive.google.com/uc?id=1fT-RIUt2XEiMRR-l77XNVhgynI8lGfKw&export=download',
             '9th-Biology': 'https://drive.google.com/uc?id=1cQGoj2kqaKxtqFbusqdyMWmCrQxTxQ1Q&export=download',
             '9th-Chemistry': 'https://drive.google.com/uc?id=1wWRGvInmZNguWLTqbKUBt9GvlWN60F8F&export=download',
-            '9th-Computer Science': 'https://drive.google.com/uc?id=1qFj7MAnKP_QLPSKk5KmZ60MNYAq-oU6D&export=download',
+            '9th-Computer-Science': 'https://drive.google.com/uc?id=1qFj7MAnKP_QLPSKk5KmZ60MNYAq-oU6D&export=download',
             '9th-English': 'https://drive.google.com/uc?id=1_YwWIv-2BVlu0HKzGmJykMZQciSMYqKl&export=download',
             '9th-Urdu': 'https://drive.google.com/uc?id=1Ok9esDCRia95erKn1fAolPvlb-8_EYHm&export=download',
             '9th-Islamiat': 'https://drive.google.com/uc?id=1CyuT5ZYK-R1AdaHgFWpkeB1GysjQ-wxe&export=download',
@@ -235,7 +235,7 @@
             '10th-Physics': 'https://drive.google.com/uc?id=1M_KxQr7duXRdtiRTPPO7llkwqPyjL8Fj&export=download',
             '10th-Biology': 'https://drive.google.com/uc?id=18PJDnU1u_bj801lJBHlOO1Gj0hKt-P8y&export=download',
             '10th-Chemistry': 'https://drive.google.com/uc?id=1rxhOQU5PnfjxFIdMJJ5voMnhjDwiKJpp&export=download',
-            '10th-Computer Science': 'https://drive.google.com/uc?id=1SBYB30Z5Tdpl3TiHdf-viuFEnQeXza1P&export=download',
+            '10th-Computer-Science': 'https://drive.google.com/uc?id=1SBYB30Z5Tdpl3TiHdf-viuFEnQeXza1P&export=download',
             '10th-English': 'https://drive.google.com/uc?id=1JPD9dTUEYdlDHRnRkIKybm2lRCoRRt6h&export=download',
             '10th-Urdu': 'https://drive.google.com/uc?id=17vNihhHGH44gnrNRO5AEknx28Tyzpr-j&export=download',
             '10th-Pakistan-Studies': 'https://drive.google.com/uc?id=1nqTLh-X5B0zMhY1tpWodJ_q9BjO3_bli&export=download',
@@ -284,7 +284,9 @@
             
             // Update Download Buttons
             if (classParam && subjectParam) {
-                const key = `${classParam}-${subjectParam}`;
+                // Normalize subject: replace spaces with hyphens and make sure it's clean
+                const normalizedSubject = subjectParam.replace(/\s+/g, '-');
+                const key = `${classParam}-${normalizedSubject}`;
                 const downloadLink = booksLinks[key];
                 
                 if (downloadLink) {
