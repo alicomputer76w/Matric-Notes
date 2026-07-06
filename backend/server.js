@@ -213,6 +213,16 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+// Verify Nodemailer connection
+transporter.verify(function(error, success) {
+    if (error) {
+        console.error('❌ Nodemailer verification failed:', error.message);
+        console.error('❌ Nodemailer error stack:', error.stack);
+    } else {
+        console.log('✅ Nodemailer is ready to send emails!');
+    }
+});
+
 // Generate OTP Function
 function generateOTP() {
     return Math.floor(100000 + Math.random() * 900000).toString(); // 6 digit OTP
@@ -343,7 +353,8 @@ app.get('/api/test', (req, res) => {
         success: true, 
         message: 'Server is working!',
         firebaseConnected: !!admin.apps.length,
-        emailUser: process.env.EMAIL_USER ? 'Set' : 'NOT SET'
+        emailUser: process.env.EMAIL_USER ? `Set (${process.env.EMAIL_USER})` : 'NOT SET',
+        emailPass: process.env.EMAIL_PASS ? 'Set' : 'NOT SET'
     });
 });
 
