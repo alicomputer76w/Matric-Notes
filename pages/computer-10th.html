@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science Solved Exercises - EduPortal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    
+    <style>
+        .page-header { background: linear-gradient(135deg, #7209b7, #3a0ca3); color: white; padding: 3rem 0; text-align: center; }
+        .breadcrumb { margin-top: 1rem; font-size: 0.9rem; opacity: 0.9; }
+        .breadcrumb a { color: #e0d4ff; }
+
+        .accordion-container {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 0 20px;
+        }
+
+        .accordion-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #eee;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: background 0.3s;
+        }
+
+        .accordion-header:hover { background: #f8f9fa; }
+        
+        .accordion-header.active {
+            background: #f3e8ff;
+            color: #7209b7;
+            border-bottom: 1px solid #eee;
+        }
+
+        .accordion-icon { transition: transform 0.3s ease; }
+        .accordion-header.active .accordion-icon { transform: rotate(180deg); }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            background: #fafafa;
+        }
+
+        .content-inner { padding: 2rem; }
+
+        /* Sub-sections inside accordion */
+        .sub-section { margin-bottom: 2rem; }
+        .sub-section:last-child { margin-bottom: 0; }
+        
+        .sub-title {
+            font-size: 1.2rem;
+            color: #7209b7;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f3e8ff;
+            padding-bottom: 0.5rem;
+        }
+
+        /* MCQ Styles */
+        .mcq-box { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #7209b7; }
+        .mcq-q { font-weight: 600; margin-bottom: 0.5rem; }
+        .mcq-ans { color: #06a77d; font-weight: 600; font-size: 0.9rem; margin-top: 0.5rem; }
+
+        /* Q&A Styles */
+        .qa-box { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; }
+        .qa-q { font-weight: 600; color: var(--text-dark); margin-bottom: 0.5rem; }
+        .qa-a { color: var(--text-light); line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo"><i class="fas fa-graduation-cap"></i> EduPortal</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="9th-class.html" >9th Class</a></li>
+                <li><a href="10th-class.html" class="active">10th Class</a></li>
+                <li><a href="#premium" class="btn-premium">Go Premium</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>Computer Science - Solved Exercises</h1>
+            <p>Click on any chapter to view MCQs, Short Questions, and Long Questions</p>
+            <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="10th-class.html">10th Class</a> / <span>Computer Science</span></div>
+        </div>
+    </header>
+
+    <section class="accordion-container">
+        
+        <!-- Chapter 1 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-book-open" style="margin-right: 10px;"></i> Chapter 1: Operating Systems: Structure and Services</span>
+                <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+                <div class="content-inner">
+                    <!-- MCQs -->
+                    <div class="sub-section">
+                        <h3 class="sub-title"><i class="fas fa-list-check"></i> MCQs</h3>
+                        <div class="mcq-box">
+                            <div class="mcq-q">1. The brain of the computer is called:</div>
+                            <div class="mcq-ans"><i class="fas fa-check"></i> Answer: CPU</div>
+                        </div>
+                        <div class="mcq-box">
+                            <div class="mcq-q">2. Which of the following is an input device?</div>
+                            <div class="mcq-ans"><i class="fas fa-check"></i> Answer: Keyboard</div>
+                        </div>
+                    </div>
+                    <!-- Short Questions -->
+                    <div class="sub-section">
+                        <h3 class="sub-title"><i class="fas fa-align-left"></i> Short Questions</h3>
+                        <div class="qa-box">
+                            <div class="qa-q">Q1: Define Computer.</div>
+                            <div class="qa-a">A computer is an electronic device that processes data to produce meaningful information.</div>
+                        </div>
+                    </div>
+                    <!-- Long Questions -->
+                    <div class="sub-section">
+                        <h3 class="sub-title"><i class="fas fa-align-justify"></i> Long Questions</h3>
+                        <div class="qa-box">
+                            <div class="qa-q">Q1: Explain the basic components of a computer system.</div>
+                            <div class="qa-a">A computer system consists of Input Unit, CPU, Memory, and Output Unit. [Detailed answer will be added here...]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 2 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-book-open" style="margin-right: 10px;"></i> Chapter 2: System Recovery and Advanced Maintenance</span>
+                <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+                <div class="content-inner">
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-list-check"></i> MCQs</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy MCQs for Chapter 2 will be added here...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-left"></i> Short Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Short Questions for Chapter 2...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-justify"></i> Long Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Long Questions for Chapter 2...</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 3 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-book-open" style="margin-right: 10px;"></i> Chapter 3: Introduction to Python Language</span>
+                <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+                <div class="content-inner">
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-list-check"></i> MCQs</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy MCQs for Chapter 3...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-left"></i> Short Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Short Questions for Chapter 3...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-justify"></i> Long Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Long Questions for Chapter 3...</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 4 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-book-open" style="margin-right: 10px;"></i> Chapter 4: Control Structures in Python</span>
+                <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+                <div class="content-inner">
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-list-check"></i> MCQs</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy MCQs for Chapter 4...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-left"></i> Short Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Short Questions for Chapter 4...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-justify"></i> Long Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Long Questions for Chapter 4...</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 5 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-book-open" style="margin-right: 10px;"></i> Chapter 5: Introduction to Data Science</span>
+                <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+                <div class="content-inner">
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-list-check"></i> MCQs</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy MCQs for Chapter 5...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-left"></i> Short Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Short Questions for Chapter 5...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-justify"></i> Long Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Long Questions for Chapter 5...</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 6 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-book-open" style="margin-right: 10px;"></i> Chapter 6: Introduction to Artificial Intelligence and Machine Learning</span>
+                <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+                <div class="content-inner">
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-list-check"></i> MCQs</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy MCQs for Chapter 6...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-left"></i> Short Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Short Questions for Chapter 6...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-justify"></i> Long Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Long Questions for Chapter 6...</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 7 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-book-open" style="margin-right: 10px;"></i> Chapter 7: Applications of AI</span>
+                <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+                <div class="content-inner">
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-list-check"></i> MCQs</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy MCQs for Chapter 7...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-left"></i> Short Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Short Questions for Chapter 7...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-justify"></i> Long Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Long Questions for Chapter 7...</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 8 -->
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <span><i class="fas fa-book-open" style="margin-right: 10px;"></i> Chapter 8: Digital Enterpreneurship</span>
+                <i class="fas fa-chevron-down accordion-icon"></i>
+            </div>
+            <div class="accordion-content">
+                <div class="content-inner">
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-list-check"></i> MCQs</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy MCQs for Chapter 8...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-left"></i> Short Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Short Questions for Chapter 8...</p></div>
+                    <div class="sub-section"><h3 class="sub-title"><i class="fas fa-align-justify"></i> Long Questions</h3><p style="padding: 1rem; background: white; border-radius: 8px;">Dummy Long Questions for Chapter 8...</p></div>
+                </div>
+            </div>
+        </div>
+
+       
+    </section>
+
+    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 EduPortal. All rights reserved.</p></div></div></footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Accordion Logic
+        const headers = document.querySelectorAll('.accordion-header');
+        
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const isActive = header.classList.contains('active');
+
+                // Close all other accordions (Optional: agar aap chahte hain ke ek waqt mein sirf ek khula rahe)
+                headers.forEach(otherHeader => {
+                    if (otherHeader !== header) {
+                        otherHeader.classList.remove('active');
+                        otherHeader.nextElementSibling.style.maxHeight = null;
+                    }
+                });
+
+                // Toggle current accordion
+                if (isActive) {
+                    header.classList.remove('active');
+                    content.style.maxHeight = null;
+                } else {
+                    header.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
