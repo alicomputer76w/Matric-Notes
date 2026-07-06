@@ -6,7 +6,7 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
-
+const { Resend } = require('resend');
 console.log('🔥 Starting EduPortal Secure Backend Server...');
 
 dotenv.config();
@@ -205,24 +205,43 @@ app.use(express.json());
 // ============================================
 // EMAIL TRANSPORTER SETUP (OTP ke liye)
 // ============================================
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-    }
-});
+// Initialize Resend Email API
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Verify Nodemailer connection
-transporter.verify(function(error, success) {
-    if (error) {
-        console.error('❌ Nodemailer verification failed:', error.message);
-        console.error('❌ Nodemailer error stack:', error.stack);
-    } else {
-        console.log('✅ Nodemailer is ready to send emails!');
+// Email send function
+async function sendOTPEmail(toEmail, otp, subject, color = '#4361ee') {
+    try {
+        const { data, error } = await resend.emails.send({
+            from: 'EduPortal <onboarding@resend.dev>',
+            to: [toEmail],
+            subject: subject,
+            html: `
+                <div style="font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5;">
+                    <div style="max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <h2 style="color: ${color}; text-align: center;">EduPortal Verification</h2>
+                        <p style="color: #555; font-size: 16px;">Your One-Time Password (OTP):</p>
+                        <div style="background: ${color}; color: white; font-size: 32px; font-weight: bold; text-align: center; padding: 20px; margin: 20px 0; border-radius: 5px; letter-spacing: 5px;">
+                            ${otp}
+                        </div>
+                        <p style="color: #777; font-size: 14px;">This OTP will expire in 5 minutes.</p>
+                        <p style="color: #777; font-size: 14px;">If you didn't request this, please ignore this email.</p>
+                    </div>
+                </div>
+            `
+        });
+        
+        if (error) {
+            console.error('❌ Resend error:', error);
+            return false;
+        }
+        
+        console.log('✅ Email sent successfully via Resend:', data.id);
+        return true;
+    } catch (error) {
+        console.error('❌ Email send error:', error);
+        return false;
     }
-});
-
+}
 // Generate OTP Function
 function generateOTP() {
     return Math.floor(100000 + Math.random() * 900000).toString(); // 6 digit OTP
@@ -307,31 +326,12 @@ app.post('/api/auth/send-otp', async (req, res) => {
         (async () => {
             try {
                 console.log('🔵 Attempting to send email...');
-                console.log('🔵 EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'NOT SET');
-                const mailOptions = {
-                    from: process.env.EMAIL_USER,
-                    to: email,
-                    subject: 'EduPortal - Email Verification OTP',
-                    html: `
-                        <div style="font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5;">
-                            <div style="max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                                <h2 style="color: #4361ee; text-align: center;">EduPortal Verification</h2>
-                                <p style="color: #555; font-size: 16px;">Your One-Time Password (OTP) for email verification:</p>
-                                <div style="background: #4361ee; color: white; font-size: 32px; font-weight: bold; text-align: center; padding: 20px; margin: 20px 0; border-radius: 5px; letter-spacing: 5px;">
-                                    ${otp}
-                                </div>
-                                <p style="color: #777; font-size: 14px;">This OTP will expire in 5 minutes.</p>
-                                <p style="color: #777; font-size: 14px;">If you didn't request this, please ignore this email.</p>
-                            </div>
-                        </div>
-                    `
-                };
-                
-                await transporter.sendMail(mailOptions);
-                console.log('✅ Email sent successfully to', email);
-            } catch (emailError) {
-                console.error('❌ Email send error:', emailError.message);
-                console.error('❌ Email send stack:', emailError.stack);
+                const success = await sendOTPEmail(email, otp, 'EduPortal - Email Verification OTP');
+                if (!success) {
+                    console.error('❌ Failed to send email via Resend');
+                }
+            } catch (error) {
+                console.error('❌ Email send error:', error);
             }
         })();
         
@@ -506,36 +506,26 @@ app.post('/api/auth/forgot-password-send-otp', async (req, res) => {
             message: 'OTP sent to your email for password reset!' 
         });
         
-        // Send email in background (async)
-        (async () => {
-            try {
-                console.log('🔵 Attempting to send password reset email...');
-                const mailOptions = {
-                    from: process.env.EMAIL_USER,
-                    to: email,
-                    subject: 'EduPortal - Password Reset OTP',
-                    html: `
-                        <div style="font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5;">
-                            <div style="max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                                <h2 style="color: #f72585; text-align: center;">Password Reset Request</h2>
-                                <p style="color: #555; font-size: 16px;">Your OTP for password reset:</p>
-                                <div style="background: #f72585; color: white; font-size: 32px; font-weight: bold; text-align: center; padding: 20px; margin: 20px 0; border-radius: 5px; letter-spacing: 5px;">
-                                    ${otp}
-                                </div>
-                                <p style="color: #777; font-size: 14px;">This OTP will expire in 5 minutes.</p>
-                                <p style="color: #777; font-size: 14px;">If you didn't request this, please ignore this email.</p>
-                            </div>
-                        </div>
-                    `
-                };
-                
-                await transporter.sendMail(mailOptions);
-                console.log('✅ Password reset email sent successfully to', email);
-            } catch (emailError) {
-                console.error('❌ Password reset email send error:', emailError.message);
-                console.error('❌ Email send stack:', emailError.stack);
-            }
-        })();
+        // Send email in background using Resend (async)
+(async () => {
+    try {
+        console.log('🔵 Attempting to send password reset email via Resend...');
+        const success = await sendOTPEmail(
+            email, 
+            otp, 
+            'EduPortal - Password Reset OTP',
+            '#f72585'
+        );
+        
+        if (!success) {
+            console.error('❌ Failed to send password reset email via Resend');
+        } else {
+            console.log('✅ Password reset email sent successfully to', email);
+        }
+    } catch (emailError) {
+        console.error('❌ Password reset email send error:', emailError.message);
+    }
+})();
         
     } catch (error) {
         console.error('Forgot Password OTP Error:', error.message);
