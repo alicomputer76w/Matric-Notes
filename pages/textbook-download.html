@@ -267,14 +267,14 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            debugLog('🔄 Page loaded, updating content...');
+            console.log('🔄 Page loaded, updating content...');
             
             // Get URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const classParam = urlParams.get('class');
             const subjectParam = urlParams.get('subject');
             
-            debugLog(`📍 URL Parameters: class = ${classParam}, subject = ${subjectParam}`);
+            console.log('📍 URL Parameters:', { class: classParam, subject: subjectParam });
             
             // Update Class Badge
             const classBadge = document.getElementById('classBadge');
@@ -284,7 +284,7 @@
                 } else if (classParam === '9th') {
                     classBadge.textContent = '9th Class | English & Urdu Medium';
                 } else {
-                    classBadge.textContent = `${classParam} Class | English & Urdu Medium';
+                    classBadge.textContent = `${classParam} Class | English & Urdu Medium`;
                 }
             }
             
@@ -305,21 +305,17 @@
                 // Normalize subject: replace spaces with hyphens and make sure it's clean
                 const normalizedSubject = subjectParam.replace(/\s+/g, '-');
                 const key = `${classParam}-${normalizedSubject}`;
-                debugLog(`🔑 Looking for key: ${key}`);
-                
                 const downloadLink = booksLinks[key];
                 
                 if (downloadLink) {
-                    debugLog(`✅ Found download link!`, 'success');
                     const fileId = getFileId(downloadLink);
-                    debugLog(`📦 File ID: ${fileId}`);
                     
                     // Update download button - Direct download attempt
                     const downloadBtn = document.getElementById('downloadBtn');
                     if (downloadBtn) {
                         downloadBtn.href = downloadLink;
                         downloadBtn.target = '_blank';
-                        debugLog(`🔗 Download button href: ${downloadLink}`);
+                        downloadBtn.setAttribute('download', '');
                     }
                     
                     // Update view button - Google Drive viewer
@@ -327,10 +323,12 @@
                     if (viewBtn && fileId) {
                         viewBtn.href = `https://drive.google.com/file/d/${fileId}/view`;
                         viewBtn.target = '_blank';
-                        debugLog(`👁️ View button href: ${viewBtn.href}`);
                     }
+                    
+                    console.log('✅ Download link set:', downloadLink);
+                    console.log('✅ View link set:', `https://drive.google.com/file/d/${fileId}/view`);
                 } else {
-                    debugLog(`⚠️ No download link found for key: ${key}`, 'error');
+                    console.warn('⚠️ No download link found for:', key);
                     
                     // Disable buttons if no link found
                     const downloadBtn = document.getElementById('downloadBtn');
@@ -352,8 +350,6 @@
                         };
                     }
                 }
-            } else {
-                debugLog('⚠️ Missing class or subject parameters in URL', 'error');
             }
         });
     </script>
