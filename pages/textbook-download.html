@@ -100,6 +100,7 @@
             gap: 10px;
             transition: all 0.3s ease;
             box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+            cursor: pointer;
         }
 
         .btn-dl:hover {
@@ -120,6 +121,7 @@
             align-items: center;
             gap: 10px;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .btn-view:hover {
@@ -240,6 +242,12 @@
             '10th-Al-Quran': 'https://drive.google.com/uc?id=1gQDn7H8iq4G0DN_XRhGC8Sg95HE-_Xvc&export=download'
         };
 
+        // Extract File ID from Google Drive URL
+        function getFileId(url) {
+            const match = url.match(/id=([^&]+)/);
+            return match ? match[1] : null;
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🔄 Page loaded, updating content...');
             
@@ -267,6 +275,7 @@
             if (subjectTitle && subjectParam) {
                 const formattedSubject = subjectParam
                     .replace(/-/g, ' ')
+                    .replace(/%20/g, ' ')
                     .replace(/\b\w/g, l => l.toUpperCase());
                 
                 subjectTitle.textContent = formattedSubject + ' Textbook';
@@ -279,23 +288,47 @@
                 const downloadLink = booksLinks[key];
                 
                 if (downloadLink) {
-                    // Update download button
+                    const fileId = getFileId(downloadLink);
+                    
+                    // Update download button - Direct download attempt
                     const downloadBtn = document.getElementById('downloadBtn');
                     if (downloadBtn) {
                         downloadBtn.href = downloadLink;
+                        downloadBtn.target = '_blank';
+                        downloadBtn.setAttribute('download', '');
                     }
                     
-                    // Update view button (same link, but opens in Google Drive viewer)
+                    // Update view button - Google Drive viewer
                     const viewBtn = document.getElementById('viewBtn');
-                    if (viewBtn) {
-                        const fileId = downloadLink.match(/id=([^&]+)/)[1];
+                    if (viewBtn && fileId) {
                         viewBtn.href = `https://drive.google.com/file/d/${fileId}/view`;
+                        viewBtn.target = '_blank';
                     }
                     
                     console.log('✅ Download link set:', downloadLink);
+                    console.log('✅ View link set:', `https://drive.google.com/file/d/${fileId}/view`);
                 } else {
                     console.warn('⚠️ No download link found for:', key);
-                    alert('Book not available yet. Please check back later!');
+                    
+                    // Disable buttons if no link found
+                    const downloadBtn = document.getElementById('downloadBtn');
+                    const viewBtn = document.getElementById('viewBtn');
+                    
+                    if (downloadBtn) {
+                        downloadBtn.href = '#';
+                        downloadBtn.onclick = function(e) {
+                            e.preventDefault();
+                            alert('Book not available yet. Please check back later!');
+                        };
+                    }
+                    
+                    if (viewBtn) {
+                        viewBtn.href = '#';
+                        viewBtn.onclick = function(e) {
+                            e.preventDefault();
+                            alert('Book not available yet. Please check back later!');
+                        };
+                    }
                 }
             }
         });
