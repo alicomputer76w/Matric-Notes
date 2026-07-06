@@ -19,23 +19,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Smooth Scrolling for Anchor Links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-
+  // 2. Smooth Scrolling for Anchor Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        
+        // Skip if href is empty, just '#', or not a valid selector
+        if (!targetId || targetId === '#' || targetId.startsWith('http')) {
+            return;
+        }
+        
+        // Check if it's a valid CSS selector (starts with #)
+        if (!targetId.startsWith('#')) {
+            return;
+        }
+        
+        e.preventDefault();
+        
+        try {
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 window.scrollTo({
-                    top: targetElement.offsetTop - 80, // Adjusting for sticky navbar
+                    top: targetElement.offsetTop - 80,
                     behavior: 'smooth'
                 });
             }
-        });
+        } catch (error) {
+            console.warn('Invalid selector:', targetId);
+        }
     });
+});
 
     // 3. Navbar Scroll Effect (Optional: adds shadow on scroll)
     const navbar = document.querySelector('.navbar');
