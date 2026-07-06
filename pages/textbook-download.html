@@ -186,12 +186,12 @@
             
             <div class="action-buttons">
                 <!-- Download Button -->
-                <a href="#" target="_blank" class="btn-dl">
+                <a href="#" target="_blank" class="btn-dl" id="downloadBtn">
                     <i class="fas fa-cloud-download-alt"></i> Download PDF
                 </a>
                 
                 <!-- View Online Button -->
-                <a href="#" target="_blank" class="btn-view">
+                <a href="#" target="_blank" class="btn-view" id="viewBtn">
                     <i class="fas fa-eye"></i> View Online
                 </a>
             </div>
@@ -215,7 +215,31 @@
 
     <script src="../js/main.js"></script>
     <script>
-        // Run immediately when DOM is ready
+        // All Books Download Links - Google Drive
+        const booksLinks = {
+            // 9th Class Books
+            '9th-Mathematics': 'https://drive.google.com/uc?id=1TyNExEOd38RD1SJEymhw-dvzka763G8W&export=download',
+            '9th-Physics': 'https://drive.google.com/uc?id=1fT-RIUt2XEiMRR-l77XNVhgynI8lGfKw&export=download',
+            '9th-Biology': 'https://drive.google.com/uc?id=1cQGoj2kqaKxtqFbusqdyMWmCrQxTxQ1Q&export=download',
+            '9th-Chemistry': 'https://drive.google.com/uc?id=1wWRGvInmZNguWLTqbKUBt9GvlWN60F8F&export=download',
+            '9th-Computer Science': 'https://drive.google.com/uc?id=1qFj7MAnKP_QLPSKk5KmZ60MNYAq-oU6D&export=download',
+            '9th-English': 'https://drive.google.com/uc?id=1_YwWIv-2BVlu0HKzGmJykMZQciSMYqKl&export=download',
+            '9th-Urdu': 'https://drive.google.com/uc?id=1Ok9esDCRia95erKn1fAolPvlb-8_EYHm&export=download',
+            '9th-Islamiat': 'https://drive.google.com/uc?id=1CyuT5ZYK-R1AdaHgFWpkeB1GysjQ-wxe&export=download',
+            '9th-Al-Quran': 'https://drive.google.com/uc?id=1omKAVQfHOJkZ80e0dQtA7SxLitS39c4P&export=download',
+            
+            // 10th Class Books
+            '10th-Mathematics': 'https://drive.google.com/uc?id=1j9BAihALWhxvDA0zWszzs2OFpBNjV7AC&export=download',
+            '10th-Physics': 'https://drive.google.com/uc?id=1M_KxQr7duXRdtiRTPPO7llkwqPyjL8Fj&export=download',
+            '10th-Biology': 'https://drive.google.com/uc?id=18PJDnU1u_bj801lJBHlOO1Gj0hKt-P8y&export=download',
+            '10th-Chemistry': 'https://drive.google.com/uc?id=1rxhOQU5PnfjxFIdMJJ5voMnhjDwiKJpp&export=download',
+            '10th-Computer Science': 'https://drive.google.com/uc?id=1SBYB30Z5Tdpl3TiHdf-viuFEnQeXza1P&export=download',
+            '10th-English': 'https://drive.google.com/uc?id=1JPD9dTUEYdlDHRnRkIKybm2lRCoRRt6h&export=download',
+            '10th-Urdu': 'https://drive.google.com/uc?id=17vNihhHGH44gnrNRO5AEknx28Tyzpr-j&export=download',
+            '10th-Pakistan-Studies': 'https://drive.google.com/uc?id=1nqTLh-X5B0zMhY1tpWodJ_q9BjO3_bli&export=download',
+            '10th-Al-Quran': 'https://drive.google.com/uc?id=1gQDn7H8iq4G0DN_XRhGC8Sg95HE-_Xvc&export=download'
+        };
+
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🔄 Page loaded, updating content...');
             
@@ -228,31 +252,51 @@
             
             // Update Class Badge
             const classBadge = document.getElementById('classBadge');
-            if (classBadge) {
+            if (classBadge && classParam) {
                 if (classParam === '10th') {
                     classBadge.textContent = '10th Class | English & Urdu Medium';
-                    console.log('✅ Updated to 10th Class');
                 } else if (classParam === '9th') {
                     classBadge.textContent = '9th Class | English & Urdu Medium';
-                    console.log('✅ Updated to 9th Class');
                 } else {
-                    classBadge.textContent = classParam ? `${classParam} Class | English & Urdu Medium` : '9th Class | English & Urdu Medium';
+                    classBadge.textContent = `${classParam} Class | English & Urdu Medium`;
                 }
             }
             
             // Update Subject Title
             const subjectTitle = document.getElementById('dynamicSubject');
             if (subjectTitle && subjectParam) {
-                // Format subject name (capitalize each word)
                 const formattedSubject = subjectParam
                     .replace(/-/g, ' ')
                     .replace(/\b\w/g, l => l.toUpperCase());
                 
                 subjectTitle.textContent = formattedSubject + ' Textbook';
                 document.title = `Download ${formattedSubject} - EduPortal`;
-                console.log('✅ Updated subject to:', formattedSubject);
-            } else if (subjectTitle) {
-                subjectTitle.textContent = 'Select Subject';
+            }
+            
+            // Update Download Buttons
+            if (classParam && subjectParam) {
+                const key = `${classParam}-${subjectParam}`;
+                const downloadLink = booksLinks[key];
+                
+                if (downloadLink) {
+                    // Update download button
+                    const downloadBtn = document.getElementById('downloadBtn');
+                    if (downloadBtn) {
+                        downloadBtn.href = downloadLink;
+                    }
+                    
+                    // Update view button (same link, but opens in Google Drive viewer)
+                    const viewBtn = document.getElementById('viewBtn');
+                    if (viewBtn) {
+                        const fileId = downloadLink.match(/id=([^&]+)/)[1];
+                        viewBtn.href = `https://drive.google.com/file/d/${fileId}/view`;
+                    }
+                    
+                    console.log('✅ Download link set:', downloadLink);
+                } else {
+                    console.warn('⚠️ No download link found for:', key);
+                    alert('Book not available yet. Please check back later!');
+                }
             }
         });
     </script>
