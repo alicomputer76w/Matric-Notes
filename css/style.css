@@ -1,5 +1,5 @@
 /* ========================================
-   JAMEEL NOORI NASTALEEQ FONT - URDU
+   JAMEEL NOORI NASTALEEQ FONT
    ======================================== */
 @font-face {
     font-family: 'Jameel Noori Nastaleeq';
@@ -9,57 +9,110 @@
     font-display: swap;
 }
 
+/* =========================================
+   1. Global Styles & Variables
+   ========================================= */
+:root {
+    --primary-color: #4361ee;
+    --secondary-color: #3f37c9;
+    --accent-color: #f72585;
+    --text-dark: #2b2d42;
+    --text-light: #8d99ae;
+    --bg-light: #f8f9fa;
+    --white: #ffffff;
+    --success: #4cc9f0;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 /* ========================================
-   GLOBAL URDU FONT APPLICATION
+   DEFAULT FONT (ENGLISH - Poppins)
+   ======================================== */
+body {
+    font-family: 'Poppins', sans-serif !important;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* ========================================
+   URDU PAGES - Jameel Noori Nastaleeq
+   ======================================== */
+body[lang="ur"],
+body[lang="ar"] {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif !important;
+    line-height: 2.5 !important;
+}
+
+body[dir="rtl"] {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif !important;
+    line-height: 2.5 !important;
+}
+
+/* ========================================
+   NAVBAR - HAMESHA ENGLISH (Poppins)
+   ======================================== */
+.navbar,
+.navbar *,
+.nav-menu,
+.nav-menu a,
+.logo,
+.btn-premium,
+.hamburger {
+    font-family: 'Poppins', sans-serif !important;
+    direction: ltr !important;
+}
+
+/* ========================================
+   BUTTONS - HAMESHA ENGLISH
+   ======================================== */
+.btn,
+button,
+.btn-primary,
+.btn-outline,
+.btn-submit,
+.btn-dashboard,
+.btn-logout {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* ========================================
+   FORMS - HAMESHA ENGLISH
+   ======================================== */
+input,
+select,
+textarea,
+label {
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* ========================================
+   URDU CONTENT ELEMENTS
+   ======================================== */
+body[lang="ur"] h1,
+body[lang="ur"] h2,
+body[lang="ur"] h3,
+body[lang="ur"] h4,
+body[lang="ur"] p,
+body[lang="ur"] span,
+body[lang="ur"] li,
+body[lang="ur"] div,
+body[lang="ur"] a:not(.nav-menu a):not(.btn):not(.btn-premium):not(.logo) {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif !important;
+}
+
+/* ========================================
+   REST OF YOUR CSS (UNCHANGED)
    ======================================== */
 
-/* Body - Default Font */
-body {
-    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Arial', serif;
-    line-height: 2.5;
-}
-
-/* All Urdu Text Elements */
-h1, h2, h3, h4, h5, h6,
-p, span, div, li, a,
-button, input, textarea,
-select, label {
-    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
-}
-
-/* Specific Urdu Classes (agar koi ho) */
-.urdu-text,
-[dir="rtl"],
-[lang="ur"] {
-    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
-    line-height: 2.8;
-}
-
-/* Navbar Urdu Text */
-.navbar .nav-menu a,
-.navbar .logo {
-    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
-}
-
-/* Buttons */
-.btn, button, .btn-premium {
-    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
-}
-
-/* Cards aur Content */
-.subject-card,
-.chapter-card,
-.surah-card,
-.poem-card,
-.question-item,
-.mcq-option {
-    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
-}
-
-/* Form Elements */
-select, input, textarea {
-    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
-}
+/* Baaki saara CSS jo aapne share kiya hai, waise hi rahega */
+/* Bas upar wale changes add karein */
 /* =========================================
    1. Global Styles & Variables
    ========================================= */
