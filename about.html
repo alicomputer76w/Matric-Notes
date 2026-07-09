@@ -1105,6 +1105,247 @@
       color: var(--text-secondary);
       line-height: 1.7;
     }
+    /* ========== CONTACT MODAL ========== */
+.contact-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 3000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    padding: 1rem;
+    overflow-y: auto;
+}
+
+.contact-modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.contact-modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+    animation: slideUp 0.4s ease;
+}
+
+.contact-header {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.contact-close {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.contact-close:hover {
+    background: rgba(255,255,255,0.3);
+    transform: rotate(90deg);
+}
+
+.contact-body {
+    padding: 2rem;
+}
+
+.contact-info-box {
+    background: linear-gradient(135deg, #fef3c7, #fffbeb);
+    border-right: 4px solid #f59e0b;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    color: #92400e;
+}
+
+.contact-info-box i {
+    color: #f59e0b;
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+}
+
+.contact-form .form-group {
+    margin-bottom: 1.3rem;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #166534;
+    font-size: 0.95rem;
+}
+
+.contact-form label i {
+    margin-left: 0.4rem;
+    color: #15803d;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 2px solid #d1fae5;
+    border-radius: 10px;
+    font-family: 'Noto Nastaliq Urdu', serif;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background: #f8fafc;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #166534;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(22, 101, 52, 0.1);
+}
+
+.contact-form textarea {
+    min-height: 150px;
+    resize: vertical;
+    line-height: 1.8;
+}
+
+.contact-submit {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    transition: all 0.3s;
+    font-family: 'Noto Nastaliq Urdu', serif;
+    margin-bottom: 1.5rem;
+}
+
+.contact-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+}
+
+/* Success Message */
+.contact-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+}
+
+.contact-success.active {
+    display: block;
+    animation: slideUp 0.4s ease;
+}
+
+.success-icon-big {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto 1.5rem;
+    animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.contact-success h3 {
+    color: #166534;
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.contact-success p {
+    color: #64748b;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+.direct-contact {
+    border-top: 2px dashed #e0e4f0;
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+}
+
+.direct-contact-btn {
+    transition: all 0.3s;
+}
+
+.direct-contact-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .contact-body { padding: 1.5rem; }
+    .contact-header h2 { font-size: 1.1rem; }
+    .direct-contact-btn { font-size: 0.85rem; padding: 0.6rem 1rem; }
+}
 
     /* =========================================
        HOW WE PREPARE NOTES – STEP PROCESS
@@ -1856,11 +2097,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: 0 auto 1.5rem;
+    overflow: hidden;
       font-size: 80px;
       margin: 0 auto 20px;
       border: 4px solid rgba(255,255,255,0.3);
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
       position: relative;
+      flex-shrink: 0;
     }
 
     .founder-avatar::after {
@@ -2518,7 +2762,7 @@
         <a href="pages/9th-class.html" role="listitem">9th Class</a>
         <a href="pages/10th-class.html" role="listitem">10th Class</a>
         <a href="pages/about.html" class="active" role="listitem">About</a>
-        <a href="https://alicomputer76w.github.io/Matric-Notes/#contact" role="listitem">Contact</a>
+        <li><a href="#" onclick="openContactModal(); return false;">Contact</a></li>
       </div>
 
       <div class="nav-actions">
@@ -2539,8 +2783,8 @@
     <a href="https://alicomputer76w.github.io/Matric-Notes/"><i class="fas fa-home"></i> Home</a>
     <a href="https://alicomputer76w.github.io/Matric-Notes/#9th"><i class="fas fa-graduation-cap"></i> 9th Class</a>
     <a href="https://alicomputer76w.github.io/Matric-Notes/#10th"><i class="fas fa-school"></i> 10th Class</a>
-    <a href="#"><i class="fas fa-info-circle"></i> About</a>
-    <a href="https://alicomputer76w.github.io/Matric-Notes/#contact"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+    <a href="../about.html"><i class="fas fa-envelope"></i> Contact</a>
   </nav>
 </nav>
 
@@ -3878,11 +4122,13 @@
   <div class="container" style="position:relative; z-index:2;">
     <div class="founder-grid">
       <div class="founder-profile" data-aos="fade-right">
-        <div class="founder-avatar" aria-hidden="true">👨‍💻</div>
+        <div class="founder-avatar" aria-hidden="true">
+    <img src="profile.png" alt="Sadaqat Ali - Founder">
+</div>
         <div class="founder-name">Sadaqat Ali</div>
-        <div class="founder-role">Founder & Developer, Matric Notes</div>
+        <div class="founder-role">Founder & Developer, EduPortal</div>
         <div class="founder-socials">
-          <a href="https://alicomputer76w.github.io/Matric-Notes/" class="founder-social" aria-label="Website" title="Matric Notes Website">
+          <a href="https://alicomputer76w.github.io/Matric-Notes/" class="founder-social" aria-label="Website" title="EduPortal Website">
             <i class="fas fa-globe"></i>
           </a>
           <a href="https://github.com/alicomputer76w" class="founder-social" aria-label="GitHub" title="GitHub Profile">
@@ -4038,44 +4284,45 @@
       <div>
         <div class="footer-col-title">9th Class</div>
         <div class="footer-links">
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#english9"><i class="fas fa-chevron-right"></i> English 9th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#urdu9"><i class="fas fa-chevron-right"></i> Urdu 9th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#math9"><i class="fas fa-chevron-right"></i> Mathematics 9th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#physics9"><i class="fas fa-chevron-right"></i> Physics 9th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#chemistry9"><i class="fas fa-chevron-right"></i> Chemistry 9th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#biology9"><i class="fas fa-chevron-right"></i> Biology 9th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#computer9"><i class="fas fa-chevron-right"></i> Computer 9th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#islamiat9"><i class="fas fa-chevron-right"></i> Islamiat 9th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#pak9"><i class="fas fa-chevron-right"></i> Pak Studies 9th</a>
+          <a href="pages/english-9th.html"><i class="fas fa-chevron-right"></i> English 9th</a>
+          <a href="pages/urdu-9th.html"><i class="fas fa-chevron-right"></i> Urdu 9th</a>
+          <a href="pages/math-9th.html"><i class="fas fa-chevron-right"></i> Mathematics 9th</a>
+          <a href="pages/physics-9th.html"><i class="fas fa-chevron-right"></i> Physics 9th</a>
+          <a href="pages/chemistry-9th.html"><i class="fas fa-chevron-right"></i> Chemistry 9th</a>
+          <a href="pages/biology-9th.html"><i class="fas fa-chevron-right"></i> Biology 9th</a>
+          <a href="pages/computer-exercises.html"><i class="fas fa-chevron-right"></i> Computer 9th</a>
+          <a href="pages/islamiat-9th.html"><i class="fas fa-chevron-right"></i> Islamiat 9th</a>
+          <a href="pages/quran-9th.html"><i class="fas fa-chevron-right"></i>  Al Quran 9th</a>
         </div>
       </div>
 
       <div>
         <div class="footer-col-title">10th Class</div>
         <div class="footer-links">
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#english10"><i class="fas fa-chevron-right"></i> English 10th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#urdu10"><i class="fas fa-chevron-right"></i> Urdu 10th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#math10"><i class="fas fa-chevron-right"></i> Mathematics 10th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#physics10"><i class="fas fa-chevron-right"></i> Physics 10th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#chemistry10"><i class="fas fa-chevron-right"></i> Chemistry 10th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#biology10"><i class="fas fa-chevron-right"></i> Biology 10th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#computer10"><i class="fas fa-chevron-right"></i> Computer 10th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#islamiat10"><i class="fas fa-chevron-right"></i> Islamiat 10th</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#pak10"><i class="fas fa-chevron-right"></i> Pak Studies 10th</a>
+          <a href="pages/english-grammar.html"><i class="fas fa-chevron-right"></i> English 10th</a>
+          <a href="pages/urdu-10th.html"><i class="fas fa-chevron-right"></i> Urdu 10th</a>
+          <a href="pages/math-10th.html"><i class="fas fa-chevron-right"></i> Mathematics 10th</a>
+          <a href="pages/physics-10th.html"><i class="fas fa-chevron-right"></i> Physics 10th</a>
+          <a href="pages/chemistery-10th.html"><i class="fas fa-chevron-right"></i> Chemistry 10th</a>
+          <a href="pages/biology-10th.html"><i class="fas fa-chevron-right"></i> Biology 10th</a>
+          <a href="pages/computer-10th.html"><i class="fas fa-chevron-right"></i> Computer 10th</a>
+          <a href="pages/islamiat-10th.html"><i class="fas fa-chevron-right"></i> Al Quran 10th</a>
+          <a href="pages/pak-studies-10th.html"><i class="fas fa-chevron-right"></i> Pak Studies 10th</a>
         </div>
       </div>
 
       <div>
-        <div class="footer-col-title">Platform</div>
-        <div class="footer-links">
-          <a href="https://alicomputer76w.github.io/Matric-Notes/"><i class="fas fa-chevron-right"></i> Home</a>
-          <a href="#"><i class="fas fa-chevron-right"></i> About Us</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#contact"><i class="fas fa-chevron-right"></i> Contact</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#guesspapers"><i class="fas fa-chevron-right"></i> Guess Papers</a>
-          <a href="https://alicomputer76w.github.io/Matric-Notes/#pastpapers"><i class="fas fa-chevron-right"></i> Past Papers</a>
-          <a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
-          <a href="#"><i class="fas fa-chevron-right"></i> Disclaimer</a>
-        </div>
+    <div class="footer-col-title">Platform</div>
+    <div class="footer-links">
+        <a href="https://alicomputer76w.github.io/Matric-Notes/"><i class="fas fa-chevron-right"></i> Home</a>
+        <a href="#"><i class="fas fa-chevron-right"></i> About Us</a>
+      <a href="#" onclick="openContactModal(); return false;">Contact</a>
+        <a href="https://alicomputer76w.github.io/Matric-Notes/#guesspapers"><i class="fas fa-chevron-right"></i> Guess Papers</a>
+        <a href="https://alicomputer76w.github.io/Matric-Notes/#pastpapers"><i class="fas fa-chevron-right"></i> Past Papers</a>
+        <a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a>
+        <a href="#"><i class="fas fa-chevron-right"></i> Disclaimer</a>
+    </div>
+</div>
         <div style="margin-top: 24px;">
           <div class="footer-col-title">Study Material</div>
           <div class="footer-links">
@@ -4358,6 +4605,211 @@ document.addEventListener('mousemove', (e) => {
 
 console.log('%c📚 EduPortal', 'color:#4361ee; font-size:24px; font-weight:900;');
 console.log('%cPakistan\'s #1 Free Study Platform | 100,000+ Students', 'color:#e91e8c; font-size:14px;');
+// ========== CONTACT FORM SYSTEM ==========
+
+// WhatsApp number (International format: 92 + number without 0)
+const CONTACT_WHATSAPP = '923081517640';
+
+// Open Contact Modal
+function openContactModal() {
+    document.getElementById('contactModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Close Contact Modal
+function closeContactModal() {
+    document.getElementById('contactModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Modal ke bahar click karne par band ho
+document.getElementById('contactModal').addEventListener('click', (e) => {
+    if (e.target.id === 'contactModal') {
+        closeContactModal();
+    }
+});
+
+// Submit Contact Form
+function submitContact(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('contactName').value.trim();
+    const email = document.getElementById('contactEmail').value.trim();
+    const type = document.getElementById('contactType').value;
+    const message = document.getElementById('contactMessage').value.trim();
+
+    if (!name || !type || !message) {
+        alert('براہ کرم تمام ضروری فیلڈز پُر کریں');
+        return;
+    }
+
+    // Current date/time
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('ur-PK');
+    const timeStr = now.toLocaleTimeString('ur-PK', { hour: '2-digit', minute: '2-digit' });
+
+    // Current page info
+    const currentPage = window.location.href;
+
+    // Beautiful formatted message
+    const contactText = `
+╔══════════════════════════════╗
+   📨 EDUPORTAL CONTACT FORM
+╚══════════════════════════════╝
+
+ نام: ${name}
+📧 ای میل: ${email || 'Not provided'}
+📅 تاریخ: ${dateStr}
+ وقت: ${timeStr}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️ پیغام کی قسم:
+${type}
+
+📝 تفصیل:
+${message}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📍 موجودہ صفحہ:
+${currentPage}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ براہ کرم جلد از جلد جواب دیں
+شکریہ! 🌟
+    `.trim();
+
+    // WhatsApp link generate karein
+    const encodedMessage = encodeURIComponent(contactText);
+    const whatsappURL = `https://wa.me/${CONTACT_WHATSAPP}?text=${encodedMessage}`;
+
+    // WhatsApp link set karein
+    document.getElementById('whatsappContactLink').href = whatsappURL;
+
+    // Form hide, success show
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('contactSuccess').classList.add('active');
+}
+
+// Reset Contact Form
+function resetContact() {
+    document.getElementById('contactForm').reset();
+    document.getElementById('contactForm').style.display = 'block';
+    document.getElementById('contactSuccess').classList.remove('active');
+}
+
+// ESC key se modal band
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeContactModal();
+    }
+});
 </script>
+<!-- Contact Modal -->
+<div class="contact-modal" id="contactModal">
+    <div class="contact-modal-content">
+        <div class="contact-header">
+            <h2><i class="fas fa-envelope-open-text"></i> Contact Us / رابطہ کریں</h2>
+            <button class="contact-close" onclick="closeContactModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="contact-body">
+            <!-- Contact Info -->
+            <div class="contact-info-box">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>ہم سے رابطہ کریں</strong><br>
+                    کوئی بھی سوال، مشورہ یا شکایت ہو تو نیچے فارم پُر کریں۔ ہم 24 گھنٹے میں جواب دیں گے۔
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <form class="contact-form" id="contactForm" onsubmit="submitContact(event)">
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-user"></i> آپ کا نام
+                    </label>
+                    <input type="text" id="contactName" required placeholder="اپنا نام لکھیں">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-envelope"></i> ای میل (Optional)
+                    </label>
+                    <input type="email" id="contactEmail" placeholder="apna.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-comment"></i> پیغام کی قسم
+                    </label>
+                    <select id="contactType" required>
+                        <option value="">-- قسم منتخب کریں --</option>
+                        <option value="General Inquiry">General Inquiry / عام سوال</option>
+                        <option value="Content Error">Content Error / مواد میں غلطی</option>
+                        <option value="Missing Content">Missing Content / مواد کی کمی</option>
+                        <option value="Technical Issue">Technical Issue / تکنیکی مسئلہ</option>
+                        <option value="Suggestion">Suggestion / تجویز</option>
+                        <option value="Feedback">Feedback / تاثرات</option>
+                        <option value="Other">Other / دیگر</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <i class="fas fa-pen"></i> آپ کا پیغام
+                    </label>
+                    <textarea id="contactMessage" required placeholder="براہ کرم اپنا سوال یا پیغام تفصیل سے لکھیں...&#10;&#10;مثال:&#10;- مجھے 9th class Physics کے Chapter 3 میں مدد چاہیے&#10;- MCQs میں کچھ غلطیاں ہیں&#10;- نیا subject add کرنے کی درخواست ہے"></textarea>
+                </div>
+
+                <button type="submit" class="contact-submit">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp پر بھیجیں
+                </button>
+            </form>
+
+            <!-- Success Section -->
+            <div class="contact-success" id="contactSuccess">
+                <div class="success-icon-big">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h3>شکریہ! آپ کا پیغام تیار ہے</h3>
+                <p>
+                    نیچے بٹن پر کلک کریں اور WhatsApp کھل جائے گا۔<br>
+                    Message send کرنے سے پہلے چیک کر لیں۔
+                </p>
+                <a href="#" id="whatsappContactLink" target="_blank" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp پر بھیجیں
+                </a>
+                <br><br>
+                <button onclick="resetContact()" style="background: none; border: none; color: #64748b; cursor: pointer; font-size: 0.9rem;">
+                    <i class="fas fa-redo"></i> نیا پیغام
+                </button>
+            </div>
+
+            <!-- Direct Contact Options -->
+            <div class="direct-contact">
+                <p style="text-align: center; color: #64748b; margin-top: 1.5rem; font-size: 0.9rem;">
+                    یا براہِ راست رابطہ کریں:
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+                    <a href="https://wa.me/923081517640" target="_blank" class="direct-contact-btn" style="background: #25d366; color: white; padding: 0.7rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp
+                    </a>
+                    <a href="mailto:we9191711@gmail.com" class="direct-contact-btn" style="background: #ea4335; color: white; padding: 0.7rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-envelope"></i>
+                        Email
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
