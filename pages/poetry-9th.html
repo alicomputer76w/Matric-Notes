@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظم اور غزل - 9ویں جماعت</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <style>
+        body { 
+            font-family: 'Noto Nastaliq Urdu', serif; 
+            line-height: 2.2; 
+            background: linear-gradient(135deg, #fef3e2 0%, #fff5eb 100%);
+        }
+        
+        .page-header { 
+            background: linear-gradient(135deg, #c2410c, #9a3412); 
+            color: white; 
+            padding: 3rem 0; 
+            text-align: center;
+            border-bottom: 5px solid #ea580c;
+        }
+        .page-header h1 { color: white; font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .page-header p { color: #fed7aa; font-size: 1.2rem; }
+        .breadcrumb { margin-top: 1.5rem; font-size: 1rem; opacity: 0.95; }
+        .breadcrumb a { color: #fdba74; text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a:hover { color: white; }
+
+        .poetry-container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 20px;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 1.5rem;
+            position: relative;
+        }
+        .section-title::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #ea580c, transparent);
+        }
+        .section-title span {
+            background: linear-gradient(135deg, #fef3e2, #fff5eb);
+            padding: 0 1.5rem;
+            color: #c2410c;
+            font-weight: 700;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Collapsible Card */
+        .poem-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(194, 65, 12, 0.08);
+            overflow: hidden;
+            border: 1px solid #fef3e2;
+            border-right: 4px solid #ea580c;
+            transition: all 0.3s ease;
+        }
+
+        .poem-card:hover {
+            box-shadow: 0 8px 25px rgba(194, 65, 12, 0.15);
+        }
+
+        /* Collapsible Header (Clickable) */
+        .poem-header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.3s;
+        }
+
+        .poem-header:hover {
+            background: #fff7ed;
+        }
+
+        .poem-number {
+            background: linear-gradient(135deg, #ea580c, #c2410c);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(234, 88, 12, 0.3);
+        }
+
+        .ghazal-card .poem-number {
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3);
+        }
+
+        .poem-info {
+            flex-grow: 1;
+        }
+
+        .poem-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.3rem;
+        }
+
+        .poem-poet {
+            font-size: 1rem;
+            color: #64748b;
+        }
+
+        .poem-poet i {
+            color: #ea580c;
+            margin-left: 5px;
+        }
+
+        .toggle-icon {
+            color: #ea580c;
+            font-size: 1.2rem;
+            transition: transform 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .ghazal-card .toggle-icon {
+            color: #dc2626;
+        }
+
+        /* Expanded State */
+        .poem-card.expanded .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .poem-card.expanded .poem-header {
+            background: #fff7ed;
+            border-bottom: 1px solid #fed7aa;
+        }
+
+        /* Collapsible Content (Hidden by Default) */
+        .poem-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            background: #fffaf5;
+        }
+
+        .poem-card.expanded .poem-content {
+            max-height: 2000px;
+            padding: 1.5rem 2rem;
+        }
+
+        .poem-details {
+            border-right: 3px solid #ea580c;
+            padding-right: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ghazal-card .poem-details {
+            border-right-color: #dc2626;
+        }
+
+        .detail-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #c2410c;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-text {
+            font-size: 1.05rem;
+            color: #334155;
+            line-height: 2.5;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #fed7aa;
+        }
+
+        .poem-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding-top: 1rem;
+            border-top: 1px dashed #fed7aa;
+        }
+
+        .btn-action {
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Noto Nastaliq Urdu', serif;
+        }
+
+        .btn-notes {
+            background: #fff7ed;
+            color: #ea580c;
+            border: 1px solid #fed7aa;
+        }
+
+        .btn-notes:hover {
+            background: #ea580c;
+            color: white;
+        }
+
+        .btn-test {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        .btn-test:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .premium-badge {
+            font-size: 0.65rem;
+            background: #fbbf24;
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 4px;
+            font-weight: 700;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(194, 65, 12, 0.1);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 2px solid #ea580c;
+        }
+
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 2rem; font-weight: 700; color: #ea580c; display: block; }
+        .stat-label { font-size: 0.95rem; color: #64748b; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .poem-header {
+                flex-wrap: wrap;
+                padding: 1.2rem;
+            }
+            .poem-title {
+                font-size: 1.1rem;
+                flex-basis: 100%;
+                order: 2;
+            }
+            .poem-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .poem-actions {
+                flex-direction: column;
+            }
+            .btn-action {
+                justify-content: center;
+            }
+            .page-header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo"><i class="fas fa-graduation-cap"></i> EduPortal</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="9th-class.html" class="active">9th Class</a></li>
+                <li><a href="10th-class.html">10th Class</a></li>
+                <li><a href="#premium" class="btn-premium">Go Premium</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>نظم اور غزل - 9ویں جماعت</h1>
+            <p>تشریح، شاعر کا تعارف اور مشقیں</p>
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> / 
+                <a href="9th-class.html">9th Class</a> / 
+                <a href="poetry-9th.html">اردو</a> / 
+                <span>نظم اور غزل</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="poetry-container">
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-number">6</span>
+                <span class="stat-label">نظمیں</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">4</span>
+                <span class="stat-label">غزلیں</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">10</span>
+                <span class="stat-label">کل تخلیقات</span>
+            </div>
+        </div>
+
+        <!-- ========== NAZM SECTION ========== -->
+        <div class="section-title">
+            <span>🎵 نظمیں</span>
+        </div>
+
+        <!-- Nazm 1 -->
+        <div class="poem-card">
+            <div class="poem-header" onclick="togglePoem(this)">
+                <div class="poem-number">۱</div>
+                <div class="poem-info">
+                    <div class="poem-title">حمد</div>
+                    <div class="poem-poet"><i class="fas fa-feather-alt"></i> شاعر: مختلف شعراء</div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="poem-content">
+                <div class="poem-details">
+                    <div class="detail-title"><i class="fas fa-book-open"></i> تشریح</div>
+                    <div class="detail-text">
+                        حمد اللہ تعالیٰ کی تعریف و توصیف میں کہی جانے والی نظم ہے۔ اس میں اللہ کی ذات، اس کی صفات اور اس کی نعمتوں کا بیان ہوتا ہے۔ ہر مسلمان کی زندگی کا آغاز حمد سے ہوتا ہے۔
+                    </div>
+                    <div class="detail-title"><i class="fas fa-user"></i> شاعر کا تعارف</div>
+                    <div class="detail-text">
+                        حمد مختلف شعراء نے کہی ہے۔ اردو ادب میں علامہ اقبال، حالی اور دیگر عظیم شعراء نے شاندار حمدیں لکھی ہیں۔
+                    </div>
+                </div>
+                <div class="poem-actions">
+                    <a href="#" class="btn-action btn-notes"><i class="fas fa-file-alt"></i> مکمل نوٹس</a>
+                    <a href="#" class="btn-action btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nazm 2 -->
+        <div class="poem-card">
+            <div class="poem-header" onclick="togglePoem(this)">
+                <div class="poem-number">۲</div>
+                <div class="poem-info">
+                    <div class="poem-title">نعت</div>
+                    <div class="poem-poet"><i class="fas fa-feather-alt"></i> شاعر: مختلف شعراء</div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="poem-content">
+                <div class="poem-details">
+                    <div class="detail-title"><i class="fas fa-book-open"></i> تشریح</div>
+                    <div class="detail-text">
+                        نعت رسول اللہ  کی مدح و ثنا میں کہی جانے والی نظم ہے۔ اس میں آپ ﷺ کی سیرت، اخلاق، معجزات اور امت پر آپ کی رحمتوں کا بیان ہوتا ہے۔
+                    </div>
+                    <div class="detail-title"><i class="fas fa-user"></i> شاعر کا تعارف</div>
+                    <div class="detail-text">
+                        اردو نعت گوئی میں علامہ اقبال، حسرت موہانی، طاہر مدنی اور دیگر شعراء نے بے مثال خدمات انجام دی ہیں۔
+                    </div>
+                </div>
+                <div class="poem-actions">
+                    <a href="#" class="btn-action btn-notes"><i class="fas fa-file-alt"></i> مکمل نوٹس</a>
+                    <a href="#" class="btn-action btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nazm 3 -->
+        <div class="poem-card">
+            <div class="poem-header" onclick="togglePoem(this)">
+                <div class="poem-number">۳</div>
+                <div class="poem-info">
+                    <div class="poem-title">محنت کی برکات</div>
+                    <div class="poem-poet"><i class="fas fa-feather-alt"></i> شاعر: علامہ اقبال</div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="poem-content">
+                <div class="poem-details">
+                    <div class="detail-title"><i class="fas fa-book-open"></i> تشریح</div>
+                    <div class="detail-text">
+                        اس نظم میں محنت اور اس کی اہمیت کو بیان کیا گیا ہے۔ شاعر بتاتے ہیں کہ محنت ہی کامیابی کی کنجی ہے اور اللہ تعالیٰ محنت کرنے والوں کو پسند فرماتے ہیں۔
+                    </div>
+                    <div class="detail-title"><i class="fas fa-user"></i> شاعر کا تعارف</div>
+                    <div class="detail-text">
+                        علامہ محمد اقبال (1877-1938) برصغیر کے عظیم شاعر، فلسفی اور مفکر تھے۔ آپ کو شاعرِ مشرق اور شاعرِ اسلام کہا جاتا ہے۔
+                    </div>
+                </div>
+                <div class="poem-actions">
+                    <a href="#" class="btn-action btn-notes"><i class="fas fa-file-alt"></i> مکمل نوٹس</a>
+                    <a href="#" class="btn-action btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nazm 4 -->
+        <div class="poem-card">
+            <div class="poem-header" onclick="togglePoem(this)">
+                <div class="poem-number">۴</div>
+                <div class="poem-info">
+                    <div class="poem-title">جاوید کے نام</div>
+                    <div class="poem-poet"><i class="fas fa-feather-alt"></i> شاعر: علامہ اقبال</div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="poem-content">
+                <div class="poem-details">
+                    <div class="detail-title"><i class="fas fa-book-open"></i> تشریح</div>
+                    <div class="detail-text">
+                        یہ نظم علامہ اقبال نے اپنے بیٹے جاوید اقبال کے نام لکھی۔ اس میں والد کی طرف سے بیٹے کو نصیحتیں اور زندگی کے اصول بتائے گئے ہیں۔
+                    </div>
+                    <div class="detail-title"><i class="fas fa-user"></i> شاعر کا تعارف</div>
+                    <div class="detail-text">
+                        علامہ اقبال نے یہ نظم اپنے بیٹے جاوید اقبال کے نام لکھی جو بعد میں عدالتِ عظمیٰ کے چیف جسٹس بنے۔
+                    </div>
+                </div>
+                <div class="poem-actions">
+                    <a href="#" class="btn-action btn-notes"><i class="fas fa-file-alt"></i> مکمل نوٹس</a>
+                    <a href="#" class="btn-action btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nazm 5 -->
+        <div class="poem-card">
+            <div class="poem-header" onclick="togglePoem(this)">
+                <div class="poem-number">۵</div>
+                <div class="poem-info">
+                    <div class="poem-title">پیام لطیف</div>
+                    <div class="poem-poet"><i class="fas fa-feather-alt"></i> شاعر: علامہ اقبال</div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="poem-content">
+                <div class="poem-details">
+                    <div class="detail-title"><i class="fas fa-book-open"></i> تشریح</div>
+                    <div class="detail-text">
+                        اس نظم میں ایک لطیف اور پیارا پیغام دیا گیا ہے۔ شاعر انسانیت کو محبت، بھائی چارگی اور اخوت کا درس دیتے ہیں۔
+                    </div>
+                    <div class="detail-title"><i class="fas fa-user"></i> شاعر کا تعارف</div>
+                    <div class="detail-text">
+                        علامہ اقبال کی شاعری میں ہمیشہ انسانیت کی فلاح و بہبود کا پیغام ملتا ہے۔
+                    </div>
+                </div>
+                <div class="poem-actions">
+                    <a href="#" class="btn-action btn-notes"><i class="fas fa-file-alt"></i> مکمل نوٹس</a>
+                    <a href="#" class="btn-action btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nazm 6 -->
+        <div class="poem-card">
+            <div class="poem-header" onclick="togglePoem(this)">
+                <div class="poem-number">۶</div>
+                <div class="poem-info">
+                    <div class="poem-title">کرکٹ اور مشاعرہ</div>
+                    <div class="poem-poet"><i class="fas fa-feather-alt"></i> شاعر: جدید شاعر</div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="poem-content">
+                <div class="poem-details">
+                    <div class="detail-title"><i class="fas fa-book-open"></i> تشریح</div>
+                    <div class="detail-text">
+                        یہ ایک جدید اور دلچسپ نظم ہے جس میں کرکٹ اور مشاعرے دونوں کا موازنہ کیا گیا ہے۔ شاعر نے مزاحیہ انداز میں دونوں میدانوں کی مماثلت بیان کی ہے۔
+                    </div>
+                    <div class="detail-title"><i class="fas fa-user"></i> شاعر کا تعارف</div>
+                    <div class="detail-text">
+                        یہ جدید اردو شاعری کا ایک خوبصورت نمونہ ہے جو نوجوان نسل کو بہت پسند آتا ہے۔
+                    </div>
+                </div>
+                <div class="poem-actions">
+                    <a href="#" class="btn-action btn-notes"><i class="fas fa-file-alt"></i> مکمل نوٹس</a>
+                    <a href="#" class="btn-action btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== GHAZAL SECTION ========== -->
+        <div class="section-title">
+            <span>🌹 غزلیں</span>
+        </div>
+
+        <!-- Ghazal 1 -->
+        <div class="poem-card ghazal-card">
+            <div class="poem-header" onclick="togglePoem(this)">
+                <div class="poem-number">۱</div>
+                <div class="poem-info">
+                    <div class="poem-title">فقیرانہ آئے صدا کر چلے</div>
+                    <div class="poem-poet"><i class="fas fa-feather-alt"></i> شاعر: مرزا غالب</div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="poem-content">
+                <div class="poem-details">
+                    <div class="detail-title"><i class="fas fa-book-open"></i> تشریح</div>
+                    <div class="detail-text">
+                        اس غزل میں غالب نے اپنی عاجزی اور انکساری کا اظہار کیا ہے۔ شاعر کہتا ہے کہ میں فقیرانہ انداز میں آیا، صدا دے کر چلا گیا۔ یہ غزل انسانی رشتوں اور محبت کی گہرائی کو بیان کرتی ہے۔
+                    </div>
+                    <div class="detail-title"><i class="fas fa-user"></i> شاعر کا تعارف</div>
+                    <div class="detail-text">
+                        مرزا اسد اللہ خان غالب (1797-1869) اردو اور فارسی کے عظیم شاعر تھے۔ آپ کو اردو غزل کا سب سے بڑا شاعر مانا جاتا ہے۔
+                    </div>
+                </div>
+                <div class="poem-actions">
+                    <a href="#" class="btn-action btn-notes"><i class="fas fa-file-alt"></i> مکمل نوٹس</a>
+                    <a href="#" class="btn-action btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ghazal 2 -->
+        <div class="poem-card ghazal-card">
+            <div class="poem-header" onclick="togglePoem(this)">
+                <div class="poem-number">۲</div>
+                <div class="poem-info">
+                    <div class="poem-title">سن تو سہی جہاں میں ہے تیرا افسانہ کیا</div>
+                    <div class="poem-poet"><i class="fas fa-feather-alt"></i> شاعر: مرزا غالب</div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="poem-content">
+                <div class="poem-details">
+                    <div class="detail-title"><i class="fas fa-book-open"></i> تشریح</div>
+                    <div class="detail-text">
+                        اس مشہور غزل میں غالب کہتے ہیں کہ سنو تو سہی، پوری دنیا میں تیرا افسانہ کیا مشہور ہے۔ یہ غزل شہرت، ناموری اور انسانی زندگی کے فلسفے پر مبنی ہے۔
+                    </div>
+                    <div class="detail-title"><i class="fas fa-user"></i> شاعر کا تعارف</div>
+                    <div class="detail-text">
+                        مرزا غالب کی غزلیں آج بھی دنیا بھر میں پڑھی اور پسند کی جاتی ہیں۔ آپ کی شاعری میں گہرائی اور وسعت دونوں پائی جاتی ہیں۔
+                    </div>
+                </div>
+                <div class="poem-actions">
+                    <a href="#" class="btn-action btn-notes"><i class="fas fa-file-alt"></i> مکمل نوٹس</a>
+                    <a href="#" class="btn-action btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ghazal 3 -->
+        <div class="poem-card ghazal-card">
+            <div class="poem-header" onclick="togglePoem(this)">
+                <div class="poem-number"></div>
+                <div class="poem-info">
+                    <div class="poem-title">غم ہے یا خوشی ہے تو</div>
+                    <div class="poem-poet"><i class="fas fa-feather-alt"></i> شاعر: مرزا غالب</div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="poem-content">
+                <div class="poem-details">
+                    <div class="detail-title"><i class="fas fa-book-open"></i> تشریح</div>
+                    <div class="detail-text">
+                        اس غزل میں غالب نے زندگی کے اتار چڑھاؤ، غم اور خوشی کے فلسفے کو بیان کیا ہے۔ شاعر کہتا ہے کہ چاہے غم ہو یا خوشی، دونوں ہی زندگی کا حصہ ہیں۔
+                    </div>
+                    <div class="detail-title"><i class="fas fa-user"></i> شاعر کا تعارف</div>
+                    <div class="detail-text">
+                        غالب کی شاعری میں زندگی کے ہر پہلو کو گہرائی سے پیش کیا گیا ہے۔ یہ غزل ان کی مشہور غزلیوں میں سے ایک ہے۔
+                    </div>
+                </div>
+                <div class="poem-actions">
+                    <a href="#" class="btn-action btn-notes"><i class="fas fa-file-alt"></i> مکمل نوٹس</a>
+                    <a href="#" class="btn-action btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ghazal 4 -->
+        <div class="poem-card ghazal-card">
+            <div class="poem-header" onclick="togglePoem(this)">
+                <div class="poem-number">۴</div>
+                <div class="poem-info">
+                    <div class="poem-title">کاش طوفاں میں سفینے کو اتارا ہوتا</div>
+                    <div class="poem-poet"><i class="fas fa-feather-alt"></i> شاعر: مرزا غالب</div>
+                </div>
+                <i class="fas fa-chevron-down toggle-icon"></i>
+            </div>
+            <div class="poem-content">
+                <div class="poem-details">
+                    <div class="detail-title"><i class="fas fa-book-open"></i> تشریح</div>
+                    <div class="detail-text">
+                        اس غزل میں غالب نے حسرت اور افسوس کا اظہار کیا ہے۔ شاعر کہتا ہے کہ کاش طوفان میں میرے سفینے (کشتی) کو بھی اتار دیا جاتا۔ یہ غزل زندگی کی ناکامیوں اور حسرتوں کی عکاس ہے۔
+                    </div>
+                    <div class="detail-title"><i class="fas fa-user"></i> شاعر کا تعارف</div>
+                    <div class="detail-text">
+                        غالب کی یہ غزل اردو ادب کے شاہکاروں میں شمار ہوتی ہے۔ اس میں انسانی درد اور حسرت کو بے مثال انداز میں بیان کیا گیا ہے۔
+                    </div>
+                </div>
+                <div class="poem-actions">
+                    <a href="#" class="btn-action btn-notes"><i class="fas fa-file-alt"></i> مکمل نوٹس</a>
+                    <a href="#" class="btn-action btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPortal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Collapsible Toggle Function
+        function togglePoem(header) {
+            const card = header.parentElement;
+            const isExpanded = card.classList.contains('expanded');
+            
+            // Close all other cards (optional - remove if you want multiple open)
+            document.querySelectorAll('.poem-card.expanded').forEach(openCard => {
+                if (openCard !== card) {
+                    openCard.classList.remove('expanded');
+                }
+            });
+            
+            // Toggle current card
+            if (isExpanded) {
+                card.classList.remove('expanded');
+            } else {
+                card.classList.add('expanded');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اردو - 9ویں جماعت</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <style>
+        body { 
+            font-family: 'Noto Nastaliq Urdu', serif; 
+            line-height: 2.2; 
+            background: linear-gradient(135deg, #fef3e2 0%, #fff5eb 100%);
+        }
+        
+        .page-header { 
+            background: linear-gradient(135deg, #c2410c, #9a3412); 
+            color: white; 
+            padding: 3rem 0; 
+            text-align: center;
+            border-bottom: 5px solid #ea580c;
+        }
+        .page-header h1 { 
+            color: white; 
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .page-header p { 
+            color: #fed7aa; 
+            font-size: 1.2rem;
+        }
+        .breadcrumb { 
+            margin-top: 1.5rem; 
+            font-size: 1rem; 
+            opacity: 0.95; 
+        }
+        .breadcrumb a { 
+            color: #fdba74; 
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .breadcrumb a:hover {
+            color: white;
+        }
+
+        .chapters-container {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 20px;
+        }
+
+        .chapter-card {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(194, 65, 12, 0.08);
+            overflow: hidden;
+            border: 1px solid #fef3e2;
+            transition: all 0.3s ease;
+            border-right: 4px solid #ea580c;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-3px) translateX(-2px);
+            box-shadow: 0 8px 25px rgba(194, 65, 12, 0.15);
+            border-right-color: #c2410c;
+        }
+
+        .chapter-header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .chapter-number {
+            background: linear-gradient(135deg, #ea580c, #c2410c);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(234, 88, 12, 0.3);
+        }
+
+        .chapter-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1e293b;
+            flex-grow: 1;
+        }
+
+        .chapter-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .btn-chapter {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-notes {
+            background: #fff7ed;
+            color: #ea580c;
+            border: 1px solid #fed7aa;
+        }
+
+        .btn-notes:hover {
+            background: #ea580c;
+            color: white;
+            border-color: #ea580c;
+        }
+
+        .btn-test {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+            position: relative;
+        }
+
+        .btn-test:hover {
+            background: #dc2626;
+            color: white;
+            border-color: #dc2626;
+        }
+
+        .premium-badge {
+            font-size: 0.65rem;
+            background: #fbbf24;
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 4px;
+            font-weight: 700;
+        }
+
+        .stats-bar {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(194, 65, 12, 0.1);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 2px solid #ea580c;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ea580c;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: #64748b;
+        }
+
+        .section-divider {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            position: relative;
+        }
+
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #ea580c, transparent);
+        }
+
+        .section-divider span {
+            background: linear-gradient(135deg, #fef3e2, #fff5eb);
+            padding: 0 1.5rem;
+            color: #c2410c;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .chapter-header {
+                flex-wrap: wrap;
+                padding: 1.2rem;
+            }
+            .chapter-title {
+                font-size: 1.1rem;
+                flex-basis: 100%;
+                order: 2;
+            }
+            .chapter-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .chapter-actions {
+                margin-right: auto;
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 0.8rem;
+            }
+            .btn-chapter {
+                flex: 1;
+                justify-content: center;
+                font-size: 0.85rem;
+                padding: 0.5rem 0.8rem;
+            }
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo"><i class="fas fa-graduation-cap"></i> EduPortal</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="9th-class.html" class="active">9th Class</a></li>
+                <li><a href="10th-class.html">10th Class</a></li>
+                <li><a href="#premium" class="btn-premium">Go Premium</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>اردو - 9ویں جماعت</h1>
+            <p>نثر: اسباق، نظم و غزل</p>
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> / 
+                <a href="9th-class.html">9th Class</a> / 
+                <span>اردو</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="chapters-container">
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-number">9</span>
+                <span class="stat-label">نثر کے اسباق</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">9</span>
+                <span class="stat-label">نوٹس دستیاب</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">9</span>
+                <span class="stat-label">ٹیسٹ دستیاب</span>
+            </div>
+        </div>
+
+        <!-- Section Divider -->
+        <div class="section-divider">
+            <span>📖 نثر کے اسباق</span>
+        </div>
+
+        <!-- Chapter 1 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۱</div>
+                <div class="chapter-title">اخلاق حسنہ</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 2 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۲</div>
+                <div class="chapter-title">اپنی مدد آپ</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 3 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۳</div>
+                <div class="chapter-title">کلیم اور مرزا ظاہر بیگ</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 4 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۴</div>
+                <div class="chapter-title">نام دیو مالی</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 5 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۵</div>
+                <div class="chapter-title">آرام و سکون</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 6 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۶</div>
+                <div class="chapter-title">کتبہ</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 7 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۷</div>
+                <div class="chapter-title">ابتدائی حساب</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 8 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۸</div>
+                <div class="chapter-title">لڑی میں پروئے ہوئے منظر</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 9 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۹</div>
+                <div class="chapter-title">بھیڑیا</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coming Soon Section -->
+        <div class="section-divider">
+            <span>🎵 عنقریب آرہا ہے - نظم و غزل</span>
+        </div>
+
+        <div style="text-align: center; padding: 3rem; background: white; border-radius: 12px; border: 2px dashed #ea580c;">
+            <i class="fas fa-music" style="font-size: 3rem; color: #ea580c; margin-bottom: 1rem;"></i>
+            <p style="font-size: 1.2rem; color: #64748b;">نظم اور غزل کا سیکشن جلد ہی دستیاب ہوگا</p>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPortal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
