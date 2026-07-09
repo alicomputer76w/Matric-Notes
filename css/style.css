@@ -1,3 +1,65 @@
+/* ========================================
+   JAMEEL NOORI NASTALEEQ FONT - URDU
+   ======================================== */
+@font-face {
+    font-family: 'Jameel Noori Nastaleeq';
+    src: url('fonts/Jameel-Noori-Nastaleeq.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ========================================
+   GLOBAL URDU FONT APPLICATION
+   ======================================== */
+
+/* Body - Default Font */
+body {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Arial', serif;
+    line-height: 2.5;
+}
+
+/* All Urdu Text Elements */
+h1, h2, h3, h4, h5, h6,
+p, span, div, li, a,
+button, input, textarea,
+select, label {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+}
+
+/* Specific Urdu Classes (agar koi ho) */
+.urdu-text,
+[dir="rtl"],
+[lang="ur"] {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+    line-height: 2.8;
+}
+
+/* Navbar Urdu Text */
+.navbar .nav-menu a,
+.navbar .logo {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+}
+
+/* Buttons */
+.btn, button, .btn-premium {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+}
+
+/* Cards aur Content */
+.subject-card,
+.chapter-card,
+.surah-card,
+.poem-card,
+.question-item,
+.mcq-option {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+}
+
+/* Form Elements */
+select, input, textarea {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+}
 /* =========================================
    1. Global Styles & Variables
    ========================================= */
