@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطالعہ پاکستان- کلاس دہم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <style>
+        body { 
+            font-family: 'Noto Nastaliq Urdu', serif; 
+            line-height: 2.2; 
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+        
+        .page-header { 
+            background: linear-gradient(135deg, #166534, #15803d); 
+            color: white; 
+            padding: 3rem 0; 
+            text-align: center;
+            border-bottom: 5px solid #166534;
+        }
+        .page-header h1 { color: white; font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .page-header p { color: #bbf7d0; font-size: 1.2rem; }
+        .breadcrumb { margin-top: 1.5rem; font-size: 1rem; opacity: 0.95; }
+        .breadcrumb a { color: #bbf7d0; text-decoration: none; transition: color 0.3s; }
+        .breadcrumb a:hover { color: white; }
+
+        /* Controls Panel - Improved Layout */
+        .controls-panel {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(22, 101, 52, 0.1);
+            border: 2px solid #dcfce7;
+        }
+
+        .control-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            align-items: end;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-label {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #166534;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-label i {
+            color: #15803d;
+            font-size: 1.1rem;
+        }
+
+        /* Custom Dropdown Styling */
+        .custom-select-wrapper {
+            position: relative;
+        }
+
+        .custom-select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid #bbf7d0;
+            border-radius: 10px;
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1rem;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .custom-select:focus {
+            outline: none;
+            border-color: #166534;
+            box-shadow: 0 0 0 3px rgba(22, 101, 52, 0.1);
+        }
+
+        .custom-select-wrapper::after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #166534;
+            pointer-events: none;
+            font-size: 1.1rem;
+        }
+
+        /* Type Buttons - Better Layout */
+        .type-buttons-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-type {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid #bbf7d0;
+            border-radius: 10px;
+            background: #fff;
+            color: #166534;
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-type i {
+            font-size: 1.2rem;
+        }
+
+        .btn-type:hover {
+            background: #f0fdf4;
+            border-color: #15803d;
+            transform: translateY(-2px);
+        }
+
+        .btn-type.active {
+            background: linear-gradient(135deg, #166534, #15803d);
+            color: white;
+            border-color: #166534;
+            box-shadow: 0 4px 12px rgba(22, 101, 52, 0.3);
+        }
+
+        /* Toggle Switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: #f0fdf4;
+            border-radius: 10px;
+        }
+
+        .toggle-label {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #166534;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input { 
+            opacity: 0; 
+            width: 0; 
+            height: 0; 
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0;
+            background-color: #bbf7d0;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        input:checked + .slider { 
+            background-color: #166534; 
+        }
+
+        input:checked + .slider:before { 
+            transform: translateX(30px); 
+        }
+
+        /* Download Button */
+        .download-section {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed #bbf7d0;
+        }
+
+        .btn-download {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-download:hover:not(.locked) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-download.locked {
+            background: linear-gradient(135deg, #94a3b8, #64748b);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .btn-download i {
+            font-size: 1.2rem;
+        }
+
+        /* Content Display Area */
+        .content-display {
+            max-width: 1200px;
+            margin: 2rem auto 4rem;
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 25px rgba(22, 101, 52, 0.08);
+            min-height: 400px;
+            border: 2px solid #dcfce7;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 3px solid #dcfce7;
+        }
+
+        .content-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #166534;
+        }
+
+        .badge-type {
+            background: linear-gradient(135deg, #166534, #15803d);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* Question List */
+        .question-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .question-item {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-right: 4px solid #166534;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .question-item:hover {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            transform: translateX(-5px);
+            box-shadow: 0 4px 12px rgba(22, 101, 52, 0.1);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #166534;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            color: #1e293b;
+            line-height: 2.4;
+            flex: 1;
+            font-weight: 600;
+        }
+
+        /* MCQ Options */
+        .mcq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            padding-right: 2.5rem;
+        }
+
+        .mcq-option {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .mcq-option:hover {
+            border-color: #166534;
+            background: #f8fafc;
+        }
+
+        .mcq-option.correct {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-color: #166534;
+            border-right: 4px solid #166534;
+        }
+
+        .mcq-option.correct::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #166534;
+            margin-right: auto;
+            font-size: 1.2rem;
+        }
+
+        .option-label {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #166534;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .mcq-option.correct .option-label {
+            background: #166534;
+        }
+
+        .option-text {
+            font-size: 1.05rem;
+            color: #334155;
+            flex: 1;
+        }
+
+        .mcq-option.correct .option-text {
+            color: #166534;
+            font-weight: 600;
+        }
+
+        /* Short/Long Questions */
+        .short-question {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-right: 4px solid #166534;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.2rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .short-question:hover {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            transform: translateX(-5px);
+            box-shadow: 0 4px 12px rgba(22, 101, 52, 0.1);
+        }
+
+        .short-question .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #166534;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .short-question .question-text {
+            font-size: 1.15rem;
+            color: #1e293b;
+            line-height: 2.4;
+            flex: 1;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 5rem 2rem;
+            color: #64748b;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: #bbf7d0;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            color: #166534;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Premium Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.active { 
+            display: flex; 
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            color: #f59e0b;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title { 
+            font-size: 1.8rem; 
+            font-weight: 700; 
+            color: #166534; 
+            margin-bottom: 1rem; 
+        }
+
+        .modal-desc { 
+            color: #64748b; 
+            margin-bottom: 2rem; 
+            line-height: 2; 
+            font-size: 1.05rem;
+        }
+        
+        .modal-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #166534;
+            margin: 1.5rem 0;
+            text-shadow: 0 2px 4px rgba(22, 101, 52, 0.2);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-modal {
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn-confirm {
+            background: linear-gradient(135deg, #166534, #15803d);
+            color: white;
+        }
+
+        .btn-cancel {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .btn-modal:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .control-row {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .type-buttons-container {
+                flex-direction: column;
+            }
+            
+            .btn-type {
+                width: 100%;
+            }
+            
+            .content-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .mcq-options {
+                padding-right: 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .controls-panel {
+                padding: 1.5rem;
+            }
+            
+            .content-display {
+                padding: 1.5rem;
+            }
+            
+            .content-title {
+                font-size: 1.3rem;
+            }
+            
+            .modal-content {
+                padding: 2rem;
+            }
+
+            .mcq-option {
+                padding: 0.8rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> 
+                <span>EduPortal</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="9th-class.html">9th Class</a></li>
+                <li><a href="10th-class.html" class="active">10th Class</a></li>
+                <li><a href="#premium" class="btn-premium">Go Premium</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>>مطالعہ پاکستان- کلاس دہم</h1>
+            <p>باب وار MCQs، Short Questions اور Long Questions</p>
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> / 
+                <a href="10th-class.html">10th Class</a> / 
+                <span>مطالعہ پاکستان</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Controls Panel -->
+    <section class="controls-panel">
+        <div class="control-row">
+            <!-- Chapter Dropdown -->
+            <div class="control-group">
+                <label class="control-label">
+                    <i class="fas fa-book"></i>
+                    باب منتخب کریں
+                </label>
+                <div class="custom-select-wrapper">
+                    <select id="chapterSelect" class="custom-select">
+                        <option value="">-- باب منتخب کریں --</option>
+                        <!-- Chapters will be populated by JavaScript -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- Type Buttons -->
+            <div class="control-group">
+                <label class="control-label">
+                    <i class="fas fa-list-check"></i>
+                    سوالات کی قسم
+                </label>
+                <div class="type-buttons-container">
+                    <button class="btn-type" data-type="mcq">
+                        <i class="fas fa-circle-question"></i>
+                        MCQs
+                    </button>
+                    <button class="btn-type" data-type="short">
+                        <i class="fas fa-align-right"></i>
+                        Short Questions
+                    </button>
+                    <button class="btn-type" data-type="long">
+                        <i class="fas fa-align-justify"></i>
+                        Long Questions
+                    </button>
+                </div>
+            </div>
+
+            <!-- Toggle Switch -->
+            <div class="control-group">
+                <label class="control-label">
+                    <i class="fas fa-filter"></i>
+                    مواد کا دائرہ
+                </label>
+                <div class="toggle-container">
+                    <span class="toggle-label">Exercise</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="scopeToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label">Additional</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Button -->
+        <div class="download-section">
+            <button id="downloadBtn" class="btn-download locked">
+                <i class="fas fa-lock"></i>
+                <span>Download PDF (Premium - Rs. 500)</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Content Display Area -->
+    <section class="content-display" id="contentArea">
+        <div class="empty-state">
+            <i class="fas fa-book-open"></i>
+            <h3>براہ کرم اوپر سے باب اور سوالات کی قسم منتخب کریں</h3>
+            <p>منتخب کرنے کے بعد مواد یہاں ظاہر ہوگا</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPortal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Premium Payment Modal -->
+    <div class="modal-overlay" id="premiumModal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-crown"></i>
+            </div>
+            <div class="modal-title">پریمیم فیچر انلاک کریں</div>
+            <div class="modal-desc">
+                تمام نوٹس ڈاؤنلوڈ کرنے کے لیے ون ٹائم پے منٹ درکار ہے۔<br>
+                ایک بار پے کرنے کے بعد تمام بابز ہمیشہ کے لیے ڈاؤنلوڈ ہوں گے۔
+            </div>
+            <div class="modal-price">Rs. 500</div>
+            <div class="modal-actions">
+                <button class="btn-modal btn-confirm" id="confirmPay">
+                    <i class="fas fa-credit-card"></i>
+                    ابھی پے کریں
+                </button>
+                <button class="btn-modal btn-cancel" id="cancelPay">بعد میں</button>
+            </div>
+        </div>
+    </div>
+
+   [...Previous HTML/CSS code remains same until the JavaScript section...]
+
+    <script src="../js/main.js"></script>
+    <script>
+        // ========== CHAPTERS DATA ==========
+        const chaptersData = [
+            { id: "ch1", title: "پاکستان کی نظریاتی اساس" },
+            { id: "ch2", title: "تحریک پاکستان" },
+            { id: "ch3", title: "پاکستان کی تاریخ (1947ء تا حال) اور پاکستان میں آئینی ترقی" },
+            { id: "ch4", title: "پاکستان کا جغرافیہ" },
+            { id: "ch5", title: "پاکستان اور بین الاقوامی امور" },
+            { id: "ch6", title: "پاکستان کے وسائل اور معاشرتی ترقی" },
+            { id: "ch7", title: "آبادی، معاشرہ اور پاکستان میں ثقافتی تنوع" },
+            { id: "ch8", title: "پاکستان میں خواتین کو با اختیار بنانا" }
+        ];
+
+        // ========== REAL QUESTIONS DATA FROM PDF ==========
+        const pakStudiesData = {
+            "ch1": {
+                title: "پاکستان کی نظریاتی اساس",
+                mcq: { 
+                    exercise: [
+                        {
+                            question: "کانگریسی وزارتوں کا دور رہا:",
+                            options: ["1933ء-1935ء", "1937ء-1939ء", "1939ء-1941ء", "1941ء-1943ء"],
+                            correct: 1
+                        },
+                        {
+                            question: "قرارداد لاہور 1940ء میں خطبہ صدارت دیا:",
+                            options: ["مولانا ظفر علی خان نے", "قائداعظم نے", "لیاقت علی خان نے", "مولوی فضل الحق نے"],
+                            correct: 3
+                        },
+                        {
+                            question: "ایم-اے-او سکول اور کالج قائم کیا:",
+                            options: ["سر سید احمد خان نے", "چودھری رحمت علی نے", "مولانا عبدالحلیم شرر نے", "مولوی فضل الحق نے"],
+                            correct: 0
+                        },
+                        {
+                            question: "بنارس میں اردو ہندی تنازعہ پیدا ہوا:",
+                            options: ["1863ء میں", "1865ء میں", "1867ء میں", "1869ء میں"],
+                            correct: 2
+                        },
+                        {
+                            question: "1206ء میں سلطنت دہلی کی بنیاد رکھی:",
+                            options: ["محمود غزنوی نے", "شہاب الدین غوری نے", "قطب الدین ایبک نے", "ظہیرالدین بابر نے"],
+                            correct: 2
+                        },
+                        {
+                            question: "1930ء میں مسلمانوں کو الگ ریاست کا تصور دینے والی شخصیت ہے:",
+                            options: ["قائداعظم", "علامہ محمد اقبال", "سر سید احمد خان", "چودھری رحمت علی"],
+                            correct: 1
+                        },
+                        {
+                            question: "\"قومیت کی جو بھی تعریف کی جائے، مسلمان اس تعریف کی رو سے الگ قوم ہیں۔\" یہ فرمان ہے:",
+                            options: ["سر سید احمد خان کا", "چودھری رحمت علی کا", "علامہ محمد اقبال کا", "قائداعظم کا"],
+                            correct: 3
+                        }
+                    ], 
+                    additional: [] 
+                },
+                short: { 
+                    exercise: [
+                        "نظریہ کی تعریف کریں؟",
+                        "نظریہ پاکستان سے کیا مراد ہے؟",
+                        "نظریہ پاکستان سے آگاہی کیوں ضروری ہے؟",
+                        "برصغیر میں دو قومی نظریے کی ابتدا کب ہوئی؟",
+                        "نظریہ پاکستان کے عناصر میں عقائد سے کیا مراد ہے؟",
+                        "علامہ محمد اقبال نے خطبہ الہ آباد میں نظریہ پاکستان کے حوالے سے کیا فرمایا؟",
+                        "عقیدہ رسالت کی تعریف کریں؟",
+                        "قائداعظم نے اقلیتوں کے بارے میں کیا فرمایا؟",
+                        "\"اب یا پھر کبھی نہیں\" کے عنوان سے مشہور کتابچہ کب اور کس نے جاری کیا؟",
+                        "قائداعظم نے یکم جولائی 1948ء کو سٹیٹ بینک آف پاکستان کا افتتاح کرتے ہوئے کیا فرمایا؟",
+                        "مساوات کے متعلق اللہ تعالیٰ کا فرمان لکھیں؟",
+                        "جمہوریت کی تعریف کریں؟",
+                        "اللہ تعالیٰ کی حاکمیت سے کیا مراد ہے؟"
+                    ], 
+                    additional: [] 
+                },
+                long: { 
+                    exercise: [
+                        "نظریہ پاکستان کے ماخذ بیان کریں؟",
+                        "دو قومی نظریہ کی وضاحت کریں؟",
+                        "نظریہ پاکستان کے بنیادی اجزاء کا تجزیہ کریں؟",
+                        "قائداعظم محمد علی جناح اور علامہ محمد اقبال کے ارشادات کی روشنی میں نظریہ پاکستان کا احاطہ کریں؟",
+                        "ہندوستان میں مسلمانوں کی معاشی اور سماجی محرومیوں کا تجزیہ کریں؟"
+                    ], 
+                    additional: [] 
+                }
+            },
+            "ch2": {
+                title: "تحریک پاکستان",
+                mcq: { 
+                    exercise: [
+                        {
+                            question: "1906ء میں قائم کی گئی:",
+                            options: ["کانگریس", "مسلم لیگ", "انجمن حمایت اسلام", "مجلس احرار"],
+                            correct: 1
+                        },
+                        {
+                            question: "پہلی جنگ عظیم میں ترکیہ نے ساتھ دیا:",
+                            options: ["روس کا", "امریکا کا", "جرمنی کا", "جاپان کا"],
+                            correct: 2
+                        },
+                        {
+                            question: "علماء نے برصغیر کو قرار دیا:",
+                            options: ["دارالحرب", "دارالسلام", "دارالامان", "دارالسلطنت"],
+                            correct: 0
+                        },
+                        {
+                            question: "نہرو رپورٹ پیش کی گئی:",
+                            options: ["1908ء میں", "1918ء میں", "1928ء میں", "1938ء میں"],
+                            correct: 2
+                        },
+                        {
+                            question: "مسلم لیگ اور کانگریس کر درمیان میثاق لکھنؤ ہوا:",
+                            options: ["1912ء میں", "1916ء میں", "1920ء میں", "1924ء میں"],
+                            correct: 1
+                        },
+                        {
+                            question: "حکومت پاکستان نے دیوان بہادر ایس پی سنگھار کی تحریک پاکستان میں خدمات پر یادگاری ٹکٹ جاری کیا:",
+                            options: ["2010ء میں", "2012ء میں", "2014ء میں", "2016ء میں"],
+                            correct: 1
+                        },
+                        {
+                            question: "علامہ محمد اقبال نے خطبہ الہ آباد پیش کیا:",
+                            options: ["1928ء میں", "1930ء میں", "1932ء میں", "1934ء میں"],
+                            correct: 1
+                        },
+                        {
+                            question: "قائد اعظم رحمتہ اللہ علیہ مسلم لیگ میں شامل ہوئے:",
+                            options: ["1913ء میں", "1916ء میں", "1917ء میں", "1919ء میں"],
+                            correct: 0
+                        },
+                        {
+                            question: "ایم-اے-او سکول اور کالج قائم کیا:",
+                            options: ["قائد اعظم نے", "علامہ محمد اقبال نے", "سر سید احمد خان نے", "قاضی محمد عیسیٰ نے"],
+                            correct: 2
+                        },
+                        {
+                            question: "محترمہ فاطمہ جناح نے 1955ء میں \"خاتون پاکستان\" کے نام سے ایک سکول کھولا تھا:",
+                            options: ["کراچی میں", "لاہور میں", "ملتان میں", "راول پنڈی میں"],
+                            correct: 0
+                        }
+                    ], 
+                    additional: [] 
+                },
+                short: { 
+                    exercise: [
+                        "تحریک علی گڑھ کے مقاصد تحریر کریں؟",
+                        "مسلم لیگ کے قیام کے پس منظر میں کیا محرکات شامل تھے؟",
+                        "تحریک ہجرت کا سبب کیا تھا؟",
+                        "ریڈ کلف ایوارڈ کا اہم ترین فیصلہ کیا تھا؟",
+                        "شملہ کانفرنس کیوں ناکام ہوئی؟",
+                        "عبوری حکومت 1946ء میں شامل مسلم لیگی ارکان کے نام لکھیں؟",
+                        "ریڈ کلف ایوارڈ میں شامل مسلمان ججز کے نام لکھیں؟",
+                        "کوئی سی تین کرپس مشن تجاویز تحریر کریں؟",
+                        "تقسیم بنگال کیوں ہوئی؟",
+                        "کابینہ مشن کے مقاصد کیا تھے؟",
+                        "قانون آزادی ہند کیا تھا؟",
+                        "یوم راست اقدام کیا تھا؟",
+                        "سائمن کمیشن کیا تھا؟",
+                        "یوم نجات کب اور کیوں منایا گیا؟",
+                        "انگریزوں کے نوآبادیاتی نظام کے برصغیر کے لوگوں کی زندگی پر تین منفی اثرات تحریر کریں؟"
+                    ], 
+                    additional: [] 
+                },
+                long: { 
+                    exercise: [
+                        "تحریک علی گڑھ کے اقدامات کا تجزیہ کریں؟",
+                        "قائداعظم رحمتہ اللہ علیہ کے 14 نکات لکھیں؟",
+                        "1906ء سے 1920ء کے دوران اہم سیاسی واقعات قلم بند کریں؟",
+                        "قیام پاکستان کے حوالے سے قائداعظم رحمتہ اللہ علیہ کا کردار واضح کریں؟"
+                    ], 
+                    additional: [] 
+                }
+            },
+            "ch3": {
+                title: "پاکستان کی تاریخ (1947ء تا حال) اور پاکستان میں آئینی ترقی",
+                mcq: { 
+                    exercise: [
+                        {
+                            question: "قرارداد مقاصد منظور ہوئی:",
+                            options: ["1930ء میں", "1940ء میں", "1946ء میں", "1949ء میں"],
+                            correct: 3
+                        },
+                        {
+                            question: "1970ء کے انتخابات کے بعد پاکستان میں اقتدار سنبھالا:",
+                            options: ["یحییٰ خان نے", "ذوالفقار علی بھٹو نے", "مجیب الرحمان نے", "مفتی محمود نے"],
+                            correct: 2
+                        },
+                        {
+                            question: "آئینی ڈھانچے \"لیگل فریم ورک آرڈر\" کے مطابق قومی اسمبلی کی نشستوں کی کل تعداد تھی:",
+                            options: ["310", "313", "316", "320"],
+                            correct: 2
+                        },
+                        {
+                            question: "جنرل آغا یحییٰ خان نے حکومت سنبھالی:",
+                            options: ["مارچ 1969ء میں", "اپریل 1970ء میں", "مارچ 1971ء میں", "اپریل 1972ء میں"],
+                            correct: 0
+                        },
+                        {
+                            question: "1973ء کے آئین کے مطابق ایوان بالا سینٹ کی معیاد ہے:",
+                            options: ["3 سال", "4 سال", "5 سال", "6 سال"],
+                            correct: 3
+                        },
+                        {
+                            question: "پاکستان اور بھارت کے درمیان ستمبر 1965ء کی جنگ جاری رہی:",
+                            options: ["سات روز تک", "تیرہ روز تک", "سترہ روز تک", "بیس روز تک"],
+                            correct: 1
+                        },
+                        {
+                            question: "پاکستان میں 1998ء میں ایٹمی دھماکے کیے:",
+                            options: ["چاغی پہاڑ میں", "کوہ کیرتھر میں", "چلتن پہاڑ میں", "کوہ سلیمان میں"],
+                            correct: 0
+                        },
+                        {
+                            question: "میاں نواز شریف نے موٹر وے کا افتتاح کیا:",
+                            options: ["1992ء میں", "1994ء میں", "1996ء میں", "1998ء میں"],
+                            correct: 2
+                        },
+                        {
+                            question: "\"یوم تکبیر\" منایا جاتا ہے:",
+                            options: ["23 مارچ کو", "15 جون کو", "یکم مئی کو", "28 مئی کو"],
+                            correct: 3
+                        },
+                        {
+                            question: "ورلڈ ٹریڈ سنٹر کا واقعہ پیش آیا:",
+                            options: ["2001ء میں", "2003ء میں", "2005ء میں", "2007ء میں"],
+                            correct: 0
+                        }
+                    ], 
+                    additional: [] 
+                },
+                short: { 
+                    exercise: [
+                        "لیاقت علی خان کو قائد ملت کا خطاب کب اور کیوں دیا گیا؟",
+                        "آئینی ڈھانچے \"لیگل فریم ورک آرڈر\" سے کیا مراد ہے؟",
+                        "1956ء کا آئین کیسے منسوخ ہوا؟",
+                        "پاکستان اور بھارت کے درمیان جنگ 1948ء کی بنیادی وجہ تحریر کریں؟",
+                        "آئین سے کیا مراد ہے؟",
+                        "قائداعظم محمد علی جناح کی بحیثیت گورنر جنرل کوئی سی تین انتظامی اصلاحات کا ذکر کریں؟",
+                        "یوم تکبیر سے کیا مراد ہے؟",
+                        "آپریشن بنیان المرصوص کا پس منظر بیان کریں؟",
+                        "1965ء کی پاکستان اور بھارت جنگ میں پاک فضائیہ کا کردار بتائیں؟",
+                        "دوسری آئینی ترمیم کیا تھی؟",
+                        "جنرل پرویز مشرف کی چار معاشرتی اصلاحات تحریر کریں؟",
+                        "پاکستان کی آئینی تاریخ میں ون یونٹ سے کیا مراد ہے؟",
+                        "1962ء کے آئین کی اسلامی دفعات تحریر کریں؟",
+                        "میاں محمد شہباز شریف کے پہلے دور حکومت میں کون سی اصلاحات متعارف کرائی گئیں؟",
+                        "گلگت بلتستان کی اسمبلی میں نشستوں کی تقسیم کس طرح ہوئی؟"
+                    ], 
+                    additional: [] 
+                },
+                long: { 
+                    exercise: [
+                        "پاکستان کے ابتدائی مسائل کا تجزیہ کریں؟",
+                        "قرارداد مقاصد کی نمایاں خصوصیات پر بحث کریں؟",
+                        "مشرقی پاکستان کی علیحدگی کے اسباب کا تجزیہ کریں؟",
+                        "ذوالفقار علی بھٹو کے دور حکومت کی پالیسیوں کا تجزیہ کریں؟",
+                        "1973ء کے آئین کی خصوصیات بیان کریں؟",
+                        "میاں محمد نواز شریف کے ادوار حکومت میں اقتصادی ترقی کیلئے کی گئی کوششوں اور اقدامات کا جائزہ لیں؟",
+                        "وزیراعظم بے نظیر بھٹو کے ادوار حکومت کا موازنہ کرتے ہوئے واضح کریں کے ان کا کون سا دور بہتر رہا؟",
+                        "جنرل ضیاءالحق کے دور میں کی گئی اصلاحات کی وضاحت کریں؟",
+                        "قانون کی حکمرانی کی اہمیت کو واضح کرتے ہوئے پاکستان میں امن و امان کی صورتحال کو بہتر بنانے کے لیے تجاویز دیں؟"
+                    ], 
+                    additional: [] 
+                }
+            },
+            "ch4": {
+                title: "پاکستان کا جغرافیہ",
+                mcq: { 
+                    exercise: [
+                        {
+                            question: "پاکستان کے میدانی علاقوں میں موسم گرما کا اوسط درجہ حرارت رہتا ہے:",
+                            options: ["20°C", "30°C", "40°C", "50°C"],
+                            correct: 1
+                        },
+                        {
+                            question: "کے-ٹو پہاڑ واقع ہے:",
+                            options: ["کوہ ہمالیہ میں", "کوہ قراقرم میں", "کوہ سفید میں", "کوہ ہندوکش میں"],
+                            correct: 1
+                        },
+                        {
+                            question: "نانگا پربت کی بلندی ہے:",
+                            options: ["7690 میٹر", "8126 میٹر", "8611 میٹر", "6790 میٹر"],
+                            correct: 2
+                        },
+                        {
+                            question: "کراچی واقع ہے:",
+                            options: ["بحیرۂ احمر کے کنارے", "بحیرۂ اسود کے کنارے", "بحیرۂ عرب کے کنارے", "بحیرۂ روم کے کنارے"],
+                            correct: 2
+                        },
+                        {
+                            question: "چین پاکستان اقتصادی راہ داری منصوبہ چین کو پاکستان کی بندرگاہ سے ملاتا ہے:",
+                            options: ["کراچی بندرگاہ", "محمد بن قاسم بندرگاہ", "گوادر بندرگاہ", "کیٹی بندرگاہ"],
+                            correct: 2
+                        },
+                        {
+                            question: "پاکستان اور بھارت کے درمیان سرحد کی لمبائی ہے:",
+                            options: ["599 کلومیٹر", "861 کلومیٹر", "2163 کلومیٹر", "2611 کلومیٹر"],
+                            correct: 3
+                        },
+                        {
+                            question: "چشمہ بیراج واقع ہے:",
+                            options: ["دریائے جہلم پر", "دریائے سندھ پر", "دریائے چناب پر", "دریائے کابل پر"],
+                            correct: 1
+                        },
+                        {
+                            question: "شاہراہ ریشم پاکستان کو چین سے ملاتی ہے:",
+                            options: ["درہ گومل کے ذریعے", "درہ ٹوچی کے ذریعے", "درہ خیبر کے ذریعے", "درہ خنجراب کے ذریعے"],
+                            correct: 3
+                        },
+                        {
+                            question: "نیشنل ڈیزاسٹر مینجمنٹ اتھارٹی کا قیام عمل میں آیا:",
+                            options: ["2006ء میں", "2007ء میں", "2008ء میں", "2009ء میں"],
+                            correct: 2
+                        }
+                    ], 
+                    additional: [] 
+                },
+                short: { 
+                    exercise: [
+                        "پاکستان کا محل وقوع بیان کریں؟",
+                        "ڈیم اور بیراج میں کیا فرق ہے؟",
+                        "جنگلات کے دو فوائد بیان کریں؟",
+                        "پاکستان میں پائی جانے والی اہم نہروں کے نام لکھیں؟",
+                        "پاکستان میں پائے جانے والے چار گلیشئرز کے نام لکھیں؟",
+                        "پیداواری اور حفاظتی جنگلات میں فرق بیان کریں؟",
+                        "گلوبل وارمنگ سے کیا مراد ہے؟ اس کی بنیادی وجہ تحریر کریں۔",
+                        "پاکستان میں پائے جانے والے طبعی خدوخال کے نام لکھیں؟",
+                        "عالمی حدت یا گلوبل وارمنگ کے اثرات بیان کریں؟",
+                        "گلیشیرز کی اہمیت بیان کریں؟",
+                        "رابطہ نہروں سے کیا مراد ہے؟",
+                        "مینگروز جنگلات پاکستان میں کہاں کہاں پائے جاتے ہیں؟",
+                        "وسط ایشیائی ممالک کے نام تحریر کریں؟",
+                        "نامیاتی ایندھن کے متبادل ایندھن کیوں ضروری ہیں؟",
+                        "پاکستان کے چار ریگستانوں کے نام لکھیں؟",
+                        "پاکستان میں سیلاب کیوں آتے ہیں؟",
+                        "جنگلات کو متاثر کرنے والے تین عوامل کے نام لکھیں؟",
+                        "نیشنل ڈیزاسٹر مینجمنٹ اتھارٹی کا کردار مختصر بیان کریں؟"
+                    ], 
+                    additional: [] 
+                },
+                long: { 
+                    exercise: [
+                        "پاکستان کے جغرافیائی محل وقوع کی اہمیت پر بحث کریں؟",
+                        "اپنے پڑوسی ممالک اور وسطی ایشیا کے ممالک کے حوالے سے پاکستان کے محل وقوع کی اہمیت کا تجزیہ کریں؟",
+                        "پاکستان کے طبعی خدوخال مختلف علاقوں میں مختلف کیوں ہیں؟ وضاحت کریں۔",
+                        "ماہر موسمیات کوپن کی موسمیاتی درجہ بندی کو مدنظر رکھ کر پاکستان کی آب و ہوا کا تجزیہ کریں اور اسکے اثرات بیان کریں؟",
+                        "موسمیاتی تبدیلی پاکستان میں کیسے مختلف قدرتی آفات کا باعث بن رہی ہے؟ وضاحت کریں۔",
+                        "پاکستان میں مختلف قسم کے جنگلات کی مقامی تقسیم کی وضاحت کریں؟",
+                        "قدرتی پودوں اور جنگلات کو متاثر کرنے والے جغرافیائی، موسمی، سیاسی، ثقافتی، اقتصادی اور صنعتی پہلوؤں کا احاطہ کریں؟",
+                        "نامیاتی ایندھن کی کھپت کے ماحولیاتی اثرات بیان کریں؟",
+                        "گلوبل وارمنگ انسانی زندگی پر کیسے اثر انداز ہوتی ہے؟ وضاحت کریں۔"
+                    ], 
+                    additional: [] 
+                }
+            },
+            "ch5": {
+                title: "پاکستان اور بین الاقوامی امور",
+                mcq: { 
+                    exercise: [
+                        {
+                            question: "اقوام متحدہ کا قیام عمل میں آیا:",
+                            options: ["24 اکتوبر 1944ء", "14 اپریل 1945ء", "24 اکتوبر 1945ء", "24 نومبر 1946ء"],
+                            correct: 2
+                        },
+                        {
+                            question: "اسلامی تعاون تنظیم کی بنیاد 1969ء میں جس شہر میں رکھی گئی، وہ ہے:",
+                            options: ["تہران", "لاہور", "جدہ", "رباط"],
+                            correct: 2
+                        },
+                        {
+                            question: "عوامی جمہوریہ چین کا قیام عمل میں آیا:",
+                            options: ["1947ء میں", "1949ء میں", "1951ء میں", "1953ء میں"],
+                            correct: 1
+                        },
+                        {
+                            question: "پاکستان نے 30 ستمبر 1947ء کو جس ادارے کی رکنیت حاصل کی، وہ ہے:",
+                            options: ["او آئی سی", "ای سی او", "اقوام متحدہ", "سارک"],
+                            correct: 2
+                        },
+                        {
+                            question: "پاکستان کو سب سے پہلے تسلیم کیا:",
+                            options: ["ایران نے", "چین نے", "افغانستان نے", "امریکا نے"],
+                            correct: 2
+                        },
+                        {
+                            question: "دولت مشترکہ کی تشکیل ہوئی:",
+                            options: ["1916ء میں", "1926ء میں", "1937ء میں", "1947ء میں"],
+                            correct: 1
+                        },
+                        {
+                            question: "پاکستان اور ایران کی مشترکہ سرحد ہے:",
+                            options: ["2163 کلومیٹر", "2611 کلومیٹر", "909 کلومیٹر", "599 کلومیٹر"],
+                            correct: 2
+                        },
+                        {
+                            question: "سارک تنظیم کا قیام عمل میں آیا:",
+                            options: ["1980ء میں", "1985ء میں", "1990ء میں", "2005ء میں"],
+                            correct: 1
+                        }
+                    ], 
+                    additional: [] 
+                },
+                short: { 
+                    exercise: [
+                        "سفارتی تعلقات کیا ہوتے ہیں؟",
+                        "مسئلہ کشمیر پر پاکستان اور بھارت کا مؤقف 3 سطروں میں واضح کریں؟",
+                        "دولت مشترکہ سے کیا مراد ہے؟",
+                        "خارجہ پالیسی کی تعریف کریں؟",
+                        "پاکستان کے بری اور بحری راستے کیوں اہم ہیں؟",
+                        "ڈیورنڈ لائن کیا ہے؟",
+                        "ایران کا مختصر تعارف بیان کریں؟",
+                        "مسئلہ فلسطین کے حل میں اقوام متحدہ کو درپیش بنیادی رکاوٹ اور مشکل کیا ہے؟",
+                        "سارک تنظیم کے دو مقاصد تحریر کریں؟",
+                        "برطانیہ کے ساتھ پاکستان کی درآمدات اور برآمدات کا ذکر کریں؟",
+                        "سلامتی کونسل میں ویٹو سے کیا مراد ہے؟",
+                        "سارک ممالک کے نام لکھیں؟",
+                        "اقوام متحدہ کے ادارے کے قیام کے مقاصد واضح کریں؟",
+                        "اقتصادی تعاون کی تنظیم کے رکن ممالک کے نام لکھیں؟",
+                        "پاکستان میں اقوام متحدہ کے ماتحت امن فوج کی حیثیت سے کن ریاستوں میں فرائض انجام دیے؟"
+                    ], 
+                    additional: [] 
+                },
+                long: { 
+                    exercise: [
+                        "پاکستان کی خارجہ پالیسی کے بنیادی مقاصد اور اہمیت بیان کریں؟",
+                        "پاکستان کے اسلامی تعاون تنظیم کے رکن ممالک کے ساتھ تعلقات کا احاطہ کریں؟",
+                        "پاکستان کے چین کے ساتھ سفارتی تعلقات بیان کرتے ہوئے ان کی اہمیت واضح کریں؟",
+                        "پاکستان کے بھارت کے ساتھ سفارتی تعلقات بیان کرتے ہوئے امن کے راستے میں رکاوٹ بننے والی مشکلات کا تجزیہ کریں؟",
+                        "اقوام متحدہ کے اداروں کا تعارف اور ذمہ داریاں بیان کریں؟"
+                    ], 
+                    additional: [] 
+                }
+            },
+            "ch6": {
+                title: "پاکستان کے وسائل اور معاشی ترقی",
+                mcq: { 
+                    exercise: [
+                        {
+                            question: "چین پاکستان اقتصادی راہداری منصوبے کا حصہ ہے:",
+                            options: ["کراچی پورٹ", "محمد بن قاسم پورٹ", "گوادر پورٹ", "پسنی پورٹ"],
+                            correct: 2
+                        },
+                        {
+                            question: "پاکستان میں ماہی گیری کی صنعت قومی جی ڈی پی میں حصہ ڈالتی ہے:",
+                            options: ["1 فیصد", "2 فیصد", "3 فیصد", "4 فیصد"],
+                            correct: 3
+                        },
+                        {
+                            question: "غذائی اجناس میں انسان کی سب سے زیادہ مقبول غذا ہے:",
+                            options: ["چاول", "مکئی", "دالیں", "گندم"],
+                            correct: 3
+                        },
+                        {
+                            question: "آپ دنیا میں کسی بھی جگہ پر بیٹھے شخص کو اپنا پیغام فوری پہنچاسکتے ہیں:",
+                            options: ["اخبار کے ذریعے", "ریڈیو کے ذریعے", "ای میل کے ذریعے", "ٹیلی وژن کے ذریعے"],
+                            correct: 2
+                        },
+                        {
+                            question: "ایک مشینی آلہ ہے جسے راکٹ کے ذریعے زمین کے مدار میں چھوڑا جاتا ہے:",
+                            options: ["سیٹلائٹ", "فیکس مشین", "سیکیورٹی ٹول", "وائرلیس ٹول"],
+                            correct: 0
+                        },
+                        {
+                            question: "پاکستان میں اکثریتی آبادی کا پیشہ ہے:",
+                            options: ["ملازمت", "صنعت", "گلہ بانی", "زراعت"],
+                            correct: 3
+                        },
+                        {
+                            question: "جی ڈی پی میں زراعت کا حصہ ہے:",
+                            options: ["25 فیصد", "23.5 فیصد", "21.64 فیصد", "20 فیصد"],
+                            correct: 2
+                        },
+                        {
+                            question: "پاکستان اکنامک سروے 2024-25 کے مطابق گندم کی پیداوار ہے:",
+                            options: ["36 ملین ٹن", "33 ملین ٹن", "29 ملین ٹن", "26 ملین ٹن"],
+                            correct: 1
+                        }
+                    ], 
+                    additional: [] 
+                },
+                short: { 
+                    exercise: [
+                        "ربیع اور خریف کی اہم فصلوں کے نام لکھیں؟",
+                        "مویشی پالنا ہماری زندگی میں کیوں اہم ہیں؟",
+                        "پاکستان کے زرعی شعبے کو درپیش کوئی سے چار مسائل تحریر کریں؟",
+                        "ماہی گیری سے کیا مراد ہے؟",
+                        "ٹیلی کمیونیکیشنز کی تعریف کریں؟",
+                        "کمپیوٹر کے دو فوائد تحریر کریں؟",
+                        "ماہی پروری کے دو اقتصادی فوائد تحریر کریں؟",
+                        "پاکستان میں سیاحت کو درپیش مسائل کونسے ہیں؟",
+                        "ٹیلی کمیونیکیشنز کی فراہمی کے سلسلے میں کونسے مسائل درپیش ہیں؟",
+                        "پاکستان میں ٹرانسپورٹ کے مسائل کے حل کیلئے کیا اقدامات کیے جا سکتے ہیں؟"
+                    ], 
+                    additional: [] 
+                },
+                long: { 
+                    exercise: [
+                        "پاکستان میں زراعت کی اہمیت، مسائل اور اس میں جدت لانے کے اقدامات کی وضاحت کریں؟",
+                        "پاکستان میں ماہی گیری کی صنعت کی اہمیت اور اس کے بنیادی ڈھانچے کی ترقی کیلئے اقدامات کا جائزہ لیں؟",
+                        "پاکستان میں ٹیلی کمیونیکیشنز کی اہمیت اور کردار کا جائزہ لیں؟"
+                    ], 
+                    additional: [] 
+                }
+            },
+            "ch7": {
+                title: "آبادی، معاشرہ اور پاکستان میں ثقافتی تنوع",
+                mcq: { 
+                    exercise: [
+                        {
+                            question: "2023ء کی مردم شماری کے مطابق پاکستان کے شہری علاقوں میں افراد آباد ہیں:",
+                            options: ["92.3 ملین", "93.8 ملین", "94.5 ملین", "95.4 ملین"],
+                            correct: 3
+                        },
+                        {
+                            question: "آبادی کے کوائف جاننے کے عمل کو کہتے ہیں:",
+                            options: ["مردم شماری", "اشتمال اراضی", "انتقال اراضی", "نقل مکانی"],
+                            correct: 0
+                        },
+                        {
+                            question: "پاکستان نے چار مرتبہ عالمی کپ جیتا:",
+                            options: ["رگبی", "سنوکر", "ہاکی", "کرکٹ"],
+                            correct: 2
+                        },
+                        {
+                            question: "شندور کے سالانہ میلے میں اس کھیل کا خصوصی طور پر انعقاد کیا جاتا ہے:",
+                            options: ["پولو", "بیڈ منٹن", "والی بال", "ہاکی"],
+                            correct: 0
+                        },
+                        {
+                            question: "سپریم کورٹ کے جج رہے:",
+                            options: ["بدیع الزمان کیکاؤس", "ولیم ڈی ہارولے", "ڈاکٹر رتھ فاؤ", "پیٹر کرسٹی"],
+                            correct: 0
+                        },
+                        {
+                            question: "پاکستان میں پنجابی زبان بولنے والے لوگ ہیں:",
+                            options: ["18 فیصد", "15 فیصد", "12 فیصد", "37 فیصد"],
+                            correct: 3
+                        },
+                        {
+                            question: "پاکستان کی آبادی میں اضافے کی سالانہ شرح--------- فیصد ہے:",
+                            options: ["4.55", "3.55", "2.55", "1.55"],
+                            correct: 2
+                        },
+                        {
+                            question: "پنجاب میں گنجانیت ہے:",
+                            options: ["622 افراد فی مربع کلومیٹر", "401 افراد فی مربع کلومیٹر", "395 افراد فی مربع کلومیٹر", "303 افراد فی مربع کلومیٹر"],
+                            correct: 0
+                        },
+                        {
+                            question: "پاکستان ٹیلی وژن کا آغاز ہو:",
+                            options: ["1966ء میں", "1964ء میں", "1962ء میں", "1960ء میں"],
+                            correct: 1
+                        },
+                        {
+                            question: "قبائلی علاقوں کو صوبہ خیبر پختونخواء میں ضم کر دیا گیا:",
+                            options: ["2020ء میں", "2018ء میں", "2016ء میں", "2014ء میں"],
+                            correct: 1
+                        }
+                    ], 
+                    additional: [] 
+                },
+                short: { 
+                    exercise: [
+                        "معاشرہ کی تعریف کریں؟",
+                        "ہم نصابی سرگرمیوں سے کیا مراد ہے؟",
+                        "سماجی درجہ بندی کی تعریف کریں؟",
+                        "مردم شماری سے کیا مراد ہے؟",
+                        "2023ء کی ڈیجیٹل مردم شماری کے مطابق پاکستان میں دیہی اور شہری آبادی کا تناسب بتائیں؟",
+                        "اقلیتی طبقوں کے کوئی سے دو مذہبی تہواروں کے نام لکھیں؟",
+                        "پاکستان کے چار سیاحتی مقامات کے نام تحریر کریں؟",
+                        "ہماری زندگی میں کھیل کی کیا اہمیت ہے؟",
+                        "پاکستان میں بولی جانے والی پانچ علاقائی زبانوں کے نام لکھیں؟",
+                        "صنفی امتیاز سے کیا مراد ہے؟",
+                        "قومی یکجہتی سے کیا مراد ہے؟",
+                        "سول سروسز کے کوئی سے چھ گروپس کے نام لکھیں؟",
+                        "صوفیائے کرام کے سلسلوں کے نام لکھیں؟",
+                        "سماجی حرکیات کی تعریف کریں؟",
+                        "ایک بامعنی معاشرے اور ریاست کی تشکیل کے سلسلے افراد کی کیا اہمیت ہے؟ تین سطروں میں لکھیں۔",
+                        "پاکستانی معاشرے اور ثقافت پر عالمگیریت کے دو اثرات لکھیں؟",
+                        "پاکستان میں کونسے ہسپتال براہ راست صوبائی حکومت کے ماتحت کام کر رہے ہیں؟",
+                        "جاگیرداری نظام کی وضاحت کریں؟",
+                        "ثقافت سے کیا مراد ہے اور ہماری ثقافت کس کی عکاسی کرتی ہے؟",
+                        "پاکستان کی پہلی دستور ساز اسمبلی میں قائداعظم نے کیا فرمایا؟"
+                    ], 
+                    additional: [] 
+                },
+                long: { 
+                    exercise: [
+                        "قومی ترقی اور ترقی میں اقلیتوں کا کردار بیان کریں؟",
+                        "علاقائی ثقافتیں کیسے قومی یکجہتی کا باعث بنتی ہیں، وضاحت کریں؟",
+                        "پاکستانی معاشرے اور ثقافت کی اہم خصوصیات بیان کریں؟",
+                        "پاکستان میں تعلیم کی صورتحال بیان کریں؟",
+                        "سیاحت کی اہمیت بیان کریں اور پاکستان کے قدرتی اور ثقافتی پرکشش مقامات کو اجاگر کریں؟"
+                    ], 
+                    additional: [] 
+                }
+            },
+            "ch8": {
+                title: "پاکستان میں خواتین کو با اختیار بنانا",
+                mcq: { 
+                    exercise: [
+                        {
+                            question: "عرب معاشرے میں اسلام سے پہلے دور جاہلیت میں لڑکی کو:",
+                            options: ["عزت دیتے تھے", "زندہ دفن کر دیتے تھے", "ونی کر دیتے تھے", "جلا دیتے تھے"],
+                            correct: 1
+                        },
+                        {
+                            question: "اسلام دین فطرت ہے جس کی تعلیمات کے مطابق بنیادی حقوق کے لحاظ سے برابر ہیں:",
+                            options: ["سب انسان", "سب بچے", "تمام افراد", "سب عورتیں"],
+                            correct: 0
+                        },
+                        {
+                            question: "قائد اعظم کے شانہ بشانہ تحریک پاکستان میں شامل رہیں:",
+                            options: ["لیڈی نصرت ہارون", "بیگم مولانا محمد علی جوہر", "محترمہ فاطمہ جناح", "بیگم فرخ حسین"],
+                            correct: 2
+                        },
+                        {
+                            question: "سماجی خدمات کے حوالے سے مشہور ہیں:",
+                            options: ["محترمہ شمشاد اختر", "محترمی ثمینہ بیگ", "ڈاکٹر فہمیدہ مرزا", "محترمہ بلقیس ایدھی"],
+                            correct: 3
+                        },
+                        {
+                            question: "پنجاب میں لڑکیوں کی شادی کی قانونی عمر ہے:",
+                            options: ["20 سال", "18 سال", "16 سال", "14 سال"],
+                            correct: 1
+                        },
+                        {
+                            question: "خواتین تشدد کے خلاف کس نمبر پر شکایات کر سکتی ہیں:",
+                            options: ["1085", "1043", "1030", "1016"],
+                            correct: 0
+                        },
+                        {
+                            question: "پنجاب حکومت نے \"پنجاب تحفظ نسواں ایکٹ\" منظور کیا:",
+                            options: ["15 ستمبر 2017ء میں", "24 فروری 2016ء میں", "16 فروری 2015ء میں", "24 جنوری 2010ء میں"],
+                            correct: 1
+                        },
+                        {
+                            question: "حج کے موقع پر صفا اور مروہ کے درمیان دوڑنا سنت ہے:",
+                            options: ["حضرت حوا کی", "حضرت ہاجرہ کی", "حضرت خدیجہ کی", "حضرت عائشہ کی"],
+                            correct: 1
+                        }
+                    ], 
+                    additional: [] 
+                },
+                short: { 
+                    exercise: [
+                        "قرآن کریم کی ایک آیت کی روشنی میں خواتین کے حقوق بیان کریں؟",
+                        "نبی کریمﷺ کی ایک حدیث کی روشنی میں خواتین کے حقوق بیان کریں؟",
+                        "تحریک پاکستان میں شامل چار خواتین کے نام لکھیں؟",
+                        "سول سیکرٹریٹ پر مسلم لیگ کا جھنڈا کس نے لہرایا؟",
+                        "لیفٹیننٹ جنرل نگار جوہر خان کا تعلق پاک فوج کی کس کور سے تھا؟",
+                        "پنجاب کی موجودہ وزیراعلیٰ کون ہے؟",
+                        "ارفع کریم کس شعبے میں مہارت رکھتی تھیں؟",
+                        "خواتین پر تشدد سے کیا مراد ہے؟",
+                        "پنجاب میں لڑکے اور لڑکی کی شادی کی قانونی عمر کیا ہے؟",
+                        "محترمہ کلثوم نواز کے بارے میں آپ کیا جانتے ہیں؟",
+                        "خواتین کے تحفظ اور ان کو بااختیار بنانے میں حکومت پنجاب کے کوئی سے دو اقدامات تحریر کریں؟",
+                        "خواتین پر تشدد کی کوئی سی دو وجوہات تحریر کریں؟"
+                    ], 
+                    additional: [] 
+                },
+                long: { 
+                    exercise: [
+                        "قرآن و سنت کی روشنی میں اسلام میں خواتین کے حقوق بیان کریں؟",
+                        "تحریک پاکستان میں خواتین کے کردار پر بحث کریں؟",
+                        "پاکستان کی ترقی میں خواتین کے کردار کا تجزیہ کریں؟",
+                        "آئینی دفعات کے حوالے سے خواتین پر تشدد کے معاشرے پر اثرات بیان کریں؟",
+                        "پاکستان میں خواتین پر تشدد کے خاتمے کے لیے حکومتی اقدامات پر روشنی ڈالیں؟"
+                    ], 
+                    additional: [] 
+                }
+            }
+        };
+
+        // ========== STATE MANAGEMENT ==========
+        let state = {
+            chapter: null,
+            type: null,
+            additional: false,
+            isPaid: localStorage.getItem('pakStudiesPaid') === 'true'
+        };
+
+        // ========== DOM ELEMENTS ==========
+        const chapterSelect = document.getElementById('chapterSelect');
+        const typeButtons = document.querySelectorAll('.btn-type');
+        const scopeToggle = document.getElementById('scopeToggle');
+        const contentArea = document.getElementById('contentArea');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const premiumModal = document.getElementById('premiumModal');
+        const confirmPay = document.getElementById('confirmPay');
+        const cancelPay = document.getElementById('cancelPay');
+
+        // ========== INITIALIZATION ==========
+        function init() {
+            // Populate chapter dropdown
+            chaptersData.forEach(chapter => {
+                const option = document.createElement('option');
+                option.value = chapter.id;
+                option.textContent = chapter.title;
+                chapterSelect.appendChild(option);
+            });
+
+            // Update download button state
+            updateDownloadButton();
+
+            // Event Listeners
+            chapterSelect.addEventListener('change', (e) => {
+                state.chapter = e.target.value || null;
+                renderContent();
+            });
+
+            typeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    typeButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    state.type = btn.dataset.type;
+                    renderContent();
+                });
+            });
+
+            scopeToggle.addEventListener('change', (e) => {
+                state.additional = e.target.checked;
+                renderContent();
+            });
+
+            downloadBtn.addEventListener('click', handleDownload);
+            confirmPay.addEventListener('click', processPayment);
+            cancelPay.addEventListener('click', () => premiumModal.classList.remove('active'));
+        }
+
+        // ========== RENDER LOGIC ==========
+        function renderContent() {
+            if (!state.chapter || !state.type) {
+                contentArea.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-book-open"></i>
+                        <h3>براہ کرم اوپر سے باب اور سوالات کی قسم منتخب کریں</h3>
+                        <p>منتخب کرنے کے بعد مواد یہاں ظاہر ہوگا</p>
+                    </div>`;
+                return;
+            }
+
+            const chapter = chaptersData.find(c => c.id === state.chapter);
+            const chapterData = pakStudiesData[state.chapter];
+            
+            if (!chapterData) {
+                contentArea.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <h3>اس باب کا ڈیٹا ابھی دستیاب نہیں ہے</h3>
+                        <p>براہ کرم دوسرا باب منتخب کریں</p>
+                    </div>`;
+                return;
+            }
+
+            const typeData = chapterData[state.type];
+            
+            let questions = [...typeData.exercise];
+            
+            if (state.additional && typeData.additional) {
+                questions = [...questions, ...typeData.additional];
+            }
+
+            const typeLabels = {
+                'mcq': 'MCQs',
+                'short': 'Short Questions',
+                'long': 'Long Questions'
+            };
+
+            let html = `
+                <div class="content-header">
+                    <div class="content-title">${chapter.title} - ${typeLabels[state.type]}</div>
+                    <span class="badge-type">${state.additional ? 'Exercise + Additional' : 'صرف Exercise'}</span>
+                </div>
+            `;
+
+            if (state.type === 'mcq') {
+                // Render MCQs with options
+                html += '<ul class="question-list">';
+                questions.forEach((mcq, index) => {
+                    html += `
+                        <li class="question-item">
+                            <div class="question-header">
+                                <span class="question-number">${index + 1}</span>
+                                <span class="question-text">${mcq.question}</span>
+                            </div>
+                            <div class="mcq-options">
+                                ${mcq.options.map((option, optIndex) => `
+                                    <div class="mcq-option ${optIndex === mcq.correct ? 'correct' : ''}">
+                                        <span class="option-label">${String.fromCharCode(65 + optIndex)}</span>
+                                        <span class="option-text">${option}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </li>
+                    `;
+                });
+                html += '</ul>';
+            } else {
+                // Render Short/Long Questions
+                html += '<ul class="question-list">';
+                questions.forEach((q, index) => {
+                    html += `
+                        <li class="short-question">
+                            <span class="question-number">${index + 1}</span>
+                            <span class="question-text">${q}</span>
+                        </li>
+                    `;
+                });
+                html += '</ul>';
+            }
+
+            contentArea.innerHTML = html;
+        }
+
+        // ========== DOWNLOAD & PREMIUM LOGIC ==========
+        function updateDownloadButton() {
+            if (state.isPaid) {
+                downloadBtn.classList.remove('locked');
+                downloadBtn.innerHTML = '<i class="fas fa-download"></i><span>Download PDF</span>';
+            } else {
+                downloadBtn.classList.add('locked');
+                downloadBtn.innerHTML = '<i class="fas fa-lock"></i><span>Download PDF (Premium - Rs. 500)</span>';
+            }
+        }
+
+        function handleDownload() {
+            if (!state.chapter || !state.type) {
+                alert('براہ کرم پہلے باب اور سوالات کی قسم منتخب کریں۔');
+                return;
+            }
+
+            if (state.isPaid) {
+                // Simulate download
+                alert('✅ ڈاؤنلوڈ شروع ہو رہا ہے...\n\n(یہ ڈمی فنکشن ہے، حقیقی PDF لنک یہاں attach کریں)');
+                // window.location.href = 'your-pdf-link.pdf';
+            } else {
+                premiumModal.classList.add('active');
+            }
+        }
+
+        function processPayment() {
+            // Simulate payment processing
+            const btn = confirmPay;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                state.isPaid = true;
+                localStorage.setItem('pakStudiesPaid', 'true');
+                updateDownloadButton();
+                premiumModal.classList.remove('active');
+                alert('✅ پے منٹ کامیاب!\n\nاب آپ تمام نوٹس ڈاؤنلوڈ کر سکتے ہیں۔');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 1500);
+        }
+
+        // Run initialization
+        init();
+    </script>
+</body>
+</html>
