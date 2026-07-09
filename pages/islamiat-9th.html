@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/responsive.css">
-     <!-- Favicon -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="../favicon.png">
     <style>
         body { font-family: 'Noto Nastaliq Urdu', serif; line-height: 2.2; }
@@ -21,79 +21,164 @@
         .breadcrumb { margin-top: 1rem; font-size: 1rem; opacity: 0.9; }
         .breadcrumb a { color: #d8f3dc; }
 
-        .bab-container {
-            max-width: 900px;
+        .chapters-container {
+            max-width: 1000px;
             margin: 4rem auto;
             padding: 0 20px;
         }
 
-        .bab-card {
+        .chapter-card {
             background: white;
             border-radius: 12px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             box-shadow: var(--shadow);
             overflow: hidden;
-            border: 2px solid #06a77d;
+            border: 1px solid #eee;
             transition: var(--transition);
         }
 
-        .bab-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(6, 167, 125, 0.2);
+        .chapter-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(6, 167, 125, 0.15);
+            border-color: #06a77d;
         }
 
-        .bab-header {
-            padding: 2rem;
+        .chapter-header {
+            padding: 1.5rem 2rem;
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            cursor: pointer;
-            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
         }
 
-        .bab-number {
-            background: #06a77d;
+        .chapter-number {
+            background: linear-gradient(135deg, #06a77d, #1b4332);
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             font-weight: 700;
             flex-shrink: 0;
         }
 
-        .bab-title {
-            font-size: 1.6rem;
-            font-weight: 700;
+        .chapter-title {
+            font-size: 1.3rem;
+            font-weight: 600;
             color: #1b4332;
+            flex-grow: 1;
         }
 
-        .bab-chapters-count {
-            background: #dcfce7;
-            color: #166534;
-            padding: 0.3rem 1rem;
-            border-radius: 50px;
+        .chapter-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        .btn-chapter {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
             font-size: 0.9rem;
-            margin-top: 0.5rem;
-            display: inline-block;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
         }
 
-        .view-btn {
-            margin-right: auto;
+        .btn-notes {
+            background: #f0fdf4;
+            color: #06a77d;
+        }
+
+        .btn-notes:hover {
             background: #06a77d;
             color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
         }
 
-        .view-btn:hover {
-            background: #047857;
+        .btn-test {
+            background: #fff0f3;
+            color: #e63946;
+            position: relative;
+        }
+
+        .btn-test:hover {
+            background: #e63946;
+            color: white;
+        }
+
+        .premium-badge {
+            font-size: 0.65rem;
+            background: #ffd700;
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-right: 4px;
+            font-weight: 700;
+        }
+
+        .stats-bar {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border: 2px solid #06a77d;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #06a77d;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .chapter-header {
+                flex-wrap: wrap;
+                padding: 1.2rem;
+            }
+            .chapter-title {
+                font-size: 1.1rem;
+                flex-basis: 100%;
+                order: 2;
+            }
+            .chapter-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .chapter-actions {
+                margin-right: auto;
+                order: 3;
+                flex-basis: 100%;
+                margin-top: 0.8rem;
+            }
+            .btn-chapter {
+                flex: 1;
+                justify-content: center;
+                font-size: 0.85rem;
+                padding: 0.5rem 0.8rem;
+            }
         }
     </style>
 </head>
@@ -115,100 +200,619 @@
     <header class="page-header">
         <div class="container">
             <h1>اسلامیات - 9ویں جماعت</h1>
-            <p>قرآن مجید، احادیث نبوی ﷺ، اور اسلامی تعلیمات</p>
-            <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="9th-class.html">9th Class</a> / <span>اسلامیات</span></div>
+            <p>یکساں قومی نصاب کے مطابق - تمام ابواب</p>
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> / 
+                <a href="9th-class.html">9th Class</a> / 
+                <span>اسلامیات</span>
+            </div>
         </div>
     </header>
 
-    <section class="bab-container">
-        
-        <!-- Bab 1 -->
-        <div class="bab-card">
-            <div class="bab-header">
-                <div class="bab-number">۱</div>
-                <div>
-                    <div class="bab-title">قرآن مجید کی تلاوت اور اس کی تعلیمات</div>
-                    <div class="bab-chapters-count">6 ابواب</div>
-                </div>
-                <a href="islamiat-bab.html?bab=1" class="view-btn">دیکھیں <i class="fas fa-arrow-left"></i></a>
+    <section class="chapters-container">
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <span class="stat-number">46</span>
+                <span class="stat-label">کل ابواب</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">46</span>
+                <span class="stat-label">نوٹس دستیاب</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">46</span>
+                <span class="stat-label">ٹیسٹ دستیاب</span>
             </div>
         </div>
 
-        <!-- Bab 2 -->
-        <div class="bab-card">
-            <div class="bab-header">
-                <div class="bab-number">۲</div>
-                <div>
-                    <div class="bab-title">ایمانیات</div>
-                    <div class="bab-chapters-count">5 ابواب</div>
+        <!-- Chapter 1 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۱</div>
+                <div class="chapter-title">قرآن مجید کی تدوین اور اس کی حفاظت</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
                 </div>
-                <a href="islamiat-bab.html?bab=2" class="view-btn">دیکھیں <i class="fas fa-arrow-left"></i></a>
             </div>
         </div>
 
-        <!-- Bab 3 -->
-        <div class="bab-card">
-            <div class="bab-header">
-                <div class="bab-number">۳</div>
-                <div>
-                    <div class="bab-title">عبادات</div>
-                    <div class="bab-chapters-count">6 ابواب</div>
+        <!-- Chapter 2 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۲</div>
+                <div class="chapter-title">حفاظت و تدوین حدیث</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
                 </div>
-                <a href="islamiat-bab.html?bab=3" class="view-btn">دیکھیں <i class="fas fa-arrow-left"></i></a>
             </div>
         </div>
 
-        <!-- Bab 4 -->
-        <div class="bab-card">
-            <div class="bab-header">
-                <div class="bab-number">۴</div>
-                <div>
-                    <div class="bab-title">معاملات</div>
-                    <div class="bab-chapters-count">6 ابواب</div>
+        <!-- Chapter 3 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۳</div>
+                <div class="chapter-title">احادیث نبوی ﷺ</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
                 </div>
-                <a href="islamiat-bab.html?bab=4" class="view-btn">دیکھیں <i class="fas fa-arrow-left"></i></a>
             </div>
         </div>
 
-        <!-- Bab 5 -->
-        <div class="bab-card">
-            <div class="bab-header">
-                <div class="bab-number">۵</div>
-                <div>
-                    <div class="bab-title">حسن اخلاق</div>
-                    <div class="bab-chapters-count">5 ابواب</div>
+        <!-- Chapter 4 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۴</div>
+                <div class="chapter-title">عقیدہ توحید</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
                 </div>
-                <a href="islamiat-bab.html?bab=5" class="view-btn">دیکھیں <i class="fas fa-arrow-left"></i></a>
             </div>
         </div>
 
-        <!-- Bab 6 -->
-        <div class="bab-card">
-            <div class="bab-header">
-                <div class="bab-number">۶</div>
-                <div>
-                    <div class="bab-title">سیرت النبی ﷺ</div>
-                    <div class="bab-chapters-count">6 ابواب</div>
+        <!-- Chapter 5 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۵</div>
+                <div class="chapter-title">عقیدہ رسالت</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
                 </div>
-                <a href="islamiat-bab.html?bab=6" class="view-btn">دیکھیں <i class="fas fa-arrow-left"></i></a>
             </div>
         </div>
 
-        <!-- Bab 7 -->
-        <div class="bab-card">
-            <div class="bab-header">
-                <div class="bab-number">۷</div>
-                <div>
-                    <div class="bab-title">اسلامی تہذیب و تمدن</div>
-                    <div class="bab-chapters-count">3 ابواب</div>
+        <!-- Chapter 6 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۶</div>
+                <div class="chapter-title">ملائکہ - فرشتے</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
                 </div>
-                <a href="islamiat-bab.html?bab=7" class="view-btn">دیکھیں <i class="fas fa-arrow-left"></i></a>
+            </div>
+        </div>
+
+        <!-- Chapter 7 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۷</div>
+                <div class="chapter-title">کتب سماویہ - آسمانی کتابیں</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 8 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۸</div>
+                <div class="chapter-title">عقیدہ آخرت</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 9 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۹</div>
+                <div class="chapter-title">نماز</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 10 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۱۰</div>
+                <div class="chapter-title">روزہ</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 11 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۱۱</div>
+                <div class="chapter-title">زکوٰۃ</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 12 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۱۲</div>
+                <div class="chapter-title">حج اور قربانی</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 13 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۱۳</div>
+                <div class="chapter-title">فتح مکہ</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 14 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۱۴</div>
+                <div class="chapter-title">غزوہ حنین</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 15 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۱۵</div>
+                <div class="chapter-title">عام الوفود</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 16 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۱۶</div>
+                <div class="chapter-title">غزوہ تبوک</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 17 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۱۷</div>
+                <div class="chapter-title">حجتہ الوداع</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 18 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۱۸</div>
+                <div class="chapter-title">وصال نبوی ﷺ</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 19 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۱۹</div>
+                <div class="chapter-title">حضرت محمد ﷺ کا بچپن اور جوانی</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 20 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۲۰</div>
+                <div class="chapter-title">حضرت محمد ﷺ کا ذوق عبادت</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 21 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۲۱</div>
+                <div class="chapter-title">حضرت محمد ﷺ کی سخاوت و ایثار</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 22 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۲۲</div>
+                <div class="chapter-title">صلہ رحمی</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 23 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۲۳</div>
+                <div class="chapter-title">خواتین کے ساتھ حسن سلوک</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 24 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۲۴</div>
+                <div class="chapter-title">انداز تربیت</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 25 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۲۵</div>
+                <div class="chapter-title">اخلاق و آداب</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 26 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۲۶</div>
+                <div class="chapter-title">بری عادات سے اجتناب</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 27 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۲۷</div>
+                <div class="chapter-title">جادو، فال اور توہم پرستی</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 28 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۲۸</div>
+                <div class="chapter-title">قسم کے احکام و مسائل</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 29 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۲۹</div>
+                <div class="chapter-title">گواہی کے احکام و مسائل</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 30 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۳۰</div>
+                <div class="chapter-title">حقوق العباد - ہمسایوں کے حقوق</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 31 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۳۱</div>
+                <div class="chapter-title">سود کی حرمت</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 32 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۳۲</div>
+                <div class="chapter-title">اسلامی ریاست</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 33 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۳۳</div>
+                <div class="chapter-title">جہاد فی سبیل اللہ</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 34 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۳۴</div>
+                <div class="chapter-title">حضرت امام زین العابدین</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 35 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۳۵</div>
+                <div class="chapter-title">حضرت امام زید بن علی</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 36 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۳۶</div>
+                <div class="chapter-title">حضرت ابو موسیٰ اشعری</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 37 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۳۷</div>
+                <div class="chapter-title">حضرت عبداللہ بن عمرو بن العاص</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 38 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۳۸</div>
+                <div class="chapter-title">حضرت عمرو بن امیہ</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 39 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۳۹</div>
+                <div class="chapter-title">حضرت عمرو بن العاص</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 40 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۴۰</div>
+                <div class="chapter-title">حضرت جابر بن عبداللہ</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 41 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۴۱</div>
+                <div class="chapter-title">حضرت انس بن مالک</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 42 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۴۲</div>
+                <div class="chapter-title">صحابیات</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 43 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۴۳</div>
+                <div class="chapter-title">صوفیہ کرام</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 44 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۴۴</div>
+                <div class="chapter-title">علماء و مفکرین</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 45 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۴۵</div>
+                <div class="chapter-title">خود اعتمادی و خود انحصاری</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 46 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۴۶</div>
+                <div class="chapter-title">جسمانی و ذہنی صحت اور جسمانی ریاضت</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 47 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۴۷</div>
+                <div class="chapter-title">اسلام میں مستقبل کی منصوبہ بندی کی اہمیت</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 48 -->
+        <div class="chapter-card">
+            <div class="chapter-header">
+                <div class="chapter-number">۴۸</div>
+                <div class="chapter-title">اسلامی تہذیب کے امتیازات</div>
+                <div class="chapter-actions">
+                    <a href="#" class="btn-chapter btn-notes"><i class="fas fa-file-alt"></i> نوٹس</a>
+                    <a href="#" class="btn-chapter btn-test"><span class="premium-badge">PREMIUM</span><i class="fas fa-lock"></i> ٹیسٹ</a>
+                </div>
             </div>
         </div>
 
     </section>
 
-    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2026 EduPortal. All rights reserved.</p></div></div></footer>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPortal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <script src="../js/main.js"></script>
 </body>
 </html>
