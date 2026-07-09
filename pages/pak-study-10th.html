@@ -105,6 +105,287 @@
             pointer-events: none;
             font-size: 1.1rem;
         }
+        /* ========== FEEDBACK BUTTON ========== */
+.feedback-fab {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    font-size: 1.5rem;
+    z-index: 999;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback-fab:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+}
+
+.feedback-fab .tooltip {
+    position: absolute;
+    right: 70px;
+    background: #2b2d42;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.feedback-fab:hover .tooltip {
+    opacity: 1;
+}
+
+/* ========== FEEDBACK MODAL ========== */
+.feedback-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    padding: 1rem;
+}
+
+.feedback-modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.feedback-modal-content {
+    background: white;
+    border-radius: 20px;
+    max-width: 550px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.feedback-header {
+    background: linear-gradient(135deg, #166534, #15803d);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 20px 20px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.feedback-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.feedback-close {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.feedback-close:hover {
+    background: rgba(255,255,255,0.3);
+    transform: rotate(90deg);
+}
+
+.feedback-body {
+    padding: 2rem;
+}
+
+.feedback-form .form-group {
+    margin-bottom: 1.3rem;
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #166534;
+    font-size: 0.95rem;
+}
+
+.feedback-form label i {
+    margin-left: 0.4rem;
+    color: #15803d;
+}
+
+.feedback-form input,
+.feedback-form select,
+.feedback-form textarea {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 2px solid #d1fae5;
+    border-radius: 10px;
+    font-family: 'Noto Nastaliq Urdu', serif;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background: #f8fafc;
+}
+
+.feedback-form input:focus,
+.feedback-form select:focus,
+.feedback-form textarea:focus {
+    outline: none;
+    border-color: #166534;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(22, 101, 52, 0.1);
+}
+
+.feedback-form textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.8;
+}
+
+.feedback-submit {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    transition: all 0.3s;
+    font-family: 'Noto Nastaliq Urdu', serif;
+}
+
+.feedback-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+}
+
+.feedback-info {
+    background: linear-gradient(135deg, #fef3c7, #fffbeb);
+    border-right: 4px solid #f59e0b;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    color: #92400e;
+}
+
+.feedback-info i {
+    color: #f59e0b;
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+}
+
+/* Success Message */
+.feedback-success {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+}
+
+.feedback-success.active {
+    display: block;
+    animation: slideUp 0.4s ease;
+}
+
+.success-icon-big {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto 1.5rem;
+    animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.feedback-success h3 {
+    color: #166534;
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+.feedback-success p {
+    color: #64748b;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    color: white;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+@media (max-width: 640px) {
+    .feedback-fab {
+        width: 55px;
+        height: 55px;
+        bottom: 20px;
+        left: 20px;
+    }
+    .feedback-body { padding: 1.5rem; }
+}
 
         /* Type Buttons - Better Layout */
         .type-buttons-container {
@@ -1616,6 +1897,214 @@
 
         // Run initialization
         init();
+        // ========== FEEDBACK SYSTEM ==========
+
+// ⚠️ IMPORTANT: Apna WhatsApp number yahan dalein (country code ke saath, bina + ke)
+// Example: Pakistan number 03001234567 → 923001234567
+const ADMIN_WHATSAPP = '923081517640'; // ← Yahan apna number dalein
+
+function openFeedbackModal() {
+    document.getElementById('feedbackModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeFeedbackModal() {
+    document.getElementById('feedbackModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Modal ke bahar click karne par band ho
+document.getElementById('feedbackModal').addEventListener('click', (e) => {
+    if (e.target.id === 'feedbackModal') {
+        closeFeedbackModal();
+    }
+});
+
+function submitFeedback(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('fbName').value.trim();
+    const chapter = document.getElementById('fbChapter').value;
+    const type = document.getElementById('fbType').value;
+    const message = document.getElementById('fbMessage').value.trim();
+
+    if (!name || !chapter || !type || !message) {
+        alert('براہ کرم تمام فیلڈز پُر کریں');
+        return;
+    }
+
+    // Current date/time
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('ur-PK');
+    const timeStr = now.toLocaleTimeString('ur-PK', { hour: '2-digit', minute: '2-digit' });
+
+    // Current page info
+    const currentChapter = document.getElementById('chapterSelect');
+    const currentType = document.querySelector('.btn-type.active');
+    const currentPage = currentChapter ? currentChapter.options[currentChapter.selectedIndex].text : 'N/A';
+    const currentTypeText = currentType ? currentType.textContent.trim() : 'N/A';
+
+    // Beautiful formatted message
+    const feedbackText = `
+╔══════════════════════════════╗
+   📚 EDUPORTAL FEEDBACK
+╚══════════════════════════════╝
+
+👤 طالب علم: ${name}
+📅 تاریخ: ${dateStr}
+⏰ وقت: ${timeStr}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ باب: ${chapter}
+
+⚠️ مسئلہ کی قسم:
+${type}
+
+📝 تفصیل:
+${message}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📍 موجودہ صفحہ:
+باب: ${currentPage}
+قسم: ${currentTypeText}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ براہ کرم جلد از جلد درست کریں
+شکریہ! 🌟
+    `.trim();
+
+    // WhatsApp link generate karein
+    const encodedMessage = encodeURIComponent(feedbackText);
+    const whatsappURL = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodedMessage}`;
+
+    // WhatsApp link set karein
+    document.getElementById('whatsappLink').href = whatsappURL;
+
+    // Form hide, success show
+    document.getElementById('feedbackFormSection').style.display = 'none';
+    document.getElementById('feedbackSuccess').classList.add('active');
+}
+
+function resetFeedback() {
+    document.getElementById('feedbackForm').reset();
+    document.getElementById('feedbackFormSection').style.display = 'block';
+    document.getElementById('feedbackSuccess').classList.remove('active');
+}
+
+// ESC key se modal band
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeFeedbackModal();
+    }
+});
     </script>
+    <!-- Floating Feedback Button -->
+<button class="feedback-fab" onclick="openFeedbackModal()" title="Feedback">
+    <i class="fab fa-whatsapp"></i>
+    <span class="tooltip">کوئی مسئلہ؟ ہمیں بتائیں</span>
+</button>
+
+<!-- Feedback Modal -->
+<div class="feedback-modal" id="feedbackModal">
+    <div class="feedback-modal-content">
+        <div class="feedback-header">
+            <h2><i class="fas fa-comment-dots"></i> Feedback / رپورٹ</h2>
+            <button class="feedback-close" onclick="closeFeedbackModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="feedback-body">
+            <!-- Form Section -->
+            <div id="feedbackFormSection">
+                <div class="feedback-info">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>کیا آپ کو کوئی غلطی ملی؟</strong><br>
+                        MCQs، Short Questions یا Long Questions میں کوئی مسئلہ ہو تو ہمیں اطلاع دیں۔ ہم جلد از جلد درست کریں گے۔
+                    </div>
+                </div>
+
+                <form class="feedback-form" id="feedbackForm" onsubmit="submitFeedback(event)">
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-user"></i> آپ کا نام
+                        </label>
+                        <input type="text" id="fbName" required placeholder="اپنا نام لکھیں">
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-book"></i> باب (Chapter)
+                        </label>
+                        <select id="fbChapter" required>
+                            <option value="">-- باب منتخب کریں --</option>
+                            <option value="باب 1: پاکستان کی نظریاتی اساس">باب 1: پاکستان کی نظریاتی اساس</option>
+                            <option value="باب 2: تحریک پاکستان">باب 2: تحریک پاکستان</option>
+                            <option value="باب 3: پاکستان کی تاریخ اور آئینی ترقی">باب 3: پاکستان کی تاریخ اور آئینی ترقی</option>
+                            <option value="باب 4: پاکستان کا جغرافیہ">باب 4: پاکستان کا جغرافیہ</option>
+                            <option value="باب 5: پاکستان اور بین الاقوامی امور">باب 5: پاکستان اور بین الاقوامی امور</option>
+                            <option value="باب 6: پاکستان کے وسائل اور معاشرتی ترقی">باب 6: پاکستان کے وسائل اور معاشرتی ترقی</option>
+                            <option value="باب 7: آبادی، معاشرہ اور ثقافتی تنوع">باب 7: آبادی، معاشرہ اور ثقافتی تنوع</option>
+                            <option value="باب 8: خواتین کو با اختیار بنانا">باب 8: خواتین کو با اختیار بنانا</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-exclamation-triangle"></i> مسئلہ کی قسم
+                        </label>
+                        <select id="fbType" required>
+                            <option value="">-- قسم منتخب کریں --</option>
+                            <option value="MCQs - غلط جواب">MCQs - غلط جواب</option>
+                            <option value="MCQs - غلط آپشن">MCQs - غلط آپشن</option>
+                            <option value="MCQs - سوال میں غلطی">MCQs - سوال میں غلطی</option>
+                            <option value="Short Questions - غلط سوال">Short Questions - غلط سوال</option>
+                            <option value="Short Questions - spelling mistake">Short Questions - spelling mistake</option>
+                            <option value="Long Questions - غلط سوال">Long Questions - غلط سوال</option>
+                            <option value="Long Questions - incomplete answer">Long Questions - incomplete answer</option>
+                            <option value="Other - دیگر">Other - دیگر</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <i class="fas fa-pen"></i> تفصیل (Details)
+                        </label>
+                        <textarea id="fbMessage" required placeholder="براہ کرم مسئلہ کی تفصیل بتائیں...&#10;&#10;مثال:&#10;- سوال نمبر 3 کا جواب غلط ہے&#10;- MCQ option B صحیح ہونا چاہیے&#10;- Short question میں spelling mistake ہے"></textarea>
+                    </div>
+
+                    <button type="submit" class="feedback-submit">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp پر بھیجیں
+                    </button>
+                </form>
+            </div>
+
+            <!-- Success Section -->
+            <div class="feedback-success" id="feedbackSuccess">
+                <div class="success-icon-big">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h3>شکریہ! آپ کا فیڈبیک تیار ہے</h3>
+                <p>
+                    نیچے بٹن پر کلک کریں اور WhatsApp کھل جائے گا۔<br>
+                    Message send کرنے سے پہلے چیک کر لیں۔
+                </p>
+                <a href="#" id="whatsappLink" target="_blank" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp پر بھیجیں
+                </a>
+                <br><br>
+                <button onclick="resetFeedback()" style="background: none; border: none; color: #64748b; cursor: pointer; font-size: 0.9rem;">
+                    <i class="fas fa-redo"></i> نیا فیڈبیک
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
