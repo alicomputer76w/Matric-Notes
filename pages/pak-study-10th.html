@@ -10,9 +10,64 @@
     <link rel="stylesheet" href="../css/responsive.css">
     <link rel="icon" type="image/png" href="../favicon.png">
     <style>
-     body {
-    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif !important; 
-    line-height: 2.5; 
+/* Global Body Text - Jameel Noori Nastaleeq */
+body {
+    font-family: 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif !important;
+    font-size: 18px; /* Perfect for Nastaleeq readability */
+    line-height: 2.8; /* Lines chipkengi nahi */
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Jameel Noori Nastaleeq', serif !important;
+    font-weight: 700;
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.2rem; margin-bottom: 1rem; }
+h3 { font-size: 1.6rem; margin-bottom: 0.8rem; }
+
+/* Content Text Only (Safe Targeting) */
+p, li, .question-text, .answer-content, .content-title {
+    font-size: 1.15rem; /* Sirf paragraphs aur questions baray hon ge */
+}
+
+/* Navigation Bar Links */
+.nav-menu a, .nav-links a {
+    font-size: 1.1rem !important;
+    padding: 0.6rem 1rem !important;
+}
+
+/* Buttons */
+.btn, button, .btn-primary, .btn-outline {
+    font-size: 1.1rem !important;
+    padding: 0.9rem 1.8rem !important;
+}
+
+/* Footer Text */
+.footer p, .footer a, .footer li {
+    font-size: 1rem !important;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    body {
+        font-size: 16px; /* Mobile pe 18px bohat bara lagta hai */
+        line-height: 2.5;
+    }
+    
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.4rem; }
+    
+    .nav-menu a {
+        font-size: 1rem !important;
+    }
+    
+    /* Mobile pe content text bhi thora adjust */
+    p, li, .question-text, .answer-content {
+        font-size: 1.05rem;
+    }
 }
         
         .page-header { 
