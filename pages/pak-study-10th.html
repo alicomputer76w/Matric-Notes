@@ -28,7 +28,7 @@
         .breadcrumb a { color: #bbf7d0; text-decoration: none; transition: color 0.3s; }
         .breadcrumb a:hover { color: white; }
 
-        /* Controls Panel - Improved Layout */
+        /* Controls Panel */
         .controls-panel {
             max-width: 1200px;
             margin: 2.5rem auto;
@@ -67,7 +67,6 @@
             font-size: 1.1rem;
         }
 
-        /* Custom Dropdown Styling */
         .custom-select-wrapper {
             position: relative;
         }
@@ -105,289 +104,279 @@
             pointer-events: none;
             font-size: 1.1rem;
         }
-        /* ========== FEEDBACK BUTTON ========== */
-.feedback-fab {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    color: white;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-    font-size: 1.5rem;
-    z-index: 999;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.feedback-fab:hover {
-    transform: scale(1.1) rotate(10deg);
-    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
-}
+        /* Feedback Button */
+        .feedback-fab {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            font-size: 1.5rem;
+            z-index: 999;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.feedback-fab .tooltip {
-    position: absolute;
-    right: 70px;
-    background: #2b2d42;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-}
+        .feedback-fab:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
 
-.feedback-fab:hover .tooltip {
-    opacity: 1;
-}
+        .feedback-fab .tooltip {
+            position: absolute;
+            right: 70px;
+            background: #2b2d42;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
 
-/* ========== FEEDBACK MODAL ========== */
-.feedback-modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px);
-    padding: 1rem;
-}
+        .feedback-fab:hover .tooltip {
+            opacity: 1;
+        }
 
-.feedback-modal.active {
-    display: flex;
-    animation: fadeIn 0.3s ease;
-}
+        /* Feedback Modal */
+        .feedback-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            padding: 1rem;
+        }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+        .feedback-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
 
-.feedback-modal-content {
-    background: white;
-    border-radius: 20px;
-    max-width: 550px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    animation: slideUp 0.4s ease;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-@keyframes slideUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
+        .feedback-modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 550px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideUp 0.4s ease;
+        }
 
-.feedback-header {
-    background: linear-gradient(135deg, #166534, #15803d);
-    color: white;
-    padding: 1.5rem;
-    border-radius: 20px 20px 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
 
-.feedback-header h2 {
-    margin: 0;
-    font-size: 1.3rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-}
+        .feedback-header {
+            background: linear-gradient(135deg, #166534, #15803d);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.feedback-close {
-    background: rgba(255,255,255,0.2);
-    border: none;
-    color: white;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: all 0.3s;
-}
+        .feedback-header h2 {
+            margin: 0;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
 
-.feedback-close:hover {
-    background: rgba(255,255,255,0.3);
-    transform: rotate(90deg);
-}
+        .feedback-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
 
-.feedback-body {
-    padding: 2rem;
-}
+        .feedback-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
 
-.feedback-form .form-group {
-    margin-bottom: 1.3rem;
-}
+        .feedback-body {
+            padding: 2rem;
+        }
 
-.feedback-form label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #166534;
-    font-size: 0.95rem;
-}
+        .feedback-form .form-group {
+            margin-bottom: 1.3rem;
+        }
 
-.feedback-form label i {
-    margin-left: 0.4rem;
-    color: #15803d;
-}
+        .feedback-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #166534;
+            font-size: 0.95rem;
+        }
 
-.feedback-form input,
-.feedback-form select,
-.feedback-form textarea {
-    width: 100%;
-    padding: 0.9rem 1rem;
-    border: 2px solid #d1fae5;
-    border-radius: 10px;
-    font-family: 'Noto Nastaliq Urdu', serif;
-    font-size: 1rem;
-    transition: all 0.3s;
-    background: #f8fafc;
-}
+        .feedback-form label i {
+            margin-left: 0.4rem;
+            color: #15803d;
+        }
 
-.feedback-form input:focus,
-.feedback-form select:focus,
-.feedback-form textarea:focus {
-    outline: none;
-    border-color: #166534;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(22, 101, 52, 0.1);
-}
+        .feedback-form input,
+        .feedback-form select,
+        .feedback-form textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid #d1fae5;
+            border-radius: 10px;
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #f8fafc;
+        }
 
-.feedback-form textarea {
-    min-height: 120px;
-    resize: vertical;
-    line-height: 1.8;
-}
+        .feedback-form input:focus,
+        .feedback-form select:focus,
+        .feedback-form textarea:focus {
+            outline: none;
+            border-color: #166534;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(22, 101, 52, 0.1);
+        }
 
-.feedback-submit {
-    width: 100%;
-    padding: 1rem;
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    transition: all 0.3s;
-    font-family: 'Noto Nastaliq Urdu', serif;
-}
+        .feedback-form textarea {
+            min-height: 120px;
+            resize: vertical;
+            line-height: 1.8;
+        }
 
-.feedback-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-}
+        .feedback-submit {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            transition: all 0.3s;
+            font-family: 'Noto Nastaliq Urdu', serif;
+        }
 
-.feedback-info {
-    background: linear-gradient(135deg, #fef3c7, #fffbeb);
-    border-right: 4px solid #f59e0b;
-    padding: 1rem;
-    border-radius: 10px;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.8rem;
-    font-size: 0.9rem;
-    color: #92400e;
-}
+        .feedback-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
 
-.feedback-info i {
-    color: #f59e0b;
-    font-size: 1.2rem;
-    margin-top: 0.2rem;
-}
+        .feedback-info {
+            background: linear-gradient(135deg, #fef3c7, #fffbeb);
+            border-right: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            font-size: 0.9rem;
+            color: #92400e;
+        }
 
-/* Success Message */
-.feedback-success {
-    display: none;
-    text-align: center;
-    padding: 2rem;
-}
+        .feedback-info i {
+            color: #f59e0b;
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
 
-.feedback-success.active {
-    display: block;
-    animation: slideUp 0.4s ease;
-}
+        .feedback-success {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
 
-.success-icon-big {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    margin: 0 auto 1.5rem;
-    animation: bounce 0.6s ease;
-}
+        .feedback-success.active {
+            display: block;
+            animation: slideUp 0.4s ease;
+        }
 
-@keyframes bounce {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-}
+        .success-icon-big {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            animation: bounce 0.6s ease;
+        }
 
-.feedback-success h3 {
-    color: #166534;
-    font-size: 1.5rem;
-    margin-bottom: 0.8rem;
-}
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
 
-.feedback-success p {
-    color: #64748b;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-}
+        .feedback-success h3 {
+            color: #166534;
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
 
-.whatsapp-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.9rem 2rem;
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    color: white;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 700;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-}
+        .feedback-success p {
+            color: #64748b;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
 
-.whatsapp-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
-}
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 2rem;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
 
-@media (max-width: 640px) {
-    .feedback-fab {
-        width: 55px;
-        height: 55px;
-        bottom: 20px;
-        left: 20px;
-    }
-    .feedback-body { padding: 1.5rem; }
-}
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
 
-        /* Type Buttons - Better Layout */
+        /* Type Buttons */
         .type-buttons-container {
             display: flex;
             gap: 1rem;
@@ -690,7 +679,7 @@
             font-weight: 600;
         }
 
-        /* Short/Long Questions */
+        /* Short/Long Questions (Simple - without answers) */
         .short-question {
             background: linear-gradient(135deg, #f0fdf4, #dcfce7);
             border-right: 4px solid #166534;
@@ -730,6 +719,123 @@
             flex: 1;
         }
 
+        /* ========== COLLAPSIBLE SHORT QUESTIONS (NEW) ========== */
+        .collapsible-question {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-right: 4px solid #166534;
+            margin-bottom: 1.2rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .collapsible-question:hover {
+            box-shadow: 0 4px 12px rgba(22, 101, 52, 0.15);
+        }
+
+        .collapsible-question.active {
+            border-right-color: #f59e0b;
+            box-shadow: 0 6px 20px rgba(22, 101, 52, 0.2);
+        }
+
+        .collapsible-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 2rem;
+            transition: background 0.3s;
+        }
+
+        .collapsible-header:hover {
+            background: rgba(22, 101, 52, 0.05);
+        }
+
+        .collapsible-question.active .collapsible-header {
+            background: rgba(22, 101, 52, 0.08);
+            border-bottom: 2px dashed #bbf7d0;
+        }
+
+        .collapsible-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #166534;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .collapsible-question-text {
+            font-size: 1.15rem;
+            color: #1e293b;
+            line-height: 2.4;
+            flex: 1;
+            font-weight: 600;
+        }
+
+        .collapsible-icon {
+            color: #166534;
+            font-size: 1.2rem;
+            transition: transform 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .collapsible-question.active .collapsible-icon {
+            transform: rotate(180deg);
+            color: #f59e0b;
+        }
+
+        .collapsible-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+        }
+
+        .collapsible-question.active .collapsible-answer {
+            max-height: 2000px;
+            padding: 1.5rem 2rem;
+        }
+
+        .answer-content {
+            font-size: 1.05rem;
+            line-height: 2.5;
+            color: #1e293b;
+            padding-right: 1rem;
+            border-right: 3px solid #f59e0b;
+        }
+
+        .answer-label {
+            display: inline-block;
+            background: #f59e0b;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .answer-hint {
+            display: block;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed #fbbf24;
+            font-size: 0.9rem;
+            color: #92400e;
+            font-style: italic;
+        }
+
+        .answer-hint i {
+            margin-left: 0.3rem;
+        }
+
+        /* Empty State */
         .empty-state {
             text-align: center;
             padding: 5rem 2rem;
@@ -776,11 +882,6 @@
             text-align: center;
             box-shadow: 0 25px 50px rgba(0,0,0,0.3);
             animation: slideUp 0.4s ease;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .modal-icon {
@@ -867,6 +968,14 @@
             .mcq-options {
                 padding-right: 0;
             }
+
+            .collapsible-header {
+                padding: 1.2rem;
+            }
+
+            .collapsible-question.active .collapsible-answer {
+                padding: 1.2rem;
+            }
         }
 
         @media (max-width: 640px) {
@@ -888,6 +997,25 @@
 
             .mcq-option {
                 padding: 0.8rem 1rem;
+            }
+
+            .feedback-fab {
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .feedback-body { padding: 1.5rem; }
+
+            .collapsible-question-text {
+                font-size: 1rem;
+            }
+
+            .collapsible-number {
+                width: 28px;
+                height: 28px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -919,7 +1047,7 @@
     <!-- Header -->
     <header class="page-header">
         <div class="container">
-            <h1>>مطالعہ پاکستان- کلاس دہم</h1>
+            <h1>مطالعہ پاکستان- کلاس دہم</h1>
             <p>باب وار MCQs، Short Questions اور Long Questions</p>
             <div class="breadcrumb">
                 <a href="../index.html">Home</a> / 
@@ -932,7 +1060,6 @@
     <!-- Controls Panel -->
     <section class="controls-panel">
         <div class="control-row">
-            <!-- Chapter Dropdown -->
             <div class="control-group">
                 <label class="control-label">
                     <i class="fas fa-book"></i>
@@ -941,12 +1068,10 @@
                 <div class="custom-select-wrapper">
                     <select id="chapterSelect" class="custom-select">
                         <option value="">-- باب منتخب کریں --</option>
-                        <!-- Chapters will be populated by JavaScript -->
                     </select>
                 </div>
             </div>
 
-            <!-- Type Buttons -->
             <div class="control-group">
                 <label class="control-label">
                     <i class="fas fa-list-check"></i>
@@ -968,7 +1093,6 @@
                 </div>
             </div>
 
-            <!-- Toggle Switch -->
             <div class="control-group">
                 <label class="control-label">
                     <i class="fas fa-filter"></i>
@@ -985,7 +1109,6 @@
             </div>
         </div>
 
-        <!-- Download Button -->
         <div class="download-section">
             <button id="downloadBtn" class="btn-download locked">
                 <i class="fas fa-lock"></i>
@@ -1034,6 +1157,101 @@
         </div>
     </div>
 
+    <!-- Floating Feedback Button -->
+    <button class="feedback-fab" onclick="openFeedbackModal()" title="Feedback">
+        <i class="fab fa-whatsapp"></i>
+        <span class="tooltip">کوئی مسئلہ؟ ہمیں بتائیں</span>
+    </button>
+
+    <!-- Feedback Modal -->
+    <div class="feedback-modal" id="feedbackModal">
+        <div class="feedback-modal-content">
+            <div class="feedback-header">
+                <h2><i class="fas fa-comment-dots"></i> Feedback / رپورٹ</h2>
+                <button class="feedback-close" onclick="closeFeedbackModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="feedback-body">
+                <div id="feedbackFormSection">
+                    <div class="feedback-info">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>کیا آپ کو کوئی غلطی ملی؟</strong><br>
+                            MCQs، Short Questions یا Long Questions میں کوئی مسئلہ ہو تو ہمیں اطلاع دیں۔ ہم جلد از جلد درست کریں گے۔
+                        </div>
+                    </div>
+
+                    <form class="feedback-form" id="feedbackForm" onsubmit="submitFeedback(event)">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> آپ کا نام</label>
+                            <input type="text" id="fbName" required placeholder="اپنا نام لکھیں">
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-book"></i> باب (Chapter)</label>
+                            <select id="fbChapter" required>
+                                <option value="">-- باب منتخب کریں --</option>
+                                <option value="باب 1: پاکستان کی نظریاتی اساس">باب 1: پاکستان کی نظریاتی اساس</option>
+                                <option value="باب 2: تحریک پاکستان">باب 2: تحریک پاکستان</option>
+                                <option value="باب 3: پاکستان کی تاریخ اور آئینی ترقی">باب 3: پاکستان کی تاریخ اور آئینی ترقی</option>
+                                <option value="باب 4: پاکستان کا جغرافیہ">باب 4: پاکستان کا جغرافیہ</option>
+                                <option value="باب 5: پاکستان اور بین الاقوامی امور">باب 5: پاکستان اور بین الاقوامی امور</option>
+                                <option value="باب 6: پاکستان کے وسائل اور معاشرتی ترقی">باب 6: پاکستان کے وسائل اور معاشرتی ترقی</option>
+                                <option value="باب 7: آبادی، معاشرہ اور ثقافتی تنوع">باب 7: آبادی، معاشرہ اور ثقافتی تنوع</option>
+                                <option value="باب 8: خواتین کو با اختیار بنانا">باب 8: خواتین کو با اختیار بنانا</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-exclamation-triangle"></i> مسئلہ کی قسم</label>
+                            <select id="fbType" required>
+                                <option value="">-- قسم منتخب کریں --</option>
+                                <option value="MCQs - غلط جواب">MCQs - غلط جواب</option>
+                                <option value="MCQs - غلط آپشن">MCQs - غلط آپشن</option>
+                                <option value="MCQs - سوال میں غلطی">MCQs - سوال میں غلطی</option>
+                                <option value="Short Questions - غلط سوال">Short Questions - غلط سوال</option>
+                                <option value="Short Questions - spelling mistake">Short Questions - spelling mistake</option>
+                                <option value="Long Questions - غلط سوال">Long Questions - غلط سوال</option>
+                                <option value="Long Questions - incomplete answer">Long Questions - incomplete answer</option>
+                                <option value="Other - دیگر">Other - دیگر</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label><i class="fas fa-pen"></i> تفصیل (Details)</label>
+                            <textarea id="fbMessage" required placeholder="براہ کرم مسئلہ کی تفصیل بتائیں..."></textarea>
+                        </div>
+
+                        <button type="submit" class="feedback-submit">
+                            <i class="fab fa-whatsapp"></i>
+                            WhatsApp پر بھیجیں
+                        </button>
+                    </form>
+                </div>
+
+                <div class="feedback-success" id="feedbackSuccess">
+                    <div class="success-icon-big">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h3>شکریہ! آپ کا فیڈبیک تیار ہے</h3>
+                    <p>
+                        نیچے بٹن پر کلک کریں اور WhatsApp کھل جائے گا۔<br>
+                        Message send کرنے سے پہلے چیک کر لیں۔
+                    </p>
+                    <a href="#" id="whatsappLink" target="_blank" class="whatsapp-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp پر بھیجیں
+                    </a>
+                    <br><br>
+                    <button onclick="resetFeedback()" style="background: none; border: none; color: #64748b; cursor: pointer; font-size: 0.9rem;">
+                        <i class="fas fa-redo"></i> نیا فیڈبیک
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="../js/main.js"></script>
     <script>
@@ -1049,65 +1267,38 @@
             { id: "ch8", title: "پاکستان میں خواتین کو با اختیار بنانا" }
         ];
 
-        // ========== REAL QUESTIONS DATA FROM PDF ==========
+        // ========== REAL QUESTIONS DATA ==========
         const pakStudiesData = {
             "ch1": {
                 title: "پاکستان کی نظریاتی اساس",
                 mcq: { 
                     exercise: [
-                        {
-                            question: "کانگریسی وزارتوں کا دور رہا:",
-                            options: ["1933ء-1935ء", "1937ء-1939ء", "1939ء-1941ء", "1941ء-1943ء"],
-                            correct: 1
-                        },
-                        {
-                            question: "قرارداد لاہور 1940ء میں خطبہ صدارت دیا:",
-                            options: ["مولانا ظفر علی خان نے", "قائداعظم نے", "لیاقت علی خان نے", "مولوی فضل الحق نے"],
-                            correct: 1
-                        },
-                        {
-                            question: "ایم-اے-او سکول اور کالج قائم کیا:",
-                            options: ["سر سید احمد خان نے", "چودھری رحمت علی نے", "مولانا عبدالحلیم شرر نے", "مولوی فضل الحق نے"],
-                            correct: 0
-                        },
-                        {
-                            question: "بنارس میں اردو ہندی تنازعہ پیدا ہوا:",
-                            options: ["1863ء میں", "1865ء میں", "1867ء میں", "1869ء میں"],
-                            correct: 2
-                        },
-                        {
-                            question: "1206ء میں سلطنت دہلی کی بنیاد رکھی:",
-                            options: ["محمود غزنوی نے", "شہاب الدین غوری نے", "قطب الدین ایبک نے", "ظہیرالدین بابر نے"],
-                            correct: 2
-                        },
-                        {
-                            question: "1930ء میں مسلمانوں کو الگ ریاست کا تصور دینے والی شخصیت ہے:",
-                            options: ["قائداعظم", "علامہ محمد اقبال", "سر سید احمد خان", "چودھری رحمت علی"],
-                            correct: 1
-                        },
-                        {
-                            question: "\"قومیت کی جو بھی تعریف کی جائے، مسلمان اس تعریف کی رو سے الگ قوم ہیں۔\" یہ فرمان ہے:",
-                            options: ["سر سید احمد خان کا", "چودھری رحمت علی کا", "علامہ محمد اقبال کا", "قائداعظم کا"],
-                            correct: 3
-                        }
+                        { question: "کانگریسی وزارتوں کا دور رہا:", options: ["1933ء-1935ء", "1937ء-1939ء", "1939ء-1941ء", "1941ء-1943ء"], correct: 1 },
+                        { question: "قرارداد لاہور 1940ء میں خطبہ صدارت دیا:", options: ["مولانا ظفر علی خان نے", "قائداعظم نے", "لیاقت علی خان نے", "مولوی فضل الحق نے"], correct: 1 },
+                        { question: "ایم-اے-او سکول اور کالج قائم کیا:", options: ["سر سید احمد خان نے", "چودھری رحمت علی نے", "مولانا عبدالحلیم شرر نے", "مولوی فضل الحق نے"], correct: 0 },
+                        { question: "بنارس میں اردو ہندی تنازعہ پیدا ہوا:", options: ["1863ء میں", "1865ء میں", "1867ء میں", "1869ء میں"], correct: 2 },
+                        { question: "1206ء میں سلطنت دہلی کی بنیاد رکھی:", options: ["محمود غزنوی نے", "شہاب الدین غوری نے", "قطب الدین ایبک نے", "ظہیرالدین بابر نے"], correct: 2 },
+                        { question: "1930ء میں مسلمانوں کو الگ ریاست کا تصور دینے والی شخصیت ہے:", options: ["قائداعظم", "علامہ محمد اقبال", "سر سید احمد خان", "چودھری رحمت علی"], correct: 1 },
+                        { question: "\"قومیت کی جو بھی تعریف کی جائے، مسلمان اس تعریف کی رو سے الگ قوم ہیں۔\" یہ فرمان ہے:", options: ["سر سید احمد خان کا", "چودھری رحمت علی کا", "علامہ محمد اقبال کا", "قائداعظم کا"], correct: 3 }
                     ], 
                     additional: [] 
                 },
+                // ✅ UPDATED: Short questions with answers (collapsible)
                 short: { 
                     exercise: [
-                        "نظریہ کی تعریف کریں؟",
-                        "نظریہ پاکستان سے کیا مراد ہے؟",
-                        "نظریہ پاکستان سے آگاہی کیوں ضروری ہے؟",
-                        "برصغیر میں دو قومی نظریے کی ابتدا کب ہوئی؟",
-                        "نظریہ پاکستان کے عناصر میں عقائد سے کیا مراد ہے؟",
-                        "علامہ محمد اقبال نے خطبہ الہ آباد میں نظریہ پاکستان کے حوالے سے کیا فرمایا؟",
-                        "عقیدہ رسالت کی تعریف کریں؟",
-                        "قائداعظم نے اقلیتوں کے بارے میں کیا فرمایا؟",
-                        "\"اب یا پھر کبھی نہیں\" کے عنوان سے مشہور کتابچہ کب اور کس نے جاری کیا؟",
-                        "قائداعظم نے یکم جولائی 1948ء کو سٹیٹ بینک آف پاکستان کا افتتاح کرتے ہوئے کیا فرمایا؟",
-                        "مساوات کے متعلق اللہ تعالیٰ کا فرمان لکھیں؟",
-                        "جمہوریت کی تعریف کریں؟",
-                        "اللہ تعالیٰ کی حاکمیت سے کیا مراد ہے؟"
+                        { question: "نظریہ کی تعریف کریں؟", answer: "نظریہ سے مراد ایسا ضابطہ یا پروگرام ہے جس کی بنیاد فلسفہ و تفکر پر رکھی گئی ہو اور انسانی زندگی کے مختلف پہلوؤں مثلاً سیاسی، معاشرتی اور تہذیبی مسائل کے حل کیلئے کوئی لائحہ عمل بنایا گیا ہو۔" },
+                        { question: "نظریہ پاکستان سے کیا مراد ہے؟", answer: "نظریہ پاکستان سے مراد ایک الگ خطۂ زمین کا حصول ہے جس میں مسلمانان برصغیر قرآن و سنت کی روشنی میں اسلامی قدروں اور نظریات کو محفوظ کر سکیں اور اپنی زندگیاں اسلام کے روشن اصولوں کے تحت گزارسکیں۔" },
+                        { question: "نظریہ پاکستان سے آگاہی کیوں ضروری ہے؟", answer: "آج کی نوجوان نسل کو نظریہ پاکستان اور قیام پاکستان کے مقاصد سے پوری طرح آگاہ رکھنے کی ضرورت ہے۔ انھیں اس عظیم تحریک سے آگاہ کیا جائے جو پاکستان کی تخلیق کیلئے برصغیر میں چلائی گئی۔ پاکستان کے عوام کو مضبوط اور متحد رکھنے کیلئے ضروری ہے کہ انھیں نظریہ پاکستان کی اہمیت اور تحریک پاکستان کے راہنماؤں کی قربانیوں کا پوری طرح علم ہو۔" },
+                        { question: "برصغیر میں دو قومی نظریے کی ابتدا کب ہوئی؟", answer: "برصغیر میں دو قومی نظریے کی ابتدا 712ء میں مسلمانوں کی آمد اور محمد بن قاسم کی فتح سندھ سے شروع ہوئی جب انھوں نے سندھ کے راجہ داہر کو شکست دی۔" },
+                        { question: "نظریہ پاکستان کے عناصر میں عقائد سے کیا مراد ہے؟", answer: "عقائد میں توحید، رسالت، آخرت، ملائکہ اور الہامی کتابوں پر ایمان لانا شامل ہے۔ عقائد کے مجموعے کو ایمان کہتے ہیں۔" },
+                        { question: "علامہ محمد اقبال نے خطبہ الہ آباد میں نظریہ پاکستان کے حوالے سے کیا فرمایا؟", answer: "آپ نے فرمایا: \"مجھے ایسا نظر آتا ہے کہ اور نہیں تو شماکل مغربی ہندوستان کے مسلمانوں کو بالآخر ایک اسلامی ریاست قائم کرنا پڑے گی۔ اگر ہم چاہتے ہیں کہ اس ملک میں اسلام بحیثیت تمدنی قوت زندہ رہے تو اس کیلئے ضروری ہے کہ وہ ایک مخصوص علاقے میں اپنی مرکزیت قائم کرلیں۔ میں صرف ہندوستان میں اسلام کی فالح و بہبود کے خیال سے ایک منظم اسلامی ریاست کے قیام کا مطالبہ کر رہا ہوں۔\"" },
+                        { question: "عقیدہ رسالت کی تعریف کریں؟", answer: "عقیدہ رسالت کا مطلب تمام رسولوں پر ایمان لانا ہے دائرہ اسلام میں آنے کے لیے لازم ہے کہ رسالت کو دل و جان سے تسلیم کیا جائے اور کسی اعتبار سے بھی اس شک و شبہ نہ کیا جائے۔ قران مجید اور اسوہ رسول صلی اللہ علیہ وسلم کو سرچشمہ ہدایت ماننا اور حضرت محمد رسول اللہ صلی اللہ علیہ وسلم کو اللہ تعالی کا اخری رسول اور اخری نبی ماننا اور یہ ایمان رکھنا کہ آپ صلی اللہ علیہ وسلم کے بعد کوئی نبی نہیں آئے گا عقیدہ رسالت کا لازمی جز ہے اور جو اس کا انکار کرے وہ مسلمان نہیں ہو سکتا۔" },
+                        { question: "قائداعظم نے اقلیتوں کے بارے میں کیا فرمایا؟", answer: "قائد اعظم رحمۃ اللہ علیہ نے دو ٹوک الفاظ میں فرمایا تھا کہ پاکستان ایک مذہبی نہیں بلکہ اسلامی فلاحی ریاست ہوگی۔ یہاں غیر مسلموں کو مسلمانوں کے برابر درجہ ملے گا۔ وہ آزاد اور خوشگوار فضا میں سانس لے سکیں گے اور انہیں برابر حقوق حاصل ہوں گے۔" },
+                        { question: "\"اب یا پھر کبھی نہیں\" کے عنوان سے مشہور کتابچہ کب اور کس نے جاری کیا؟", answer: "28 جنوری 1933 کو چودھری رحمت علی نے \"اب یا پھر کبھی نہیں\" کے عنوان سے ایک مشہور کتابچہ جاری کیا جس میں مسلمانوں کی علیحدہ مملکت کیلئے لفظ \"پاکستان\" تجویز کیا اور اس کا نقشہ بھی پیش کیا۔" },
+                        { question: "قائداعظم نے یکم جولائی 1948ء کو سٹیٹ بینک آف پاکستان کا افتتاح کرتے ہوئے کیا فرمایا؟", answer: "یکم جولائی 1948 کو قائداعظم رحمتۃاللہ علیہ نے اسٹیٹ بینک آف پاکستان کا افتتاح کرتے ہوئے فرمایا: \"مغرب کا معاشی نظام انسانیت کے لیے ناقابل حل مسائل پیدا کر رہا ہے اور یہ لوگوں کے درمیان انصاف قائم کرنے میں ناکام رہا ہے ہمیں دنیا کے سامنے ایک ایسا معاشی نظام پیش کرنا چاہیے جو اسلام کے صحیح تصور مساوات اور سماجی انصاف کے اصولوں پر مبنی ہو۔\"" },
+                        { question: "مساوات کے متعلق اللہ تعالیٰ کا فرمان لکھیں؟", answer: "اللہ تعالی نے مساوات نسل انسانی کا دس دیتے ہوئے سورۃ الحجرات میں یوں ارشاد فرمایا ہے: \"اے لوگو! بے شک ہم نے تمہیں ایک مرد اور ایک عورت سے پیدا فرمایا اور ہم نے تمہیں (مختلف) قومیں اور قبیلے بنایا تاکہ تم ایک دوسرے کو پہچان سکو بے شک اللہ تعالی کے نزدیک تم میں زیادہ عزت والا وہ ہے جو تم میں زیادہ پرہیزگار ہو۔\"" },
+                        { question: "جمہوریت کی تعریف کریں؟", answer: "جمہوریت وہ نظامِ حکومت ہے جس میں عوام اپنے منتخب نمائندوں کے ذریعے ملک کا نظام چلاتے ہیں اور اقتدار کا سرچشمہ عوام ہوتے ہیں۔ عام الفاظ میں: جمہوریت عوام کی حکومت، عوام کے ذریعے، عوام کے لیے ہوتی ہے۔" },
+                        { question: "اللہ تعالیٰ کی حاکمیت سے کیا مراد ہے؟", answer: "اللہ تعالی کی حاکمیت سے مراد یہ ہے کہ تمام کائنات کا مالک صرف اللہ تعالی ہے۔ اسلامی ریاست میں حاکم وقت اللہ تعالی کے نافذ کردہ قوانین کی پاسداری کو یقینی بنانے کے لیے اپنا کردار نبھاتا ہے۔ اس کائنات میں حاکمیت ایک اللہ تعالی کے سوا نہ کسی کی ہو سکتی ہے اور نہ کسی کو یہ حق حاصل ہے کہ وہ حاکمیت کا دعویدار بنے۔ حکومت الہیہ میں اللہ تعالی کے حاکمیت اور اس کے نازل کردہ احکام و قوانین کی فوقیت کو من و عن تسلیم کیا جاتا ہے اور انہی احکامات کے مطابق اسلامی قوانین وضع کیے جاتے ہیں۔" }
                     ], 
                     additional: [] 
                 },
@@ -1126,56 +1317,16 @@
                 title: "تحریک پاکستان",
                 mcq: { 
                     exercise: [
-                        {
-                            question: "1906ء میں قائم کی گئی:",
-                            options: ["کانگریس", "مسلم لیگ", "انجمن حمایت اسلام", "مجلس احرار"],
-                            correct: 1
-                        },
-                        {
-                            question: "پہلی جنگ عظیم میں ترکیہ نے ساتھ دیا:",
-                            options: ["روس کا", "امریکا کا", "جرمنی کا", "جاپان کا"],
-                            correct: 2
-                        },
-                        {
-                            question: "علماء نے برصغیر کو قرار دیا:",
-                            options: ["دارالحرب", "دارالسلام", "دارالامان", "دارالسلطنت"],
-                            correct: 0
-                        },
-                        {
-                            question: "نہرو رپورٹ پیش کی گئی:",
-                            options: ["1908ء میں", "1918ء میں", "1928ء میں", "1938ء میں"],
-                            correct: 2
-                        },
-                        {
-                            question: "مسلم لیگ اور کانگریس کر درمیان میثاق لکھنؤ ہوا:",
-                            options: ["1912ء میں", "1916ء میں", "1920ء میں", "1924ء میں"],
-                            correct: 1
-                        },
-                        {
-                            question: "حکومت پاکستان نے دیوان بہادر ایس پی سنگھار کی تحریک پاکستان میں خدمات پر یادگاری ٹکٹ جاری کیا:",
-                            options: ["2010ء میں", "2012ء میں", "2014ء میں", "2016ء میں"],
-                            correct: 3
-                        },
-                        {
-                            question: "علامہ محمد اقبال نے خطبہ الہ آباد پیش کیا:",
-                            options: ["1928ء میں", "1930ء میں", "1932ء میں", "1934ء میں"],
-                            correct: 1
-                        },
-                        {
-                            question: "قائد اعظم رحمتہ اللہ علیہ مسلم لیگ میں شامل ہوئے:",
-                            options: ["1913ء میں", "1916ء میں", "1917ء میں", "1919ء میں"],
-                            correct: 0
-                        },
-                        {
-                            question: "ایم-اے-او سکول اور کالج قائم کیا:",
-                            options: ["قائد اعظم نے", "علامہ محمد اقبال نے", "سر سید احمد خان نے", "قاضی محمد عیسیٰ نے"],
-                            correct: 2
-                        },
-                        {
-                            question: "محترمہ فاطمہ جناح نے 1955ء میں \"خاتون پاکستان\" کے نام سے ایک سکول کھولا تھا:",
-                            options: ["کراچی میں", "لاہور میں", "ملتان میں", "راول پنڈی میں"],
-                            correct: 0
-                        }
+                        { question: "1906ء میں قائم کی گئی:", options: ["کانگریس", "مسلم لیگ", "انجمن حمایت اسلام", "مجلس احرار"], correct: 1 },
+                        { question: "پہلی جنگ عظیم میں ترکیہ نے ساتھ دیا:", options: ["روس کا", "امریکا کا", "جرمنی کا", "جاپان کا"], correct: 2 },
+                        { question: "علماء نے برصغیر کو قرار دیا:", options: ["دارالحرب", "دارالسلام", "دارالامان", "دارالسلطنت"], correct: 0 },
+                        { question: "نہرو رپورٹ پیش کی گئی:", options: ["1908ء میں", "1918ء میں", "1928ء میں", "1938ء میں"], correct: 2 },
+                        { question: "مسلم لیگ اور کانگریس کر درمیان میثاق لکھنؤ ہوا:", options: ["1912ء میں", "1916ء میں", "1920ء میں", "1924ء میں"], correct: 1 },
+                        { question: "حکومت پاکستان نے دیوان بہادر ایس پی سنگھار کی تحریک پاکستان میں خدمات پر یادگاری ٹکٹ جاری کیا:", options: ["2010ء میں", "2012ء میں", "2014ء میں", "2016ء میں"], correct: 3 },
+                        { question: "علامہ محمد اقبال نے خطبہ الہ آباد پیش کیا:", options: ["1928ء میں", "1930ء میں", "1932ء میں", "1934ء میں"], correct: 1 },
+                        { question: "قائد اعظم رحمتہ اللہ علیہ مسلم لیگ میں شامل ہوئے:", options: ["1913ء میں", "1916ء میں", "1917ء میں", "1919ء میں"], correct: 0 },
+                        { question: "ایم-اے-او سکول اور کالج قائم کیا:", options: ["قائد اعظم نے", "علامہ محمد اقبال نے", "سر سید احمد خان نے", "قاضی محمد عیسیٰ نے"], correct: 2 },
+                        { question: "محترمہ فاطمہ جناح نے 1955ء میں \"خاتون پاکستان\" کے نام سے ایک سکول کھولا تھا:", options: ["کراچی میں", "لاہور میں", "ملتان میں", "راول پنڈی میں"], correct: 0 }
                     ], 
                     additional: [] 
                 },
@@ -1213,56 +1364,16 @@
                 title: "پاکستان کی تاریخ (1947ء تا حال) اور پاکستان میں آئینی ترقی",
                 mcq: { 
                     exercise: [
-                        {
-                            question: "قرارداد مقاصد منظور ہوئی:",
-                            options: ["1930ء میں", "1940ء میں", "1946ء میں", "1949ء میں"],
-                            correct: 3
-                        },
-                        {
-                            question: "1970ء کے انتخابات کے بعد پاکستان میں اقتدار سنبھالا:",
-                            options: ["یحییٰ خان نے", "ذوالفقار علی بھٹو نے", "مجیب الرحمان نے", "مفتی محمود نے"],
-                            correct: 1
-                        },
-                        {
-                            question: "آئینی ڈھانچے \"لیگل فریم ورک آرڈر\" کے مطابق قومی اسمبلی کی نشستوں کی کل تعداد تھی:",
-                            options: ["310", "313", "316", "320"],
-                            correct: 1
-                        },
-                        {
-                            question: "جنرل آغا یحییٰ خان نے حکومت سنبھالی:",
-                            options: ["مارچ 1969ء میں", "اپریل 1970ء میں", "مارچ 1971ء میں", "اپریل 1972ء میں"],
-                            correct: 0
-                        },
-                        {
-                            question: "1973ء کے آئین کے مطابق ایوان بالا سینٹ کی معیاد ہے:",
-                            options: ["3 سال", "4 سال", "5 سال", "6 سال"],
-                            correct: 3
-                        },
-                        {
-                            question: "پاکستان اور بھارت کے درمیان ستمبر 1965ء کی جنگ جاری رہی:",
-                            options: ["سات روز تک", "تیرہ روز تک", "سترہ روز تک", "بیس روز تک"],
-                            correct: 2
-                        },
-                        {
-                            question: "پاکستان میں 1998ء میں ایٹمی دھماکے کیے:",
-                            options: ["چاغی پہاڑ میں", "کوہ کیرتھر میں", "چلتن پہاڑ میں", "کوہ سلیمان میں"],
-                            correct: 0
-                        },
-                        {
-                            question: "میاں نواز شریف نے موٹر وے کا افتتاح کیا:",
-                            options: ["1992ء میں", "1994ء میں", "1997ء میں", "1998ء میں"],
-                            correct: 2
-                        },
-                        {
-                            question: "\"یوم تکبیر\" منایا جاتا ہے:",
-                            options: ["23 مارچ کو", "15 جون کو", "یکم مئی کو", "28 مئی کو"],
-                            correct: 3
-                        },
-                        {
-                            question: "ورلڈ ٹریڈ سنٹر کا واقعہ پیش آیا:",
-                            options: ["2001ء میں", "2003ء میں", "2005ء میں", "2007ء میں"],
-                            correct: 0
-                        }
+                        { question: "قرارداد مقاصد منظور ہوئی:", options: ["1930ء میں", "1940ء میں", "1946ء میں", "1949ء میں"], correct: 3 },
+                        { question: "1970ء کے انتخابات کے بعد پاکستان میں اقتدار سنبھالا:", options: ["یحییٰ خان نے", "ذوالفقار علی بھٹو نے", "مجیب الرحمان نے", "مفتی محمود نے"], correct: 1 },
+                        { question: "آئینی ڈھانچے \"لیگل فریم ورک آرڈر\" کے مطابق قومی اسمبلی کی نشستوں کی کل تعداد تھی:", options: ["310", "313", "316", "320"], correct: 1 },
+                        { question: "جنرل آغا یحییٰ خان نے حکومت سنبھالی:", options: ["مارچ 1969ء میں", "اپریل 1970ء میں", "مارچ 1971ء میں", "اپریل 1972ء میں"], correct: 0 },
+                        { question: "1973ء کے آئین کے مطابق ایوان بالا سینٹ کی معیاد ہے:", options: ["3 سال", "4 سال", "5 سال", "6 سال"], correct: 3 },
+                        { question: "پاکستان اور بھارت کے درمیان ستمبر 1965ء کی جنگ جاری رہی:", options: ["سات روز تک", "تیرہ روز تک", "سترہ روز تک", "بیس روز تک"], correct: 2 },
+                        { question: "پاکستان میں 1998ء میں ایٹمی دھماکے کیے:", options: ["چاغی پہاڑ میں", "کوہ کیرتھر میں", "چلتن پہاڑ میں", "کوہ سلیمان میں"], correct: 0 },
+                        { question: "میاں نواز شریف نے موٹر وے کا افتتاح کیا:", options: ["1992ء میں", "1994ء میں", "1997ء میں", "1998ء میں"], correct: 2 },
+                        { question: "\"یوم تکبیر\" منایا جاتا ہے:", options: ["23 مارچ کو", "15 جون کو", "یکم مئی کو", "28 مئی کو"], correct: 3 },
+                        { question: "ورلڈ ٹریڈ سنٹر کا واقعہ پیش آیا:", options: ["2001ء میں", "2003ء میں", "2005ء میں", "2007ء میں"], correct: 0 }
                     ], 
                     additional: [] 
                 },
@@ -1305,51 +1416,15 @@
                 title: "پاکستان کا جغرافیہ",
                 mcq: { 
                     exercise: [
-                        {
-                            question: "پاکستان کے میدانی علاقوں میں موسم گرما کا اوسط درجہ حرارت رہتا ہے:",
-                            options: ["20°C", "30°C", "40°C", "50°C"],
-                            correct: 2
-                        },
-                        {
-                            question: "کے-ٹو پہاڑ واقع ہے:",
-                            options: ["کوہ ہمالیہ میں", "کوہ قراقرم میں", "کوہ سفید میں", "کوہ ہندوکش میں"],
-                            correct: 1
-                        },
-                        {
-                            question: "نانگا پربت کی بلندی ہے:",
-                            options: ["7690 میٹر", "8126 میٹر", "8611 میٹر", "6790 میٹر"],
-                            correct: 1
-                        },
-                        {
-                            question: "کراچی واقع ہے:",
-                            options: ["بحیرۂ احمر کے کنارے", "بحیرۂ اسود کے کنارے", "بحیرۂ عرب کے کنارے", "بحیرۂ روم کے کنارے"],
-                            correct: 2
-                        },
-                        {
-                            question: "چین پاکستان اقتصادی راہ داری منصوبہ چین کو پاکستان کی بندرگاہ سے ملاتا ہے:",
-                            options: ["کراچی بندرگاہ", "محمد بن قاسم بندرگاہ", "گوادر بندرگاہ", "کیٹی بندرگاہ"],
-                            correct: 2
-                        },
-                        {
-                            question: "پاکستان اور بھارت کے درمیان سرحد کی لمبائی ہے:",
-                            options: ["599 کلومیٹر", "861 کلومیٹر", "2163 کلومیٹر", "2611 کلومیٹر"],
-                            correct: 2
-                        },
-                        {
-                            question: "چشمہ بیراج واقع ہے:",
-                            options: ["دریائے جہلم پر", "دریائے سندھ پر", "دریائے چناب پر", "دریائے کابل پر"],
-                            correct: 1
-                        },
-                        {
-                            question: "شاہراہ ریشم پاکستان کو چین سے ملاتی ہے:",
-                            options: ["درہ گومل کے ذریعے", "درہ ٹوچی کے ذریعے", "درہ خیبر کے ذریعے", "درہ خنجراب کے ذریعے"],
-                            correct: 3
-                        },
-                        {
-                            question: "نیشنل ڈیزاسٹر مینجمنٹ اتھارٹی کا قیام عمل میں آیا:",
-                            options: ["2006ء میں", "2007ء میں", "2008ء میں", "2009ء میں"],
-                            correct: 1
-                        }
+                        { question: "پاکستان کے میدانی علاقوں میں موسم گرما کا اوسط درجہ حرارت رہتا ہے:", options: ["20°C", "30°C", "40°C", "50°C"], correct: 2 },
+                        { question: "کے-ٹو پہاڑ واقع ہے:", options: ["کوہ ہمالیہ میں", "کوہ قراقرم میں", "کوہ سفید میں", "کوہ ہندوکش میں"], correct: 1 },
+                        { question: "نانگا پربت کی بلندی ہے:", options: ["7690 میٹر", "8126 میٹر", "8611 میٹر", "6790 میٹر"], correct: 1 },
+                        { question: "کراچی واقع ہے:", options: ["بحیرۂ احمر کے کنارے", "بحیرۂ اسود کے کنارے", "بحیرۂ عرب کے کنارے", "بحیرۂ روم کے کنارے"], correct: 2 },
+                        { question: "چین پاکستان اقتصادی راہ داری منصوبہ چین کو پاکستان کی بندرگاہ سے ملاتا ہے:", options: ["کراچی بندرگاہ", "محمد بن قاسم بندرگاہ", "گوادر بندرگاہ", "کیٹی بندرگاہ"], correct: 2 },
+                        { question: "پاکستان اور بھارت کے درمیان سرحد کی لمبائی ہے:", options: ["599 کلومیٹر", "861 کلومیٹر", "2163 کلومیٹر", "2611 کلومیٹر"], correct: 2 },
+                        { question: "چشمہ بیراج واقع ہے:", options: ["دریائے جہلم پر", "دریائے سندھ پر", "دریائے چناب پر", "دریائے کابل پر"], correct: 1 },
+                        { question: "شاہراہ ریشم پاکستان کو چین سے ملاتی ہے:", options: ["درہ گومل کے ذریعے", "درہ ٹوچی کے ذریعے", "درہ خیبر کے ذریعے", "درہ خنجراب کے ذریعے"], correct: 3 },
+                        { question: "نیشنل ڈیزاسٹر مینجمنٹ اتھارٹی کا قیام عمل میں آیا:", options: ["2006ء میں", "2007ء میں", "2008ء میں", "2009ء میں"], correct: 1 }
                     ], 
                     additional: [] 
                 },
@@ -1395,46 +1470,14 @@
                 title: "پاکستان اور بین الاقوامی امور",
                 mcq: { 
                     exercise: [
-                        {
-                            question: "اقوام متحدہ کا قیام عمل میں آیا:",
-                            options: ["24 اکتوبر 1944ء", "14 اپریل 1945ء", "24 اکتوبر 1945ء", "24 نومبر 1946ء"],
-                            correct: 2
-                        },
-                        {
-                            question: "اسلامی تعاون تنظیم کی بنیاد 1969ء میں جس شہر میں رکھی گئی، وہ ہے:",
-                            options: ["تہران", "لاہور", "جدہ", "رباط"],
-                            correct: 3
-                        },
-                        {
-                            question: "عوامی جمہوریہ چین کا قیام عمل میں آیا:",
-                            options: ["1947ء میں", "1949ء میں", "1951ء میں", "1953ء میں"],
-                            correct: 1
-                        },
-                        {
-                            question: "پاکستان نے 30 ستمبر 1947ء کو جس ادارے کی رکنیت حاصل کی، وہ ہے:",
-                            options: ["او آئی سی", "ای سی او", "اقوام متحدہ", "سارک"],
-                            correct: 2
-                        },
-                        {
-                            question: "پاکستان کو سب سے پہلے تسلیم کیا:",
-                            options: ["ایران نے", "چین نے", "افغانستان نے", "امریکا نے"],
-                            correct: 0
-                        },
-                        {
-                            question: "دولت مشترکہ کی تشکیل ہوئی:",
-                            options: ["1916ء میں", "1926ء میں", "1937ء میں", "1947ء میں"],
-                            correct: 1
-                        },
-                        {
-                            question: "پاکستان اور ایران کی مشترکہ سرحد ہے:",
-                            options: ["2163 کلومیٹر", "2611 کلومیٹر", "909 کلومیٹر", "599 کلومیٹر"],
-                            correct: 2
-                        },
-                        {
-                            question: "سارک تنظیم کا قیام عمل میں آیا:",
-                            options: ["1980ء میں", "1985ء میں", "1990ء میں", "2005ء میں"],
-                            correct: 1
-                        }
+                        { question: "اقوام متحدہ کا قیام عمل میں آیا:", options: ["24 اکتوبر 1944ء", "14 اپریل 1945ء", "24 اکتوبر 1945ء", "24 نومبر 1946ء"], correct: 2 },
+                        { question: "اسلامی تعاون تنظیم کی بنیاد 1969ء میں جس شہر میں رکھی گئی، وہ ہے:", options: ["تہران", "لاہور", "جدہ", "رباط"], correct: 3 },
+                        { question: "عوامی جمہوریہ چین کا قیام عمل میں آیا:", options: ["1947ء میں", "1949ء میں", "1951ء میں", "1953ء میں"], correct: 1 },
+                        { question: "پاکستان نے 30 ستمبر 1947ء کو جس ادارے کی رکنیت حاصل کی، وہ ہے:", options: ["او آئی سی", "ای سی او", "اقوام متحدہ", "سارک"], correct: 2 },
+                        { question: "پاکستان کو سب سے پہلے تسلیم کیا:", options: ["ایران نے", "چین نے", "افغانستان نے", "امریکا نے"], correct: 0 },
+                        { question: "دولت مشترکہ کی تشکیل ہوئی:", options: ["1916ء میں", "1926ء میں", "1937ء میں", "1947ء میں"], correct: 1 },
+                        { question: "پاکستان اور ایران کی مشترکہ سرحد ہے:", options: ["2163 کلومیٹر", "2611 کلومیٹر", "909 کلومیٹر", "599 کلومیٹر"], correct: 2 },
+                        { question: "سارک تنظیم کا قیام عمل میں آیا:", options: ["1980ء میں", "1985ء میں", "1990ء میں", "2005ء میں"], correct: 1 }
                     ], 
                     additional: [] 
                 },
@@ -1473,46 +1516,14 @@
                 title: "پاکستان کے وسائل اور معاشی ترقی",
                 mcq: { 
                     exercise: [
-                        {
-                            question: "چین پاکستان اقتصادی راہداری منصوبے کا حصہ ہے:",
-                            options: ["کراچی پورٹ", "محمد بن قاسم پورٹ", "گوادر پورٹ", "پسنی پورٹ"],
-                            correct: 2
-                        },
-                        {
-                            question: "پاکستان میں ماہی گیری کی صنعت قومی جی ڈی پی میں حصہ ڈالتی ہے:",
-                            options: ["1 فیصد", "2 فیصد", "3 فیصد", "4 فیصد"],
-                            correct: 0
-                        },
-                        {
-                            question: "غذائی اجناس میں انسان کی سب سے زیادہ مقبول غذا ہے:",
-                            options: ["چاول", "مکئی", "دالیں", "گندم"],
-                            correct: 3
-                        },
-                        {
-                            question: "آپ دنیا میں کسی بھی جگہ پر بیٹھے شخص کو اپنا پیغام فوری پہنچاسکتے ہیں:",
-                            options: ["اخبار کے ذریعے", "ریڈیو کے ذریعے", "ای میل کے ذریعے", "ٹیلی وژن کے ذریعے"],
-                            correct: 2
-                        },
-                        {
-                            question: "ایک مشینی آلہ ہے جسے راکٹ کے ذریعے زمین کے مدار میں چھوڑا جاتا ہے:",
-                            options: ["سیٹلائٹ", "فیکس مشین", "سیکیورٹی ٹول", "وائرلیس ٹول"],
-                            correct: 0
-                        },
-                        {
-                            question: "پاکستان میں اکثریتی آبادی کا پیشہ ہے:",
-                            options: ["ملازمت", "صنعت", "گلہ بانی", "زراعت"],
-                            correct: 3
-                        },
-                        {
-                            question: "جی ڈی پی میں زراعت کا حصہ ہے:",
-                            options: ["25 فیصد", "23.5 فیصد", "21.64 فیصد", "20 فیصد"],
-                            correct: 1
-                        },
-                        {
-                            question: "پاکستان اکنامک سروے 2024-25 کے مطابق گندم کی پیداوار ہے:",
-                            options: ["36 ملین ٹن", "33 ملین ٹن", "29 ملین ٹن", "26 ملین ٹن"],
-                            correct: 2
-                        }
+                        { question: "چین پاکستان اقتصادی راہداری منصوبے کا حصہ ہے:", options: ["کراچی پورٹ", "محمد بن قاسم پورٹ", "گوادر پورٹ", "پسنی پورٹ"], correct: 2 },
+                        { question: "پاکستان میں ماہی گیری کی صنعت قومی جی ڈی پی میں حصہ ڈالتی ہے:", options: ["1 فیصد", "2 فیصد", "3 فیصد", "4 فیصد"], correct: 0 },
+                        { question: "غذائی اجناس میں انسان کی سب سے زیادہ مقبول غذا ہے:", options: ["چاول", "مکئی", "دالیں", "گندم"], correct: 3 },
+                        { question: "آپ دنیا میں کسی بھی جگہ پر بیٹھے شخص کو اپنا پیغام فوری پہنچاسکتے ہیں:", options: ["اخبار کے ذریعے", "ریڈیو کے ذریعے", "ای میل کے ذریعے", "ٹیلی وژن کے ذریعے"], correct: 2 },
+                        { question: "ایک مشینی آلہ ہے جسے راکٹ کے ذریعے زمین کے مدار میں چھوڑا جاتا ہے:", options: ["سیٹلائٹ", "فیکس مشین", "سیکیورٹی ٹول", "وائرلیس ٹول"], correct: 0 },
+                        { question: "پاکستان میں اکثریتی آبادی کا پیشہ ہے:", options: ["ملازمت", "صنعت", "گلہ بانی", "زراعت"], correct: 3 },
+                        { question: "جی ڈی پی میں زراعت کا حصہ ہے:", options: ["25 فیصد", "23.5 فیصد", "21.64 فیصد", "20 فیصد"], correct: 1 },
+                        { question: "پاکستان اکنامک سروے 2024-25 کے مطابق گندم کی پیداوار ہے:", options: ["36 ملین ٹن", "33 ملین ٹن", "29 ملین ٹن", "26 ملین ٹن"], correct: 2 }
                     ], 
                     additional: [] 
                 },
@@ -1544,56 +1555,16 @@
                 title: "آبادی، معاشرہ اور پاکستان میں ثقافتی تنوع",
                 mcq: { 
                     exercise: [
-                        {
-                            question: "2023ء کی مردم شماری کے مطابق پاکستان کے شہری علاقوں میں افراد آباد ہیں:",
-                            options: ["92.3 ملین", "93.8 ملین", "94.5 ملین", "95.4 ملین"],
-                            correct: 1
-                        },
-                        {
-                            question: "آبادی کے کوائف جاننے کے عمل کو کہتے ہیں:",
-                            options: ["مردم شماری", "اشتمال اراضی", "انتقال اراضی", "نقل مکانی"],
-                            correct: 0
-                        },
-                        {
-                            question: "پاکستان نے چار مرتبہ عالمی کپ جیتا:",
-                            options: ["رگبی", "سنوکر", "ہاکی", "کرکٹ"],
-                            correct: 2
-                        },
-                        {
-                            question: "شندور کے سالانہ میلے میں اس کھیل کا خصوصی طور پر انعقاد کیا جاتا ہے:",
-                            options: ["پولو", "بیڈ منٹن", "والی بال", "ہاکی"],
-                            correct: 0
-                        },
-                        {
-                            question: "سپریم کورٹ کے جج رہے:",
-                            options: ["بدیع الزمان کیکاؤس", "ولیم ڈی ہارولے", "ڈاکٹر رتھ فاؤ", "پیٹر کرسٹی"],
-                            correct: 0
-                        },
-                        {
-                            question: "پاکستان میں پنجابی زبان بولنے والے لوگ ہیں:",
-                            options: ["18 فیصد", "15 فیصد", "12 فیصد", "37 فیصد"],
-                            correct: 3
-                        },
-                        {
-                            question: "پاکستان کی آبادی میں اضافے کی سالانہ شرح--------- فیصد ہے:",
-                            options: ["4.55", "3.55", "2.55", "1.55"],
-                            correct: 2
-                        },
-                        {
-                            question: "پنجاب میں گنجانیت ہے:",
-                            options: ["622 افراد فی مربع کلومیٹر", "401 افراد فی مربع کلومیٹر", "395 افراد فی مربع کلومیٹر", "303 افراد فی مربع کلومیٹر"],
-                            correct: 0
-                        },
-                        {
-                            question: "پاکستان ٹیلی وژن کا آغاز ہو:",
-                            options: ["1966ء میں", "1964ء میں", "1962ء میں", "1960ء میں"],
-                            correct: 1
-                        },
-                        {
-                            question: "قبائلی علاقوں کو صوبہ خیبر پختونخواء میں ضم کر دیا گیا:",
-                            options: ["2020ء میں", "2018ء میں", "2016ء میں", "2014ء میں"],
-                            correct: 1
-                        }
+                        { question: "2023ء کی مردم شماری کے مطابق پاکستان کے شہری علاقوں میں افراد آباد ہیں:", options: ["92.3 ملین", "93.8 ملین", "94.5 ملین", "95.4 ملین"], correct: 1 },
+                        { question: "آبادی کے کوائف جاننے کے عمل کو کہتے ہیں:", options: ["مردم شماری", "اشتمال اراضی", "انتقال اراضی", "نقل مکانی"], correct: 0 },
+                        { question: "پاکستان نے چار مرتبہ عالمی کپ جیتا:", options: ["رگبی", "سنوکر", "ہاکی", "کرکٹ"], correct: 2 },
+                        { question: "شندور کے سالانہ میلے میں اس کھیل کا خصوصی طور پر انعقاد کیا جاتا ہے:", options: ["پولو", "بیڈ منٹن", "والی بال", "ہاکی"], correct: 0 },
+                        { question: "سپریم کورٹ کے جج رہے:", options: ["بدیع الزمان کیکاؤس", "ولیم ڈی ہارولے", "ڈاکٹر رتھ فاؤ", "پیٹر کرسٹی"], correct: 0 },
+                        { question: "پاکستان میں پنجابی زبان بولنے والے لوگ ہیں:", options: ["18 فیصد", "15 فیصد", "12 فیصد", "37 فیصد"], correct: 3 },
+                        { question: "پاکستان کی آبادی میں اضافے کی سالانہ شرح--------- فیصد ہے:", options: ["4.55", "3.55", "2.55", "1.55"], correct: 2 },
+                        { question: "پنجاب میں گنجانیت ہے:", options: ["622 افراد فی مربع کلومیٹر", "401 افراد فی مربع کلومیٹر", "395 افراد فی مربع کلومیٹر", "303 افراد فی مربع کلومیٹر"], correct: 0 },
+                        { question: "پاکستان ٹیلی وژن کا آغاز ہو:", options: ["1966ء میں", "1964ء میں", "1962ء میں", "1960ء میں"], correct: 1 },
+                        { question: "قبائلی علاقوں کو صوبہ خیبر پختونخواء میں ضم کر دیا گیا:", options: ["2020ء میں", "2018ء میں", "2016ء میں", "2014ء میں"], correct: 1 }
                     ], 
                     additional: [] 
                 },
@@ -1637,46 +1608,14 @@
                 title: "پاکستان میں خواتین کو با اختیار بنانا",
                 mcq: { 
                     exercise: [
-                        {
-                            question: "عرب معاشرے میں اسلام سے پہلے دور جاہلیت میں لڑکی کو:",
-                            options: ["عزت دیتے تھے", "زندہ دفن کر دیتے تھے", "ونی کر دیتے تھے", "جلا دیتے تھے"],
-                            correct: 1
-                        },
-                        {
-                            question: "اسلام دین فطرت ہے جس کی تعلیمات کے مطابق بنیادی حقوق کے لحاظ سے برابر ہیں:",
-                            options: ["سب انسان", "سب بچے", "تمام افراد", "سب عورتیں"],
-                            correct: 0
-                        },
-                        {
-                            question: "قائد اعظم کے شانہ بشانہ تحریک پاکستان میں شامل رہیں:",
-                            options: ["لیڈی نصرت ہارون", "بیگم مولانا محمد علی جوہر", "محترمہ فاطمہ جناح", "بیگم فرخ حسین"],
-                            correct: 2
-                        },
-                        {
-                            question: "سماجی خدمات کے حوالے سے مشہور ہیں:",
-                            options: ["محترمہ شمشاد اختر", "محترمی ثمینہ بیگ", "ڈاکٹر فہمیدہ مرزا", "محترمہ بلقیس ایدھی"],
-                            correct: 3
-                        },
-                        {
-                            question: "پنجاب میں لڑکیوں کی شادی کی قانونی عمر ہے:",
-                            options: ["20 سال", "18 سال", "16 سال", "14 سال"],
-                            correct: 2
-                        },
-                        {
-                            question: "خواتین تشدد کے خلاف کس نمبر پر شکایات کر سکتی ہیں:",
-                            options: ["1085", "1043", "1030", "1016"],
-                            correct: 1
-                        },
-                        {
-                            question: "پنجاب حکومت نے \"پنجاب تحفظ نسواں ایکٹ\" منظور کیا:",
-                            options: ["15 ستمبر 2017ء میں", "24 فروری 2016ء میں", "16 فروری 2015ء میں", "24 جنوری 2010ء میں"],
-                            correct: 1
-                        },
-                        {
-                            question: "حج کے موقع پر صفا اور مروہ کے درمیان دوڑنا سنت ہے:",
-                            options: ["حضرت حوا کی", "حضرت ہاجرہ کی", "حضرت خدیجہ کی", "حضرت عائشہ کی"],
-                            correct: 1
-                        }
+                        { question: "عرب معاشرے میں اسلام سے پہلے دور جاہلیت میں لڑکی کو:", options: ["عزت دیتے تھے", "زندہ دفن کر دیتے تھے", "ونی کر دیتے تھے", "جلا دیتے تھے"], correct: 1 },
+                        { question: "اسلام دین فطرت ہے جس کی تعلیمات کے مطابق بنیادی حقوق کے لحاظ سے برابر ہیں:", options: ["سب انسان", "سب بچے", "تمام افراد", "سب عورتیں"], correct: 0 },
+                        { question: "قائد اعظم کے شانہ بشانہ تحریک پاکستان میں شامل رہیں:", options: ["لیڈی نصرت ہارون", "بیگم مولانا محمد علی جوہر", "محترمہ فاطمہ جناح", "بیگم فرخ حسین"], correct: 2 },
+                        { question: "سماجی خدمات کے حوالے سے مشہور ہیں:", options: ["محترمہ شمشاد اختر", "محترمی ثمینہ بیگ", "ڈاکٹر فہمیدہ مرزا", "محترمہ بلقیس ایدھی"], correct: 3 },
+                        { question: "پنجاب میں لڑکیوں کی شادی کی قانونی عمر ہے:", options: ["20 سال", "18 سال", "16 سال", "14 سال"], correct: 2 },
+                        { question: "خواتین تشدد کے خلاف کس نمبر پر شکایات کر سکتی ہیں:", options: ["1085", "1043", "1030", "1016"], correct: 1 },
+                        { question: "پنجاب حکومت نے \"پنجاب تحفظ نسواں ایکٹ\" منظور کیا:", options: ["15 ستمبر 2017ء میں", "24 فروری 2016ء میں", "16 فروری 2015ء میں", "24 جنوری 2010ء میں"], correct: 1 },
+                        { question: "حج کے موقع پر صفا اور مروہ کے درمیان دوڑنا سنت ہے:", options: ["حضرت حوا کی", "حضرت ہاجرہ کی", "حضرت خدیجہ کی", "حضرت عائشہ کی"], correct: 1 }
                     ], 
                     additional: [] 
                 },
@@ -1730,7 +1669,6 @@
 
         // ========== INITIALIZATION ==========
         function init() {
-            // Populate chapter dropdown
             chaptersData.forEach(chapter => {
                 const option = document.createElement('option');
                 option.value = chapter.id;
@@ -1738,10 +1676,8 @@
                 chapterSelect.appendChild(option);
             });
 
-            // Update download button state
             updateDownloadButton();
 
-            // Event Listeners
             chapterSelect.addEventListener('change', (e) => {
                 state.chapter = e.target.value || null;
                 renderContent();
@@ -1795,7 +1731,7 @@
             
             let questions = [...typeData.exercise];
             
-            if (state.additional && typeData.additional) {
+            if (state.additional && typeData.additional && typeData.additional.length > 0) {
                 questions = [...questions, ...typeData.additional];
             }
 
@@ -1834,8 +1770,45 @@
                     `;
                 });
                 html += '</ul>';
+            } else if (state.type === 'short') {
+                // ✅ UPDATED: Render collapsible short questions with answers
+                html += '<ul class="question-list">';
+                questions.forEach((q, index) => {
+                    // Check if question has answer (new format) or just text (old format)
+                    if (typeof q === 'object' && q.answer) {
+                        html += `
+                            <li class="collapsible-question" onclick="toggleAnswer(this)">
+                                <div class="collapsible-header">
+                                    <span class="collapsible-number">${index + 1}</span>
+                                    <span class="collapsible-question-text">${q.question}</span>
+                                    <i class="fas fa-chevron-down collapsible-icon"></i>
+                                </div>
+                                <div class="collapsible-answer">
+                                    <div class="answer-content">
+                                        <span class="answer-label"><i class="fas fa-lightbulb"></i> جواب</span>
+                                        <div>${q.answer}</div>
+                                        <div class="answer-hint">
+                                            <i class="fas fa-info-circle"></i>
+                                            جواب دیکھنے کے لیے سوال پر دوبارہ کلک کریں
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        `;
+                    } else {
+                        // Old format (no answer yet)
+                        const questionText = typeof q === 'object' ? q.question : q;
+                        html += `
+                            <li class="short-question">
+                                <span class="question-number">${index + 1}</span>
+                                <span class="question-text">${questionText}</span>
+                            </li>
+                        `;
+                    }
+                });
+                html += '</ul>';
             } else {
-                // Render Short/Long Questions
+                // Render Long Questions
                 html += '<ul class="question-list">';
                 questions.forEach((q, index) => {
                     html += `
@@ -1849,6 +1822,20 @@
             }
 
             contentArea.innerHTML = html;
+        }
+
+        // ========== TOGGLE ANSWER FUNCTION (NEW) ==========
+        function toggleAnswer(element) {
+            // Toggle active class
+            element.classList.toggle('active');
+            
+            // Optional: Close other open answers
+            const allQuestions = document.querySelectorAll('.collapsible-question');
+            allQuestions.forEach(question => {
+                if (question !== element) {
+                    question.classList.remove('active');
+                }
+            });
         }
 
         // ========== DOWNLOAD & PREMIUM LOGIC ==========
@@ -1869,16 +1856,13 @@
             }
 
             if (state.isPaid) {
-                // Simulate download
                 alert('✅ ڈاؤنلوڈ شروع ہو رہا ہے...\n\n(یہ ڈمی فنکشن ہے، حقیقی PDF لنک یہاں attach کریں)');
-                // window.location.href = 'your-pdf-link.pdf';
             } else {
                 premiumModal.classList.add('active');
             }
         }
 
         function processPayment() {
-            // Simulate payment processing
             const btn = confirmPay;
             const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
@@ -1897,55 +1881,49 @@
 
         // Run initialization
         init();
+
         // ========== FEEDBACK SYSTEM ==========
+        const ADMIN_WHATSAPP = '923081517640';
 
-// ⚠️ IMPORTANT: Apna WhatsApp number yahan dalein (country code ke saath, bina + ke)
-// Example: Pakistan number 03001234567 → 923001234567
-const ADMIN_WHATSAPP = '923081517640'; // ← Yahan apna number dalein
+        function openFeedbackModal() {
+            document.getElementById('feedbackModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-function openFeedbackModal() {
-    document.getElementById('feedbackModal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
+        function closeFeedbackModal() {
+            document.getElementById('feedbackModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
 
-function closeFeedbackModal() {
-    document.getElementById('feedbackModal').classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
+        document.getElementById('feedbackModal').addEventListener('click', (e) => {
+            if (e.target.id === 'feedbackModal') {
+                closeFeedbackModal();
+            }
+        });
 
-// Modal ke bahar click karne par band ho
-document.getElementById('feedbackModal').addEventListener('click', (e) => {
-    if (e.target.id === 'feedbackModal') {
-        closeFeedbackModal();
-    }
-});
+        function submitFeedback(e) {
+            e.preventDefault();
 
-function submitFeedback(e) {
-    e.preventDefault();
+            const name = document.getElementById('fbName').value.trim();
+            const chapter = document.getElementById('fbChapter').value;
+            const type = document.getElementById('fbType').value;
+            const message = document.getElementById('fbMessage').value.trim();
 
-    const name = document.getElementById('fbName').value.trim();
-    const chapter = document.getElementById('fbChapter').value;
-    const type = document.getElementById('fbType').value;
-    const message = document.getElementById('fbMessage').value.trim();
+            if (!name || !chapter || !type || !message) {
+                alert('براہ کرم تمام فیلڈز پُر کریں');
+                return;
+            }
 
-    if (!name || !chapter || !type || !message) {
-        alert('براہ کرم تمام فیلڈز پُر کریں');
-        return;
-    }
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('ur-PK');
+            const timeStr = now.toLocaleTimeString('ur-PK', { hour: '2-digit', minute: '2-digit' });
 
-    // Current date/time
-    const now = new Date();
-    const dateStr = now.toLocaleDateString('ur-PK');
-    const timeStr = now.toLocaleTimeString('ur-PK', { hour: '2-digit', minute: '2-digit' });
+            const currentChapter = document.getElementById('chapterSelect');
+            const currentType = document.querySelector('.btn-type.active');
+            const currentPage = currentChapter ? currentChapter.options[currentChapter.selectedIndex].text : 'N/A';
+            const currentTypeText = currentType ? currentType.textContent.trim() : 'N/A';
 
-    // Current page info
-    const currentChapter = document.getElementById('chapterSelect');
-    const currentType = document.querySelector('.btn-type.active');
-    const currentPage = currentChapter ? currentChapter.options[currentChapter.selectedIndex].text : 'N/A';
-    const currentTypeText = currentType ? currentType.textContent.trim() : 'N/A';
-
-    // Beautiful formatted message
-    const feedbackText = `
+            const feedbackText = `
 ╔══════════════════════════════╗
    📚 EDUPORTAL FEEDBACK
 ╚══════════════════════════════╝
@@ -1956,7 +1934,7 @@ function submitFeedback(e) {
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 
- باب: ${chapter}
+📖 باب: ${chapter}
 
 ⚠️ مسئلہ کی قسم:
 ${type}
@@ -1974,137 +1952,28 @@ ${message}
 
 ✅ براہ کرم جلد از جلد درست کریں
 شکریہ! 🌟
-    `.trim();
+            `.trim();
 
-    // WhatsApp link generate karein
-    const encodedMessage = encodeURIComponent(feedbackText);
-    const whatsappURL = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodedMessage}`;
+            const encodedMessage = encodeURIComponent(feedbackText);
+            const whatsappURL = `https://wa.me/${ADMIN_WHATSAPP}?text=${encodedMessage}`;
 
-    // WhatsApp link set karein
-    document.getElementById('whatsappLink').href = whatsappURL;
+            document.getElementById('whatsappLink').href = whatsappURL;
 
-    // Form hide, success show
-    document.getElementById('feedbackFormSection').style.display = 'none';
-    document.getElementById('feedbackSuccess').classList.add('active');
-}
+            document.getElementById('feedbackFormSection').style.display = 'none';
+            document.getElementById('feedbackSuccess').classList.add('active');
+        }
 
-function resetFeedback() {
-    document.getElementById('feedbackForm').reset();
-    document.getElementById('feedbackFormSection').style.display = 'block';
-    document.getElementById('feedbackSuccess').classList.remove('active');
-}
+        function resetFeedback() {
+            document.getElementById('feedbackForm').reset();
+            document.getElementById('feedbackFormSection').style.display = 'block';
+            document.getElementById('feedbackSuccess').classList.remove('active');
+        }
 
-// ESC key se modal band
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        closeFeedbackModal();
-    }
-});
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeFeedbackModal();
+            }
+        });
     </script>
-    <!-- Floating Feedback Button -->
-<button class="feedback-fab" onclick="openFeedbackModal()" title="Feedback">
-    <i class="fab fa-whatsapp"></i>
-    <span class="tooltip">کوئی مسئلہ؟ ہمیں بتائیں</span>
-</button>
-
-<!-- Feedback Modal -->
-<div class="feedback-modal" id="feedbackModal">
-    <div class="feedback-modal-content">
-        <div class="feedback-header">
-            <h2><i class="fas fa-comment-dots"></i> Feedback / رپورٹ</h2>
-            <button class="feedback-close" onclick="closeFeedbackModal()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        
-        <div class="feedback-body">
-            <!-- Form Section -->
-            <div id="feedbackFormSection">
-                <div class="feedback-info">
-                    <i class="fas fa-info-circle"></i>
-                    <div>
-                        <strong>کیا آپ کو کوئی غلطی ملی؟</strong><br>
-                        MCQs، Short Questions یا Long Questions میں کوئی مسئلہ ہو تو ہمیں اطلاع دیں۔ ہم جلد از جلد درست کریں گے۔
-                    </div>
-                </div>
-
-                <form class="feedback-form" id="feedbackForm" onsubmit="submitFeedback(event)">
-                    <div class="form-group">
-                        <label>
-                            <i class="fas fa-user"></i> آپ کا نام
-                        </label>
-                        <input type="text" id="fbName" required placeholder="اپنا نام لکھیں">
-                    </div>
-
-                    <div class="form-group">
-                        <label>
-                            <i class="fas fa-book"></i> باب (Chapter)
-                        </label>
-                        <select id="fbChapter" required>
-                            <option value="">-- باب منتخب کریں --</option>
-                            <option value="باب 1: پاکستان کی نظریاتی اساس">باب 1: پاکستان کی نظریاتی اساس</option>
-                            <option value="باب 2: تحریک پاکستان">باب 2: تحریک پاکستان</option>
-                            <option value="باب 3: پاکستان کی تاریخ اور آئینی ترقی">باب 3: پاکستان کی تاریخ اور آئینی ترقی</option>
-                            <option value="باب 4: پاکستان کا جغرافیہ">باب 4: پاکستان کا جغرافیہ</option>
-                            <option value="باب 5: پاکستان اور بین الاقوامی امور">باب 5: پاکستان اور بین الاقوامی امور</option>
-                            <option value="باب 6: پاکستان کے وسائل اور معاشرتی ترقی">باب 6: پاکستان کے وسائل اور معاشرتی ترقی</option>
-                            <option value="باب 7: آبادی، معاشرہ اور ثقافتی تنوع">باب 7: آبادی، معاشرہ اور ثقافتی تنوع</option>
-                            <option value="باب 8: خواتین کو با اختیار بنانا">باب 8: خواتین کو با اختیار بنانا</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>
-                            <i class="fas fa-exclamation-triangle"></i> مسئلہ کی قسم
-                        </label>
-                        <select id="fbType" required>
-                            <option value="">-- قسم منتخب کریں --</option>
-                            <option value="MCQs - غلط جواب">MCQs - غلط جواب</option>
-                            <option value="MCQs - غلط آپشن">MCQs - غلط آپشن</option>
-                            <option value="MCQs - سوال میں غلطی">MCQs - سوال میں غلطی</option>
-                            <option value="Short Questions - غلط سوال">Short Questions - غلط سوال</option>
-                            <option value="Short Questions - spelling mistake">Short Questions - spelling mistake</option>
-                            <option value="Long Questions - غلط سوال">Long Questions - غلط سوال</option>
-                            <option value="Long Questions - incomplete answer">Long Questions - incomplete answer</option>
-                            <option value="Other - دیگر">Other - دیگر</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>
-                            <i class="fas fa-pen"></i> تفصیل (Details)
-                        </label>
-                        <textarea id="fbMessage" required placeholder="براہ کرم مسئلہ کی تفصیل بتائیں...&#10;&#10;مثال:&#10;- سوال نمبر 3 کا جواب غلط ہے&#10;- MCQ option B صحیح ہونا چاہیے&#10;- Short question میں spelling mistake ہے"></textarea>
-                    </div>
-
-                    <button type="submit" class="feedback-submit">
-                        <i class="fab fa-whatsapp"></i>
-                        WhatsApp پر بھیجیں
-                    </button>
-                </form>
-            </div>
-
-            <!-- Success Section -->
-            <div class="feedback-success" id="feedbackSuccess">
-                <div class="success-icon-big">
-                    <i class="fas fa-check"></i>
-                </div>
-                <h3>شکریہ! آپ کا فیڈبیک تیار ہے</h3>
-                <p>
-                    نیچے بٹن پر کلک کریں اور WhatsApp کھل جائے گا۔<br>
-                    Message send کرنے سے پہلے چیک کر لیں۔
-                </p>
-                <a href="#" id="whatsappLink" target="_blank" class="whatsapp-btn">
-                    <i class="fab fa-whatsapp"></i>
-                    WhatsApp پر بھیجیں
-                </a>
-                <br><br>
-                <button onclick="resetFeedback()" style="background: none; border: none; color: #64748b; cursor: pointer; font-size: 0.9rem;">
-                    <i class="fas fa-redo"></i> نیا فیڈبیک
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 </html>
