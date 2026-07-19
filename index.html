@@ -346,6 +346,7 @@
 <!-- JAVASCRIPT -->
 <script type="module">
     // 1. Firebase Imports
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, onAuthStateChanged, signOut } 
            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -433,56 +434,66 @@
 
     // 4. REGISTER (SIGN UP) WITH EMAIL VERIFICATION LINK
     window.handleRegister = async function(e) {
-        e.preventDefault();
-        const name = document.getElementById('regName').value;
-        const email = document.getElementById('regEmail').value;
-        const password = document.getElementById('regPassword').value;
-        const role = document.getElementById('regRole').value;
-        const msg = document.getElementById('registerMessage');
-        const btn = document.getElementById('registerBtn');
+    e.preventDefault();
+    const name = document.getElementById('regName').value;
+    const email = document.getElementById('regEmail').value;
+    const password = document.getElementById('regPassword').value;
+    const role = document.getElementById('regRole').value;
+    const msg = document.getElementById('registerMessage');
+    const btn = document.getElementById('registerBtn');
 
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
-        if (!passwordRegex.test(password)) {
-            msg.className = 'message-box error';
-            msg.innerText = '❌ Password must meet all requirements (8+ chars, uppercase, lowercase, number, special char)';
-            msg.style.display = 'block';
-            return;
-        }
-
-        btn.disabled = true;
-        btn.innerText = 'Creating Account...';
-
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-
-            localStorage.setItem('userName', name);
-            localStorage.setItem('userRole', role);
-
-            // ✅ Verification Link bhejein
-            await sendEmailVerification(user);
-
-            msg.className = 'message-box success';
-            msg.innerText = `✅ Account created! A verification link has been sent to ${email}. Please check your inbox (and spam) and verify before logging in.`;
-            msg.style.display = 'block';
-
-            setTimeout(() => {
-                window.closeModal('register');
-                window.openModal('login');
-            }, 4000);
-
-        } catch (error) {
-            msg.className = 'message-box error';
-            let errorMsg = error.message;
-            if (error.code === 'auth/email-already-in-use') errorMsg = 'This email is already registered.';
-            msg.innerText = `❌ ${errorMsg}`;
-            msg.style.display = 'block';
-        } finally {
-            btn.disabled = false;
-            btn.innerText = 'Create Account';
-        }
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+    if (!passwordRegex.test(password)) {
+        msg.className = 'message-box error';
+        msg.innerText = ' Password must meet all requirements (8+ chars, uppercase, lowercase, number, special char)';
+        msg.style.display = 'block';
+        return;
     }
 
+    btn.disabled = true;
+    btn.innerText = 'Creating Account...';
+
+    try {
+        // 1. Firebase Authentication mein user banayein
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // 2. ✅ FIRESTORE MEIN DATA SAVE KAREIN
+        await setDoc(doc(db, "users", user.uid), {
+            name: name,
+            email: email,
+            role: role,
+            createdAt: new Date(),
+            emailVerified: false,
+            uid: user.uid
+        });
+
+        localStorage.setItem('userName', name);
+        localStorage.setItem('userRole', role);
+
+        // 3. Verification Link bhejein
+        await sendEmailVerification(user);
+
+        msg.className = 'message-box success';
+        msg.innerText = `✅ Account created! A verification link has been sent to ${email}. Please check your inbox (and spam) and verify before logging in.`;
+        msg.style.display = 'block';
+
+        setTimeout(() => {
+            window.closeModal('register');
+            window.openModal('login');
+        }, 4000);
+
+    } catch (error) {
+        msg.className = 'message-box error';
+        let errorMsg = error.message;
+        if (error.code === 'auth/email-already-in-use') errorMsg = 'This email is already registered.';
+        msg.innerText = `❌ ${errorMsg}`;
+        msg.style.display = 'block';
+    } finally {
+        btn.disabled = false;
+        btn.innerText = 'Create Account';
+    }
+}
     // 5. LOGIN WITH EMAIL VERIFICATION CHECK
     window.handleLogin = async function(e) {
         e.preventDefault();
