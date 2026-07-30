@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Logarithms - Mathematics 9th Class</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="icon" type="image/png" href="../favicon.png">
+    
+    <style>
+        /* Chapter Header - Purple/Pink Theme */
+        .chapter-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter-header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="white" opacity="0.1"/><circle cx="80" cy="40" r="3" fill="white" opacity="0.1"/><circle cx="40" cy="80" r="2" fill="white" opacity="0.1"/></svg>');
+        }
+        
+        .chapter-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .chapter-header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .breadcrumb {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+        }
+        
+        .breadcrumb a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* Score Panel */
+        .score-panel {
+            position: sticky;
+            top: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin: 2rem auto;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            z-index: 100;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-item .value {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .score-item .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .reset-btn {
+            background: white;
+            color: #764ba2;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Content Area */
+        .content-area {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+        }
+
+        /* MCQ Card */
+        .mcq-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.08);
+            border: 2px solid #f0e6ff;
+            transition: all 0.3s ease;
+        }
+
+        .mcq-card:hover {
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .mcq-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mcq-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .mcq-question {
+            font-size: 1.15rem;
+            color: #2b2d42;
+            line-height: 1.8;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .mcq-question .math {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            color: #764ba2;
+            font-weight: 600;
+        }
+
+        /* Options */
+        .mcq-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            padding-left: 3.5rem;
+        }
+
+        .mcq-option {
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1rem;
+        }
+
+        .mcq-option:hover:not(.disabled) {
+            background: #f0e6ff;
+            border-color: #764ba2;
+            transform: translateX(5px);
+        }
+
+        .mcq-option .option-label {
+            background: #667eea;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .mcq-option .option-text {
+            flex: 1;
+            color: #2b2d42;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.1rem;
+        }
+
+        /* Answer States */
+        .mcq-option.correct {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border-color: #28a745;
+            animation: correctPulse 0.5s ease;
+        }
+
+        .mcq-option.correct .option-label {
+            background: #28a745;
+        }
+
+        .mcq-option.correct::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #28a745;
+            font-size: 1.2rem;
+            margin-left: auto;
+        }
+
+        .mcq-option.wrong {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            border-color: #dc3545;
+            animation: shake 0.4s ease;
+        }
+
+        .mcq-option.wrong .option-label {
+            background: #dc3545;
+        }
+
+        .mcq-option.wrong::after {
+            content: '\f00d';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #dc3545;
+            font-size: 1.2rem;
+            margin-left: auto;
+        }
+
+        .mcq-option.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        @keyframes correctPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Navigation */
+        .chapter-nav {
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+
+        .nav-btn {
+            background: white;
+            color: #764ba2;
+            border: 2px solid #764ba2;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #764ba2;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .chapter-header h1 { font-size: 1.8rem; }
+            .mcq-options { grid-template-columns: 1fr; padding-left: 0; }
+            .mcq-header { flex-direction: column; }
+            .mcq-card { padding: 1.5rem; }
+            .score-panel { flex-direction: column; gap: 1rem; position: static; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i> EduPortal
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="9th-class.html" class="active">9th Class</a></li>
+                <li><a href="10th-class.html">10th Class</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../index.html#premium" class="btn-premium">Go Premium</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chapter Header -->
+    <header class="chapter-header">
+        <div class="container">
+            <h1>Chapter 2: Logarithms</h1>
+            <p class="subtitle">Mathematics - 9th Class | Review Exercise MCQs</p>
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a> / 
+                <a href="9th-class.html">9th Class</a> / 
+                <a href="math-9th.html">Mathematics</a> / 
+                <span>Chapter 2</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Score Panel -->
+    <div class="container">
+        <div class="score-panel">
+            <div class="score-item">
+                <span class="value" id="totalQuestions">10</span>
+                <span class="label">Total Questions</span>
+            </div>
+            <div class="score-item">
+                <span class="value" id="correctCount">0</span>
+                <span class="label">Correct</span>
+            </div>
+            <div class="score-item">
+                <span class="value" id="wrongCount">0</span>
+                <span class="label">Wrong</span>
+            </div>
+            <div class="score-item">
+                <span class="value" id="scorePercent">0%</span>
+                <span class="label">Score</span>
+            </div>
+            <button class="reset-btn" onclick="resetQuiz()">
+                <i class="fas fa-redo"></i> Reset
+            </button>
+        </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area" id="mcqContainer">
+        <!-- MCQs will be rendered here by JavaScript -->
+    </div>
+
+    <!-- Chapter Navigation -->
+    <div class="chapter-nav">
+        <a href="math-9th-ch1.html" class="nav-btn">
+            <i class="fas fa-arrow-left"></i> Chapter 1: Real Numbers
+        </a>
+        <a href="math-9th-ch3.html" class="nav-btn">
+            Chapter 3: Sets & Functions <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 EduPortal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // ========== MCQs DATA ==========
+        const mcqsData = [
+            {
+                question: "The standard form of 5.2 × 10⁶ is:",
+                options: ["52,000", "520,000", "5,200,000", "52,000,000"],
+                correct: 2
+            },
+            {
+                question: "Scientific notation of 0.00034 is:",
+                options: ["3.4 × 10³", "3.4 × 10⁻⁴", "3.4 × 10⁴", "3.4 × 10⁻³"],
+                correct: 1
+            },
+            {
+                question: "The base of common logarithm is:",
+                options: ["2", "10", "5", "e"],
+                correct: 1
+            },
+            {
+                question: "log₂ 2³ =",
+                options: ["1", "2", "5", "3"],
+                correct: 3
+            },
+            {
+                question: "log 100 =",
+                options: ["2", "3", "10", "1"],
+                correct: 0
+            },
+            {
+                question: "If log 2 = 0.3010, then log 200 is:",
+                options: ["1.3010", "0.6010", "2.3010", "2.6010"],
+                correct: 2
+            },
+            {
+                question: "log (0) =",
+                options: ["positive", "negative", "zero", "undefined"],
+                correct: 3
+            },
+            {
+                question: "log 10,000 =",
+                options: ["2", "3", "4", "5"],
+                correct: 2
+            },
+            {
+                question: "log 5 + log 3 =",
+                options: ["log 0", "log 2", "log (5/3)", "log 15"],
+                correct: 3
+            },
+            {
+                question: "3⁴ = 81 in logarithmic form is:",
+                options: ["log₃ 4 = 81", "log₄ 3 = 81", "log₃ 81 = 4", "log 81 = 3"],
+                correct: 2
+            }
+        ];
+
+        // ========== STATE ==========
+        let correctCount = 0;
+        let wrongCount = 0;
+        let answered = new Array(mcqsData.length).fill(false);
+
+        // ========== RENDER MCQs ==========
+        function renderMCQs() {
+            const container = document.getElementById('mcqContainer');
+            let html = '';
+
+            mcqsData.forEach((mcq, index) => {
+                html += `
+                    <div class="mcq-card" id="mcq-${index}">
+                        <div class="mcq-header">
+                            <div class="mcq-number">${index + 1}</div>
+                            <div class="mcq-question">${mcq.question}</div>
+                        </div>
+                        <div class="mcq-options">
+                            ${mcq.options.map((option, optIndex) => `
+                                <div class="mcq-option" onclick="selectOption(${index}, ${optIndex})" id="mcq-${index}-opt-${optIndex}">
+                                    <span class="option-label">${String.fromCharCode(97 + optIndex)}</span>
+                                    <span class="option-text">${option}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // ========== SELECT OPTION ==========
+        function selectOption(mcqIndex, optIndex) {
+            if (answered[mcqIndex]) return;
+            
+            answered[mcqIndex] = true;
+            const mcq = mcqsData[mcqIndex];
+            const options = document.querySelectorAll(`#mcq-${mcqIndex} .mcq-option`);
+
+            options.forEach(opt => opt.classList.add('disabled'));
+
+            if (optIndex === mcq.correct) {
+                document.getElementById(`mcq-${mcqIndex}-opt-${optIndex}`).classList.add('correct');
+                correctCount++;
+            } else {
+                document.getElementById(`mcq-${mcqIndex}-opt-${optIndex}`).classList.add('wrong');
+                document.getElementById(`mcq-${mcqIndex}-opt-${mcq.correct}`).classList.add('correct');
+                wrongCount++;
+            }
+
+            updateScore();
+        }
+
+        // ========== UPDATE SCORE ==========
+        function updateScore() {
+            document.getElementById('correctCount').textContent = correctCount;
+            document.getElementById('wrongCount').textContent = wrongCount;
+            
+            const total = mcqsData.length;
+            const percent = Math.round((correctCount / total) * 100);
+            document.getElementById('scorePercent').textContent = percent + '%';
+        }
+
+        // ========== RESET QUIZ ==========
+        function resetQuiz() {
+            correctCount = 0;
+            wrongCount = 0;
+            answered = new Array(mcqsData.length).fill(false);
+            updateScore();
+            renderMCQs();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ========== INIT ==========
+        renderMCQs();
+    </script>
+</body>
+</html>
