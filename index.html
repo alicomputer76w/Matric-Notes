@@ -373,8 +373,9 @@
 
     // Avoid redeclaring the Firebase app if this script runs multiple times
     const app = (window.firebaseApp || (window.firebaseApp = initializeApp(firebaseConfig)));
-    const auth = getAuth(app);
-    let currentUser = null;
+const auth = getAuth(app);
+const db = getFirestore(app);  // 👈 YEH LINE ADD KAREIN
+let currentUser = null;
 
     // 2. Auto Check Login Status
     onAuthStateChanged(auth, (user) => {
