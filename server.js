@@ -626,17 +626,12 @@ app.get('/api/auth/me', verifyToken, async (req, res) => {
     }
 });
 
+
 // ============================================
-// ERROR HANDLING
+// WHATSAPP CLOUD API - AUTO REPLY SYSTEM
 // ============================================
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ 
-        success: false, 
-        error: 'Something went wrong!', 
-        message: err.message 
-    });
-});
+
+
 // ============================================
 // WHATSAPP CLOUD API - AUTO REPLY SYSTEM
 // ============================================
@@ -658,7 +653,6 @@ async function sendWhatsAppMessage(to, text) {
   });
   return await response.json();
 }
-
 // Welcome Message (Professional)
 const WELCOME_MESSAGE = `Welcome to *EduPortal Platform* 🎓
 
@@ -738,6 +732,20 @@ Model papers aur online tests with instant results.
 
 Hum 24 ghante mein jawab dete hain!`
 };
+// Webhook Verification Route (GET /webhook)
+app.get('/webhook', (req, res) => {
+  const mode = req.query['hub.mode'];
+  const token = req.query['hub.verify_token'];
+  const challenge = req.query['hub.challenge'];
+
+  if (mode === 'subscribe' && token === 'eduportal123') {
+    console.log('✅ WEBHOOK VERIFIED!');
+    res.status(200).send(challenge);
+  } else {
+    console.log('❌ Webhook verification failed');
+    res.sendStatus(403);
+  }
+});
 
 // Webhook Handler - Receive & Auto Reply
 app.post('/webhook', async (req, res) => {
@@ -790,6 +798,17 @@ app.post('/api/send-whatsapp', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});
+// ============================================
+// ERROR HANDLING
+// ============================================
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ 
+        success: false, 
+        error: 'Something went wrong!', 
+        message: err.message 
+    });
 });
 // ============================================
 // START SERVER
