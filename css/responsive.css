@@ -34,24 +34,39 @@
     .hamburger {
         display: block;
         z-index: 1001;
+        cursor: pointer;
     }
 
     .nav-menu {
         position: fixed;
         left: -100%;
         top: 70px;
+        display: flex;
         flex-direction: column;
         background-color: var(--white);
         width: 100%;
+        height: calc(100vh - 70px);
         text-align: center;
-        transition: 0.3s;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+        transition: left 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         padding: 2rem 0;
         gap: 1.5rem;
+        overflow-y: auto;
+        z-index: 1000;
     }
 
     .nav-menu.active {
         left: 0;
+    }
+
+    .nav-menu li {
+        width: 100%;
+    }
+
+    .nav-menu a {
+        display: block;
+        padding: 12px 0;
+        font-size: 1.1rem;
     }
 
     .nav-menu a {
