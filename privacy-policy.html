@@ -2,25 +2,163 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Privacy Policy - EduPortal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | EduPortal - Matric Notes Website</title>
+<style>
+  :root {
+    --primary: #4361ee;
+    --primary-dark: #3a0ca3;
+    --accent: #f72585;
+    --bg: #f5f7fb;
+    --text: #2b2d42;
+    --muted: #6c757d;
+    --card: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+  /* ===== HEADER ===== */
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #fff; text-align: center; padding: 70px 20px;
+  }
+  header h1 { font-size: 2.6rem; font-weight: 700; letter-spacing: 1px; }
+  header p { margin-top: 10px; opacity: 0.9; font-size: 1.05rem; }
+  .badge {
+    display: inline-block; margin-top: 18px; background: rgba(255,255,255,0.15);
+    padding: 6px 18px; border-radius: 50px; font-size: 0.85rem;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  /* ===== LAYOUT ===== */
+  .container { max-width: 900px; margin: -40px auto 40px; padding: 0 20px; }
+  .card {
+    background: var(--card); border-radius: 14px; padding: 30px 35px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08); margin-bottom: 25px;
+  }
+
+  /* ===== TABLE OF CONTENTS ===== */
+  .toc h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 15px; }
+  .toc ol { padding-left: 20px; }
+  .toc li { margin: 6px 0; }
+  .toc a { color: var(--text); text-decoration: none; transition: 0.2s; }
+  .toc a:hover { color: var(--primary); padding-left: 5px; }
+
+  /* ===== SECTIONS ===== */
+  .section h2 {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 1.35rem; color: var(--primary-dark); margin-bottom: 15px;
+  }
+  .num {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: #fff; width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .section p, .section li { color: var(--muted); margin-bottom: 10px; }
+  .section ul { padding-left: 22px; }
+
+  .highlight {
+    background: #eef2ff; border-left: 4px solid var(--primary);
+    padding: 15px 20px; border-radius: 8px; margin-top: 12px;
+  }
+  .highlight p { color: var(--text); margin: 0; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--primary-dark); color: #fff; text-align: center;
+    padding: 30px 20px; font-size: 0.95rem;
+  }
+  footer a { color: #ffd6e8; text-decoration: none; font-weight: 600; }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.9rem; }
+    .card { padding: 22px; }
+  }
+</style>
 </head>
-<body style="font-family: Arial; padding: 40px; max-width: 800px; margin: auto;">
-<h1>Privacy Policy</h1>
-<p>EduPortal respects your privacy. This page explains what information we collect and how we use it.</p>
-<h2>Information We Collect</h2>
-<ul>
-<li>Account details: name and email when you register.</li>
-<li>Phone number: only when you request notes on WhatsApp.</li>
-</ul>
-<h2>How We Use Your Information</h2>
-<ul>
-<li>To provide educational notes and services.</li>
-<li>To send WhatsApp messages that you request.</li>
-<li>To send verification emails (OTP).</li>
-</ul>
-<h2>Data Sharing</h2>
-<p>We do not sell your personal data. WhatsApp (Meta) is used only to deliver messages you request.</p>
-<h2>Contact</h2>
-<p>Email: eduportal.contact@gmail.com</p>
+<body>
+
+<header>
+  <h1>Privacy Policy</h1>
+  <p>EduPortal — Your Trusted Platform for Matric Notes & Learning Resources</p>
+  <span class="badge">Effective Date: August 3, 2026</span>
+</header>
+
+<div class="container">
+
+  <div class="card toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#collect">Information We Collect</a></li>
+      <li><a href="#use">How We Use Your Information</a></li>
+      <li><a href="#whatsapp">WhatsApp Communication</a></li>
+      <li><a href="#sharing">Data Sharing & Third Parties</a></li>
+      <li><a href="#security">Data Security</a></li>
+      <li><a href="#rights">Your Rights</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ol>
+  </div>
+
+  <div class="card section" id="intro">
+    <h2><span class="num">1</span> Introduction</h2>
+    <p>Welcome to <strong>EduPortal</strong>. We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our website and services.</p>
+  </div>
+
+  <div class="card section" id="collect">
+    <h2><span class="num">2</span> Information We Collect</h2>
+    <ul>
+      <li><strong>Account Information:</strong> Name, email address, and password when you register.</li>
+      <li><strong>Phone Number:</strong> Only when you request notes or updates via WhatsApp.</li>
+      <li><strong>Usage Data:</strong> Pages visited and notes downloaded to improve our services.</li>
+    </ul>
+  </div>
+
+  <div class="card section" id="use">
+    <h2><span class="num">3</span> How We Use Your Information</h2>
+    <ul>
+      <li>To provide educational notes, tests, and learning resources.</li>
+      <li>To send account verification emails (OTP).</li>
+      <li>To deliver WhatsApp messages that you explicitly request.</li>
+      <li>To improve website performance and user experience.</li>
+    </ul>
+  </div>
+
+  <div class="card section" id="whatsapp">
+    <h2><span class="num">4</span> WhatsApp Communication</h2>
+    <p>We use the <strong>WhatsApp Business API (Meta Platforms)</strong> solely to send you educational content, notes links, or updates that you request. Your phone number is never used for spam or sold to anyone.</p>
+    <div class="highlight">
+      <p>📱 You may opt out at any time by messaging "STOP" on WhatsApp or contacting us via email.</p>
+    </div>
+  </div>
+
+  <div class="card section" id="sharing">
+    <h2><span class="num">5</span> Data Sharing & Third Parties</h2>
+    <p>We <strong>do not sell</strong> your personal data. Information is shared only with trusted service providers required to operate our platform (e.g., Firebase for secure storage, Meta for WhatsApp delivery).</p>
+  </div>
+
+  <div class="card section" id="security">
+    <h2><span class="num">6</span> Data Security</h2>
+    <p>Your passwords are encrypted using industry-standard hashing (Bcrypt), and all data is stored securely on protected servers. We continuously work to keep your information safe.</p>
+  </div>
+
+  <div class="card section" id="rights">
+    <h2><span class="num">7</span> Your Rights</h2>
+    <p>You may request access, correction, or deletion of your account and personal data at any time by contacting us. We will respond within a reasonable timeframe.</p>
+  </div>
+
+  <div class="card section" id="contact">
+    <h2><span class="num">8</span> Contact Us</h2>
+    <p>For any privacy-related questions, reach out to us:</p>
+    <p>📧 Email: <strong>eduportal.contact@gmail.com</strong></p>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 EduPortal. All Rights Reserved. | <a href="index.html">Back to Home</a></p>
+</footer>
+
 </body>
 </html>
