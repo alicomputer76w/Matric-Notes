@@ -716,6 +716,28 @@ app.use((err, req, res, next) => {
         message: err.message 
     });
 });
+// --- YAHAN AAPKA PURANA CODE HAI ---
+// Saare routes, middleware, email, OTP waghera yahan hain...
+
+// --- WHATSAPP WEBHOOK ROUTES START (YAHAN PASTE KAREIN) ---
+app.get('/webhook', (req, res) => {
+  const mode = req.query['hub.mode'];
+  const token = req.query['hub.verify_token'];
+  const challenge = req.query['hub.challenge'];
+
+  if (mode === 'subscribe' && token === 'eduportal123') {
+    console.log('✅ WEBHOOK VERIFIED!');
+    res.status(200).send(challenge);
+  } else {
+    console.log('❌ Webhook verification failed');
+    res.sendStatus(403);
+  }
+});
+
+app.post('/webhook', (req, res) => {
+  console.log('📩 Naya WhatsApp Message aaya:', JSON.stringify(req.body));
+  res.sendStatus(200);
+});
 
 // ============================================
 // START SERVER
