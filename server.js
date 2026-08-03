@@ -6,8 +6,10 @@ const path = require('path');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
-
 console.log('🔥 Starting EduPortal Secure Backend Server...');
+console.log('🔍 WHATSAPP_TOKEN exists:', !!process.env.WHATSAPP_TOKEN);
+console.log('🔍 WHATSAPP_PHONE_ID:', process.env.WHATSAPP_PHONE_ID);
+
 
 // Load environment variables
 dotenv.config();
@@ -455,7 +457,7 @@ app.post('/api/auth/forgot-password-send-otp', async (req, res) => {
     }
 });
 
-// 6. RESET PASSWORD
+
 // 6. RESET PASSWORD
 app.post('/api/auth/reset-password', async (req, res) => {
     try {
@@ -626,10 +628,6 @@ app.get('/api/auth/me', verifyToken, async (req, res) => {
     }
 });
 
-
-// ============================================
-// WHATSAPP CLOUD API - AUTO REPLY SYSTEM
-// ============================================
 
 
 // ============================================
