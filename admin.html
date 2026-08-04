@@ -7,144 +7,410 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{background:#f0f2f5;padding:20px}
-.container{max-width:700px;margin:30px auto;background:#fff;border-radius:12px;padding:30px;box-shadow:0 4px 20px rgba(0,0,0,.08)}
-h1{color:#4361ee;margin-bottom:20px;font-size:1.5rem}
-.hidden{display:none}
+body{background:#f0f2f5;min-height:100vh}
+.hidden{display:none !important}
+
+/* LOGIN */
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-box{background:#fff;padding:40px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.08);max-width:400px;width:100%}
+.login-box h1{color:#4361ee;margin-bottom:25px;font-size:1.5rem;text-align:center}
+
+/* TOP BAR */
+.topbar{background:#fff;padding:15px 30px;box-shadow:0 2px 10px rgba(0,0,0,.05);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.topbar h1{color:#4361ee;font-size:1.3rem}
+.btn-logout{background:#f5576c;color:#fff;border:none;padding:8px 20px;border-radius:6px;cursor:pointer;font-weight:600}
+
+/* TABS */
+.tabs{display:flex;gap:5px;background:#fff;padding:10px 30px;border-bottom:1px solid #e0e0e0;flex-wrap:wrap}
+.tab{padding:10px 20px;border:none;background:transparent;cursor:pointer;font-weight:600;color:#666;border-radius:6px;font-size:.9rem}
+.tab.active{background:#4361ee;color:#fff}
+.tab:hover:not(.active){background:#f0f2f5}
+
+/* CONTENT */
+.content{max-width:1200px;margin:20px auto;padding:0 20px}
+.card{background:#fff;border-radius:12px;padding:25px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-bottom:20px}
+.card h2{color:#4361ee;margin-bottom:20px;font-size:1.2rem;border-bottom:2px solid #f0f2f5;padding-bottom:10px}
+
+/* FORMS */
 .form-group{margin-bottom:15px}
-label{display:block;margin-bottom:6px;font-weight:600;font-size:.9rem;color:#2b2d42}
-input,select,textarea{width:100%;padding:10px;border:2px solid #e0e0e0;border-radius:8px;font-size:.95rem}
+label{display:block;margin-bottom:6px;font-weight:600;font-size:.88rem;color:#2b2d42}
+input,select,textarea{width:100%;padding:10px;border:2px solid #e0e0e0;border-radius:8px;font-size:.92rem;font-family:inherit}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#4361ee}
 textarea{min-height:80px;resize:vertical}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.btn{width:100%;padding:12px;background:#4361ee;color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer}
-.btn:hover{background:#3f37c9}
-.btn-logout{width:auto;padding:8px 20px;background:#f5576c}
-.msg{padding:10px;border-radius:8px;margin-bottom:15px;display:none;font-size:.9rem}
-.msg.success{background:#d4edda;color:#155724;display:block}
-.msg.error{background:#f8d7da;color:#721c24;display:block}
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.recent{margin-top:30px;border-top:2px solid #eee;padding-top:20px}
-.recent-item{background:#f8f9fa;padding:10px;border-radius:8px;margin-bottom:8px;font-size:.85rem}
-.tag{display:inline-block;background:#4361ee;color:#fff;padding:2px 8px;border-radius:20px;font-size:.7rem;margin-right:5px}
+.row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px}
+
+/* BUTTONS */
+.btn{padding:12px 24px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:.95rem;transition:all .2s}
+.btn-primary{background:#4361ee;color:#fff;width:100%}
+.btn-primary:hover{background:#3f37c9}
+.btn-success{background:#10b981;color:#fff}
+.btn-danger{background:#ef4444;color:#fff;padding:6px 12px;font-size:.8rem}
+.btn-edit{background:#f59e0b;color:#fff;padding:6px 12px;font-size:.8rem}
+.btn-secondary{background:#6b7280;color:#fff;padding:6px 12px;font-size:.8rem}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+.stat-card{background:linear-gradient(135deg,#4361ee,#3f37c9);color:#fff;padding:20px;border-radius:10px;text-align:center}
+.stat-card.green{background:linear-gradient(135deg,#10b981,#059669)}
+.stat-card.orange{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.stat-card.pink{background:linear-gradient(135deg,#f72585,#b5179e)}
+.stat-card.cyan{background:linear-gradient(135deg,#06b6d4,#0891b2)}
+.stat-num{font-size:2rem;font-weight:700;margin:5px 0}
+.stat-label{font-size:.85rem;opacity:.9}
+
+/* MESSAGE */
+.msg{padding:12px;border-radius:8px;margin-bottom:15px;display:none;font-size:.9rem}
+.msg.success{background:#d1fae5;color:#065f46;display:block}
+.msg.error{background:#fee2e2;color:#991b1b;display:block}
+.msg.info{background:#dbeafe;color:#1e40af;display:block}
+
+/* QUESTION LIST */
+.q-list{max-height:600px;overflow-y:auto}
+.q-item{background:#f8f9fa;padding:15px;border-radius:8px;margin-bottom:10px;border-left:4px solid #4361ee;position:relative}
+.q-item .meta{font-size:.75rem;color:#666;margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap}
+.q-item .meta .tag{background:#4361ee;color:#fff;padding:2px 8px;border-radius:10px;font-size:.7rem}
+.q-item .meta .tag.green{background:#10b981}
+.q-item .meta .tag.orange{background:#f59e0b}
+.q-item .question-text{font-weight:500;margin-bottom:6px}
+.q-item .answer-text{font-size:.85rem;color:#555;margin-top:5px;background:#fff;padding:8px;border-radius:5px}
+.q-item .actions{display:flex;gap:5px;margin-top:10px}
+
+/* FILTERS */
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:15px;padding:15px;background:#f8f9fa;border-radius:8px}
+.filters input,.filters select{padding:8px;font-size:.85rem}
+
+/* BULK PREVIEW */
+.preview-list{max-height:300px;overflow-y:auto;background:#f8f9fa;padding:15px;border-radius:8px;margin-top:15px}
+.preview-item{background:#fff;padding:10px;margin-bottom:8px;border-radius:6px;font-size:.85rem;border-left:3px solid #10b981}
+.preview-item.invalid{border-left-color:#ef4444;background:#fee2e2}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px}
+.modal{background:#fff;border-radius:12px;padding:30px;max-width:600px;width:100%;max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal-close{background:none;border:none;font-size:1.8rem;cursor:pointer;color:#666}
+
+/* RESPONSIVE */
+@media (max-width:768px){
+  .row,.row-3{grid-template-columns:1fr}
+  .tabs{padding:10px 15px}
+  .tab{padding:8px 12px;font-size:.8rem}
+  .content{padding:0 10px}
+  .card{padding:18px}
+}
 </style>
 </head>
 <body>
 
-<!-- LOGIN SECTION -->
-<div class="container" id="loginSection">
-  <h1>🔐 EduPortal Admin Login</h1>
-  <div class="msg" id="loginMsg"></div>
-  <form id="adminLoginForm">
-    <div class="form-group">
-      <label>Email</label>
-      <input type="email" id="adminEmail" required placeholder="Admin email">
-    </div>
-    <div class="form-group">
-      <label>Password</label>
-      <input type="password" id="adminPassword" required placeholder="Password">
-    </div>
-    <button type="submit" class="btn">Login</button>
-  </form>
+<!-- LOGIN -->
+<div class="login-wrap" id="loginSection">
+  <div class="login-box">
+    <h1>🔐 EduPortal Admin</h1>
+    <div class="msg" id="loginMsg"></div>
+    <form id="adminLoginForm">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="adminEmail" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="adminPassword" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
 </div>
 
-<!-- ADMIN PANEL -->
-<div class="container hidden" id="adminSection">
-  <div class="header">
-    <h1>📚 Admin Panel</h1>
-    <button class="btn btn-logout" id="logoutBtn">Logout</button>
+<!-- MAIN -->
+<div id="mainSection" class="hidden">
+  <div class="topbar">
+    <h1>📚 EduPortal Admin Panel</h1>
+    <button class="btn-logout" id="logoutBtn">Logout</button>
   </div>
-  <div class="msg" id="adminMsg"></div>
 
-  <form id="questionForm">
-    <div class="row">
-      <div class="form-group">
-        <label>Class</label>
-        <select id="qClass" required>
-          <option value="9th">9th Class</option>
-          <option value="10th">10th Class</option>
-        </select>
+  <div class="tabs">
+    <button class="tab active" data-tab="dashboard">📊 Dashboard</button>
+    <button class="tab" data-tab="add">➕ Add Question</button>
+    <button class="tab" data-tab="bulk">📋 Bulk Upload</button>
+    <button class="tab" data-tab="manage">🔧 Manage Questions</button>
+  </div>
+
+  <div class="content">
+    
+    <!-- DASHBOARD -->
+    <div class="tab-content" id="tab-dashboard">
+      <div class="card">
+        <h2>📈 Overview</h2>
+        <div class="stats-grid" id="statsGrid"></div>
       </div>
-      <div class="form-group">
-        <label>Subject</label>
-        <select id="qSubject" required>
-          <option value="math">Mathematics</option>
-          <option value="english">English</option>
-          <option value="urdu">Urdu</option>
-          <option value="physics">Physics</option>
-          <option value="chemistry">Chemistry</option>
-          <option value="biology">Biology</option>
-          <option value="computer">Computer</option>
-          <option value="islamiat">Islamiat</option>
-          <option value="pak-studies">Pak Studies</option>
-        </select>
+      <div class="card">
+        <h2>📚 Subject-wise Breakdown</h2>
+        <div id="subjectStats"></div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="form-group">
-        <label>Chapter #</label>
-        <input type="number" id="qChapter" min="1" required placeholder="1">
+    <!-- ADD QUESTION -->
+    <div class="tab-content hidden" id="tab-add">
+      <div class="card">
+        <h2>➕ Add New Question</h2>
+        <div class="msg" id="addMsg"></div>
+        <form id="questionForm">
+          <div class="row">
+            <div class="form-group">
+              <label>Class</label>
+              <select id="qClass" required>
+                <option value="9th">9th Class</option>
+                <option value="10th">10th Class</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Subject</label>
+              <select id="qSubject" required>
+                <option value="math">Mathematics</option>
+                <option value="english">English</option>
+                <option value="urdu">Urdu</option>
+                <option value="physics">Physics</option>
+                <option value="chemistry">Chemistry</option>
+                <option value="biology">Biology</option>
+                <option value="computer">Computer</option>
+                <option value="islamiat">Islamiat</option>
+                <option value="pak-studies">Pak Studies</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group">
+              <label>Chapter #</label>
+              <input type="number" id="qChapter" min="1" required>
+            </div>
+            <div class="form-group">
+              <label>Chapter Name</label>
+              <input type="text" id="qChapterName" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Content Type</label>
+            <select id="qType" required>
+              <option value="mcq">MCQ</option>
+              <option value="short">Short Question</option>
+              <option value="long">Long Question</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Question</label>
+            <textarea id="qQuestion" required></textarea>
+          </div>
+          <div id="mcqFields">
+            <div class="row">
+              <div class="form-group"><label>Option A</label><input type="text" id="optA"></div>
+              <div class="form-group"><label>Option B</label><input type="text" id="optB"></div>
+            </div>
+            <div class="row">
+              <div class="form-group"><label>Option C</label><input type="text" id="optC"></div>
+              <div class="form-group"><label>Option D</label><input type="text" id="optD"></div>
+            </div>
+            <div class="form-group">
+              <label>Correct Answer</label>
+              <select id="qCorrect">
+                <option value="A">A</option><option value="B">B</option>
+                <option value="C">C</option><option value="D">D</option>
+              </select>
+            </div>
+          </div>
+          <div id="answerField" class="hidden">
+            <div class="form-group">
+              <label>Answer</label>
+              <textarea id="qAnswer"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" id="submitBtn">➕ Add Question</button>
+        </form>
       </div>
-      <div class="form-group">
-        <label>Chapter Name</label>
-        <input type="text" id="qChapterName" required placeholder="e.g. Matrices">
+    </div>
+
+    <!-- BULK UPLOAD -->
+    <div class="tab-content hidden" id="tab-bulk">
+      <div class="card">
+        <h2>📋 Bulk Upload MCQs</h2>
+        <div class="msg" id="bulkMsg"></div>
+        <div class="msg info" style="display:block">
+          <strong>Format:</strong> Neeche diya gaya format use karein. Har MCQ ke darmiyan ek blank line honi chahiye.
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>Class</label>
+            <select id="bulkClass" required>
+              <option value="9th">9th Class</option>
+              <option value="10th">10th Class</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <select id="bulkSubject" required>
+              <option value="math">Mathematics</option>
+              <option value="english">English</option>
+              <option value="urdu">Urdu</option>
+              <option value="physics">Physics</option>
+              <option value="chemistry">Chemistry</option>
+              <option value="biology">Biology</option>
+              <option value="computer">Computer</option>
+              <option value="islamiat">Islamiat</option>
+              <option value="pak-studies">Pak Studies</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Chapter #</label>
+            <input type="number" id="bulkChapter" min="1" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Chapter Name</label>
+          <input type="text" id="bulkChapterName" required>
+        </div>
+        <div class="form-group">
+          <label>Paste MCQs Here</label>
+          <textarea id="bulkText" style="min-height:250px;font-family:monospace;font-size:.85rem" placeholder="Q: What is 2+2?
+A) 3
+B) 4
+C) 5
+D) 6
+Answer: B
+
+Q: Capital of Pakistan?
+A) Lahore
+B) Islamabad
+C) Karachi
+D) Peshawar
+Answer: B"></textarea>
+        </div>
+        <button class="btn btn-secondary" onclick="parseBulk()">🔍 Parse & Preview</button>
+        <button class="btn btn-success hidden" id="uploadBulkBtn" onclick="uploadBulk()">📤 Upload All</button>
+        <div id="bulkPreview" class="preview-list"></div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label>Content Type</label>
-      <select id="qType" required>
-        <option value="mcq">MCQ</option>
-        <option value="short">Short Question</option>
-        <option value="long">Long Question</option>
-      </select>
+    <!-- MANAGE -->
+    <div class="tab-content hidden" id="tab-manage">
+      <div class="card">
+        <h2>🔧 Manage Questions</h2>
+        <div class="msg" id="manageMsg"></div>
+        <div class="filters">
+          <input type="text" id="filterSearch" placeholder="🔍 Search question...">
+          <select id="filterClass">
+            <option value="">All Classes</option>
+            <option value="9th">9th Class</option>
+            <option value="10th">10th Class</option>
+          </select>
+          <select id="filterSubject">
+            <option value="">All Subjects</option>
+            <option value="math">Mathematics</option>
+            <option value="english">English</option>
+            <option value="urdu">Urdu</option>
+            <option value="physics">Physics</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="biology">Biology</option>
+            <option value="computer">Computer</option>
+            <option value="islamiat">Islamiat</option>
+            <option value="pak-studies">Pak Studies</option>
+          </select>
+          <select id="filterType">
+            <option value="">All Types</option>
+            <option value="mcq">MCQ</option>
+            <option value="short">Short</option>
+            <option value="long">Long</option>
+          </select>
+          <button class="btn btn-primary" onclick="loadManage()">Apply Filters</button>
+        </div>
+        <div class="q-list" id="questionList">
+          <p style="text-align:center;color:#888;padding:20px">Loading...</p>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
 
-    <div class="form-group">
-      <label>Question</label>
-      <textarea id="qQuestion" required placeholder="Sawal likhein..."></textarea>
+<!-- EDIT MODAL -->
+<div class="modal-overlay hidden" id="editModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>✏️ Edit Question</h2>
+      <button class="modal-close" onclick="closeEditModal()">&times;</button>
     </div>
-
-    <!-- MCQ Options (sirf MCQ type par) -->
-    <div id="mcqFields">
+    <div class="msg" id="editMsg"></div>
+    <form id="editForm">
+      <input type="hidden" id="editId">
       <div class="row">
-        <div class="form-group"><label>Option A</label><input type="text" id="optA"></div>
-        <div class="form-group"><label>Option B</label><input type="text" id="optB"></div>
+        <div class="form-group">
+          <label>Class</label>
+          <select id="editClass" required>
+            <option value="9th">9th</option><option value="10th">10th</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select id="editSubject" required>
+            <option value="math">Mathematics</option>
+            <option value="english">English</option>
+            <option value="urdu">Urdu</option>
+            <option value="physics">Physics</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="biology">Biology</option>
+            <option value="computer">Computer</option>
+            <option value="islamiat">Islamiat</option>
+            <option value="pak-studies">Pak Studies</option>
+          </select>
+        </div>
       </div>
       <div class="row">
-        <div class="form-group"><label>Option C</label><input type="text" id="optC"></div>
-        <div class="form-group"><label>Option D</label><input type="text" id="optD"></div>
+        <div class="form-group"><label>Chapter #</label><input type="number" id="editChapter" required></div>
+        <div class="form-group"><label>Chapter Name</label><input type="text" id="editChapterName" required></div>
       </div>
       <div class="form-group">
-        <label>Correct Answer</label>
-        <select id="qCorrect">
-          <option value="A">A</option><option value="B">B</option>
-          <option value="C">C</option><option value="D">D</option>
+        <label>Type</label>
+        <select id="editType" onchange="toggleEditAnswer()">
+          <option value="mcq">MCQ</option>
+          <option value="short">Short</option>
+          <option value="long">Long</option>
         </select>
       </div>
-    </div>
-
-    <!-- Answer (short/long type par) -->
-    <div id="answerField" class="hidden">
       <div class="form-group">
-        <label>Answer</label>
-        <textarea id="qAnswer" placeholder="Jawab likhein..."></textarea>
+        <label>Question</label>
+        <textarea id="editQuestion" required></textarea>
       </div>
-    </div>
-
-    <button type="submit" class="btn" id="submitBtn">➕ Add Question</button>
-  </form>
-
-  <div class="recent">
-    <h1 style="font-size:1.1rem">🕒 Recently Added (Last 10)</h1>
-    <div id="recentList"><p style="color:#888;font-size:.85rem">Loading...</p></div>
+      <div id="editMcqFields">
+        <div class="row">
+          <div class="form-group"><label>Option A</label><input type="text" id="editOptA"></div>
+          <div class="form-group"><label>Option B</label><input type="text" id="editOptB"></div>
+        </div>
+        <div class="row">
+          <div class="form-group"><label>Option C</label><input type="text" id="editOptC"></div>
+          <div class="form-group"><label>Option D</label><input type="text" id="editOptD"></div>
+        </div>
+        <div class="form-group">
+          <label>Correct Answer</label>
+          <select id="editCorrect">
+            <option value="A">A</option><option value="B">B</option>
+            <option value="C">C</option><option value="D">D</option>
+          </select>
+        </div>
+      </div>
+      <div id="editAnswerField" class="hidden">
+        <div class="form-group">
+          <label>Answer</label>
+          <textarea id="editAnswer"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">💾 Save Changes</button>
+    </form>
   </div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, addDoc, collection, getDocs, limit, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getFirestore, doc, getDoc, addDoc, collection, getDocs, query, where, limit, deleteDoc, updateDoc, serverTimestamp, writeBatch } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD4OjgT03bWh3oGwZ4TpLt5ndnJl2B2YWs",
@@ -159,25 +425,22 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const loginSection = document.getElementById('loginSection');
-const adminSection = document.getElementById('adminSection');
-
+// ===== AUTH =====
 function showMsg(id, text, type){
   const el = document.getElementById(id);
   el.className = 'msg ' + type;
   el.innerText = text;
-  setTimeout(()=>{ el.className='msg'; }, 4000);
+  if(type !== 'info') setTimeout(()=>{ el.className='msg'; }, 4000);
 }
 
-// ---- AUTH CHECK (Admin hai ya nahi) ----
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     try {
       const uSnap = await getDoc(doc(db, 'users', user.uid));
       if (uSnap.exists() && uSnap.data().role === 'admin') {
-        loginSection.classList.add('hidden');
-        adminSection.classList.remove('hidden');
-        loadRecent();
+        document.getElementById('loginSection').classList.add('hidden');
+        document.getElementById('mainSection').classList.remove('hidden');
+        loadDashboard();
         return;
       }
     } catch(e){}
@@ -186,7 +449,6 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-// ---- LOGIN ----
 document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   try {
@@ -198,22 +460,31 @@ document.getElementById('adminLoginForm').addEventListener('submit', async (e) =
   }
 });
 
-// ---- LOGOUT ----
 document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth));
 
-// ---- MCQ / Answer Fields Toggle ----
+// ===== TABS =====
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.remove('hidden');
+    if(tab.dataset.tab === 'dashboard') loadDashboard();
+    if(tab.dataset.tab === 'manage') loadManage();
+  });
+});
+
+// ===== ADD QUESTION =====
 document.getElementById('qType').addEventListener('change', (e) => {
   const isMcq = e.target.value === 'mcq';
   document.getElementById('mcqFields').classList.toggle('hidden', !isMcq);
   document.getElementById('answerField').classList.toggle('hidden', isMcq);
 });
 
-// ---- ADD QUESTION ----
 document.getElementById('questionForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
   btn.disabled = true; btn.innerText = 'Saving...';
-
   const type = document.getElementById('qType').value;
   const data = {
     class: document.getElementById('qClass').value,
@@ -224,7 +495,6 @@ document.getElementById('questionForm').addEventListener('submit', async (e) => 
     question: document.getElementById('qQuestion').value.trim(),
     createdAt: serverTimestamp()
   };
-
   if (type === 'mcq') {
     data.options = [
       document.getElementById('optA').value.trim(),
@@ -236,39 +506,318 @@ document.getElementById('questionForm').addEventListener('submit', async (e) => 
   } else {
     data.answer = document.getElementById('qAnswer').value.trim();
   }
-
   try {
     await addDoc(collection(db, 'questions'), data);
-    showMsg('adminMsg', '✅ Question successfully add ho gaya!', 'success');
+    showMsg('addMsg', '✅ Question successfully added!', 'success');
     e.target.reset();
     document.getElementById('mcqFields').classList.remove('hidden');
     document.getElementById('answerField').classList.add('hidden');
-    loadRecent();
   } catch (err) {
-    showMsg('adminMsg', '❌ Error: ' + err.message, 'error');
+    showMsg('addMsg', '❌ Error: ' + err.message, 'error');
   } finally {
     btn.disabled = false; btn.innerText = '➕ Add Question';
   }
 });
 
-// ---- RECENT LIST ----
-async function loadRecent(){
+// ===== DASHBOARD =====
+async function loadDashboard(){
+  const grid = document.getElementById('statsGrid');
+  const subjectStats = document.getElementById('subjectStats');
+  grid.innerHTML = '<p style="text-align:center;padding:20px">Loading stats...</p>';
   try {
-    const snap = await getDocs(query(collection(db,'questions'), limit(10)));
-    let items = [];
-    snap.forEach(d => items.push(d.data()));
-    items.sort((a,b) => (b.createdAt?.seconds||0) - (a.createdAt?.seconds||0));
-    const list = document.getElementById('recentList');
-    if (!items.length) { list.innerHTML = '<p style="color:#888;font-size:.85rem">Abhi koi question nahi hai.</p>'; return; }
-    list.innerHTML = items.map(i => `
-      <div class="recent-item">
-        <span class="tag">${i.class}</span><span class="tag">${i.subject}</span>
-        <span class="tag">${i.type}</span> Ch.${i.chapter} — ${i.question}
-      </div>`).join('');
-  } catch(e){
-    document.getElementById('recentList').innerHTML = '<p style="color:#888">Loading failed</p>';
+    const snap = await getDocs(collection(db, 'questions'));
+    const all = [];
+    snap.forEach(d => all.push({id:d.id, ...d.data()}));
+    
+    const total = all.length;
+    const mcqs = all.filter(q => q.type === 'mcq').length;
+    const shorts = all.filter(q => q.type === 'short').length;
+    const longs = all.filter(q => q.type === 'long').length;
+    const cls9 = all.filter(q => q.class === '9th').length;
+    const cls10 = all.filter(q => q.class === '10th').length;
+    
+    grid.innerHTML = `
+      <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-label">Total Questions</div></div>
+      <div class="stat-card green"><div class="stat-num">${mcqs}</div><div class="stat-label">MCQs</div></div>
+      <div class="stat-card orange"><div class="stat-num">${shorts}</div><div class="stat-label">Short Qs</div></div>
+      <div class="stat-card pink"><div class="stat-num">${longs}</div><div class="stat-label">Long Qs</div></div>
+      <div class="stat-card cyan"><div class="stat-num">${cls9}</div><div class="stat-label">9th Class</div></div>
+      <div class="stat-card"><div class="stat-num">${cls10}</div><div class="stat-label">10th Class</div></div>
+    `;
+
+    // Subject-wise
+    const subjects = {};
+    all.forEach(q => {
+      const key = `${q.class} - ${q.subject}`;
+      if(!subjects[key]) subjects[key] = {mcq:0, short:0, long:0, total:0};
+      subjects[key][q.type]++;
+      subjects[key].total++;
+    });
+    
+    subjectStats.innerHTML = `
+      <table style="width:100%;border-collapse:collapse;font-size:.88rem">
+        <thead>
+          <tr style="background:#f0f2f5">
+            <th style="padding:10px;text-align:left">Class - Subject</th>
+            <th style="padding:10px">MCQs</th>
+            <th style="padding:10px">Short</th>
+            <th style="padding:10px">Long</th>
+            <th style="padding:10px;font-weight:700">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${Object.entries(subjects).map(([k,v]) => `
+            <tr style="border-bottom:1px solid #eee">
+              <td style="padding:10px;font-weight:500">${k}</td>
+              <td style="padding:10px;text-align:center">${v.mcq}</td>
+              <td style="padding:10px;text-align:center">${v.short}</td>
+              <td style="padding:10px;text-align:center">${v.long}</td>
+              <td style="padding:10px;text-align:center;font-weight:700;color:#4361ee">${v.total}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  } catch(e) {
+    grid.innerHTML = '<p style="color:#ef4444">Failed to load stats</p>';
   }
 }
+
+// ===== MANAGE =====
+let allQuestions = [];
+async function loadManage(){
+  const list = document.getElementById('questionList');
+  list.innerHTML = '<p style="text-align:center;padding:20px">Loading...</p>';
+  
+  try {
+    const search = document.getElementById('filterSearch').value.toLowerCase();
+    const fClass = document.getElementById('filterClass').value;
+    const fSubject = document.getElementById('filterSubject').value;
+    const fType = document.getElementById('filterType').value;
+
+    let q = collection(db, 'questions');
+    const constraints = [];
+    if(fClass) constraints.push(where('class', '==', fClass));
+    if(fSubject) constraints.push(where('subject', '==', fSubject));
+    if(fType) constraints.push(where('type', '==', fType));
+    
+    const snap = constraints.length ? await getDocs(query(q, ...constraints, limit(100))) : await getDocs(query(q, limit(100)));
+    
+    allQuestions = [];
+    snap.forEach(d => allQuestions.push({id:d.id, ...d.data()}));
+    
+    // Search filter (client-side)
+    let filtered = allQuestions;
+    if(search){
+      filtered = allQuestions.filter(q => 
+        q.question?.toLowerCase().includes(search) ||
+        q.answer?.toLowerCase().includes(search)
+      );
+    }
+    
+    filtered.sort((a,b) => (b.createdAt?.seconds||0) - (a.createdAt?.seconds||0));
+    
+    if(!filtered.length){
+      list.innerHTML = '<p style="text-align:center;padding:20px;color:#888">No questions found</p>';
+      return;
+    }
+
+    list.innerHTML = filtered.map(q => `
+      <div class="q-item">
+        <div class="meta">
+          <span class="tag">${q.class}</span>
+          <span class="tag green">${q.subject}</span>
+          <span class="tag orange">${q.type}</span>
+          <span>Ch.${q.chapter} - ${q.chapterName || ''}</span>
+        </div>
+        <div class="question-text">Q: ${q.question}</div>
+        ${q.type === 'mcq' ? `
+          <div class="answer-text">
+            <strong>Options:</strong> A) ${q.options?.[0]} | B) ${q.options?.[1]} | C) ${q.options?.[2]} | D) ${q.options?.[3]}<br>
+            <strong>Answer:</strong> ${q.answer}
+          </div>
+        ` : `
+          <div class="answer-text"><strong>Answer:</strong> ${q.answer || '(No answer)'}</div>
+        `}
+        <div class="actions">
+          <button class="btn btn-edit" onclick="openEdit('${q.id}')">✏️ Edit</button>
+          <button class="btn btn-danger" onclick="deleteQuestion('${q.id}')">🗑️ Delete</button>
+        </div>
+      </div>
+    `).join('');
+  } catch(e){
+    list.innerHTML = `<p style="color:#ef4444">Error: ${e.message}</p>`;
+  }
+}
+window.loadManage = loadManage;
+
+// ===== DELETE =====
+window.deleteQuestion = async function(id){
+  if(!confirm('Kya aap waqai yeh question delete karna chahte hain?')) return;
+  try {
+    await deleteDoc(doc(db, 'questions', id));
+    showMsg('manageMsg', '✅ Deleted successfully!', 'success');
+    loadManage();
+    loadDashboard();
+  } catch(e){
+    showMsg('manageMsg', '❌ Error: ' + e.message, 'error');
+  }
+};
+
+// ===== EDIT =====
+window.openEdit = function(id){
+  const q = allQuestions.find(x => x.id === id);
+  if(!q) return;
+  document.getElementById('editId').value = id;
+  document.getElementById('editClass').value = q.class;
+  document.getElementById('editSubject').value = q.subject;
+  document.getElementById('editChapter').value = q.chapter;
+  document.getElementById('editChapterName').value = q.chapterName || '';
+  document.getElementById('editType').value = q.type;
+  document.getElementById('editQuestion').value = q.question;
+  if(q.type === 'mcq'){
+    document.getElementById('editOptA').value = q.options?.[0] || '';
+    document.getElementById('editOptB').value = q.options?.[1] || '';
+    document.getElementById('editOptC').value = q.options?.[2] || '';
+    document.getElementById('editOptD').value = q.options?.[3] || '';
+    document.getElementById('editCorrect').value = q.answer || 'A';
+  } else {
+    document.getElementById('editAnswer').value = q.answer || '';
+  }
+  toggleEditAnswer();
+  document.getElementById('editModal').classList.remove('hidden');
+};
+
+window.toggleEditAnswer = function(){
+  const type = document.getElementById('editType').value;
+  document.getElementById('editMcqFields').classList.toggle('hidden', type !== 'mcq');
+  document.getElementById('editAnswerField').classList.toggle('hidden', type === 'mcq');
+};
+
+window.closeEditModal = function(){
+  document.getElementById('editModal').classList.add('hidden');
+};
+
+document.getElementById('editForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const id = document.getElementById('editId').value;
+  const type = document.getElementById('editType').value;
+  const data = {
+    class: document.getElementById('editClass').value,
+    subject: document.getElementById('editSubject').value,
+    chapter: parseInt(document.getElementById('editChapter').value),
+    chapterName: document.getElementById('editChapterName').value.trim(),
+    type: type,
+    question: document.getElementById('editQuestion').value.trim()
+  };
+  if(type === 'mcq'){
+    data.options = [
+      document.getElementById('editOptA').value.trim(),
+      document.getElementById('editOptB').value.trim(),
+      document.getElementById('editOptC').value.trim(),
+      document.getElementById('editOptD').value.trim()
+    ];
+    data.answer = document.getElementById('editCorrect').value;
+  } else {
+    data.answer = document.getElementById('editAnswer').value.trim();
+  }
+  try {
+    await updateDoc(doc(db, 'questions', id), data);
+    showMsg('editMsg', '✅ Updated successfully!', 'success');
+    setTimeout(() => {
+      closeEditModal();
+      loadManage();
+    }, 1000);
+  } catch(e){
+    showMsg('editMsg', '❌ Error: ' + e.message, 'error');
+  }
+});
+
+// ===== BULK UPLOAD =====
+let parsedQuestions = [];
+window.parseBulk = function(){
+  const text = document.getElementById('bulkText').value.trim();
+  const preview = document.getElementById('bulkPreview');
+  parsedQuestions = [];
+  
+  if(!text){ preview.innerHTML = '<p style="color:#888">Koi data nahi hai</p>'; return; }
+  
+  const blocks = text.split(/\n\s*\n/);
+  
+  blocks.forEach((block, idx) => {
+    const lines = block.trim().split('\n').map(l => l.trim()).filter(l => l);
+    if(!lines.length) return;
+    
+    const qLine = lines.find(l => l.toLowerCase().startsWith('q:') || l.toLowerCase().startsWith('question:'));
+    if(!qLine){
+      preview.innerHTML += `<div class="preview-item invalid">Block ${idx+1}: Invalid (no Q: line)</div>`;
+      return;
+    }
+    
+    const question = qLine.replace(/^q(uestion)?:/i, '').trim();
+    const optA = lines.find(l => /^a\)/i.test(l))?.replace(/^a\)\s*/i, '').trim() || '';
+    const optB = lines.find(l => /^b\)/i.test(l))?.replace(/^b\)\s*/i, '').trim() || '';
+    const optC = lines.find(l => /^c\)/i.test(l))?.replace(/^c\)\s*/i, '').trim() || '';
+    const optD = lines.find(l => /^d\)/i.test(l))?.replace(/^d\)\s*/i, '').trim() || '';
+    const ansLine = lines.find(l => /^answer\s*:/i.test(l));
+    const answer = ansLine ? ansLine.replace(/^answer\s*:/i, '').trim().toUpperCase() : '';
+    
+    if(!optA || !optB || !optC || !optD || !['A','B','C','D'].includes(answer)){
+      preview.innerHTML += `<div class="preview-item invalid">Block ${idx+1}: Missing options or invalid answer</div>`;
+      return;
+    }
+    
+    parsedQuestions.push({ question, options:[optA,optB,optC,optD], answer });
+    preview.innerHTML += `<div class="preview-item"><strong>Q${parsedQuestions.length}:</strong> ${question}<br><small>A) ${optA} | B) ${optB} | C) ${optC} | D) ${optD} → <strong>${answer}</strong></small></div>`;
+  });
+  
+  if(parsedQuestions.length > 0){
+    document.getElementById('uploadBulkBtn').classList.remove('hidden');
+    showMsg('bulkMsg', `✅ ${parsedQuestions.length} MCQs parsed successfully!`, 'success');
+  } else {
+    document.getElementById('uploadBulkBtn').classList.add('hidden');
+    showMsg('bulkMsg', '❌ No valid MCQs found', 'error');
+  }
+};
+
+window.uploadBulk = async function(){
+  const btn = document.getElementById('uploadBulkBtn');
+  btn.disabled = true; btn.innerText = 'Uploading...';
+  
+  const cls = document.getElementById('bulkClass').value;
+  const subj = document.getElementById('bulkSubject').value;
+  const chapter = parseInt(document.getElementById('bulkChapter').value);
+  const chapterName = document.getElementById('bulkChapterName').value.trim();
+  
+  try {
+    const batch = writeBatch(db);
+    parsedQuestions.forEach(q => {
+      const ref = doc(collection(db, 'questions'));
+      batch.set(ref, {
+        class: cls,
+        subject: subj,
+        chapter: chapter,
+        chapterName: chapterName,
+        type: 'mcq',
+        question: q.question,
+        options: q.options,
+        answer: q.answer,
+        createdAt: serverTimestamp()
+      });
+    });
+    await batch.commit();
+    showMsg('bulkMsg', `✅ ${parsedQuestions.length} MCQs uploaded successfully!`, 'success');
+    document.getElementById('bulkText').value = '';
+    document.getElementById('bulkPreview').innerHTML = '';
+    document.getElementById('uploadBulkBtn').classList.add('hidden');
+    parsedQuestions = [];
+    loadDashboard();
+  } catch(e){
+    showMsg('bulkMsg', '❌ Error: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false; btn.innerText = '📤 Upload All';
+  }
+};
 </script>
 </body>
 </html>
