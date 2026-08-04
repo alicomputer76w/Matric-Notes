@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduPortal - Online Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#f0f2f5;color:#2b2d42}
+.topbar{background:#fff;padding:15px 20px;box-shadow:0 2px 10px rgba(0,0,0,.05);display:flex;align-items:center;gap:15px;position:sticky;top:0;z-index:10}
+.topbar a{color:#4361ee;text-decoration:none;font-weight:600}
+.topbar h1{font-size:1.1rem;color:#4361ee}
+.container{max-width:900px;margin:20px auto;padding:0 15px}
+.selectors{background:#fff;padding:20px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.05);margin-bottom:20px}
+.sel-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+select{width:100%;padding:10px;border:2px solid #e0e0e0;border-radius:8px;font-size:.9rem}
+.type-tabs{display:flex;gap:8px}
+.type-tab{flex:1;padding:10px;border:none;background:#f0f2f5;border-radius:8px;font-weight:600;cursor:pointer;color:#666}
+.type-tab.active{background:#4361ee;color:#fff}
+.count{font-size:.85rem;color:#666;margin-bottom:12px}
+.q-card{background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.q-num{display:inline-block;background:#4361ee;color:#fff;font-size:.75rem;padding:3px 10px;border-radius:12px;margin-bottom:8px}
+.q-text{font-weight:600;margin-bottom:12px}
+.opt{display:block;width:100%;text-align:left;padding:10px 14px;margin-bottom:8px;border:2px solid #e0e0e0;border-radius:8px;background:#fff;cursor:pointer;font-size:.9rem;transition:.2s}
+.opt:hover{border-color:#4361ee;background:#f5f7ff}
+.opt.correct{border-color:#10b981;background:#d1fae5;font-weight:600}
+.opt.wrong{border-color:#ef4444;background:#fee2e2}
+.opt:disabled{cursor:default}
+.explain{margin-top:8px;font-size:.85rem;color:#065f46;background:#d1fae5;padding:8px 12px;border-radius:6px;display:none}
+.answer-box{margin-top:10px;background:#eef2ff;border-left:4px solid #4361ee;padding:12px;border-radius:6px;font-size:.9rem;display:none}
+.show-ans{background:#4361ee;color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:.85rem;margin-top:8px}
+.empty{text-align:center;padding:40px 20px;background:#fff;border-radius:12px;color:#888}
+@media(max-width:600px){.sel-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="../index.html">← Home</a>
+  <h1>📚 EduPortal Study Portal</h1>
+</div>
+<div class="container">
+  <div class="selectors">
+    <div class="sel-row">
+      <select id="selClass">
+        <option value="9th">9th Class</option>
+        <option value="10th">10th Class</option>
+      </select>
+      <select id="selSubject">
+        <option value="math">Mathematics</option>
+        <option value="english">English</option>
+        <option value="urdu">Urdu</option>
+        <option value="physics">Physics</option>
+        <option value="chemistry">Chemistry</option>
+        <option value="biology">Biology</option>
+        <option value="computer">Computer</option>
+        <option value="islamiat">Islamiat</option>
+        <option value="pak-studies">Pak Studies</option>
+      </select>
+      <select id="selChapter"><option value="">All Chapters</option></select>
+    </div>
+    <div class="type-tabs">
+      <button class="type-tab active" data-type="mcq">MCQs</button>
+      <button class="type-tab" data-type="short">Short Questions</button>
+      <button class="type-tab" data-type="long">Long Questions</button>
+    </div>
+  </div>
+  <div class="count" id="countMsg"></div>
+  <div id="contentArea"><div class="empty">⏳ Loading...</div></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyD4OjgT03bWh3oGwZ4TpLt5ndnJl2B2YWs",
+  authDomain: "general-59069.firebaseapp.com",
+  projectId: "general-59069",
+  storageBucket: "general-59069.firebasestorage.app",
+  messagingSenderId: "1025337426123",
+  appId: "1:1025337426123:web:6d5d7ebfa26e64c0ae5b4e"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let allData = [];
+let currentType = 'mcq';
+
+const selClass = document.getElementById('selClass');
+const selSubject = document.getElementById('selSubject');
+const selChapter = document.getElementById('selChapter');
+const contentArea = document.getElementById('contentArea');
+const countMsg = document.getElementById('countMsg');
+
+selClass.addEventListener('change', loadData);
+selSubject.addEventListener('change', loadData);
+selChapter.addEventListener('change', render);
+
+document.querySelectorAll('.type-tab').forEach(t => t.addEventListener('click', () => {
+  document.querySelectorAll('.type-tab').forEach(x => x.classList.remove('active'));
+  t.classList.add('active');
+  currentType = t.dataset.type;
+  render();
+}));
+
+async function loadData(){
+  contentArea.innerHTML = '<div class="empty">⏳ Loading questions...</div>';
+  try{
+    const snap = await getDocs(query(collection(db,'questions'),
+      where('class','==',selClass.value),
+      where('subject','==',selSubject.value)));
+    allData = [];
+    snap.forEach(d => allData.push(d.data()));
+    buildChapters();
+    render();
+  }catch(e){
+    contentArea.innerHTML = `<div class="empty">❌ Error: ${e.message}</div>`;
+  }
+}
+
+function buildChapters(){
+  const map = {};
+  allData.forEach(q => { map[q.chapter] = q.chapterName || ('Chapter ' + q.chapter); });
+  const keys = Object.keys(map).sort((a,b)=>a-b);
+  selChapter.innerHTML = '<option value="">All Chapters</option>' +
+    keys.map(k => `<option value="${k}">Ch ${k}: ${map[k]}</option>`).join('');
+}
+
+function render(){
+  let items = allData.filter(q => q.type === currentType);
+  if(selChapter.value) items = items.filter(q => q.chapter == selChapter.value);
+  items.sort((a,b)=> (a.chapter-b.chapter));
+  countMsg.innerText = `✅ ${items.length} questions found`;
+  if(!items.length){
+    contentArea.innerHTML = '<div class="empty">📭 Abhi is section mein content nahi hai.<br>Admin jald hi add karega!</div>';
+    return;
+  }
+  if(currentType === 'mcq'){
+    contentArea.innerHTML = items.map((q,i)=>`
+      <div class="q-card" data-ans="${q.answer}">
+        <span class="q-num">Ch ${q.chapter} • Q${i+1}</span>
+        <div class="q-text">${q.question}</div>
+        ${(q.options||[]).map((o,idx)=>`<button class="opt" data-opt="${'ABCD'[idx]}">${'ABCD'[idx]}) ${o}</button>`).join('')}
+        <div class="explain">✅ Correct Answer: ${q.answer}</div>
+      </div>`).join('');
+  } else {
+    contentArea.innerHTML = items.map((q,i)=>`
+      <div class="q-card">
+        <span class="q-num">Ch ${q.chapter} • Q${i+1}</span>
+        <div class="q-text">${q.question}</div>
+        <button class="show-ans" onclick="this.nextElementSibling.style.display='block';this.style.display='none';">👁️ Show Answer</button>
+        <div class="answer-box"><strong>Answer:</strong><br>${q.answer || '(Answer coming soon)'}</div>
+      </div>`).join('');
+  }
+}
+
+// MCQ click handling
+contentArea.addEventListener('click', (e) => {
+  const btn = e.target.closest('.opt');
+  if(!btn) return;
+  const card = btn.closest('.q-card');
+  if(card.dataset.done) return;
+  card.dataset.done = '1';
+  const correct = card.dataset.ans;
+  card.querySelectorAll('.opt').forEach(o => {
+    o.disabled = true;
+    if(o.dataset.opt === correct) o.classList.add('correct');
+  });
+  if(btn.dataset.opt !== correct) btn.classList.add('wrong');
+  card.querySelector('.explain').style.display = 'block';
+});
+
+loadData();
+</script>
+</body>
+</html>
