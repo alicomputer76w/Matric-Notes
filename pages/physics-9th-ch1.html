@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1 - Physical Quantities and Measurement | 9th Physics | EduPortal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Arial,sans-serif}
+body{background:#f3f4f6;color:#1f2937;padding-bottom:60px}
+.navbar{background:#fff;display:flex;justify-content:space-between;align-items:center;padding:14px 40px;box-shadow:0 2px 10px rgba(0,0,0,.07);position:sticky;top:0;z-index:100}
+.logo{font-size:22px;font-weight:700;color:#4f46e5;text-decoration:none}
+.nav-right{display:flex;align-items:center;gap:25px}
+.nav-right a{color:#374151;text-decoration:none;font-weight:600;font-size:15px}
+.nav-right a.active{color:#4f46e5}
+.premium-btn{background:#db2777;color:#fff !important;padding:10px 22px;border-radius:50px;font-weight:700}
+.strip{height:12px;background:#4f46e5}
+.container{max-width:950px;margin:0 auto;padding:25px 15px}
+.back-link{display:inline-block;margin-bottom:15px;color:#4f46e5;text-decoration:none;font-weight:600}
+.ch-header{background:#fff;border-radius:14px;padding:20px 25px;display:flex;align-items:center;gap:15px;box-shadow:0 3px 10px rgba(0,0,0,.06);margin-bottom:25px}
+.ch-num{width:45px;height:45px;background:#4f46e5;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;flex-shrink:0}
+.ch-header h1{font-size:20px;color:#111827}
+.tabs{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:25px}
+.tab-btn{padding:12px 22px;border:2px solid #c7d2fe;background:#fff;color:#4f46e5;border-radius:10px;font-weight:700;cursor:pointer;font-size:15px;transition:.2s}
+.tab-btn:hover{background:#eef2ff}
+.tab-btn.active{background:#4f46e5;color:#fff;border-color:#4f46e5}
+.q-card{background:#fff;border-radius:12px;padding:20px;margin-bottom:15px;box-shadow:0 2px 6px rgba(0,0,0,.05);border-left:5px solid #4f46e5}
+.q-title{font-size:16px;font-weight:600;display:flex;gap:10px;align-items:flex-start;line-height:1.5}
+.q-num{background:#eef2ff;color:#4f46e5;font-weight:700;min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.options{margin:12px 0 0 38px;display:grid;gap:8px}
+.option{padding:10px 14px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;font-size:14px}
+.option.correct{background:#dcfce7;border-color:#22c55e;color:#166534;font-weight:700}
+.answer-box{margin:12px 0 0 38px;background:#eef2ff;border:1px dashed #6366f1;padding:12px 15px;border-radius:8px;font-size:14px;white-space:pre-line}
+.answer-box b{color:#4f46e5}
+.section-title{text-align:center;color:#4f46e5;margin-bottom:15px;font-size:18px}
+.empty{text-align:center;color:#6b7280;background:#fff;border-radius:12px;padding:25px}
+@media(max-width:600px){.navbar{padding:12px 15px}.nav-right{gap:12px}.nav-right a{font-size:13px}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="../index.html" class="logo">📘 EduPortal</a>
+  <div class="nav-right">
+    <a href="../index.html">Home</a>
+    <a href="physics-9th.html" class="active">9th Class</a>
+    <a href="../index.html" class="premium-btn">Go Premium</a>
+  </div>
+</nav>
+<div class="strip"></div>
+
+<div class="container">
+  <a class="back-link" href="physics-9th.html">← Back to Chapters</a>
+
+  <div class="ch-header">
+    <div class="ch-num">1</div>
+    <h1>Physical Quantities and Measurement</h1>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn" onclick="showSection('mcqs',this)">MCQs</button>
+    <button class="tab-btn" onclick="showSection('short',this)">Short Questions</button>
+    <button class="tab-btn" onclick="showSection('long',this)">Long Questions</button>
+    <button class="tab-btn" onclick="showSection('numerical',this)">Numericals</button>
+  </div>
+
+  <div id="content"></div>
+</div>
+
+<script>
+/* =====================================================
+   CHAPTER 1 DATA — MCQs aur Short filled hain.
+   Long aur Numerical baad mai isi format mai add kren:
+   long: [ { q: "question", ans: "answer" }, ... ]
+   numerical: [ { q: "question", solution: "hal" }, ... ]
+===================================================== */
+const chapterData = {
+
+  mcqs: [
+    { q: "The instrument that is most suitable for measuring the thickness of a few sheets of cardboard is:",
+      options: ["Meter rule", "Measuring tape", "Vernier Callipers", "Micrometer screw gauge"],
+      correct: 3 },
+    { q: "One femtometre is equal to:",
+      options: ["10⁻⁹ m", "10⁻¹⁵ m", "10⁹ m", "10¹⁵ m"],
+      correct: 1 },
+    { q: "A light year is a unit of:",
+      options: ["Light", "Time", "Distance", "Speed"],
+      correct: 2 },
+    { q: "Which one is a non-physical quantity?",
+      options: ["Distance", "Density", "Colour", "Temperature"],
+      correct: 2 },
+    { q: "When using a measuring cylinder, one precaution to take is:",
+      options: ["Check for the zero error", "Look at the meniscus from below the level of the water surface", "Take several readings by looking from more than one direction", "Position the eye in line with the bottom of the meniscus"],
+      correct: 3 },
+    { q: "Volume of water consumed by you per day is estimated in:",
+      options: ["Millilitre", "Litre", "Kilogram", "Cubic metre"],
+      correct: 1 },
+    { q: "A displacement can is used to measure:",
+      options: ["Mass of a liquid", "Mass of a solid", "Volume of a liquid", "Volume of a solid"],
+      correct: 3 },
+    { q: "Two rods with lengths 12.321 cm and 10.3 cm are placed side by side. The difference in their lengths is:",
+      options: ["2.02 cm", "2.0 cm", "2 cm", "2.021 cm"],
+      correct: 1 },
+    { q: "Four students measure the diameter of a cylinder with Vernier Callipers. Which of the following readings is correct?",
+      options: ["3.4 cm", "3.475 cm", "3.47 cm", "3.5 cm"],
+      correct: 2 },
+    { q: "Which of the following measures are likely to represent the thickness of a sheet of this book?",
+      options: ["6×10⁻²⁵ m", "1×10⁻⁴ m", "1.2×10⁻¹⁵ m", "4×10⁻⁷ m"],
+      correct: 1 },
+    { q: "In a Vernier Callipers ten smallest divisions of the Vernier scale are equal to nine smallest divisions of the main scale. If the smallest division of the main scale is half millimetre, the Vernier constant is equal to:",
+      options: ["0.5 mm", "0.1 mm", "0.05 mm", "0.001 mm"],
+      correct: 2 }
+  ],
+
+  short: [
+    { q: "Can a non-physical quantity be measured? If yes, then how?",
+      ans: "No, a non-physical quantity cannot be measured because by definition non-physical quantities are those which cannot be measured or expressed with numerical value and units. For example love, sadness, color and taste, etc." },
+    { q: "What is measurement? Name its two parts.",
+      ans: "A measurement is a process of comparison of unknown quantity with a widely accepted standard quantity.\nExample: A metal weight of 100 kg.\nTwo important parts of a measurement are number or numerical value and a unit.\nNumerical value = 100\nUnit = kilogram\nA measurement without a unit is meaningless." },
+    { q: "Why do we need a standard unit for measurements?",
+      ans: "There are mainly two important purposes of using standard units:\n(i) To measure the quantities accurately\n(ii) To convey the measurements to other people so that they understand those measurements accurately\n(iii) Also use of SI measurements helps scientist to share and compare their observation and results easily." },
+    { q: "Write the name of 3 base quantities and 3 derived quantities.",
+      ans: "The three base and derived quantities are:\n(a) Length, mass, time  (base quantities)\n(b) Area, volume, speed  (derived quantities)" },
+    { q: "Which SI unit will you use to express the height of your desk?",
+      ans: 'The SI unit use to express the height of your desk is the meter abbreviated as "m".' },
+    { q: "Write the name and symbols of all SI base units.",
+      ans: "Physical quantity — Unit — Symbol\nLength — Meter — m\nMass — Kilogram — kg\nTime — Second — s\nTemperature — Kelvin — K\nElectric current — Ampere — A\nIntensity of light — Candela — cd\nAmount of substance — Mole — mol" },
+    { q: "Why is a prefix used? Name three sub-multiples and three multiple prefixes with their symbols.",
+      ans: "Prefixes are the words or symbols added before SI units as milli, centi, kilo, etc.\nBy using prefixes it becomes very easy to add or subtract and multiply or divide very large or small physical quantities.\nMultiple prefixes: mega (M), giga (G), tera (T)\nSub-multiple prefixes: micro (μ), nano (n), pico (p)" },
+    { q: "What is meant by: (a) 5 pm (b) 15 ns (c) 6 μm (d) 5 fs",
+      ans: "(a) pm (pico-meter) is unit of length. Prefix = pico = 10⁻¹²  ⇒  5 pm = 5 × 10⁻¹² m\n(b) ns (nano-second) is unit of time. Prefix = nano = 10⁻⁹  ⇒  15 ns = 15 × 10⁻⁹ s\n(c) μm (micro-meter) is unit of length. Prefix = micro = 10⁻⁶  ⇒  6 μm = 6 × 10⁻⁶ m\n(d) fs (femto-second) is unit of time. Prefix = femto = 10⁻¹⁵  ⇒  5 fs = 5 × 10⁻¹⁵ s" },
+    { q: "(a) For what purpose a Vernier Callipers is used? (b) Name its two main parts. (c) How is least count found? (d) What is meant by zero-error?",
+      ans: "(a) Vernier calliper can be used to measure the thickness, internal and external diameter, width or depth of an object.\n(b) (i) Main scale which has marking of 1mm each. (ii) Vernier scale of length 9 mm and it is divided into 10 equal parts.\n(c) Least count of Vernier callipers is the difference between one main scale division and one Vernier scale division.\nL.C = 1 (M.S) division − 1 (V.C) division = 1 mm − 0.9 mm = 0.1 mm\n(d) If on joining jaws zeros of the main scale and Vernier scale do not exactly coincide with each other then there is an error in the instrument called zero error. It may be positive or negative." },
+    { q: "State least count and Vernier scale reading as shown in the figure and hence, find the length.",
+      ans: "The smallest measurement which can be made by a device is called its least count.\nL.C of Vernier calliper = 0.1 mm = 0.01 cm\nMain scale = 2.6 cm\nVernier scale division = 4\nActual length = 2.6 + 0.01 × 4 = 2.6 cm + 0.04 cm = 2.64 cm" },
+    { q: "Which reading out of A, B and C shows the correct length and why?",
+      ans: "Reading B is correct because it has no any parallax error.\nCorrect length = 6.0 cm" }
+  ],
+
+  long: [],        // 👈 baad mai add kren: { q: "question", ans: "answer" },
+  numerical: []    // 👈 baad mai add kren: { q: "question", solution: "hal" }
+
+};
+/* ================= DATA END ================= */
+
+function showSection(type, btn){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  let html = '';
+
+  if(type === 'mcqs'){
+    html += '<h2 class="section-title">Multiple Choice Questions</h2>';
+    if(!chapterData.mcqs.length) html += '<div class="empty">No questions added yet.</div>';
+    chapterData.mcqs.forEach((m,i)=>{
+      html += `<div class="q-card">
+        <div class="q-title"><span class="q-num">${i+1}</span><span>${m.q}</span></div>
+        <div class="options">
+          ${m.options.map((op,j)=>`<div class="option ${j===m.correct?'correct':''}">${String.fromCharCode(65+j)}. ${op} ${j===m.correct?'✔':''}</div>`).join('')}
+        </div>
+      </div>`;
+    });
+  }
+  else if(type === 'short' || type === 'long'){
+    const list = chapterData[type];
+    html += '<h2 class="section-title">'+(type==='short'?'Short Answer Questions':'Long Questions')+'</h2>';
+    if(!list.length) html += '<div class="empty">Is section mai abhi questions add nahi ki gayi.</div>';
+    list.forEach((s,i)=>{
+      html += `<div class="q-card">
+        <div class="q-title"><span class="q-num">${i+1}</span><span>${s.q}</span></div>
+        ${s.ans ? `<div class="answer-box"><b>Answer:</b> ${s.ans}</div>` : ''}
+      </div>`;
+    });
+  }
+  else{
+    html += '<h2 class="section-title">Numerical Problems</h2>';
+    if(!chapterData.numerical.length) html += '<div class="empty">Is section mai abhi numericals add nahi ki gayi.</div>';
+    chapterData.numerical.forEach((n,i)=>{
+      html += `<div class="q-card">
+        <div class="q-title"><span class="q-num">${i+1}</span><span>${n.q}</span></div>
+        ${n.solution ? `<div class="answer-box"><b>Solution:</b> ${n.solution}</div>` : ''}
+      </div>`;
+    });
+  }
+  document.getElementById('content').innerHTML = html;
+}
+
+// Tabs pe count + default MCQs
+const counts = [chapterData.mcqs.length, chapterData.short.length, chapterData.long.length, chapterData.numerical.length];
+document.querySelectorAll('.tab-btn').forEach((b,i)=> b.textContent += ` (${counts[i]})`);
+showSection('mcqs', document.querySelector('.tab-btn'));
+</script>
+</body>
+</html>
