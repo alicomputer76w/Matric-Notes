@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter 1 - Physical Quantities and Measurement | 9th Physics | EduPortal</title>
+<title>Chapter 2 - Kinematics | 9th Physics | EduPortal</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Arial,sans-serif}
 body{background:#f3f4f6;color:#1f2937;padding-bottom:60px}
@@ -52,8 +52,8 @@ body{background:#f3f4f6;color:#1f2937;padding-bottom:60px}
   <a class="back-link" href="physics-9th.html">← Back to Chapters</a>
 
   <div class="ch-header">
-    <div class="ch-num">1</div>
-    <h1>Physical Quantities and Measurement</h1>
+    <div class="ch-num">2</div>
+    <h1>Kinematics</h1>
   </div>
 
   <div class="tabs">
@@ -70,117 +70,105 @@ body{background:#f3f4f6;color:#1f2937;padding-bottom:60px}
 
 <script>
 /* =====================================================
-   CHAPTER 1 COMPLETE DATA (Exercise PDF k mutabiq)
+   CHAPTER 2 (KINEMATICS) COMPLETE DATA — Exercise PDF k mutabiq
 ===================================================== */
 const chapterData = {
 
   mcqs: [
-    { q: "The instrument that is most suitable for measuring the thickness of a few sheets of cardboard is:",
-      options: ["Metre rule", "Measuring tape", "Vernier Callipers", "Micrometer screw gauge"], correct: 3 },
-    { q: "One femtometre is equal to:",
-      options: ["10⁻⁹ m", "10⁻¹⁵ m", "10⁹ m", "10¹⁵ m"], correct: 1 },
-    { q: "A light year is a unit of:",
-      options: ["Light", "Time", "Distance", "Speed"], correct: 2 },
-    { q: "Which one is a non-physical quantity?",
-      options: ["Distance", "Density", "Colour", "Temperature"], correct: 2 },
-    { q: "When using a measuring cylinder, one precaution to take is:",
-      options: ["Check for the zero error", "Look at the meniscus from below the level of the water surface", "Take several readings by looking from more than one direction", "Position the eye in line with the bottom of the meniscus"], correct: 3 },
-    { q: "Volume of water consumed by you per day is estimated in:",
-      options: ["Millilitre", "Litre", "Kilogram", "Cubic metre"], correct: 1 },
-    { q: "A displacement can is used to measure:",
-      options: ["Mass of a liquid", "Mass of a solid", "Volume of a liquid", "Volume of a solid"], correct: 3 },
-    { q: "Two rods with lengths 12.321 cm and 10.3 cm are placed side by side, the difference in their lengths is:",
-      options: ["2.02 cm", "2.0 cm", "2 cm", "2.021 cm"], correct: 1 },
-    { q: "Four students measure the diameter of a cylinder with Vernier Callipers. Which of the following readings is correct?",
-      options: ["3.4 cm", "3.475 cm", "3.47 cm", "3.5 cm"], correct: 2 },
-    { q: "Which of the following measures are likely to represent the thickness of a sheet of this book?",
-      options: ["6×10⁻²⁵ m", "1×10⁻⁴ m", "1.2×10⁻¹⁵ m", "4×10⁻⁷ m"], correct: 1 },
-    { q: "In a Vernier Callipers ten smallest divisions of the Vernier scale are equal to nine smallest divisions of the main scale. If the smallest division of the main scale is half millimetre, the Vernier constant is equal to:",
-      options: ["0.5 mm", "0.1 mm", "0.05 mm", "0.001 mm"], correct: 2 }
+    { q: "The numerical ratio of displacement to distance is:",
+      options: ["Always less than one", "Always equal to one", "Always greater than one", "Equal to or less than one"], correct: 3 },
+    { q: "If a body does not change its position with respect to some fixed point, then it will be in a state of:",
+      options: ["Rest", "Motion", "Uniform motion", "Variable motion"], correct: 0 },
+    { q: "A ball is dropped from the top of a tower, the distance covered by it in the first second is:",
+      options: ["5 m", "10 m", "50 m", "100 m"], correct: 0 },
+    { q: "A body accelerates from rest to a velocity of 144 km h⁻¹ in 20 seconds. Then the distance covered by it is:",
+      options: ["100 m", "400 m", "1400 m", "1440 m"], correct: 1 },
+    { q: "A body is moving with constant acceleration starting from rest. It covers a distance S in 4 seconds. How much time does it take to cover one-fourth of this distance?",
+      options: ["1 s", "2 s", "4 s", "16 s"], correct: 1 },
+    { q: "The displacement time graphs of two objects A and B are shown in the figure. Point out the true statement from the following:",
+      options: ["The velocity of A is greater than B", "The velocity of A is less than B", "The velocity of A is equal to that of B", "The graph gives no information in this regard"], correct: 0 },
+    { q: "The area under the speed-time graph is numerically equal to:",
+      options: ["Velocity", "Uniform velocity", "Acceleration", "Distance covered"], correct: 3 },
+    { q: "Gradient of the speed-time graph is equal to:",
+      options: ["Speed", "Velocity", "Acceleration", "Distance covered"], correct: 2 },
+    { q: "Gradient of the distance-time graph is equal to the:",
+      options: ["Speed", "Velocity", "Distance covered", "Acceleration"], correct: 0 },
+    { q: "A car accelerates uniformly from 80.5 km h⁻¹ at t = 0 to 113 km h⁻¹ at t = 9 s. Which graph best describes the motion of the car?",
+      options: ["(a) Curved increasing line", "(b) Straight line starting from origin", "(c) Straight line starting above origin (positive intercept)", "(d) Decreasing straight line"], correct: 2 }
   ],
 
   short: [
-    { q: "Can a non-physical quantity be measured? If yes, then how?",
-      ans: "No, a non-physical quantity cannot be measured using tools and instruments." },
-    { q: "What is measurement? Name its two parts.",
-      ans: "Measurement: A measurement is a process of comparison of an unknown quantity with a widely accepted standard quantity.\nParts: A measurement consists of two parts:\n(a) Number\n(b) Unit" },
-    { q: "Why do we need a standard unit for measurements?",
-      ans: "Use of SI measurements helps all scientists to share and compare their observations and results easily. Their values are fixed with reference to international standards." },
-    { q: "Write the name of 3 base quantities and 3 derived quantities.",
-      ans: "Base quantities: Length, mass, time\nDerived quantities: Area, volume, speed" },
-    { q: "Which SI unit will you use to express the height of your desk?",
-      ans: "SI unit we use to express the height of desk is metre or cm because the height of desk most commonly is in the range of 1 cm to 100 cm." },
-    { q: "Write the name and symbols of all SI base units.",
-      ans: "Physical quantity — Unit — Symbol\nLength — metre — m\nMass — kilogram — kg\nTime — second — s\nTemperature — kelvin — K\nElectric current — ampere — A\nIntensity of light — candela — cd\nAmount of substance — mole — mol" },
-    { q: "Why prefix is used? Name three sub-multiples and three multiple prefixes with their symbols.",
-      ans: "Prefixes are used to write big quantities and small quantities more simply by power of 10.\nExample: 50000000 m = 5×10⁷ m and 0.00004 m = 4×10⁻⁵ m\nMultiples: Kilo = k = 10³, Mega = M = 10⁶, Giga = G = 10⁹\nSub-multiples: Milli = m = 10⁻³, Micro = μ = 10⁻⁶, Nano = n = 10⁻⁹" },
-    { q: "What is meant by: (a) 5 pm (b) 15 ns (c) 6 μm (d) 5 fs",
-      ans: "5 pm = 5×10⁻¹² m  (as pico = p = 10⁻¹²)\n15 ns = 15×10⁻⁹ s  (as nano = n = 10⁻⁹)\n6 μm = 6×10⁻⁶ m  (as micro = μ = 10⁻⁶)\n5 fs = 5×10⁻¹⁵ s  (as femto = f = 10⁻¹⁵)" },
-    { q: "(a) For what purpose a Vernier Callipers is used? (b) Name its two main parts. (c) How is least count found? (d) What is meant by zero error?",
-      ans: "Vernier Callipers: It is an instrument used to measure small lengths down to 1/10th of a millimetre. It can be used to measure the thickness, diameter, width or depth of an object.\nParts: (a) A main scale which has marking of 1 mm each. (b) A Vernier (sliding) scale of length 9 mm and it is divided into 10 equal parts.\nLeast count: The difference between one main scale division (M.S) and one Vernier scale (V.S) division. L.C = 1 mm − 0.9 mm = 0.1 mm\nZero error: On joining the jaws, if the zeros of the main scale and Vernier scale do not exactly coincide with each other then there is an error in the instrument called zero error." },
-    { q: "State least count and Vernier scale reading as shown in the figure and hence, find the length.",
-      ans: "Least count = 1 M.S div − 1 V.S div = 1 mm − 0.9 mm = 0.1 mm\nVernier scale reading = 5 × 0.01 cm = 0.05 cm\nLength = Main scale reading + Vernier scale reading = 2.5 cm + 0.05 cm = 2.55 cm" },
-    { q: "Which reading out of A, B and C shows the correct length and why?",
-      ans: "6 cm is the correct reading.\nReason: While measuring, the eye should be vertically above the reading point and at point B the eye is vertically above." }
+    { q: "Define scalar and vector quantities.",
+      ans: "Scalars: A scalar is that physical quantity which can be described completely by its magnitude only.\nVectors: A vector is that physical quantity which needs magnitude as well as direction to describe it completely." },
+    { q: "Give 5 examples each for scalar and vector quantities.",
+      ans: "Scalars: (i) distance (ii) length (iii) time (iv) speed (v) energy\nVectors: (i) displacement (ii) velocity (iii) acceleration (iv) weight (v) force" },
+    { q: "State head-to-tail rule for addition of vectors.",
+      ans: "Head-to-tail rule: To add a number of vectors, redraw their representative lines such that the head of one line coincides with the tail of the other. The resultant vector is given by a single vector which is directed from the tail of the first vector to the head of the last vector." },
+    { q: "What are distance-time graph and speed-time graph?",
+      ans: "Distance-Time Graph: Distance-time graph shows the relation between distance S and time t taken by a moving body. Time is taken along x-axis and distance along y-axis.\nSpeed-Time Graph: Speed-time graph shows the relation between speed V and time t taken by a moving body. Time is taken along x-axis and speed along y-axis." },
+    { q: "Falling objects near the Earth have the same constant acceleration. Does this imply that a heavier object will fall faster than a lighter object?",
+      ans: "If air resistance is negligible then both the objects will move with same speed regardless their masses." },
+    { q: "The vector quantities are sometimes written in scalar notation (not bold face). How is the direction indicated?",
+      ans: "When vector quantities are written in scalar notation, the direction is usually given by an angle θ (theta) with x-axis. The angle with x-axis is always measured from the right side of x-axis in the anti-clockwise direction." },
+    { q: "A body is moving with uniform speed. Will its velocity be uniform? Give reason.",
+      ans: "If body is moving in a straight line with uniform speed then its velocity will also be uniform as direction is not changing, but if it is moving in a circular path then its velocity will not be uniform as its direction is changing continuously." },
+    { q: "Is it possible for a body to have acceleration? When moving with: (i) constant velocity (ii) constant speed",
+      ans: "If a body is moving with constant velocity then there will be no acceleration because for acceleration there should be change in velocity.\nWhen a body is moving with constant speed it may have an acceleration. For example when a body is moving with constant speed in a circle. In circular motion direction changes continuously which produces acceleration." }
   ],
 
   constructed: [
-    { q: "In what unit will you express each of the following?",
-      ans: "(a) Thickness of a five-rupee coin = mm\n(b) Length of a book = cm\n(c) Length of football field = m\n(d) The distance between two cities = km\n(e) Mass of five-rupee coin = gram\n(f) Mass of your school bag = kg\n(g) Duration of your class period = minutes\n(h) Volume of petrol filled in the tank of a car = litre\n(i) Time to boil one litre milk = minutes" },
-    { q: "Why might a standard system of measurement be helpful to a tailor?",
-      ans: "As tailor has to measure the length of garments in metres and inches. So, standard system of measurement is very helpful for him to get more precise measurement with lesser uncertainty." },
-    { q: "The minimum main scale reading of a micrometer screw gauge is 1 mm and there are 100 divisions on the circular scale. When thimble is rotated once, 1 mm is its measurement on the main scale. What is the least count of the instrument? The reading for thickness of a steel rod as shown in the figure. What is the thickness of the rod?",
-      ans: "Pitch of screw gauge = 1 mm\nNumber of divisions on circular scale = 100\nLeast count = Pitch / No. of divisions = 1 mm / 100 = 0.01 mm\nThickness of rod = Main scale reading + Circular scale reading × L.C\n= 9 mm + 70 × 0.01 mm = 9 mm + 0.70 mm = 9.7 mm" },
-    { q: "You are provided a metre scale and a bundle of pencils; how can the diameter of a pencil be measured using the metre scale with the same precision as that of Vernier Callipers? Describe briefly.",
-      ans: "To measure the diameter of a pencil with metre scale with same precision as that of Vernier callipers, we use unit mm as both instruments can measure in mm. Tie all pencils tightly and measure the width by metre rule, it will be total diameter of all pencils, then use formula:\nDiameter of a pencil = Total width of all pencils / Number of pencils" },
-    { q: "The end of a metre scale is worn out. Where will you place a pencil to find the length?",
-      ans: "If one end of a metre rule is worn out we will choose other clear starting point. Now place one end of pencil at this point and note the positions on metre rule of the pencil's starting point and ending point and then take difference of both readings. This will be the length of pencil.\nExample: Length of pencil = 15 cm − 4 cm = 11 cm" },
-    { q: "Why is it better to place the object close to the metre scale?",
-      ans: "It is better to place the object near to metre scale because it will:\n(a) Reduce parallax error\n(b) Increase the precision" },
-    { q: "Why a standard unit is needed to measure a quantity correctly?",
-      ans: "Standard unit is needed to measure a quantity correctly because standard unit is commonly acceptable all over the world and it makes easy to exchange scientific and technical information." },
-    { q: "Suggest some natural phenomena that could serve as a reasonably accurate time standard.",
-      ans: "(a) Rotation of earth about its axis\n(b) Revolution of moon around the earth\n(c) Radioactive decay\n(d) Solar cycle" },
-    { q: "It is difficult to locate the meniscus in a wider vessel. Why?",
-      ans: "It is difficult to measure the meniscus in wider vessel because surface of liquid becomes more flat which reduces the curvature of the meniscus and makes difficult to locate the meniscus." },
-    { q: "Which instrument can be used to measure: (i) Internal diameter of a test tube. (ii) Depth of a beaker.",
-      ans: "Vernier callipers is used to measure the internal diameter of a test tube and depth of a beaker is measured by using tail of Vernier callipers." }
+    { q: "Distance and displacement may or may not be equal in magnitude. Explain this statement.",
+      ans: "The magnitude of distance and displacement will be equal if body is moving without change in direction as in case of straight line motion, but when body is moving with changing direction then distance and displacement will not be equal as in case of circular motion." },
+    { q: "When a bullet is fired, its velocity with which it leaves the barrel is called the muzzle velocity of the gun. The muzzle velocity of one gun with a longer barrel is lesser than that of another gun with a shorter barrel. In which gun is the acceleration of the bullet larger? Explain your answer.",
+      ans: "In case of shorter barrel the muzzle velocity is larger. This results in larger acceleration. In case of longer barrel the muzzle velocity will be smaller and acceleration will also be smaller. The bullet has less time and distance to reach a higher velocity, requiring a greater force over a shorter time." },
+    { q: "For a complete trip, average velocity was calculated. Its value came out to be positive. Is it possible that its instantaneous velocity at any time during the trip had the negative value? Give justification of your answer.",
+      ans: "Yes, it is possible that instantaneous velocity could have negative sign because in whole trip net displacement is positive but object could move in opposite direction for a while (negative instantaneous velocity)." },
+    { q: "A ball is thrown vertically upward with velocity v. It returns to the ground in time T. Which of the following graphs correctly represents the motion? Explain your reasoning.",
+      ans: "Graph (a) correctly represents motion.\nReason: When a ball is thrown vertically upward with a velocity v, its velocity decreases continuously, and when it returns to the ground its velocity increases continuously. Graph (a) shows the correct motion." },
+    { q: "Figure given below shows the distance-time graph for the travel of a cyclist. Find the velocities for the segments a, b and c.",
+      ans: "For the segment a: The velocity for this segment is uniform, as graph is a straight line.\nV = 0.6 km / 2 min = 0.3 km/min = (0.3×1000)/60 m/s = 5 m/s\nFor the segment b: For this segment, speed will be 0 as distance-time graph is parallel to x-axis.\nFor the segment c: For this segment, velocity is uniform but decreasing continuously.\nV = 0.6 km / 17 min = 0.035 km/min = (0.035×1000)/60 m/s = 0.588 m/s" },
+    { q: "Is it possible that the velocity of an object is zero at an instant of time, but its acceleration is not zero? If yes, give an example of such a case.",
+      ans: "Yes, it is possible. When an object is thrown vertically upward its velocity becomes zero at the highest point but gravitational acceleration is still 10 ms⁻²." }
   ],
 
   comprehensive: [
-    { q: "What is meant by base and derived quantities? Give the names and symbols of SI base units.",
-      ans: "Base quantities: The quantities which can be expressed independently without the reference of any other quantity are called base quantities.\nDerived quantities: All the quantities which can be described in terms of one or more base quantities are called derived physical quantities.\nSI base units:\nLength — metre — m\nMass — kilogram — kg\nTime — second — s\nTemperature — kelvin — K\nElectric current — ampere — A\nIntensity of light — candela — cd\nAmount of substance — mole — mol" },
-    { q: "Give three examples of derived unit in SI. How are they derived from base units? Describe briefly.",
-      ans: "(i) Area: Area = length × length; Units: m² = m × m (unit of length multiplied two times)\n(ii) Speed: Speed = length / time; Unit: m/s (unit of length divided by unit of time)\n(iii) Volume: Volume = length × length × length; Unit: m³ = m × m × m (unit of length multiplied three times)" },
-    { q: "State the similarities and differences between Vernier Callipers and micrometer screw gauge.",
-      ans: "Similarities:\n(a) Both are used to measure small lengths\n(b) Both are used to measure fractional part of 1 m\n(c) Both have same units cm or mm\nDifferences:\n(a) Measuring mechanism is different\n(b) Range of measurement is different\n(c) Vernier callipers measure internal and external dimensions but screw gauge only measures external dimensions" },
-    { q: "Identify and explain the reasons for human errors, random errors and systematic errors in experiments.",
-      ans: "Human errors: Human error occurs due to personal performance; the limitation of the human perception such as the inability to perfectly estimate the position of the pointer on a scale.\nRandom errors: Random error occurs when repeated measurements of a quantity give different values under the same conditions. It is due to some unknown causes which are unpredictable. It arises due to sudden fluctuation or variation in the environmental conditions.\nSystematic errors: Systematic error refers to an effect that influences all measurements of particular measurements equally. It produces a consistent difference in readings. It occurs due to some definite rule — zero error of instrument, poor calibration of instrument or incorrect marking." },
-    { q: "Differentiate between precision and accuracy of a measurement with examples.",
-      ans: "Precision: Precision of a measurement refers to how close together a group of measurements are actually to each other.\nAccuracy: Accuracy of a measurement refers how close the measured value is to true value.\nExamples: (a) Precise not accurate (b) Accurate not precise (c) Accurate and precise" }
+    { q: "How a vector can be represented graphically? Explain.",
+      ans: "Graphical representation: A vector can be represented graphically by drawing a straight line with an arrow head at one end. The length of line represents the magnitude of the vector quantity according to a suitable scale while the direction of arrow indicates the direction of the vector.\nExplanation: Draw representative lines of all the vectors according to selected scale. Draw representative line of first vector. Draw second vector such that the head of 1st representative line coincides with the tail of the 2nd representative line. The resultant vector is given by a single vector which is directed from the tail of the first vector to the head of the last vector." },
+    { q: "Differentiate between: (i) rest and motion (ii) speed and velocity",
+      ans: "Rest: If a body does not change its position with respect to its surroundings, it is said to be at rest. Example: A motorcyclist standing on the road is at rest.\nMotion: If a body changes its position with respect to its surroundings, it is said to be in motion. Example: When the motorcyclist is driving, he is in state of motion.\nSpeed: Distance covered by a body in unit time is called its speed. Formula: Speed = Distance/Time. Unit: ms⁻¹ or kmh⁻¹. It is a scalar quantity.\nVelocity: The net displacement of a body in unit time is called velocity. Formula: Velocity = Displacement/Time. Unit: ms⁻¹ or km h⁻¹. It is a vector quantity." },
+    { q: "Describe different types of motion. Also give examples.",
+      ans: "1. Translatory Motion: If the motion of a body is such that every particle of the body moves uniformly in the same direction, it is called translatory motion. Example: motion of a train or a car.\nTypes of translatory motion:\n(i) Linear Motion: If the body moves along a straight line. Example: A freely falling body.\n(ii) Random Motion: If the body moves along an irregular path. Examples: Motion of smoke particles, motion of bee, motion of gas molecules.\n(iii) Circular Motion: The motion of a body along a circle. Example: A Ferris wheel.\n2. Rotatory Motion: If each point of a body moves around a fixed point (axis), the motion is called rotatory motion. Example: Motion of an electric fan and the drum of a washing machine dryer.\n3. Vibratory Motion: When a body repeats its to and fro motion about a fixed position, the motion is called vibratory motion. Examples: Motion of a swing in a children park, motion of see-saw." },
+    { q: "Explain the difference between distance and displacement.",
+      ans: "Distance: The distance is the length of actual path of the motion between two points. It is a scalar quantity. Its unit is m.\nDisplacement: The displacement is the shortest distance between the initial and final positions of the motion. It is a vector quantity.\nExplanation: Suppose a car travels from position A to B. The curved line is the actual path followed by the car. The total distance covered by the car will be equal to the length of the curved line AB. The displacement d is the straight line AB directed from A to B as indicated by the arrow head. Its unit is m." },
+    { q: "What do gradients of distance-time graph and speed-time graph represent? Explain it by drawing diagrams.",
+      ans: "Gradient of distance-time graph: The gradient of the distance-time graph is equal to the average speed of the body.\nSlope = (S₂ − S₁)/(t₂ − t₁) = S/t = Vav (average speed)\nGradient of speed-time graph: The gradient of the speed-time graph is equal to the average acceleration of the body.\nSlope = (v₂ − v₁)/(t₂ − t₁) = Av/t = a (average acceleration)" },
+    { q: "Prove that the area under speed-time graph is equal to the distance covered by an object.",
+      ans: "Proof:\nCase-I: When object is moving with constant speed:\nS = v × t. The area under speed-time graph is the area of rectangle of sides t and v.\nA = l × w = t × v = S. This area is numerically equal to the distance covered.\nCase-II: When speed of object is increasing uniformly:\nDistance = Average speed × time; S = (v+0)/2 × t = ½ × v × t.\nThe area under graph is a right-angled triangle: Area = ½ × perpendicular × base = ½ × v × t.\nIt is numerically equal to the distance covered by the object.\nResult: The area under speed-time graph is numerically equal to the distance covered by an object." },
+    { q: "How equations of motion can be applied to the bodies moving under the action of gravity?",
+      ans: "Since the freely falling bodies move vertically downwards in a straight line with uniform acceleration g, so the three equations of motion can be applied to the motion of such bodies. While applying equations of motion, the acceleration a is replaced by g.\nThus, equations of motion for freely falling bodies can be written as:\nVf = vi + gt  …(1)\nS = vit + ½gt²  …(2)\n2gS = vf² − vi²  …(3)" }
   ],
 
   numerical: [
-    { q: "Calculate the number of seconds in a (a) day (b) week (c) month and state your answers using SI prefixes.",
-      solution: "(a) One day = 24 h = 24×60×60 s = 86400 s = 86.4×10³ s = 86.4 ks\n(b) One week = 7 days = 7×24×60×60 s = 604800 s = 604.8×10³ s = 604.8 ks\n(c) One month = 30 days = 30×24×60×60 s = 2592000 s = 2.592×10⁶ s = 2.592 Ms" },
-    { q: "State the answers of problem 1.1 in scientific notation.",
-      solution: "(a) Day = 86400 s = 8.64×10⁴ s\n(b) Week = 604800 s = 6.048×10⁵ s\n(c) Month = 2592000 s = 2.592×10⁶ s" },
-    { q: "Solve the following addition or subtraction. State your answers in scientific notation.\n(a) 4×10⁻⁴ kg + 3×10⁻⁵ kg\n(b) 5.4×10⁻⁶ m − 3.2×10⁻⁵ m",
-      solution: "(a) = (4 kg + 3×10⁻¹ kg) 10⁻⁴ = (4 + 0.3) 10⁻⁴ kg = 4.3×10⁻⁴ kg\n(b) = (5.4×10⁻¹ m − 3.2 m) 10⁻⁵ = (0.54 − 3.2) 10⁻⁵ m = −2.66×10⁻⁵ m" },
-    { q: "Solve the following multiplication or division. State your answers in scientific notation.\n(a) (5×10⁴ m) × (3×10⁻² m)\n(b) 6×10⁸ kg / 3×10⁴ m³",
-      solution: "(a) = 15×10² m² = 1.5×10³ m²\n(b) = 2×10⁸⁻⁴ kg m⁻³ = 2×10⁴ kg m³" },
-    { q: "Calculate the following and state your answer in scientific notation: (3×10³ kg) × (4.0 km) / 5×10² s²",
-      solution: "= (3×10³ kg)(4×10³ m) / 5×10² s²\n= 12×10⁶ / 5×10² kg m s⁻²\n= 2.4×10⁴ kg m s⁻²" },
-    { q: "State the number of significant digits in each measurement.\n(a) 0.0045 m (b) 2.047 m (c) 3.40 m (d) 3.420×10⁴ m",
-      solution: "(a) 0.0045 m → 2 significant figures\n(b) 2.047 m → 4 significant figures\n(c) 3.40 m → 3 significant figures\n(d) 3.420×10⁴ m → 4 significant figures" },
-    { q: "Write in scientific notation:\n(a) 0.0035 m\n(b) 206.4×10² m",
-      solution: "(a) 0.0035 m = 3.5×10⁻³ m\n(b) 206.4×10² m = 2.064×10²×10² m = 2.064×10⁴ m" },
-    { q: "Write using correct prefixes:\n(a) 5.0×10² m\n(b) 580×10² g\n(c) 45×10⁻⁴ s",
-      solution: "(a) 5.0×10² m = 0.5×10³ m = 0.5 km\n(b) 580×10² g = 58×10³ g = 58 kg\n(c) 45×10⁻⁴ s = 4.5×10⁻³ s = 4.5 ms" },
-    { q: "Light year is a unit of distance used in Astronomy. It is the distance covered by light in one year. Taking the speed of light as 3.0×10⁸ m/s, calculate the distance.",
-      solution: "t = 1 year = 365×24×60×60 s = 31536000 s = 3.1536×10⁷ s\nv = 3×10⁸ m/s\nS = v × t = 3×10⁸ × 3.1536×10⁷\nS = 9.4608×10¹⁵ m" },
-    { q: "Express the density of mercury given as 13.6 g cm⁻³ in kg m⁻³.",
-      solution: "d = 13.6 g cm⁻³\n= 13.6 × 10³ kg m⁻³\n= 1.36×10⁴ kg m³" }
+    { q: "Draw the representative lines of the following vectors:\n(a) A velocity of 400 ms⁻¹ making an angle of 60° with x-axis.\n(b) A force of 50 N making an angle of 120° with x-axis.",
+      solution: "(a) V = 400 ms⁻¹, θ = 60°\nSelected scale: 100 ms⁻¹ = 1 cm, so 400 ms⁻¹ = 4 cm\nDraw 4 cm line at an angle of 60° with x-axis.\n(b) F = 50 N, θ = 120°\nSelected scale: 10 N = 1 cm, so 50 N = 5 cm\nDraw 5 cm line at an angle of 120° with x-axis." },
+    { q: "A car is moving with an average speed of 72 km h⁻¹. How much time will it take to cover a distance of 360 km?",
+      solution: "Given: V = 72 kmh⁻¹, S = 360 km\nTo find: t = ?\nSol: t = S / Vav = 360 / 72\nResult: t = 5 h\nSo, time required is 5 h to travel a distance of 360 km." },
+    { q: "A truck starts from rest. It reaches a velocity of 90 km h⁻¹ in 50 seconds. Find its average acceleration.",
+      solution: "Given: Vi = 0 ms⁻¹, Vf = 90 kmh⁻¹ = (90×1000)/3600 = 25 ms⁻¹, t = 50 s\nTo find: a = ?\nSol: a = (Vf − Vi)/t = (25 − 0)/50\nResult: a = 0.5 ms⁻²\nSo, acceleration produced is 0.5 ms⁻²." },
+    { q: "A car passes a green traffic signal while moving with a velocity of 5 ms⁻¹. It then accelerates at 1.5 ms⁻². What is the velocity of car after 5 seconds?",
+      solution: "Given: Vi = 5 ms⁻¹, a = 1.5 ms⁻², t = 5 s\nTo find: Vf = ?\nSol: Vf = Vi + at = 5 + (1.5)(5) = 5 + 7.5\nResult: Vf = 12.5 ms⁻¹\nSo, velocity of car after 5 sec is 12.5 ms⁻¹." },
+    { q: "A motorcycle initially travelling at 18 km h⁻¹ accelerates at constant rate of 2 ms⁻². How far will the motorcycle go in 10 seconds?",
+      solution: "Given: Vi = 18 kmh⁻¹ = (18×1000)/3600 = 5 ms⁻¹, a = 2 ms⁻², t = 10 s\nTo find: S = ?\nSol: S = Vit + ½at² = (5)(10) + ½(2)(10)² = 50 + 100\nResult: S = 150 m\nThe motorcycle will go 150 m in 10 sec." },
+    { q: "A wagon is moving on the road with a velocity of 54 km h⁻¹. Brakes are applied suddenly. The wagon covers a distance of 25 m before stopping. Determine the acceleration of the wagon.",
+      solution: "Given: Vi = 54 kmh⁻¹ = (54×1000)/3600 = 15 ms⁻¹, Vf = 0, S = 25 m\nTo find: a = ?\nSol: 2aS = Vf² − Vi²\n2×a×25 = (0)² − (15)²\na×50 = −225\na = −225/50\nResult: a = −4.5 ms⁻²\nSo, acceleration of wagon is −4.5 ms⁻²." },
+    { q: "A stone is dropped from a height of 45 m. How long will it take to reach the ground? What will be its velocity just before hitting the ground?",
+      solution: "Given: Vi = 0 ms⁻¹, h = 45 m, g = 10 ms⁻²\nTo find: t = ?, Vf = ?\nSol: 2gh = Vf² − Vi²\n2×10×45 = Vf² − 0\n900 = Vf²\nVf = 30 ms⁻¹\nt = (Vf − Vi)/g = (30 − 0)/10\nResult: t = 3 s\nStone will take 3 seconds and it will hit with a velocity of 30 ms⁻¹." },
+    { q: "A car travels 10 km with an average velocity of 20 ms⁻¹. Then it travels in the same direction through a diversion at an average velocity of 4 ms⁻¹ for the next 0.8 km. Determine the average velocity of the car for the total journey.",
+      solution: "Given: S₁ = 10 km = 10000 m, V₁ = 20 ms⁻¹; S₂ = 0.8 km = 800 m, V₂ = 4 ms⁻¹\nTo find: Vav = ?\nSol: t₁ = S₁/V₁ = 10000/20 = 500 s\nt₂ = S₂/V₂ = 800/4 = 200 s\nTotal time = 500 + 200 = 700 s\nTotal distance = 10000 + 800 = 10800 m\nVav = Total distance / Total time = 10800/700\nResult: Vav = 15.4 ms⁻¹" },
+    { q: "A ball is dropped from the top of a tower. The ball reaches the ground in 5 seconds. Find the height of the tower and the velocity of the ball with which it strikes the ground.",
+      solution: "Given: Vi = 0, t = 5 s, g = 10 ms⁻²\nTo find: h = ?, Vf = ?\nSol: Vf = Vi + gt = 0 + 10×5 = 50 ms⁻¹\nh = Vit + ½gt² = 0×5 + ½(10)(5)² = 5×25\nResult: h = 125 m\nSo, height of tower is 125 m and it will hit the ground with a velocity of 50 ms⁻¹." },
+    { q: "A cricket ball is hit so that it travels straight up in the air. An observer notes that it took 3 seconds to reach the highest point. What was the initial velocity of the ball? If the ball was hit 1 m above the ground, how high did it rise from the ground?",
+      solution: "Given: Vf = 0, t = 3 s, initial height h₁ = 1 m, g = −10 ms⁻²\nTo find: Vi = ?, total height h = ?\nSol: Vf = Vi + gt\n0 = Vi + (−10)(3) → Vi = 30 ms⁻¹\nh₂ = Vit + ½gt² = 30×3 + ½(−10)(3)² = 90 − 45 = 45 m\nTotal height h = h₁ + h₂ = 1 + 45\nResult: Initial velocity = 30 ms⁻¹ and total height from ground = 46 m" }
   ],
 
   long: []   // 👈 Long Questions (Theory Part) baad mai add kren: { q: "question", ans: "answer" },
