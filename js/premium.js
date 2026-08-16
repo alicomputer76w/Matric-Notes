@@ -1,5 +1,5 @@
 // ============================================
-// 👑 EDUPORTAL PREMIUM SYSTEM (Student Side)
+// 👑 EDUPORTAL PREMIUM SYSTEM v2 (Professional)
 // ============================================
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -7,6 +7,7 @@ import { getFirestore, doc, getDoc, collection, addDoc, query, where, getDocs, s
 
 const SITE = 'https://alicomputer76w.github.io/Matric-Notes';
 const PRICE = 500;
+const OLD_PRICE = 1000;
 
 const firebaseConfig = {
   apiKey: "AIzaSyD4OjgT03bWh3oGwZ4TpLt5ndnJl2B2YWs",
@@ -25,59 +26,78 @@ let currentUser = null;
 let selectedMethod = 'Easypaisa';
 
 const ACCOUNTS = {
-  'Easypaisa':   { number: '0345-9572281',  title: 'Sadaqat Ali' },
-  'JazzCash':    { number: '0308-1517640',  title: 'Sadaqat Ali' },
-  'Bank Alfalah':{ number: '56135002206096', title: 'Sadaqat Ali', extra: 'IBAN: PK43ALFH5613005002206096' }
+  'Easypaisa':    { number: '0345-9572281',   title: 'Sadaqat Ali', icon: '📱' },
+  'JazzCash':     { number: '0308-1517640',   title: 'Sadaqat Ali', icon: '📲' },
+  'Bank Alfalah': { number: '56135002206096', title: 'Sadaqat Ali', extra: 'IBAN: PK43ALFH5613005002206096', icon: '🏦' }
 };
 
-// ---------- Styles inject ----------
+// ---------- Professional Styles ----------
 const style = document.createElement('style');
 style.textContent = `
 .ep-hidden{display:none!important}
-#epOverlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;display:flex;align-items:center;justify-content:center;padding:15px}
-#epModal{background:#fff;border-radius:16px;max-width:480px;width:100%;max-height:92vh;overflow-y:auto;position:relative;font-family:'Poppins',sans-serif}
+#epOverlay{position:fixed;inset:0;background:rgba(10,10,25,.7);backdrop-filter:blur(4px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:15px}
+#epModal{background:#fff;border-radius:20px;max-width:520px;width:100%;max-height:92vh;overflow-y:auto;position:relative;box-shadow:0 25px 60px rgba(0,0,0,.35);font-family:'Poppins',sans-serif}
 #epModal *{box-sizing:border-box;font-family:'Poppins',sans-serif}
-.ep-close{position:absolute;top:10px;right:14px;background:none;border:none;font-size:1.6rem;cursor:pointer;color:#999;z-index:2}
-.ep-header{background:linear-gradient(135deg,#f72585,#7209b7);color:#fff;padding:25px 20px;text-align:center;border-radius:16px 16px 0 0}
-.ep-header .crown{font-size:2.2rem}
-.ep-header h2{margin:5px 0 2px;font-size:1.4rem}
-.ep-header p{margin:0;font-size:.85rem;opacity:.95}
-.ep-body{padding:20px}
-.ep-perks{background:#fff0f3;border-radius:10px;padding:12px 15px;font-size:.85rem;color:#9f1239;margin-bottom:15px;line-height:1.8}
-.ep-tabs{display:flex;gap:6px;margin-bottom:12px}
-.ep-tab{flex:1;padding:9px 5px;border:2px solid #eee;background:#fff;border-radius:8px;font-weight:600;font-size:.78rem;cursor:pointer;color:#666}
-.ep-tab.active{border-color:#f72585;color:#f72585;background:#fff0f3}
-.ep-account{background:#f8f9fa;border:2px dashed #ddd;border-radius:10px;padding:15px;text-align:center;margin-bottom:12px}
-.ep-account .num{font-size:1.3rem;font-weight:700;color:#2b2d42;letter-spacing:1px;margin:4px 0}
-.ep-account .ttl{font-size:.8rem;color:#666}
-.ep-account .ext{font-size:.7rem;color:#888;word-break:break-all}
-.ep-copy{background:#4361ee;color:#fff;border:none;padding:7px 18px;border-radius:50px;font-size:.78rem;font-weight:600;cursor:pointer;margin-top:8px}
-.ep-steps{font-size:.8rem;color:#555;margin:0 0 15px 18px;line-height:1.9}
-.ep-body input{width:100%;padding:11px;border:2px solid #e0e0e0;border-radius:8px;margin-bottom:10px;font-size:.9rem}
-.ep-body input:focus{outline:none;border-color:#f72585}
-.ep-submit{width:100%;padding:13px;background:linear-gradient(135deg,#f72585,#7209b7);color:#fff;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer}
-.ep-msg{padding:10px;border-radius:8px;font-size:.85rem;margin-bottom:12px;display:none}
+.ep-close{position:absolute;top:12px;right:14px;background:rgba(255,255,255,.15);border:none;width:34px;height:34px;border-radius:50%;font-size:1.3rem;cursor:pointer;color:#fff;z-index:2}
+.ep-hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;padding:30px 20px 24px;text-align:center;position:relative;overflow:hidden}
+.ep-hero:before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,158,11,.15) 0%,transparent 60%)}
+.ep-crown{font-size:2.6rem;filter:drop-shadow(0 0 12px rgba(245,158,11,.8))}
+.ep-hero h2{margin:8px 0 2px;font-size:1.35rem;letter-spacing:2px;font-weight:700}
+.ep-hero h2 span{color:#f59e0b}
+.ep-hero p{margin:0;font-size:.8rem;opacity:.8;letter-spacing:1px}
+.ep-price-line{margin-top:14px;display:flex;align-items:center;justify-content:center;gap:10px}
+.ep-old{text-decoration:line-through;opacity:.5;font-size:.9rem}
+.ep-price{font-size:2rem;font-weight:800;color:#f59e0b}
+.ep-badge{background:linear-gradient(135deg,#f59e0b,#d97706);color:#1a1a2e;font-size:.62rem;font-weight:800;padding:4px 10px;border-radius:50px;letter-spacing:1px}
+.ep-body{padding:22px}
+.ep-label{font-size:.72rem;font-weight:700;color:#2b2d42;letter-spacing:.5px;margin:16px 0 8px;text-transform:uppercase}
+.ep-features{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ep-feat{background:#f8f9fa;border:1px solid #eee;border-radius:10px;padding:10px;font-size:.73rem;font-weight:600;color:#444;display:flex;gap:8px;align-items:center}
+.ep-feat span{font-size:1rem}
+.ep-tabs{display:flex;background:#f0f2f5;border-radius:10px;padding:4px;gap:4px}
+.ep-tab{flex:1;padding:9px 4px;border:none;background:transparent;border-radius:8px;font-weight:600;font-size:.75rem;cursor:pointer;color:#777;transition:.2s}
+.ep-tab.active{background:#fff;color:#0f3460;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.ep-account{border:2px dashed #e5c76b;border-radius:12px;padding:16px;text-align:center;margin-top:10px;background:#fffdf5}
+.ep-acc-head{font-size:.8rem;font-weight:700;color:#555}
+.ep-account .num{font-size:1.5rem;font-weight:800;color:#1a1a2e;letter-spacing:2px;margin:6px 0 2px}
+.ep-account .ttl{font-size:.75rem;color:#777}
+.ep-account .ext{font-size:.65rem;color:#999;word-break:break-all;margin-top:2px}
+.ep-copy{background:#1a1a2e;color:#f59e0b;border:none;padding:8px 20px;border-radius:50px;font-size:.75rem;font-weight:700;cursor:pointer;margin-top:10px;transition:.2s}
+.ep-copy:hover{transform:translateY(-1px)}
+.ep-body input{width:100%;padding:12px 14px;border:2px solid #e8e8e8;border-radius:10px;margin-bottom:10px;font-size:.88rem;background:#fafafa}
+.ep-body input:focus{outline:none;border-color:#f59e0b;background:#fff}
+.ep-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ep-submit{width:100%;padding:14px;background:linear-gradient(135deg,#f59e0b,#d97706);color:#1a1a2e;border:none;border-radius:12px;font-size:1rem;font-weight:800;cursor:pointer;letter-spacing:.5px;box-shadow:0 6px 18px rgba(245,158,11,.4);transition:.2s}
+.ep-submit:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(245,158,11,.5)}
+.ep-trust{display:flex;justify-content:center;gap:18px;margin-top:14px;font-size:.7rem;color:#888;font-weight:600}
+.ep-msg{padding:10px;border-radius:8px;font-size:.82rem;margin-bottom:10px;display:none}
 .ep-msg.err{background:#fee2e2;color:#991b1b;display:block}
 .ep-msg.ok{background:#d1fae5;color:#065f46;display:block}
-.ep-center{text-align:center;padding:15px 5px}
-.ep-center .big{font-size:3rem}
-.ep-center h3{margin:10px 0 5px;color:#2b2d42}
-.ep-center p{font-size:.85rem;color:#666;line-height:1.7}
-.ep-login-btn{display:inline-block;background:#4361ee;color:#fff;padding:11px 25px;border-radius:8px;text-decoration:none;font-weight:600;margin-top:10px}
-.ep-premium-badge{background:linear-gradient(135deg,#f72585,#7209b7)!important;color:#fff!important}
-#epToast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#2b2d42;color:#fff;padding:12px 25px;border-radius:50px;font-size:.85rem;z-index:10000;display:none;font-family:'Poppins',sans-serif}
+.ep-center{text-align:center;padding:20px 5px}
+.ep-center .big{font-size:3.2rem}
+.ep-center h3{margin:12px 0 6px;color:#1a1a2e;font-size:1.15rem}
+.ep-center p{font-size:.85rem;color:#666;line-height:1.8}
+.ep-login-btn{display:inline-block;background:linear-gradient(135deg,#f59e0b,#d97706);color:#1a1a2e;padding:12px 28px;border-radius:10px;text-decoration:none;font-weight:700;margin-top:12px}
+.ep-premium-badge{background:linear-gradient(135deg,#f59e0b,#d97706)!important;color:#1a1a2e!important}
+#epToast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%);background:#1a1a2e;color:#f59e0b;padding:12px 25px;border-radius:50px;font-size:.85rem;z-index:10000;display:none;font-family:'Poppins',sans-serif;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+@media(max-width:480px){.ep-features{grid-template-columns:1fr}.ep-row{grid-template-columns:1fr}}
 `;
 document.head.appendChild(style);
 
-// ---------- Modal inject ----------
+// ---------- Modal ----------
 document.body.insertAdjacentHTML('beforeend', `
 <div id="epOverlay" class="ep-hidden">
   <div id="epModal">
     <button class="ep-close" id="epClose">&times;</button>
-    <div class="ep-header">
-      <div class="crown">👑</div>
-      <h2>EduPortal Premium</h2>
-      <p>Lifetime Access — Sirf Rs. ${PRICE} (ek baar)</p>
+    <div class="ep-hero">
+      <div class="ep-crown">👑</div>
+      <h2>EDUPORTAL <span>PREMIUM</span></h2>
+      <p>Unlock Everything. Forever.</p>
+      <div class="ep-price-line">
+        <span class="ep-old">Rs. ${OLD_PRICE}</span>
+        <span class="ep-price">Rs. ${PRICE}</span>
+        <span class="ep-badge">LIFETIME</span>
+      </div>
     </div>
     <div class="ep-body" id="epBody"></div>
   </div>
@@ -88,7 +108,6 @@ document.body.insertAdjacentHTML('beforeend', `
 const overlay = document.getElementById('epOverlay');
 const epBody = document.getElementById('epBody');
 
-// ---------- Helpers ----------
 function toast(msg) {
   const t = document.getElementById('epToast');
   t.innerText = msg; t.style.display = 'block';
@@ -101,7 +120,6 @@ function closeModal() { overlay.classList.add('ep-hidden'); }
 async function renderState() {
   if (!currentUser) return renderLogin();
   if (currentUser.isPremium) return renderPremium();
-  // pending order check
   try {
     const q = query(collection(db, 'premiumOrders'),
       where('userId', '==', currentUser.uid), where('status', '==', 'pending'));
@@ -115,8 +133,8 @@ function renderLogin() {
   epBody.innerHTML = `
     <div class="ep-center">
       <div class="big">🔐</div>
-      <h3>Login Zaroori Hai</h3>
-      <p>Premium khareedne ke liye pehle apne EduPortal account mein login karein.</p>
+      <h3>Login Required</h3>
+      <p>Premium activate karne ke liye pehle apne<br>EduPortal account mein login karein.</p>
       <a class="ep-login-btn" href="${SITE}/index.html">Login / Signup Karein</a>
     </div>`;
 }
@@ -125,8 +143,8 @@ function renderPremium() {
   epBody.innerHTML = `
     <div class="ep-center">
       <div class="big">👑</div>
-      <h3>Aap Premium Member Hain!</h3>
-      <p>Aapko poore site ka premium content access hai.<br>Khush rahein, parhte rahein! 📚</p>
+      <h3>You Are Premium!</h3>
+      <p>Aapko poore EduPortal ka premium content<br>lifetime ke liye available hai. Parhte rahein! 📚</p>
     </div>`;
 }
 
@@ -134,46 +152,48 @@ function renderPending() {
   epBody.innerHTML = `
     <div class="ep-center">
       <div class="big">⏳</div>
-      <h3>Order Review Mein Hai</h3>
-      <p>Aapki payment submit ho chuki hai.<br>Admin 24 hours ke andar approve karega.<br>Confirmation email + WhatsApp par milegi.</p>
+      <h3>Order Under Review</h3>
+      <p>Aapki payment submit ho chuki hai.<br>Admin 24 hours ke andar approve karega.<br>Confirmation email + WhatsApp par milegi. ✅</p>
     </div>`;
 }
 
 function renderPayment() {
   const acc = ACCOUNTS[selectedMethod];
   epBody.innerHTML = `
-    <div class="ep-perks">
-      👑 <strong>Premium mein shaamil:</strong><br>
-      ✅ Tamam Premium Tests & Model Papers<br>
-      ✅ Chapter-wise Notes<br>
-      ✅ Past Papers & Guess Papers<br>
-      ✅ Lifetime access — ek baar payment
+    <div class="ep-features">
+      <div class="ep-feat"><span>🧪</span> Premium Tests & Model Papers</div>
+      <div class="ep-feat"><span>📝</span> Past Papers & Guess Papers</div>
+      <div class="ep-feat"><span>📚</span> Chapter-wise Notes</div>
+      <div class="ep-feat"><span>💬</span> Priority Support</div>
     </div>
+
+    <div class="ep-label">Step 1 — Payment Method</div>
     <div class="ep-tabs">
-      ${Object.keys(ACCOUNTS).map(m => `<button class="ep-tab ${m === selectedMethod ? 'active' : ''}" data-method="${m}">${m}</button>`).join('')}
+      ${Object.keys(ACCOUNTS).map(m => `<button class="ep-tab ${m === selectedMethod ? 'active' : ''}" data-method="${m}">${ACCOUNTS[m].icon} ${m}</button>`).join('')}
     </div>
     <div class="ep-account">
-      <div class="ttl">${selectedMethod} — Account Title: ${acc.title}</div>
+      <div class="ep-acc-head">${acc.icon} ${selectedMethod} — ${acc.title}</div>
       <div class="num">${acc.number}</div>
       ${acc.extra ? `<div class="ext">${acc.extra}</div>` : ''}
       <button class="ep-copy" id="epCopy">📋 Copy Number</button>
     </div>
-    <ol class="ep-steps">
-      <li>Upar wale number par <strong>Rs. ${PRICE}</strong> bhejein</li>
-      <li>Transaction ID (TID) copy kar lein</li>
-      <li>Neeche form mein TID submit karein</li>
-      <li>Admin approval ke baad Premium activate ✅</li>
-    </ol>
+
+    <div class="ep-label">Step 2 — Rs. ${PRICE} Bhej Kar TID Submit Karein</div>
     <div class="ep-msg" id="epMsg"></div>
     <form id="epForm">
       <input id="epTID" placeholder="Transaction ID (TID)" required>
-      <input id="epSender" placeholder="Sender Number (jis number se bheje)" required>
-      <input id="epWhatsapp" placeholder="Aapka WhatsApp Number" required>
-      <button type="submit" class="ep-submit">✅ Payment Submit Karein</button>
-    </form>`;
+      <div class="ep-row">
+        <input id="epSender" placeholder="Sender Number" required>
+        <input id="epWhatsapp" placeholder="Aapka WhatsApp Number" required>
+      </div>
+      <button type="submit" class="ep-submit">👑 ACTIVATE MY PREMIUM</button>
+    </form>
+    <div class="ep-trust">
+      <span>🔒 Secure</span><span>⚡ 24h Activation</span><span>♾️ Lifetime Access</span>
+    </div>`;
 }
 
-// ---------- Events (delegation) ----------
+// ---------- Events ----------
 document.addEventListener('click', (e) => {
   if (e.target.id === 'epClose' || e.target === overlay) return closeModal();
   if (e.target.id === 'epCopy') {
@@ -249,7 +269,6 @@ onAuthStateChanged(auth, async (user) => {
   } else {
     currentUser = null;
   }
-  // Navbar update
   document.querySelectorAll('.btn-premium').forEach(b => {
     if (currentUser && currentUser.isPremium) {
       b.innerHTML = '<i class="fas fa-crown"></i> Premium';
@@ -258,4 +277,4 @@ onAuthStateChanged(auth, async (user) => {
   });
 });
 
-console.log('👑 EduPortal Premium System loaded');
+console.log('👑 EduPortal Premium System v2 loaded');
