@@ -716,26 +716,8 @@ app.use((err, req, res, next) => {
         message: err.message 
     });
 });
-// --- YAHAN AAPKA PURANA CODE HAI ---
-// Saare routes, middleware, email, OTP waghera yahan hain...
-
-// --- WHATSAPP WEBHOOK ROUTES START (YAHAN PASTE KAREIN) ---
-app.get('/webhook', (req, res) => {
-  const mode = req.query['hub.mode'];
-  const token = req.query['hub.verify_token'];
-  const challenge = req.query['hub.challenge'];
-
-  if (mode === 'subscribe' && token === 'eduportal123') {
-    console.log('✅ WEBHOOK VERIFIED!');
-    res.status(200).send(challenge);
-  } else {
-    console.log('❌ Webhook verification failed');
-    res.sendStatus(403);
-  }
-});
-
 // ============================================
-// WHATSAPP CLOUD API - AUTO REPLY SYSTEM
+// 📱 WHATSAPP CLOUD API - SMART AUTO REPLY SYSTEM v2
 // ============================================
 
 // Helper: WhatsApp Message Send Function
@@ -756,20 +738,56 @@ async function sendWhatsAppMessage(to, text) {
   return await response.json();
 }
 
-// Welcome Message (Professional)
+// ============================================
+// 📚 BOOKS & NOTES LINKS
+// ============================================
+const BOOKS = {
+  '9th': [
+    { name: 'Mathematics', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/math-9th.html' },
+    { name: 'Physics', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/physics-9th.html' },
+    { name: 'Chemistry', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/chemistry-9th.html' },
+    { name: 'Biology', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/biology-9th.html' },
+    { name: 'Computer Science', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/computer-exercises.html' },
+    { name: 'English', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/english-9th.html' },
+    { name: 'Urdu', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/urdu-9th.html' },
+    { name: 'Islamiat', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/islamiat-9th.html' },
+    { name: 'Al-Quran', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/quran-9th.html' }
+  ],
+  '10th': [
+    { name: 'Mathematics', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/math-10th.html' },
+    { name: 'Physics', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/physics-10th.html' },
+    { name: 'Chemistry', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/chemistery-10th.html' },
+    { name: 'Biology', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/biology-10th.html' },
+    { name: 'Computer Science', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/computer-10th.html' },
+    { name: 'English', link: 'https://alicomputer76w.github.io/Matric-Notes/' },
+    { name: 'Urdu', link: 'https://alicomputer76w.github.io/Matric-Notes/' },
+    { name: 'Pak Studies', link: 'https://alicomputer76w.github.io/Matric-Notes/pages/pak-study-10th.html' },
+    { name: 'Al-Quran', link: 'https://alicomputer76w.github.io/Matric-Notes/' }
+  ]
+};
+
+// Session management (10 minute expiry)
+const userSessions = new Map();
+const SESSION_TTL = 10 * 60 * 1000;
+
+function getState(from) {
+  const s = userSessions.get(from);
+  if (!s) return null;
+  if (Date.now() - s.time > SESSION_TTL) { userSessions.delete(from); return null; }
+  return s.state;
+}
+function setState(from, state) { userSessions.set(from, { state, time: Date.now() }); }
+function clearState(from) { userSessions.delete(from); }
+
+function bookListMessage(cls) {
+  const emojis = ['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣'];
+  const lines = BOOKS[cls].map((b, i) => `${emojis[i]} ${b.name}`).join('\n');
+  return `📚 *${cls} Class - Book Select Karein:*\n\n${lines}\n\n👉 *Book ka number reply karein*\n🏠 Menu ke liye *hi* bhejein`;
+}
+
 const WELCOME_MESSAGE = `Welcome to *EduPortal Platform* 🎓
 
-You can avail our following services:
-
-📚 *9th Class Notes* - Complete subject-wise notes with solved exercises
-📖 *10th Class Notes* - Comprehensive notes for all subjects
-📝 *Past Papers* - 5 years solved past papers & guess papers
-❓ *Important Questions* - Board exam important Q&A
-🎥 *Video Lectures* - Topic-wise video explanations
-🧪 *Test Series* - Premium online tests with instant results
-💬 *Support* - 24/7 help & guidance
-
-*Reply with the number of service you need:*
+*Reply with the number:*
 1️⃣ 9th Notes
 2️⃣ 10th Notes
 3️⃣ Past Papers
@@ -778,65 +796,19 @@ You can avail our following services:
 6️⃣ Test Series
 7️⃣ Support`;
 
-// Detailed Service Replies
 const SERVICE_REPLIES = {
-  '1': `📚 *9th Class Notes*
-
-EduPortal par 9th class ke mukammal notes maujood hain:
-
-✅ Physics - All chapters with numericals
-✅ Chemistry - Reactions & lab experiments
-✅ Biology - Diagrams & detailed explanations
-✅ Mathematics - Solved exercises & theorems
-✅ Computer - Programming basics
-✅ English & Urdu - Grammar & compositions
-
-👉 *Visit:* https://alicomputer76w.github.io/
-
-Koi aur service chahiye? Menu ke liye *hi* bhejein.`,
-
-  '2': `📖 *10th Class Notes*
-
-Complete 10th class notes for all subjects with board exam preparation.
-
-👉 *Visit:* https://alicomputer76w.github.io/
-
-Menu ke liye *hi* bhejein.`,
-
-  '3': `📝 *Past Papers & Guess Papers 2026*
-
-5 saal ke solved past papers aur latest guess papers available hain.
-
-👉 *Visit:* https://alicomputer76w.github.io/`,
-
-  '4': `❓ *Important Questions*
-
-Har subject ke most important questions solved form mein.
-
-👉 *Visit:* https://alicomputer76w.github.io/`,
-
-  '5': `🎥 *Video Lectures*
-
-Mushkil topics ki asaan video explanations.
-
-👉 *Visit:* https://alicomputer76w.github.io/`,
-
-  '6': `🧪 *Premium Test Series*
-
-Model papers aur online tests with instant results.
-
-👉 *Visit:* https://alicomputer76w.github.io/`,
-
-  '7': `💬 *Rabta (Support)*
-
-📧 Email: eduportal.contact@gmail.com
-🌐 Website: https://alicomputer76w.github.io/
-📱 WhatsApp: +92 310 6727640
-
-Hum 24 ghante mein jawab dete hain!`
+  '3': `📝 *Past Papers & Guess Papers 2026*\n\n👉 https://alicomputer76w.github.io/Matric-Notes/`,
+  '4': `❓ *Important Questions*\n\n👉 https://alicomputer76w.github.io/Matric-Notes/`,
+  '5': `🎥 *Video Lectures*\n\n👉 https://alicomputer76w.github.io/Matric-Notes/`,
+  '6': `🧪 *Premium Test Series*\n\n👉 https://alicomputer76w.github.io/Matric-Notes/`,
+  '7': `💬 *Rabta (Support)*\n\n📧 Email: eduportal.contact@gmail.com\n🌐 Website: https://alicomputer76w.github.io/Matric-Notes/\n📱 WhatsApp: +92 310 6727640`
 };
 
-// Webhook Verification Route (GET)
+// ============================================
+// 📡 WEBHOOK ROUTES
+// ============================================
+
+// GET - Meta verification
 app.get('/webhook', (req, res) => {
   const mode = req.query['hub.mode'];
   const token = req.query['hub.verify_token'];
@@ -851,7 +823,7 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-// Webhook Handler - Receive & Auto Reply (POST)
+// POST - Smart Message Handler
 app.post('/webhook', async (req, res) => {
   try {
     const value = req.body?.entry?.[0]?.changes?.[0]?.value;
@@ -863,25 +835,44 @@ app.post('/webhook', async (req, res) => {
       
       console.log(`📩 New WhatsApp from ${from}: "${text}"`);
 
-      // Trigger words for welcome message
-      const greetings = ['hi', 'hello', 'hey', 'salam', 'assalam o alaikum', 'aoa', 'start', 'menu', 'help'];
-      
+      // Greetings → Main Menu (state reset)
+      const greetings = ['hi', 'hello', 'hey', 'salam', 'assalam o alaikum', 'aoa', 'start', 'menu', 'help', '0'];
       if (greetings.includes(text)) {
+        clearState(from);
         await sendWhatsAppMessage(from, WELCOME_MESSAGE);
-        console.log(`✅ Welcome message sent to ${from}`);
-      } 
-      // Service selection
-      else if (['1', '2', '3', '4', '5', '6', '7'].includes(text)) {
-        if (SERVICE_REPLIES[text]) {
-          await sendWhatsAppMessage(from, SERVICE_REPLIES[text]);
-          console.log(`✅ Service ${text} info sent to ${from}`);
-        }
+        return res.sendStatus(200);
       }
-      // Unknown message
-      else {
-        await sendWhatsAppMessage(from, 
-          `Maaf kijiye, main samajh nahi paya 😅\n\nMenu dekhne ke liye *hi* likh kar bhejein.`
-        );
+
+      // Agar student book select kar raha hai
+      const state = getState(from);
+      if (state === 'awaiting_9th' || state === 'awaiting_10th') {
+        const cls = state === 'awaiting_9th' ? '9th' : '10th';
+        const list = BOOKS[cls];
+        const idx = parseInt(text, 10) - 1;
+        
+        if (!isNaN(idx) && list[idx]) {
+          clearState(from);
+          const book = list[idx];
+          await sendWhatsAppMessage(from,
+            `📖 *${cls} Class - ${book.name}*\n\n🔗 Notes yahan dekhein/download karein:\n${book.link}\n\n📚 Koi aur book? *${cls === '9th' ? '1' : '2'}* dobara bhejein.\n🏠 Menu ke liye *hi* bhejein.`
+          );
+        } else {
+          await sendWhatsAppMessage(from, `❌ Sahi number bhejein (1-${list.length})\n\n🏠 Menu ke liye *hi* bhejein.`);
+        }
+        return res.sendStatus(200);
+      }
+
+      // Main Menu selections
+      if (text === '1') {
+        setState(from, 'awaiting_9th');
+        await sendWhatsAppMessage(from, bookListMessage('9th'));
+      } else if (text === '2') {
+        setState(from, 'awaiting_10th');
+        await sendWhatsAppMessage(from, bookListMessage('10th'));
+      } else if (SERVICE_REPLIES[text]) {
+        await sendWhatsAppMessage(from, SERVICE_REPLIES[text]);
+      } else {
+        await sendWhatsAppMessage(from, `Maaf kijiye, main samajh nahi paya 😅\n\nMenu dekhne ke liye *hi* likh kar bhejein.`);
       }
     }
     
@@ -892,7 +883,7 @@ app.post('/webhook', async (req, res) => {
   }
 });
 
-// WhatsApp Message Send Endpoint (Website se call karne ke liye)
+// API endpoint for website to send WhatsApp messages
 app.post('/api/send-whatsapp', async (req, res) => {
   try {
     const { to, name, message } = req.body;
@@ -903,7 +894,6 @@ app.post('/api/send-whatsapp', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 // ============================================
 // START SERVER
 // ============================================
