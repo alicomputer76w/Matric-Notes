@@ -964,6 +964,130 @@ app.post('/api/send-whatsapp', async (req, res) => {
   }
 });
 // ============================================
+// 👑 PREMIUM SYSTEM - ADMIN ENDPOINTS
+// ============================================
+
+// Premium Activation Email
+async function sendPremiumActivationEmail(toEmail, name) {
+    try {
+        const { data, error } = await resend.emails.send({
+            from: 'EduPortal <onboarding@resend.dev>',
+            to: [toEmail],
+            subject: '🎉 EduPortal Premium Activated!',
+            html: `
+                <div style="font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5;">
+                    <div style="max-width: 500px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; border-top: 5px solid #f72585;">
+                        <h2 style="color: #f72585; text-align: center;">👑 Premium Activated!</h2>
+                        <p style="color: #555;">Dear <strong>${name}</strong>,</p>
+                        <p style="color: #555;">Mubarak ho! Aapki <strong>EduPortal Premium Subscription (Rs. 500 - Lifetime)</strong> activate ho gayi hai.</p>
+                        <div style="background: #fff0f3; padding: 15px; border-radius: 8px; margin: 20px 0;">
+                            <p style="color: #9f1239; margin: 5px 0;">✅ Tamam Premium Tests</p>
+                            <p style="color: #9f1239; margin: 5px 0;">✅ Chapter-wise Notes</p>
+                            <p style="color: #9f1239; margin: 5px 0;">✅ Past Papers & Guess Papers</p>
+                            <p style="color: #9f1239; margin: 5px 0;">✅ Full Book Model Papers</p>
+                        </div>
+                        <p style="text-align: center;"><a href="https://alicomputer76w.github.io/Matric-Notes/" style="background: #f72585; color: white; padding: 12px 25px; text-decoration: none; border-radius: 6px; display: inline-block;">Website Kholein</a></p>
+                        <p style="color: #777; font-size: 13px; text-align: center;">— Team EduPortal</p>
+                    </div>
+                </div>
+            `
+        });
+        if (error) { console.error('❌ Premium email error:', error); return false; }
+        console.log('✅ Premium activation email sent to', toEmail);
+        return true;
+    } catch (e) {
+        console.error('❌ Premium email error:', e.message);
+        return false;
+    }
+}
+
+// Premium WhatsApp Message
+function premiumWhatsAppMsg(name) {
+  return `🎉 *MUBARAK HO ${name}!* 🎉
+━━━━━━━━━━━━━━━━━━
+✅ Aapka *EduPortal Premium* activate ho gaya hai!
+
+👑 *Ab aap access kar sakte hain:*
+• Tamam Premium Tests
+• Chapter-wise Notes
+• Past Papers & Guess Papers
+• Full Book Model Papers
+
+🌐 *Website:* https://alicomputer76w.github.io/Matric-Notes/
+
+Parhte rahein, kamyab hon! 📚
+— *Team EduPortal*`;
+}
+
+// APPROVE PREMIUM ORDER (Admin only)
+app.post('/api/admin/approve-premium', async (req, res) => {
+  try {
+    const token = req.headers['authorization']?.split(' ')[1];
+    if (!token) return res.status(401).json({ success: false, message: 'No token' });
+
+    const decoded = await admin.auth().verifyIdToken(token);
+    const adminDoc = await db.collection('users').doc(decoded.uid).get();
+    if (!adminDoc.exists || adminDoc.data().role !== 'admin') {
+      return res.status(403).json({ success: false, message: 'Admin only!' });
+    }
+
+    const { orderId } = req.body;
+    const orderRef = db.collection('premiumOrders').doc(orderId);
+    const orderSnap = await orderRef.get();
+    if (!orderSnap.exists) return res.status(404).json({ success: false, message: 'Order not found' });
+
+    const order = orderSnap.data();
+    if (order.status !== 'pending') return res.status(400).json({ success: false, message: 'Order already reviewed' });
+
+    // 1. Order approve karo
+    await orderRef.update({ status: 'approved', reviewedAt: admin.firestore.FieldValue.serverTimestamp() });
+    // 2. User ko premium karo
+    await db.collection('users').doc(order.userId).update({
+      isPremium: true,
+      premiumSince: admin.firestore.FieldValue.serverTimestamp()
+    });
+    // 3. Email bhejo
+    await sendPremiumActivationEmail(order.email, order.name);
+    // 4. WhatsApp bhejo
+    if (order.whatsapp) {
+      let digits = order.whatsapp.replace(/\D/g, '');
+      if (!digits.startsWith('92')) digits = '92' + digits;
+      await sendWhatsAppMessage(digits, premiumWhatsAppMsg(order.name));
+    }
+
+    console.log(`✅ Premium order approved: ${orderId} (${order.email})`);
+    res.json({ success: true, message: 'Approved! Email + WhatsApp sent.' });
+  } catch (e) {
+    console.error('❌ Approve error:', e.message);
+    res.status(500).json({ success: false, message: e.message });
+  }
+});
+
+// REJECT PREMIUM ORDER (Admin only)
+app.post('/api/admin/reject-premium', async (req, res) => {
+  try {
+    const token = req.headers['authorization']?.split(' ')[1];
+    if (!token) return res.status(401).json({ success: false, message: 'No token' });
+
+    const decoded = await admin.auth().verifyIdToken(token);
+    const adminDoc = await db.collection('users').doc(decoded.uid).get();
+    if (!adminDoc.exists || adminDoc.data().role !== 'admin') {
+      return res.status(403).json({ success: false, message: 'Admin only!' });
+    }
+
+    const { orderId } = req.body;
+    const orderRef = db.collection('premiumOrders').doc(orderId);
+    const orderSnap = await orderRef.get();
+    if (!orderSnap.exists) return res.status(404).json({ success: false, message: 'Order not found' });
+
+    await orderRef.update({ status: 'rejected', reviewedAt: admin.firestore.FieldValue.serverTimestamp() });
+    console.log(`❌ Premium order rejected: ${orderId}`);
+    res.json({ success: true, message: 'Order rejected.' });
+  } catch (e) {
+    res.status(500).json({ success: false, message: e.message });
+  }
+});
+// ============================================
 // START SERVER
 // ============================================
 const PORT = process.env.PORT || 5000;
