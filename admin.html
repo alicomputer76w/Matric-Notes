@@ -100,6 +100,19 @@ textarea{min-height:80px;resize:vertical}
   .content{padding:0 10px}
   .card{padding:18px}
 }
+/* PREMIUM ORDERS */
+.order-card{background:#f8f9fa;border-radius:10px;padding:15px;margin-bottom:12px;border-left:4px solid #f59e0b}
+.order-card.approved{border-left-color:#10b981}
+.order-card.rejected{border-left-color:#ef4444}
+.order-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.order-head h4{font-size:.95rem}
+.order-status{font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:10px;color:#fff}
+.status-pending{background:#f59e0b}
+.status-approved{background:#10b981}
+.status-rejected{background:#ef4444}
+.order-details{font-size:.82rem;color:#555;display:grid;grid-template-columns:1fr 1fr;gap:4px 15px;margin-bottom:10px}
+.order-details b{color:#2b2d42}
+.order-actions{display:flex;gap:8px}
 </style>
 </head>
 <body>
@@ -135,10 +148,20 @@ textarea{min-height:80px;resize:vertical}
     <button class="tab" data-tab="add">➕ Add Question</button>
     <button class="tab" data-tab="bulk">📋 Bulk Upload</button>
     <button class="tab" data-tab="manage">🔧 Manage Questions</button>
+    <button class="tab" data-tab="premium">👑 Premium Orders</button>
   </div>
 
   <div class="content">
-    
+        <!-- PREMIUM ORDERS -->
+    <div class="tab-content hidden" id="tab-premium">
+      <div class="card">
+        <h2>👑 Premium Orders</h2>
+        <div class="msg" id="premiumMsg"></div>
+        <div class="stats-grid" id="premiumStats" style="margin-bottom:20px"></div>
+        <button class="btn btn-primary" style="width:auto;margin-bottom:15px" onclick="loadPremiumOrders()">🔄 Refresh Orders</button>
+        <div id="ordersList"><p style="text-align:center;color:#888;padding:20px">Loading...</p></div>
+      </div>
+    </div>
     <!-- DASHBOARD -->
     <div class="tab-content" id="tab-dashboard">
       <div class="card">
@@ -471,6 +494,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     document.getElementById('tab-' + tab.dataset.tab).classList.remove('hidden');
     if(tab.dataset.tab === 'dashboard') loadDashboard();
     if(tab.dataset.tab === 'manage') loadManage();
+    if(tab.dataset.tab === 'premium') loadPremiumOrders();
   });
 });
 
@@ -650,7 +674,107 @@ async function loadManage(){
   }
 }
 window.loadManage = loadManage;
+// ===== PREMIUM ORDERS =====
+const BACKEND_URL = 'https://eduportal-backend-0qj8.onrender.com';
 
+async function loadPremiumOrders(){
+  const list = document.getElementById('ordersList');
+  list.innerHTML = '<p style="text-align:center;color:#888;padding:20px">Loading orders...</p>';
+  try {
+    const snap = await getDocs(collection(db, 'premiumOrders'));
+    const orders = [];
+    snap.forEach(d => orders.push({id: d.id, ...d.data()}));
+    orders.sort((a,b) => {
+      if(a.status === 'pending' && b.status !== 'pending') return -1;
+      if(b.status === 'pending' && a.status !== 'pending') return 1;
+      return (b.createdAt?.seconds||0) - (a.createdAt?.seconds||0);
+    });
+
+    const total = orders.length;
+    const pending = orders.filter(o => o.status === 'pending').length;
+    const approved = orders.filter(o => o.status === 'approved').length;
+    document.getElementById('premiumStats').innerHTML = `
+      <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-label">Total Orders</div></div>
+      <div class="stat-card orange"><div class="stat-num">${pending}</div><div class="stat-label">Pending</div></div>
+      <div class="stat-card green"><div class="stat-num">${approved}</div><div class="stat-label">Approved</div></div>
+      <div class="stat-card pink"><div class="stat-num">Rs. ${approved * 500}</div><div class="stat-label">Revenue</div></div>
+    `;
+
+    if(!orders.length){
+      list.innerHTML = '<p style="text-align:center;color:#888;padding:20px">Abhi koi order nahi hai</p>';
+      return;
+    }
+
+    list.innerHTML = orders.map(o => `
+      <div class="order-card ${o.status}">
+        <div class="order-head">
+          <h4>👤 ${o.name} <small style="color:#888">(${o.email})</small></h4>
+          <span class="order-status status-${o.status}">${o.status.toUpperCase()}</span>
+        </div>
+        <div class="order-details">
+          <span><b>Method:</b> ${o.paymentMethod}</span>
+          <span><b>Amount:</b> Rs. ${o.amount}</span>
+          <span><b>TID:</b> ${o.transactionId}</span>
+          <span><b>Sender:</b> ${o.senderNumber}</span>
+          <span><b>WhatsApp:</b> ${o.whatsapp}</span>
+          <span><b>Date:</b> ${o.createdAt?.seconds ? new Date(o.createdAt.seconds*1000).toLocaleString() : '-'}</span>
+        </div>
+        ${o.status === 'pending' ? `
+        <div class="order-actions">
+          <button class="btn btn-success" onclick="approveOrder('${o.id}')">✅ Approve</button>
+          <button class="btn btn-danger" onclick="rejectOrder('${o.id}')">❌ Reject</button>
+        </div>` : ''}
+      </div>
+    `).join('');
+  } catch(e){
+    list.innerHTML = `<p style="color:#ef4444">Error: ${e.message}</p>`;
+  }
+}
+window.loadPremiumOrders = loadPremiumOrders;
+
+async function approveOrder(id){
+  if(!confirm('Order approve karein? (Email + WhatsApp bheja jayega)')) return;
+  try {
+    const token = await auth.currentUser.getIdToken();
+    const res = await fetch(BACKEND_URL + '/api/admin/approve-premium', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({ orderId: id })
+    });
+    const data = await res.json();
+    if(data.success){
+      showMsg('premiumMsg', '✅ Order approved! Email + WhatsApp bhej diya gaya.', 'success');
+      loadPremiumOrders();
+    } else {
+      showMsg('premiumMsg', '❌ ' + data.message, 'error');
+    }
+  } catch(e){
+    showMsg('premiumMsg', '❌ Error: ' + e.message, 'error');
+  }
+}
+window.approveOrder = approveOrder;
+
+async function rejectOrder(id){
+  if(!confirm('Is order ko reject karein?')) return;
+  try {
+    const token = await auth.currentUser.getIdToken();
+    const res = await fetch(BACKEND_URL + '/api/admin/reject-premium', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({ orderId: id })
+    });
+    const data = await res.json();
+    if(data.success){
+      showMsg('premiumMsg', '❌ Order reject ho gaya.', 'info');
+      loadPremiumOrders();
+    } else {
+      showMsg('premiumMsg', '❌ ' + data.message, 'error');
+    }
+  } catch(e){
+    showMsg('premiumMsg', '❌ Error: ' + e.message, 'error');
+  }
+}
+window.rejectOrder = rejectOrder;
 // ===== DELETE =====
 window.deleteQuestion = async function(id){
   if(!confirm('Kya aap waqai yeh question delete karna chahte hain?')) return;
