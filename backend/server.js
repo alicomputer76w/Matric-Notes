@@ -780,28 +780,86 @@ function setState(from, state) { userSessions.set(from, { state, time: Date.now(
 function clearState(from) { userSessions.delete(from); }
 
 function bookListMessage(cls) {
-  const emojis = ['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣'];
-  const lines = BOOKS[cls].map((b, i) => `${emojis[i]} ${b.name}`).join('\n');
-  return `📚 *${cls} Class - Book Select Karein:*\n\n${lines}\n\n👉 *Book ka number reply karein*\n🏠 Menu ke liye *hi* bhejein`;
+  const lines = BOOKS[cls].map((b, i) => `*${i + 1}* • ${b.name}`).join('\n');
+  return `📚 *${cls.toUpperCase()} CLASS* — *Select Book*
+━━━━━━━━━━━━━━━━━━
+
+${lines}
+
+━━━━━━━━━━━━━━━━━━
+👉 *Reply with book number*
+🏠 Main Menu: reply *Hi*`;
 }
 
-const WELCOME_MESSAGE = `Welcome to *EduPortal Platform* 🎓
+const WELCOME_MESSAGE = `🎓 *EDUPORTAL* 🎓
+━━━━━━━━━━━━━━━━━━
+*9th & 10th Class Study Platform*
+_Board Exam Preparation Made Easy_
 
-*Reply with the number:*
-1️⃣ 9th Notes
-2️⃣ 10th Notes
-3️⃣ Past Papers
-4️⃣ Important Q's
-5️⃣ Video Lectures
-6️⃣ Test Series
-7️⃣ Support`;
+👋 *Welcome! Select a Service:*
+
+📚 *1* • 9th Class Notes
+📖 *2* • 10th Class Notes
+📝 *3* • Past Papers (5 Years Solved)
+❓ *4* • Important Questions
+🎥 *5* • Video Lectures
+🧪 *6* • Premium Test Series
+💬 *7* • Support
+
+━━━━━━━━━━━━━━━━━━
+👉 *Reply with number (1-7)*
+🌐 alicomputer76w.github.io/Matric-Notes`;
 
 const SERVICE_REPLIES = {
-  '3': `📝 *Past Papers & Guess Papers 2026*\n\n👉 https://alicomputer76w.github.io/Matric-Notes/`,
-  '4': `❓ *Important Questions*\n\n👉 https://alicomputer76w.github.io/Matric-Notes/`,
-  '5': `🎥 *Video Lectures*\n\n👉 https://alicomputer76w.github.io/Matric-Notes/`,
-  '6': `🧪 *Premium Test Series*\n\n👉 https://alicomputer76w.github.io/Matric-Notes/`,
-  '7': `💬 *Rabta (Support)*\n\n📧 Email: eduportal.contact@gmail.com\n🌐 Website: https://alicomputer76w.github.io/Matric-Notes/\n📱 WhatsApp: +92 310 6727640`
+  '3': `📝 *PAST PAPERS* — *5 Years Solved*
+━━━━━━━━━━━━━━━━━━
+✅ 2021-2025 Board Papers
+✅ Solved & Guess Papers
+✅ All Subjects Included
+
+🔗 https://alicomputer76w.github.io/Matric-Notes/
+━━━━━━━━━━━━━━━━━━
+🏠 Main Menu: reply *Hi*`,
+
+  '4': `❓ *IMPORTANT QUESTIONS*
+━━━━━━━━━━━━━━━━━━
+✅ Chapter-wise Important Q/A
+✅ Board Exam Focused
+✅ Solved Form Mein
+
+🔗 https://alicomputer76w.github.io/Matric-Notes/
+━━━━━━━━━━━━━━━━━━
+🏠 Main Menu: reply *Hi*`,
+
+  '5': `🎥 *VIDEO LECTURES*
+━━━━━━━━━━━━━━━━━━
+✅ Topic-wise Explanations
+✅ Difficult Topics Made Easy
+✅ Free Video Content
+
+🔗 https://alicomputer76w.github.io/Matric-Notes/
+━━━━━━━━━━━━━━━━━━
+🏠 Main Menu: reply *Hi*`,
+
+  '6': `🧪 *PREMIUM TEST SERIES*
+━━━━━━━━━━━━━━━━━━
+👑 Chapter-wise Tests
+👑 Full Book Mock Exams
+👑 Instant Results & Analysis
+
+🔗 https://alicomputer76w.github.io/Matric-Notes/
+━━━━━━━━━━━━━━━━━━
+🏠 Main Menu: reply *hi*`,
+
+  '7': `💬 *EDUPORTAL SUPPORT*
+━━━━━━━━━━━━━━━━━━
+📧 eduportal.contact@gmail.com
+📱 +92 310 6727640
+🌐 alicomputer76w.github.io/Matric-Notes
+
+⏰ *Response Time:* Within 24 hours
+━━━━━━━━━━━━━━━━━━
+🏠 Main Menu: reply *hi*`
 };
 
 // ============================================
@@ -854,10 +912,21 @@ app.post('/webhook', async (req, res) => {
           clearState(from);
           const book = list[idx];
           await sendWhatsAppMessage(from,
-            `📖 *${cls} Class - ${book.name}*\n\n🔗 Notes yahan dekhein/download karein:\n${book.link}\n\n📚 Koi aur book? *${cls === '9th' ? '1' : '2'}* dobara bhejein.\n🏠 Menu ke liye *hi* bhejein.`
-          );
+  `✅ *${cls} CLASS* — *${book.name}*
+━━━━━━━━━━━━━━━━━━
+
+📖 *Chapter-wise Complete Notes!*
+
+🔗 *Read / Download:*
+${book.link}
+
+━━━━━━━━━━━━━━━━━━
+📚 More books: reply *${cls === '9th' ? '1' : '2'}*
+🏠 Main menu: reply *Hi*
+💬 Support: reply *7*`
+);
         } else {
-          await sendWhatsAppMessage(from, `❌ Sahi number bhejein (1-${list.length})\n\n🏠 Menu ke liye *hi* bhejein.`);
+          await sendWhatsAppMessage(from, `❌ Sahi number bhejein (1-${list.length})\n\n🏠 Menu ke liye *Hi* bhejein.`);
         }
         return res.sendStatus(200);
       }
@@ -872,7 +941,7 @@ app.post('/webhook', async (req, res) => {
       } else if (SERVICE_REPLIES[text]) {
         await sendWhatsAppMessage(from, SERVICE_REPLIES[text]);
       } else {
-        await sendWhatsAppMessage(from, `Maaf kijiye, main samajh nahi paya 😅\n\nMenu dekhne ke liye *hi* likh kar bhejein.`);
+        await sendWhatsAppMessage(from, `Maaf kijiye, main samajh nahi paya 😅\n\nMenu dekhne ke liye *Hi* likh kar bhejein.`);
       }
     }
     
