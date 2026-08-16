@@ -1,4 +1,11 @@
-    document.addEventListener('DOMContentLoaded', () => {
+// ===== PREMIUM SYSTEM LOADER (har page par auto-load) =====
+(function () {
+  var s = document.createElement('script');
+  s.type = 'module';
+  s.src = (document.currentScript ? document.currentScript.src : '').replace('main.js', 'premium.js') || 'js/premium.js';
+  document.head.appendChild(s);
+})();
+document.addEventListener('DOMContentLoaded', () => {
     
     // 1. Mobile Menu Toggle (Hamburger)
     const hamburger = document.getElementById('hamburger');
