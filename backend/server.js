@@ -1041,11 +1041,14 @@ app.post('/api/admin/approve-premium', async (req, res) => {
 
     // 1. Order approve karo
     await orderRef.update({ status: 'approved', reviewedAt: admin.firestore.FieldValue.serverTimestamp() });
-    // 2. User ko premium karo
-    await db.collection('users').doc(order.userId).update({
+        // 2. User ko premium karo (document na ho to create + merge)
+    await db.collection('users').doc(order.userId).set({
+      email: order.email,
+      name: order.name,
       isPremium: true,
       premiumSince: admin.firestore.FieldValue.serverTimestamp()
-    });
+    }, { merge: true });
+ 
     // 3. Email bhejo
     await sendPremiumActivationEmail(order.email, order.name);
     // 4. WhatsApp bhejo
