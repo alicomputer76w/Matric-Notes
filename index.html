@@ -225,6 +225,7 @@
 
     <!-- JavaScript -->
     <script src="js/main.js"></script>
+    <script type="module" src="js/premium.js"></script>
     <!-- LOGIN MODAL -->
 <div class="modal-overlay" id="loginModal">
     <div class="modal">
@@ -346,7 +347,7 @@
 <!-- JAVASCRIPT -->
 <script type="module">
     // 1. Firebase Imports
-    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, onAuthStateChanged, signOut } 
            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
@@ -377,13 +378,25 @@ const auth = getAuth(app);
 const db = getFirestore(app);  // 👈 YEH LINE ADD KAREIN
 let currentUser = null;
 
-    // 2. Auto Check Login Status
-    onAuthStateChanged(auth, (user) => {
+        // 2. Auto Check Login Status + Premium Check
+    onAuthStateChanged(auth, async (user) => {
         if (user && user.emailVerified) {
             currentUser = user;
+            
+            // Firestore se premium status check
+            let isPremium = false;
+            try {
+                const userDoc = await getDoc(doc(db, 'users', user.uid));
+                if (userDoc.exists()) {
+                    isPremium = userDoc.data().isPremium || false;
+                }
+            } catch (e) {
+                console.error('Premium check error:', e);
+            }
+            
             const userName = localStorage.getItem('userName') || user.email.split('@')[0];
             const userRole = localStorage.getItem('userRole') || 'student';
-            localStorage.setItem('user', JSON.stringify({ name: userName, email: user.email, role: userRole }));
+            localStorage.setItem('user', JSON.stringify({ name: userName, email: user.email, role: userRole, isPremium }));
             
             document.getElementById('guestNav').style.display = 'none';
             document.getElementById('userNav').style.display = 'flex';
@@ -391,6 +404,15 @@ let currentUser = null;
             const initials = userName.split(' ').map(n => n[0]).join('').toUpperCase();
             document.getElementById('userAvatar').innerText = initials;
             document.getElementById('userName').innerText = userName.split(' ')[0];
+            
+            // Premium badge
+            if (isPremium) {
+                document.querySelectorAll('.btn-premium').forEach(btn => {
+                    btn.innerHTML = '<i class="fas fa-crown"></i> Premium';
+                    btn.style.background = 'linear-gradient(135deg, #f59e0b, #d97706)';
+                    btn.style.color = '#1a1a2e';
+                });
+            }
         } else {
             currentUser = null;
             localStorage.removeItem('user');
@@ -398,7 +420,6 @@ let currentUser = null;
             document.getElementById('userNav').style.display = 'none';
         }
     });
-
     // 3. Modal Functions (Global banayein taake HTML onclick kaam kare)
     window.openModal = function(type) {
         document.getElementById(type + 'Modal').classList.add('active');
@@ -427,9 +448,12 @@ let currentUser = null;
         setTimeout(() => window.openModal(to), 200);
     }
 
-    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+       // Sirf login/register/forgot modals (premium modal ko skip)
+    document.querySelectorAll('#loginModal, #registerModal, #forgotPasswordModal').forEach(overlay => {
         overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) window.closeModal(e.target.id.replace('Modal', ''));
+            if (e.target === overlay) {
+                window.closeModal(overlay.id.replace('Modal', ''));
+            }
         });
     });
 
