@@ -348,7 +348,7 @@
 <script type="module">
     // 1. Firebase Imports
     import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, onAuthStateChanged, signOut } 
            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
@@ -373,7 +373,7 @@
     }
 
     // Avoid redeclaring the Firebase app if this script runs multiple times
-    const app = (window.firebaseApp || (window.firebaseApp = initializeApp(firebaseConfig)));
+    const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);  // 👈 YEH LINE ADD KAREIN
 let currentUser = null;
