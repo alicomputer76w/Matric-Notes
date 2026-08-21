@@ -6811,5 +6811,29 @@
             });
         });
     </script>
+        <script src="../js/main.js"></script>
+            <script>
+   
+// Mobile menu fix (grammar page)
+document.addEventListener("DOMContentLoaded", function () {
+    var hb = document.getElementById('hamburger');
+    var nm = document.getElementById('navMenu');
+    if (!hb || !nm) return;
+
+    // Hamburger click par menu kholo/band karo
+    hb.addEventListener('click', function () {
+        nm.classList.toggle('active');
+        hb.classList.toggle('active');
+    });
+
+    // Menu link par click karne se menu band ho jaye
+    nm.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+            nm.classList.remove('active');
+            hb.classList.remove('active');
+        }
+    });
+});
+</script>
 </body>
 </html>
