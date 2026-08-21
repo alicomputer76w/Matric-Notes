@@ -6782,28 +6782,18 @@
 <hr data-start="7194" data-end="7197" />
 <p data-start="7199" data-end="7230">&nbsp;</p>
 </div>
-
-
-       
-
-
-       <script>
+    
+           <script>
         document.addEventListener("DOMContentLoaded", function () {
             const topicButtons = document.querySelectorAll(".topic-btn");
             topicButtons.forEach(btn => {
                 btn.addEventListener("click", function () {
                     const content = this.nextElementSibling;
                     if (!content || !content.classList.contains("topic-content")) return;
-
-                    // Pehle check karein: kya yeh topic pehle se khula tha?
                     const wasOpen = (content.style.display === "block");
-
-                    // Saare topics band karein
                     document.querySelectorAll(".topic-content").forEach(c => {
                         c.style.display = "none";
                     });
-
-                    // Agar pehle khula NAHI tha to kholein, warna band rahe
                     if (!wasOpen) {
                         content.style.display = "block";
                     }
@@ -6811,29 +6801,26 @@
             });
         });
     </script>
-        <script src="../js/main.js"></script>
-            <script>
-   
-// Mobile menu fix (grammar page)
-document.addEventListener("DOMContentLoaded", function () {
-    var hb = document.getElementById('hamburger');
-    var nm = document.getElementById('navMenu');
-    if (!hb || !nm) return;
-
-    // Hamburger click par menu kholo/band karo
-    hb.addEventListener('click', function () {
-        nm.classList.toggle('active');
-        hb.classList.toggle('active');
+    
+    <script src="../js/main.js"></script>
+    
+    <script>
+    // Mobile menu fix (grammar page)
+    document.addEventListener("DOMContentLoaded", function () {
+        var hb = document.getElementById('hamburger');
+        var nm = document.getElementById('navMenu');
+        if (!hb || !nm) return;
+        hb.addEventListener('click', function () {
+            nm.classList.toggle('active');
+            hb.classList.toggle('active');
+        });
+        nm.addEventListener('click', function (e) {
+            if (e.target.tagName === 'A') {
+                nm.classList.remove('active');
+                hb.classList.remove('active');
+            }
+        });
     });
-
-    // Menu link par click karne se menu band ho jaye
-    nm.addEventListener('click', function (e) {
-        if (e.target.tagName === 'A') {
-            nm.classList.remove('active');
-            hb.classList.remove('active');
-        }
-    });
-});
-</script>
+    </script>
 </body>
 </html>
